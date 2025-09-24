@@ -2,6 +2,8 @@
 - project planning, requirment gatehring and analysis.
 - project setup,create organized folder structure.
 - tailwind css installation and setup.
+- learn daisyui for readymade tailwind component like bootstrap.
+- learn react-icons library.
 - create account on supabase.
 
 
