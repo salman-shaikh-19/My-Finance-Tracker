@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <div data-theme={theme} className="select-none">
+      <div data-theme={theme} className="">
         {/* <Beta /> */}
          <AppRoutes />
       </div>

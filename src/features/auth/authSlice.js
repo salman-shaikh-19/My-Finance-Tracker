@@ -16,13 +16,42 @@ export const loginUser = createAsyncThunk(
 );
 
 
+// export const registerUser = createAsyncThunk(
+//   "auth/registerUser",
+//   async ({ email, password }, { rejectWithValue }) => {
+//     try {
+//       const { data, error } = await supabase.auth.signUp({ email, password });
+//       if (error) throw error;
+//       return data.user;
+//     } catch (err) {
+//       return rejectWithValue(err.message || "Registration failed");
+//     }
+//   }
+// );
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({ name, email, password, avatar = null }, { rejectWithValue }) => {
     try {
+     
       const { data, error } = await supabase.auth.signUp({ email, password });
       if (error) throw error;
-      return data.user;
+
+      const authUser = data.user; 
+
+   
+      if (authUser) {
+        const { error: insertError } = await supabase.from("users").insert([
+          {
+            auth_user_id: authUser.id,  
+            user_name: name,
+            user_avatar: avatar,
+          },
+        ]);
+
+        if (insertError) throw insertError;
+      }
+
+      return authUser;
     } catch (err) {
       return rejectWithValue(err.message || "Registration failed");
     }
@@ -30,23 +59,23 @@ export const registerUser = createAsyncThunk(
 );
 
 
-export const isEmailAvailable = createAsyncThunk(
-  "auth/isEmailAvailable",
-  async (email, { rejectWithValue }) => {
-    try {
-      const { data, error } = await supabase
-        .from("users") // assuming you have a `users` table
-        .select("id")
-        .eq("email", email)
-        .limit(1);
+// export const isEmailAvailable = createAsyncThunk(
+//   "auth/isEmailAvailable",
+//   async (email, { rejectWithValue }) => {
+//     try {
+//       const { data, error } = await supabase
+//         .from("users") // assuming you have a `users` table
+//         .select("id")
+//         .eq("email", email)
+//         .limit(1);
 
-      if (error) throw error;
-      return data.length === 0; // true if email is available
-    } catch (err) {
-      return rejectWithValue(err.message || "Failed to check email availability");
-    }
-  }
-);
+//       if (error) throw error;
+//       return data.length === 0; // true if email is available
+//     } catch (err) {
+//       return rejectWithValue(err.message || "Failed to check email availability");
+//     }
+//   }
+// );
 
 
 export const logoutUser = createAsyncThunk(
@@ -106,17 +135,17 @@ const authSlice = createSlice({
       })
 
     
-      .addCase(isEmailAvailable.pending, (state) => {
-        state.userLoading = true;
-        state.error = null;
-      })
-      .addCase(isEmailAvailable.fulfilled, (state) => {
-        state.userLoading = false;
-      })
-      .addCase(isEmailAvailable.rejected, (state, action) => {
-        state.userLoading = false;
-        state.error = action.payload || "Failed to check email availability";
-      })
+      // .addCase(isEmailAvailable.pending, (state) => {
+      //   state.userLoading = true;
+      //   state.error = null;
+      // })
+      // .addCase(isEmailAvailable.fulfilled, (state) => {
+      //   state.userLoading = false;
+      // })
+      // .addCase(isEmailAvailable.rejected, (state, action) => {
+      //   state.userLoading = false;
+      //   state.error = action.payload || "Failed to check email availability";
+      // })
 
 
       .addCase(logoutUser.pending, (state) => {
