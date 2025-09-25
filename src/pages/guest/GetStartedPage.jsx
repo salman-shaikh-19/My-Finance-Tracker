@@ -1,14 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import InstallApp from "../../components/Other/InstallApp";
-import { setGetStarted } from "../../features/common/commonSlice";
+import  setGetStarted  from "../../features/common/commonSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const GetStartedPage = () => {
+  const {isGetStarted}=useSelector(state=>state.common);
   const dispatch=useDispatch();
+  const navigate = useNavigate();
+
+ 
+
   const handleClick=()=>{
-    console.log('clicked');
+    // console.log('clicked');
     
     dispatch(setGetStarted(true));
   }
+
+  useEffect(() => {
+    if (isGetStarted) {
+      navigate("/login");
+    }
+  }, [isGetStarted,dispatch]);
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
