@@ -1,10 +1,11 @@
-import { MdAlarm, MdHome } from "react-icons/md";
 import Beta from "./pages/Beta";
 
 function App() {
   return (
     <>
-    {/* <Beta /> */}
+      <div data-theme="night" className="select-none">
+        <Beta />
+      </div>
     </>
   );
 }

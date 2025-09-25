@@ -1,2 +1,58 @@
-@import "tailwindcss";
-@plugin "daisyui";
+/* @import "tailwindcss";
+@plugin "daisyui" {
+  themes: 
+    light --default, 
+    dark --prefersdark, 
+    cupcake, 
+    synthwave, 
+    dracula, 
+    forest, 
+    luxury, 
+    night, 
+    coffee, 
+    winter, 
+    nord, 
+    caramel, 
+    abyss, 
+    sunset;
+} */
+ @import "tailwindcss";
+@plugin "daisyui" {
+  themes: 
+    light --default, 
+    dark --prefersdark, 
+    cupcake, 
+    synthwave, 
+    dracula, 
+    forest, 
+    luxury, 
+    night, 
+    coffee, 
+    winter, 
+    nord, 
+    caramel, 
+    abyss, 
+    sunset,
+    halloween,
+    garden,
+    retro,
+    cyberpunk,
+    valentine,
+    black,
+    aqua,
+    lofi,
+    pastel,
+    bumblebee,
+    emerald,
+    corporate,
+    fantasy,
+    wireframe,
+    blackforest,
+    lemonade,
+    cmyk,
+    autumn,
+    business,
+    acid,
+    dim,
+    caramellatte;
+}
