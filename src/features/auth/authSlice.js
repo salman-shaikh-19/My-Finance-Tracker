@@ -14,20 +14,24 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+export const checkEmailExists = createAsyncThunk(
+  "auth/checkEmailExists",
+  async (email, { rejectWithValue }) => {
+    try {
+      const { data, error } = await supabase
+        .from("users") 
+        .select("user_id")
+        .eq("user_email", email)
+        .limit(1);
 
+      if (error) throw error;
+      return data.length > 0; 
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
-// export const registerUser = createAsyncThunk(
-//   "auth/registerUser",
-//   async ({ email, password }, { rejectWithValue }) => {
-//     try {
-//       const { data, error } = await supabase.auth.signUp({ email, password });
-//       if (error) throw error;
-//       return data.user;
-//     } catch (err) {
-//       return rejectWithValue(err.message || "Registration failed");
-//     }
-//   }
-// );
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async ({ name, email, password, avatar = null }, { rejectWithValue }) => {
@@ -44,6 +48,7 @@ export const registerUser = createAsyncThunk(
           {
             auth_user_id: authUser.id,  
             user_name: name,
+            user_email:email,
             user_avatar: avatar,
           },
         ]);
@@ -59,23 +64,7 @@ export const registerUser = createAsyncThunk(
 );
 
 
-// export const isEmailAvailable = createAsyncThunk(
-//   "auth/isEmailAvailable",
-//   async (email, { rejectWithValue }) => {
-//     try {
-//       const { data, error } = await supabase
-//         .from("users") // assuming you have a `users` table
-//         .select("id")
-//         .eq("email", email)
-//         .limit(1);
 
-//       if (error) throw error;
-//       return data.length === 0; // true if email is available
-//     } catch (err) {
-//       return rejectWithValue(err.message || "Failed to check email availability");
-//     }
-//   }
-// );
 
 
 export const logoutUser = createAsyncThunk(
@@ -134,18 +123,18 @@ const authSlice = createSlice({
         state.error = action.payload || "Registration failed";
       })
 
-    
-      // .addCase(isEmailAvailable.pending, (state) => {
-      //   state.userLoading = true;
-      //   state.error = null;
-      // })
-      // .addCase(isEmailAvailable.fulfilled, (state) => {
-      //   state.userLoading = false;
-      // })
-      // .addCase(isEmailAvailable.rejected, (state, action) => {
-      //   state.userLoading = false;
-      //   state.error = action.payload || "Failed to check email availability";
-      // })
+      .addCase(checkEmailExists.pending, (state) => {
+        state.userLoading = true;
+        state.error = null;
+      })
+      .addCase(checkEmailExists.fulfilled, (state) => {
+        state.userLoading = false;
+
+      })
+      .addCase(checkEmailExists.rejected, (state, action) => {
+        state.userLoading = false;
+        state.error = action.payload || "Failed to check email";
+      })
 
 
       .addCase(logoutUser.pending, (state) => {

@@ -22,7 +22,7 @@ const DashboardPage = () => {
       <ThemeToggle />
       <button
         onClick={handleLogout}
-        className="btn btn-primary btn-dash"
+        className="btn btn-primary "
       >
         Logout
       </button>

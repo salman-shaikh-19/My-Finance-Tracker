@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { clearError, registerUser } from "../authSlice"; // <-- replace with your register action
+import { checkEmailExists, clearError, registerUser } from "../authSlice"; // <-- replace with your register action
 import { BiUserPlus } from "react-icons/bi";
 import { toast } from "react-toastify";
 
@@ -30,8 +30,14 @@ const RegisterAccount = () => {
       navigate("/get-started");
     }
   }, [isGetStarted, navigate]);
-const handleSubmit = async (values, { setSubmitting }) => {
+const handleSubmit = async (values, { setSubmitting,setFieldError }) => {
   try {
+     const emailExists = await dispatch(checkEmailExists(values.email)).unwrap();
+    if (emailExists) {
+      setFieldError("email", "Email is already registered");
+      setSubmitting(false);
+      return;
+    }
     const user = await dispatch(registerUser(values)).unwrap();
     toast.success("Account created successfully"); // success only
     dispatch(clearError()); // clear any previous errors
