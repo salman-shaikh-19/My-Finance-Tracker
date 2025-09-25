@@ -14,7 +14,7 @@ const Header = () => {
          alert('logout succ');
       //   navigate("/login"); // redirect to login after logout
     } catch (err) {
-      alert('logout faild');
+      alert('logout faild',err);
       console.error("Logout failed:", err);
     }
   };
