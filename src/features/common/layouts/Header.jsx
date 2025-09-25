@@ -12,11 +12,22 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();
-      // optionally navigate("/login")
     } catch (err) {
       console.error("Logout failed:", err);
     }
   };
+
+  // Close dropdown when clicking outside
+  const handleClickOutside = (e) => {
+    if (!e.target.closest(".dropdown-container")) {
+      setDropdownOpen(false);
+    }
+  };
+
+  // Attach event listener
+  if (typeof window !== "undefined") {
+    window.addEventListener("click", handleClickOutside);
+  }
 
   return (
     <>
@@ -46,10 +57,13 @@ const Header = () => {
           </a>
 
           {/* Manual dropdown for extra items */}
-          <div className="relative">
+          <div className="relative dropdown-container">
             <button
               className="flex flex-col items-center justify-center hover:text-primary focus:outline-none"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
+              onClick={(e) => {
+                e.stopPropagation(); // prevent closing immediately
+                setDropdownOpen(!dropdownOpen);
+              }}
             >
               <MdMoreHoriz size={24} />
               <span className="text-xs">More</span>
@@ -57,10 +71,16 @@ const Header = () => {
 
             {dropdownOpen && (
               <div className="absolute bottom-full mb-2 right-0 bg-base-100 shadow-lg rounded-lg w-40 flex flex-col p-2 space-y-2 z-50">
-                <button className="text-left w-full" onClick={() => { console.log("Reels clicked") }}>Reels</button>
-                <button className="text-left w-full" onClick={() => { console.log("Activity clicked") }}>Activity</button>
+                <button className="text-left w-full" onClick={() => console.log("Reels clicked")}>
+                  Reels
+                </button>
+                <button className="text-left w-full" onClick={() => console.log("Activity clicked")}>
+                  Activity
+                </button>
                 <button className="text-left w-full" onClick={handleLogout}>Logout</button>
-                <ThemeToggle />
+                <div className="px-2 py-1">
+                  <ThemeToggle />
+                </div>
               </div>
             )}
           </div>
