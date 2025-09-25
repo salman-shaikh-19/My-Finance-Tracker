@@ -3,13 +3,21 @@ import { logoutUser } from "../../auth/authSlice";
 import ThemeToggle from "../components/ThemeToggle";
 import { MdHome } from "react-icons/md";
 import { BiSearch } from "react-icons/bi";
+import supabase from "../../../services/supabaseClient";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
+       const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      console.warn("No active session, skipping logout");
+      navigate('/login');
+      return;
+    }
       await dispatch(logoutUser()).unwrap();
          alert('logout succ');
       //   navigate("/login"); // redirect to login after logout
