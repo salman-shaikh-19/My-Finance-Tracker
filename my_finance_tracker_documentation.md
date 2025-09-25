@@ -213,120 +213,85 @@ myfinance-tracker/
 │
 ├─ public/
 │
-├─ src/
-|  |
-|  ├─assets/ #assets like css,images,audios, etc
-|  |
-│  ├─ store/                     # Redux store and setup
-│  │  ├─ store.js
-│  │  └─ rootReducer.js
-│  │
-│  ├─ features/                # Redux slices + thunks
-│  │  ├─ auth/                 # Authentication module
-│  │  │  ├─ authSlice.js       # will use thunks 
-│  │  │  ├─ authThunks.js      # login, logout, register, verify, call that services funs()
-│  │  │  └─ AuthForms.jsx
-│  │  │
-│  │  ├─ expenses/
-│  │  │  ├─ expensesSlice.js
-│  │  │  ├─ expensesThunks.js
-│  │  │  └─ ExpensesList.jsx
-│  │  │
-│  │  ├─ income/
-│  │  │  ├─ incomeSlice.js
-│  │  │  ├─ incomeThunks.js
-│  │  │  └─ IncomeList.jsx
-│  │  │
-│  │  ├─ savings/
-│  │  │  ├─ savingsSlice.js
-│  │  │  ├─ savingsThunks.js
-│  │  │  └─ SavingsList.jsx
-│  │  │
-│  │  ├─ investments/
-│  │  │  ├─ investmentsSlice.js
-│  │  │  ├─ investmentsThunks.js
-│  │  │  └─ InvestmentsList.jsx
-│  │  │
-│  │  ├─ assets/
-│  │  │  ├─ assetsSlice.js
-│  │  │  ├─ assetsThunks.js
-│  │  │  └─ AssetsList.jsx
-│  │  │
-│  │  ├─ goals/
-│  │  │  ├─ goalsSlice.js
-│  │  │  ├─ goalsThunks.js
-│  │  │  └─ GoalsList.jsx
-│  │  │
-│  │  ├─ dashboard/
-│  │  │  ├─ dashboardSlice.js
-│  │  │  └─ dashboardThunks.js
-│  │  │
-│  │  ├─ guest/                # Guest-specific module
-│  │  │  ├─ guestSlice.js
-│  │  │  ├─ guestThunks.js
-│  │  │  └─ GuestPage.jsx
-│  │  │
-│  │  └─ common/               # Shared state between modules
-│  │     ├─ notificationsSlice.js
-│  │     └─ uiSlice.js         # modals, loading spinner, theme
-│  │
-│  ├─ components/              # UI components
-│  │  ├─ Dashboard/
-│  │  │  └─ DashboardCard.jsx
-│  │  ├─ Expenses/
-│  │  │  ├─ GeneralExpenseForm.jsx
-│  │  │  ├─ DebtPaymentForm.jsx
-│  │  │  └─ PlannedExpenseForm.jsx
-│  │  ├─ Income/
-│  │  │  └─ IncomeForm.jsx
-│  │  ├─ Savings/
-│  │  │  └─ SavingsForm.jsx
-│  │  ├─ Investments/
-│  │  │  └─ InvestmentForm.jsx
-│  │  ├─ Assets/
-│  │  │  └─ AssetForm.jsx
-│  │  ├─ FinancialGoals/
-│  │  │  └─ GoalForm.jsx
-│  │  ├─ Auth/                 # Login/Register forms, OAuth buttons
-│  │  │  └─ LoginForm.jsx
-│  │  ├─ Guest/                # Guest UI components
-│  │  └─ Common/               # Buttons, Cards, Modals, Alerts
-│  │
-│  ├─ pages/                   # Route-level components
-│  │  ├─ DashboardPage.jsx
-│  │  ├─ ExpensesPage.jsx
-│  │  ├─ IncomePage.jsx
-│  │  ├─ SavingsPage.jsx
-│  │  ├─ InvestmentsPage.jsx
-│  │  ├─ AssetsPage.jsx
-│  │  ├─ GoalsPage.jsx
-│  │  ├─ ReportsPage.jsx
-│  │  ├─ SettingsPage.jsx
-│  │  ├─ AuthPage.jsx           # Login/Register page
-│  │  └─ GuestPage.jsx          # Guest landing page
-│  │
-│  ├─ services/                # API / Supabase calls
-│  │  ├─ supabaseClient.js
-│  │  ├─ authService.js  #actual login /register function here
-│  │  ├─ expensesService.js
-│  │  ├─ incomeService.js
-│  │  ├─ savingsService.js
-│  │  ├─ investmentsService.js
-│  │  ├─ assetsService.js
-│  │  └─ goalsService.js
-│  │
-│  ├─ utils/
-│  │  ├─ dateUtils.js
-│  │  ├─ currencyUtils.js
-│  │  └─ notifications.js
-│  │
-│  ├─ App.jsx
-│  ├─ main.jsx
-│  └─ index.css
-│
-├─ vite.config.js
-├─ package.json
-└─ README.md
+├── src
+│   ├── App.jsx
+│   ├── assets
+│   │   ├── css
+│   │   │   └── index.css
+│   │   └── images
+│   │       └── auth
+│   │           └── Forgot password-cuate.png
+│   ├── features
+│   │   ├── assets
+│   │   │   ├── assetsSlice.js
+│   │   │   └── components
+│   │   │       ├── AssetsList.jsx
+│   │   │       └── AssetsPage.jsx
+│   │   ├── auth
+│   │   │   ├── authSlice.js
+│   │   │   └── components
+│   │   │       ├── Login.jsx
+│   │   │       └── RegisterAccount.jsx
+│   │   ├── common
+│   │   │   ├── commonSlice.js
+│   │   │   ├── components
+│   │   │   │   ├── InstallApp.jsx
+│   │   │   │   ├── NotFoundPage.jsx
+│   │   │   │   ├── ThemeToggle.jsx
+│   │   │   │   └── UnAuthorized.jsx
+│   │   │   └── layouts
+│   │   │       ├── Footer.jsx
+│   │   │       ├── Header.jsx
+│   │   │       └── Main.jsx
+│   │   ├── dashboard
+│   │   │   ├── components
+│   │   │   │   └── DashboardPage.jsx
+│   │   │   └── dashboardSlice.js
+│   │   ├── expenses
+│   │   │   ├── components
+│   │   │   │   ├── ExpensesList.jsx
+│   │   │   │   └── ExpensesPage.jsx
+│   │   │   └── expensesSlice.js
+│   │   ├── goals
+│   │   │   ├── components
+│   │   │   │   ├── GoalsList.jsx
+│   │   │   │   └── GoalsPage.jsx
+│   │   │   └── goalsSlice.js
+│   │   ├── guest
+│   │   │   └── components
+│   │   │       └── GetStartedPage.jsx
+│   │   ├── income
+│   │   │   ├── components
+│   │   │   │   ├── IncomeList.jsx
+│   │   │   │   └── IncomePage.jsx
+│   │   │   └── incomeSlice.js
+│   │   ├── investments
+│   │   │   ├── components
+│   │   │   │   ├── InvestmentsList.jsx
+│   │   │   │   └── InvestmentsPage.jsx
+│   │   │   └── investmentsSlice.js
+│   │   ├── reports
+│   │   │   ├── components
+│   │   │   └── ReportsPage.jsx
+│   │   └── savings
+│   │       ├── components
+│   │       │   ├── SavingsList.jsx
+│   │       │   └── SavingsPage.jsx
+│   │       └── savingsSlice.js
+│   ├── main.jsx
+│   ├── routes
+│   │   ├── index.jsx
+│   │   └── ProtectedRoute.jsx
+│   ├── services
+│   │   └── supabaseClient.js
+│   ├── store
+│   │   └── store.js
+│   └── utils
+│       ├── currencyUtils.js
+│       ├── dateUtils.js
+│       └── notifications.js
+├── vercel.json
+└── vite.config.js
 
 ```
 
