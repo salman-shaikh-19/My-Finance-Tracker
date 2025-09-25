@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import InstallApp from "../../components/Other/InstallApp";
-import  setGetStarted  from "../../features/common/commonSlice";
+import  {setGetStarted}  from "../../features/common/commonSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +21,7 @@ const GetStartedPage = () => {
     if (isGetStarted) {
       navigate("/login");
     }
-  }, [isGetStarted,dispatch]);
+  }, [isGetStarted, dispatch, navigate]);
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
