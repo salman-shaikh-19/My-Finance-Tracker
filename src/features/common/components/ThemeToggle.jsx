@@ -33,7 +33,7 @@ const ThemeToggle = () => {
         onChange={handleChange}
       >
         {themes.map((t) => (
-          <option key={t} value={t}>{t}</option>
+          <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
         ))}
       </select>
     </div>

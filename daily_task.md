@@ -13,5 +13,12 @@
 - routing setup.
 - create store.
 - create supabase client service (setup).
-- create landing page,add install app button , and login page.
+- create landing page,add install app button .
+- login implemented.
+
+
+# 26 sep 
+- Register account implemented.
+- logout implemented.
+- theme (daisyUI themes) implemented[created theme selection dropdown , many themes avaialbe].
 
