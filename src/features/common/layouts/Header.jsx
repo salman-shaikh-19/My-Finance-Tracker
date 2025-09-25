@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../auth/authSlice";
 import ThemeToggle from "../components/ThemeToggle";
 import { MdHome, MdMoreHoriz } from "react-icons/md";
-import { BiSearch } from "react-icons/bi";
+import { BiLogOut, BiSearch } from "react-icons/bi";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -16,18 +14,6 @@ const Header = () => {
       console.error("Logout failed:", err);
     }
   };
-
-  // Close dropdown when clicking outside
-  const handleClickOutside = (e) => {
-    if (!e.target.closest(".dropdown-container")) {
-      setDropdownOpen(false);
-    }
-  };
-
-  // Attach event listener
-  if (typeof window !== "undefined") {
-    window.addEventListener("click", handleClickOutside);
-  }
 
   return (
     <>
@@ -52,37 +38,31 @@ const Header = () => {
 
           {/* Explore */}
           <a href="#" className="flex flex-col items-center justify-center hover:text-primary group">
-            <BiSearch size={24} />
-            <span className="text-xs">Explore</span>
+            <BiLogOut size={24} />
+            <button onClick={handleLogout}>Logout</button>
           </a>
 
-          {/* Manual dropdown for extra items */}
-          <div className="relative dropdown-container">
-            <button
-              className="flex flex-col items-center justify-center hover:text-primary focus:outline-none"
-              onClick={(e) => {
-                e.stopPropagation(); // prevent closing immediately
-                setDropdownOpen(!dropdownOpen);
-              }}
-            >
+          {/* Dropdown for extra items */}
+          <div className="dropdown dropdown-top">
+            <label tabIndex={0} className="flex flex-col items-center justify-center cursor-pointer hover:text-primary">
               <MdMoreHoriz size={24} />
               <span className="text-xs">More</span>
-            </button>
-
-            {dropdownOpen && (
-              <div className="absolute bottom-full mb-2 right-0 bg-base-100 shadow-lg rounded-lg w-40 flex flex-col p-2 space-y-2 z-50">
-                <button className="text-left w-full" onClick={() => console.log("Reels clicked")}>
-                  Reels
-                </button>
-                <button className="text-left w-full" onClick={() => console.log("Activity clicked")}>
-                  Activity
-                </button>
-                <button className="text-left w-full" onClick={handleLogout}>Logout</button>
-                <div className="px-2 py-1">
-                  <ThemeToggle />
-                </div>
-              </div>
-            )}
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40"
+            >
+              <li>
+                <a href="#">menu1</a>
+              </li>
+              <li>
+                <a href="#">menu2</a>
+              </li>
+             
+              <li>
+                <ThemeToggle />
+              </li>
+            </ul>
           </div>
         </div>
       </nav>
