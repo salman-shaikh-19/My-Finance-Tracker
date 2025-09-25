@@ -24,9 +24,9 @@ const ThemeToggle = () => {
 
   return (
     <div className="form-control w-52">
-      <label className="label">
+      {/* <label className="label">
         <span className="label-text">Select Theme</span>
-      </label>
+      </label> */}
       <select
         className="select select-bordered"
         value={theme}
