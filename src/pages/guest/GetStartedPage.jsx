@@ -19,7 +19,7 @@ const GetStartedPage = () => {
 
   useEffect(() => {
     if (isGetStarted) {
-      navigate("/login");
+      navigate("/login");//login
     }
   }, [isGetStarted, dispatch, navigate]);
   return (
