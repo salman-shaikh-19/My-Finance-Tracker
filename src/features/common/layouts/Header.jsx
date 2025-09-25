@@ -11,8 +11,10 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();
+         alert('logout succ');
       //   navigate("/login"); // redirect to login after logout
     } catch (err) {
+      alert('logout faild');
       console.error("Logout failed:", err);
     }
   };
