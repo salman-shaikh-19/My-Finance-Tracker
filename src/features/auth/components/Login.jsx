@@ -28,28 +28,27 @@ const Login = () => {
     }
   }, [isGetStarted, navigate]);
 
- const handleSubmit = async (values, { setSubmitting }) => {
-  try {
-    const user = await dispatch(loginUser(values)).unwrap(); 
-    if (user) {
-      toast.success('Login successfull');
-      navigate("/"); 
-    }
-  } catch (err) {
-
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      const user = await dispatch(loginUser(values)).unwrap();
+      if (user) {
+        toast.success("Login successfull");
+        navigate("/");
+      }
+    } catch (err) {
       if (err === "Email not confirmed") {
-    toast.error("Please confirm your email before logging in.");
-  } else {
-    toast.error(err);
-  }
-  } finally {
-    setSubmitting(false);
-  }
-};
+        toast.error("Please confirm your email before logging in.");
+      } else {
+        toast.error(err);
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-useEffect(()=>{
-     dispatch(clearError())
-},[]);
+  useEffect(() => {
+    dispatch(clearError());
+  }, []);
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -65,9 +64,8 @@ useEffect(()=>{
         </div> */}
 
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          
           <div className="card-body">
-                    <h1 className="text-3xl font-bold text-center">Login now!</h1>
+            <h1 className="text-3xl font-bold text-center">Login now!</h1>
             <Formik
               initialValues={{ email: "", password: "" }}
               validationSchema={loginSchema}
@@ -108,7 +106,7 @@ useEffect(()=>{
                   {/* <div>
                     <a className="link link-hover text-sm">Forgot password?</a>
                   </div> */}
-                
+
                   {error && (
                     <div className="alert alert-error alert-dash text-sm mb-2 justify-center">
                       <span className="text-center w-full">{error}</span>
@@ -116,17 +114,26 @@ useEffect(()=>{
                   )}
                   <button
                     type="submit"
-                    className="btn btn-primary w-full mt-4"
+                    className="btn btn-primary btn-dash w-full mt-4"
                     disabled={isSubmitting || userLoading}
                   >
-                    {isSubmitting || userLoading ?  "Logging in..." : "Login"}
+                    {isSubmitting || userLoading ? (
+                      <>
+                        <span className="loading loading-spinner"></span>{" "}
+                        logging in...
+                      </>
+                    ) : (
+                      "Login"
+                    )}
                   </button>
                 </Form>
               )}
             </Formik>
-              <div className="flex justify-center"> 
-                    <Link to="/register" className="link link-hover text-sm ">Create new account</Link>
-                  </div>
+            <div className="flex justify-center">
+              <Link to="/register" className="link link-hover text-sm ">
+                Create new account
+              </Link>
+            </div>
           </div>
         </div>
       </div>

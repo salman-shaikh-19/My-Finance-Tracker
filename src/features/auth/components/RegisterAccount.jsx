@@ -143,10 +143,12 @@ useEffect(()=>{
                  
                   <button
                     type="submit"
-                    className="btn btn-primary w-full mt-4"
+                    className="btn btn-primary btn-dash w-full mt-4"
                     disabled={isSubmitting || userLoading}
                   >
-                    {isSubmitting || userLoading ? "Creating account..." : "Register"}
+                    {isSubmitting || userLoading ?  <>
+    <span className="loading loading-spinner"></span> Creating account...
+  </> : "Register"}
                   </button>
                 </Form>
               )}
