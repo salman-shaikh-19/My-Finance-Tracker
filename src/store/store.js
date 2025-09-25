@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import commonReducer from '../features/common/commonSlice'
 // import userReducer from '../features/user/userSlice'
-// import authReducer from '../features/auth/authSlice'
+import authReducer from '../features/auth/authSlice'
 // import chatReducer from '../features/chat/chatSlice'
 
 import { persistReducer, persistStore } from "redux-persist";
@@ -20,7 +20,7 @@ import storage from "redux-persist/lib/storage";
 const rootReducer = combineReducers({
   common: commonReducer,
 //   user:userReducer,
-//   auth:authReducer,
+  auth:authReducer,
 //   chat: chatReducer,
 });
 

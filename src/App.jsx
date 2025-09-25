@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Beta from "./pages/Beta";
 import { toast } from "react-toastify";
 import AppRoutes from "./routes";
 import { useSelector } from "react-redux";
@@ -25,11 +24,13 @@ function App() {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
         .register("/sw.js")
-        .then((reg) => {
-          console.log("Service Worker registered:", reg);
+        .then(() => {
+          // console.log("Service Worker registered:", reg);
         })
-        .catch((err) =>
-          console.error("Service Worker registration failed:", err)
+        .catch(() =>{
+
+          // console.error("Service Worker registration failed:", err)
+        }
         );
     }
 

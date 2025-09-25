@@ -19,7 +19,7 @@ const InstallApp = ({ className }) => {
 
     // Check if the app is already installed
     window.addEventListener('appinstalled', () => {
-      console.log('App was installed');
+      // console.log('App was installed');
       setDeferredPrompt(null);
       setIsInstallable(false);
     });
@@ -38,8 +38,8 @@ const InstallApp = ({ className }) => {
     deferredPrompt.prompt();
     
     // Wait for the user to respond to the prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
+     await deferredPrompt.userChoice;
+    // console.log(`User response to the install prompt: ${outcome}`);
     
     // Reset the deferred prompt variable, as it can only be used once
     setDeferredPrompt(null);

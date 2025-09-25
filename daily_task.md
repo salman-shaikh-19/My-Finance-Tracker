@@ -13,4 +13,5 @@
 - routing setup.
 - create store.
 - create supabase client service (setup).
+- create landing page,add install app button , and login page.
 

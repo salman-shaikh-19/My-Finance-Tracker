@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import InstallApp from "../../components/Other/InstallApp";
-import  {setGetStarted}  from "../../features/common/commonSlice";
+import InstallApp from "../../common/components/InstallApp";
+import  {setGetStarted}  from "../../common/commonSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

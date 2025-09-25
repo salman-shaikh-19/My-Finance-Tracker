@@ -5,7 +5,7 @@ export const commonSlice = createSlice({
   name: "common",
   initialState: {
     theme: "light",
-    isUserLoggedIn: false,
+  
  
     loading: false,
     error: null,
@@ -16,9 +16,7 @@ export const commonSlice = createSlice({
     setTheme(state, action) {
       state.theme = action.payload;
     },
-    setIsUserLoggedIn(state, action) {
-      state.isUserLoggedIn = action.payload;
-    },
+  
    
 
     setGetStarted(state, action) {
@@ -31,5 +29,5 @@ export const commonSlice = createSlice({
 
 });
 
-export const { setTheme,  setIsUserLoggedIn,setGetStarted} = commonSlice.actions;
+export const { setTheme,setGetStarted} = commonSlice.actions;
 export default commonSlice.reducer;

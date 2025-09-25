@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
-import GetStartedPage from '../pages/guest/GetStartedPage'
-import NotFoundPage from '../components/Common/NotFoundPage';
-import UnAuthorized from '../components/Common/UnAuthorized';
-import LoginPage from "../pages/auth/LoginPage";
-import DashboardPage from '../pages/dashboard/DashboardPage';
+
+import GetStartedPage from '../features/guest/components/GetStartedPage'
+import LoginPage from "../features/auth/components/LoginPage";
+import DashboardPage from '../features/dashboard/components/DashboardPage';
+import UnAuthorized from "../features/common/components/UnAuthorized";
+import NotFoundPage from "../features/common/components/NotFoundPage";
 const AppRoutes = () => {
     return (
       
