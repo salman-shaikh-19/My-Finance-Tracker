@@ -37,10 +37,10 @@ const Header = () => {
           </a>
 
           {/* Explore */}
-          <a href="#" className="flex flex-col items-center justify-center hover:text-primary group">
+          <span href="#" className="flex flex-col items-center justify-center hover:text-primary group">
             <BiLogOut size={24} />
             <button onClick={handleLogout}>Logout</button>
-          </a>
+          </span>
 
           {/* Dropdown for extra items */}
           <div className="dropdown dropdown-top">
