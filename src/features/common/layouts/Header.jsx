@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../auth/authSlice";
 import ThemeToggle from "../components/ThemeToggle";
@@ -6,10 +7,12 @@ import { BiSearch } from "react-icons/bi";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       await dispatch(logoutUser()).unwrap();
+      // optionally navigate("/login")
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -42,37 +45,25 @@ const Header = () => {
             <span className="text-xs">Explore</span>
           </a>
 
-          {/* Dropdown for extra items */}
-    <div className="dropdown dropdown-top dropdown-end">
-  {/* Trigger */}
-  <label
-    tabIndex={0}
-    className="flex flex-col items-center justify-center cursor-pointer hover:text-primary focus:outline-none"
-  >
-    <MdMoreHoriz size={24} />
-    <span className="text-xs">More</span>
-  </label>
+          {/* Manual dropdown for extra items */}
+          <div className="relative">
+            <button
+              className="flex flex-col items-center justify-center hover:text-primary focus:outline-none"
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+            >
+              <MdMoreHoriz size={24} />
+              <span className="text-xs">More</span>
+            </button>
 
-  {/* Dropdown content */}
-  <ul
-    tabIndex={0}
-    className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-40 max-h-60 overflow-auto"
-  >
-    <li>
-      <a href="#">Reels</a>
-    </li>
-    <li>
-      <a href="#">Activity</a>
-    </li>
-    <li>
-      <button onClick={handleLogout}>Logout</button>
-    </li>
-    <li>
-      <ThemeToggle />
-    </li>
-  </ul>
-</div>
-
+            {dropdownOpen && (
+              <div className="absolute bottom-full mb-2 right-0 bg-base-100 shadow-lg rounded-lg w-40 flex flex-col p-2 space-y-2 z-50">
+                <button className="text-left w-full" onClick={() => { console.log("Reels clicked") }}>Reels</button>
+                <button className="text-left w-full" onClick={() => { console.log("Activity clicked") }}>Activity</button>
+                <button className="text-left w-full" onClick={handleLogout}>Logout</button>
+                <ThemeToggle />
+              </div>
+            )}
+          </div>
         </div>
       </nav>
     </>
