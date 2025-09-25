@@ -10,3 +10,7 @@
 
 # 25 sep
 - supabase account setup , create database and tables.
+- routing setup.
+- create store.
+- create supabase client service (setup).
+
