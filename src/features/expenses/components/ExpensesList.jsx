@@ -7,15 +7,19 @@ import {
   getCategoryByName,
 } from "../../../utils/Categories"; 
 import ExpenseCard from "./ExpenseCard";
+import ExpenseChart from "./ExpenseChart";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({  expenses }) => {
   const { userCurrency } = useSelector((state) => state.common);
   return (
+    <>
     <div
       id="expenses-list"
       className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide"
     >
+    <ExpenseChart expenses={expenses} />
+         
       <CustomInfiniteScroll
         pageSize={20}
         data={expenses}
@@ -47,6 +51,7 @@ const ExpensesList = ({  expenses }) => {
         )}
       </CustomInfiniteScroll>
     </div>
+              </>
   );
 };
 

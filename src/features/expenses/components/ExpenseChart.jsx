@@ -77,7 +77,7 @@ const ExpenseChart = ({ expenses = [] }) => {
   }
 
   return (
-    <div className="w-full  max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
+    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
       <h2 className="text-xl font-semibold mb-4 px-2">Expense Overview</h2>
       <div className="w-full h-[calc(100%-50px)]">
         <ResponsiveContainer width="100%" height="100%">

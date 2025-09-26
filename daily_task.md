@@ -31,3 +31,4 @@
 - set theme implmented.
 - expense card make.
 - expense listed.
+- expense chart implemented

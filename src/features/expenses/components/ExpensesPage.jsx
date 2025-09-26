@@ -25,8 +25,7 @@ const ExpensesPage = () => {
   return (
     <>
       <Main>
-        
-        <ExpenseChart expenses={expenses} />
+     
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
       </Main>
     </>
