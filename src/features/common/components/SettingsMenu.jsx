@@ -11,6 +11,7 @@ import { BiReset } from "react-icons/bi";
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
+  children
 }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
@@ -72,6 +73,7 @@ const SettingsMenu = ({
           }  w-42 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
         >
           <ul className="menu menu-compact">
+            {children}
             <li>
               <Link to="/profile" onClick={() => handleClickItem()}>
                 <CgProfile /> Profile
@@ -82,6 +84,7 @@ const SettingsMenu = ({
                 <CgPassword /> Test test
               </Link>
             </li>
+           
           </ul>
 
           <div className="mt-3 border-t pt-2">

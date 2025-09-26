@@ -13,6 +13,7 @@ import SettingsMenu from "../components/SettingsMenu";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
+import { GrDashboard } from "react-icons/gr";
 
 const Header = () => {
   return (
@@ -21,6 +22,7 @@ const Header = () => {
         <Link to={"/"} className="font-bold me-auto select-none ">
           My Finance Tracker
         </Link>
+        <HeaderNav title="Home" redirectTo="/" />
         <HeaderNav title="Expanses" />
         <HeaderNav title="Incomes" />
         <HeaderNav title="Investments" />
@@ -58,7 +60,13 @@ const Header = () => {
                 title="More"
               />
             }
-          />
+          >
+            <li>
+              <Link to="/">
+                <GrDashboard /> Dashboard
+              </Link>
+            </li>
+          </SettingsMenu>
           <HeaderNavMobile
             title="Investments"
             icon={<FaChartLine className="" />}
