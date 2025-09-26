@@ -1,16 +1,17 @@
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import  supabase  from "../services/supabaseClient"; 
+import { FaSpinner } from "react-icons/fa";
 
 const ProtectedRoute = ({ children, publicOnly = false }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setIsLoggedIn(!!session);
-      setIsLoading(false);
+      // setIsLoading(false);
     };
 
     checkUser();
@@ -25,10 +26,16 @@ const ProtectedRoute = ({ children, publicOnly = false }) => {
     };
   }, []);
 
-  if (isLoading) {
-    return <div>Loading...</div>; // or a spinner
-  }
-
+  //   if (isLoading) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen bg-gray-50">
+  //       <div className="flex flex-col items-center">
+  //         <FaSpinner className="animate-spin text-5xl text- mb-4" />
+  //         <p className="text-gray-600 font-medium"></p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
   // public route: redirect logged-in user to home
   if (publicOnly && isLoggedIn) {
     return <Navigate to="/" replace />;

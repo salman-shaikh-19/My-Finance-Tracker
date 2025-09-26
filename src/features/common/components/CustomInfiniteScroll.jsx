@@ -59,7 +59,7 @@ function CustomInfiniteScroll({ data, pageSize, children, scrollTargetId,isTable
                 dataLength={dataToScroll.length}
                 next={loadMoreData}
                 hasMore={hasMore}
-                loader={<div className="d-flex justify-content-center align-item-center " style={{height:"100vh"}}><center><p><FaSpinner className="animate-spin" size="2x" /></p></center></div>}
+                loader={<div className="d-flex justify-content-center align-item-center " style={{height:"100vh"}}><center><p><FaSpinner className="animate-spin" size={32} /></p></center></div>}
                 endMessage={isTable ? '':<><div className="text-center"><span className=" fw-bold">{endMsg}</span></div></>}
                 scrollableTarget={scrollTargetId}
             >
