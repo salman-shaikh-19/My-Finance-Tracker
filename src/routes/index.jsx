@@ -4,7 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import GetStartedPage from '../features/guest/components/GetStartedPage'
 import LoginPage from "../features/auth/components/Login";
-import DashboardPage from '../features/dashboard/components/DashboardPage';
+import Dashboard from '../features/dashboard/components/Dashboard';
 import UnAuthorized from "../features/common/components/UnAuthorized";
 import NotFoundPage from "../features/common/components/NotFoundPage";
 import RegisterAccount from "../features/auth/components/RegisterAccount";
@@ -33,7 +33,7 @@ const AppRoutes = () => {
 
              <Route path="/" element={
                  <ProtectedRoute >
-                    <DashboardPage />
+                    <Dashboard />
                 </ProtectedRoute>
             }
             />

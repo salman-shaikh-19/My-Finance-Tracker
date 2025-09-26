@@ -2,7 +2,7 @@
 import Main from "../../common/layouts/Main";
 // import { useNavigate } from "react-router-dom";
 
-const DashboardPage = () => {
+const Dashboard = () => {
   return (
     <Main>
       <div className="text-center  flex flex-col items-center justify-center gap-4">
@@ -12,4 +12,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default Dashboard;
