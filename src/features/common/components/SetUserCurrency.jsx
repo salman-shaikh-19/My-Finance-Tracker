@@ -20,6 +20,7 @@ const SetUserCurrency = () => {
         <span className="label-text">Select Theme</span>
       </label> */}
     <select
+    title="Set your Currency"
   className="select appearance-none"
   value={userCurrency}
   onChange={handleChange}

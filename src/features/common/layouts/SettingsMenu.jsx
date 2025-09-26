@@ -88,10 +88,10 @@ const SettingsMenu = ({
               </Link>
             </li>
           </ul>
-          <div className="mt-3 border-t pt-1 ">
+          <div className="mt-3 border-t pt-2 ">
             <SetUserCurrency />
           </div>
-          <div className="mt-1 ">
+          <div className="mt-2 ">
             <ThemeToggle onClick={() => handleClickItem()} />
           </div>
 
