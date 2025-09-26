@@ -21,7 +21,7 @@ const Header = () => {
    
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md">
         {/* <HeaderNav title="My Finance Tracker"   /> */}
-        <Link to={"/"} className="font-bold me-auto ">My Finance Tracker</Link>
+        <Link to={"/"} className="font-bold me-auto select-none ">My Finance Tracker</Link>
         <HeaderNav title="Expanses"  />
         <HeaderNav title="Incomes"  />
         <HeaderNav title="Investments"  />
@@ -30,7 +30,7 @@ const Header = () => {
         <button onClick={handleLogout} className="btn btn-error">
           Logout
         </button> */}
-        <SettingsMenu triggerIcon={<CgProfile className="text-2xl cursor-pointer" title="profile"  />}  />
+        <SettingsMenu triggerIcon={<CgProfile className="text-2xl cursor-pointer hover:text-primary" title="profile"  />}  />
         {/* <HeaderNav title=""  icon={<FiSettings className="text-xl"  />} /> */}
         
         
