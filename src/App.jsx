@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <div data-theme={theme} className="select-none lg:select-text">
+      <div data-theme={theme} className="bg-base-300  select-none lg:select-text transition-colors duration-300">
         {/* <Beta /> */}
          <AppRoutes />
       </div>
