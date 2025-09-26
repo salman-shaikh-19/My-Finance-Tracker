@@ -51,7 +51,7 @@ const SettingsMenu = ({isMobile=false, triggerIcon = <FiSettings className="text
   }, []);
 
   return (
-    <div ref={menuRef} className="relative">
+    <div ref={menuRef} className="relative ">
       <div  onClick={(e) => { e.stopPropagation(); setOpen(!open); }}>
         {triggerIcon}
       </div>

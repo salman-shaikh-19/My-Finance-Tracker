@@ -8,6 +8,7 @@ import HeaderNav from "../components/HeaderNav";
 import SettingsMenu from "../components/SettingsMenu";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { BiPlusCircle } from "react-icons/bi";
 
 const Header = () => {
 
@@ -43,7 +44,7 @@ const Header = () => {
             title="Incomes"
             icon={<FaMoneyBillWave className="" />}
           />
-         <SettingsMenu isMobile={true} triggerIcon={<CgProfile className="text-3xl cursor-pointer" title="profile"  />} />
+         <SettingsMenu isMobile={true} triggerIcon={<BiPlusCircle className=" text-5xl cursor-pointer hover:text-primary " title="More"  />} />
           <HeaderNavMobile title="Investments" icon={<FaChartLine className="" />} />
           <HeaderNavMobile title="Savings" icon={<FaPiggyBank className=""  />} />
 
