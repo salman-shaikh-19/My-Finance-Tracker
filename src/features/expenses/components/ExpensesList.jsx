@@ -8,6 +8,8 @@ import {
   getCategoryByName,
 } from "../../../utils/Categories"; // import categories
 import supabase from "../../../services/supabaseClient";
+import { BiHome } from "react-icons/bi";
+import ExpenseCard from "./ExpenseCard";
 
 const ExpensesList = ({ userId }) => {
   const dispatch = useDispatch();
@@ -16,32 +18,29 @@ const ExpensesList = ({ userId }) => {
   // useEffect(() => {
   //   if (userId) dispatch(getAllExpenses(userId));
   // }, [dispatch, userId]);
-   useEffect(() => {
+  useEffect(() => {
     if (!userId) return;
 
-
     dispatch(getAllExpenses(userId));
-
 
     const channel = supabase
       .channel("expenses-realtime")
       .on(
         "postgres_changes",
         {
-          event: "*", // add/edit/deleet
+          event: "*", // fetch all data on add/edit/deleet event
           schema: "public",
           table: "user_expenses",
           filter: `user_id=eq.${userId}`,
         },
         () => {
-        
           dispatch(getAllExpenses(userId));
         }
       )
       .subscribe();
 
     return () => {
-      supabase.removeChannel(channel); 
+      supabase.removeChannel(channel);
     };
   }, [dispatch, userId]);
 
@@ -49,14 +48,14 @@ const ExpensesList = ({ userId }) => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="expenses-list">
+    <div id="expenses-list"   className="overflow-auto h-[530px] scrollbar-hide">
       <CustomInfiniteScroll
-        pageSize={10}
+        pageSize={20}
         data={expenses}
-        scrollTargetId={"expenses-list"}
+        scrollTargetId="expenses-list"
       >
         {(items) => (
-          <div className="flex flex-wrap justify-center">
+          <div className="flex flex-wrap justify-center gap-2">
             {items.map((item) => {
               const category = getCategoryByName(
                 expenseCategories,
@@ -65,26 +64,22 @@ const ExpensesList = ({ userId }) => {
               const Icon = category.icon;
 
               return (
-                <div
-                  key={item.id}
-                  className="m-2 p-2 border rounded w-60 flex flex-col gap-1"
-                >
-                  <div className="flex items-center gap-2">
-                    <Icon className="text-6xl" />
-                    <span className="font-semibold">{category.name}</span>
-                  </div>
-                  <p>
-                    <strong>Amount:</strong> {item.amount}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {commonDate(item.expense_date)}
-                  </p>
-                </div>
+           
+                <ExpenseCard 
+                cardKey={item.id}
+                category={category.name}
+                amount={item.amount}
+                type={item.payment_method}
+                date= {commonDate(item.expense_date)}
+                bgColor={category.bg} 
+                Icon={Icon} 
+              />
               );
             })}
           </div>
         )}
       </CustomInfiniteScroll>
+
     </div>
   );
 };

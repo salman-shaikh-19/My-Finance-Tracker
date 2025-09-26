@@ -8,7 +8,8 @@ export const getAllExpenses = createAsyncThunk(
       const { data, error } = await supabase
         .from("user_expenses")
         .select("*")
-        .eq('user_id',userId);
+        .eq('user_id',userId)
+        .order("id", { ascending: false });
         // select all fields
 
       if (error) throw error;

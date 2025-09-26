@@ -58,3 +58,11 @@
 }
 
 
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none !important; /* IE 10+ */
+  scrollbar-width: none !important; /* Firefox */
+}
