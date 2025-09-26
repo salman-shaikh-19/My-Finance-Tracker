@@ -2,10 +2,11 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "react-icons/fi";
-import { CgProfile } from "react-icons/cg";
+import { CgPassword, CgProfile } from "react-icons/cg";
 import ThemeToggle from "./ThemeToggle";
 import { logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
+import { BiReset } from "react-icons/bi";
 
 const SettingsMenu = ({isMobile=false, triggerIcon = <FiSettings className="text-xl cursor-pointer" /> }) => {
   const [open, setOpen] = useState(false);
@@ -56,7 +57,7 @@ const SettingsMenu = ({isMobile=false, triggerIcon = <FiSettings className="text
       </div>
 
       {open && (
-        <div className={`${isMobile ? 'absolute bottom-20 -right-15 ':'absolute top-16 right-0'}  w-40 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}>
+        <div className={`${isMobile ? 'absolute bottom-20 -right-15 ':'absolute top-16 right-0'}  w-42 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}>
           <ul className="menu menu-compact">
             <li>
               <Link to="/profile" onClick={() => handleClickItem()}>
@@ -65,7 +66,7 @@ const SettingsMenu = ({isMobile=false, triggerIcon = <FiSettings className="text
             </li>
             <li>
               <Link to="/settings" onClick={() => handleClickItem()}>
-                <FiSettings /> Settings
+                <CgPassword /> Test test
               </Link>
             </li>
           </ul>
