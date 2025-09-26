@@ -14,8 +14,19 @@ import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+   const [spinning, setSpinning] = useState(false);
+     const handleClick = () => {
+    setSpinning(true);
+    setTimeout(() => setSpinning(false), 500); // remove class after animation
+  };
+
+  useEffect(()=>{
+    console.log('logg');
+    
+  },[])
   return (
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md">
@@ -55,10 +66,11 @@ const Header = () => {
           <SettingsMenu
             isMobile={true}
             triggerIcon={
-              <BiPlusCircle
-                className=" text-5xl cursor-pointer hover:text-primary "
-                title="More"
-              />
+               <BiPlusCircle
+              className={`text-5xl cursor-pointer hover:text-primary ${spinning ? "animate-spin" : ""}`}
+              title="More"
+              onClick={handleClick}
+            />
             }
           >
             <li>
