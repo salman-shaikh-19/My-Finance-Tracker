@@ -10,44 +10,24 @@ import {
 import supabase from "../../../services/supabaseClient";
 import { BiHome } from "react-icons/bi";
 import ExpenseCard from "./ExpenseCard";
+import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ userId,expenses }) => {
   const dispatch = useDispatch();
 
    const { userCurrency } = useSelector((state) => state.common);
-   
-   
-  // useEffect(() => {
-  //   if (userId) dispatch(getAllExpenses(userId));
-  // }, [dispatch, userId]);
-  useEffect(() => {
+   useEffect(() => {
     if (!userId) return;
-
     dispatch(getAllExpenses(userId));
-
-    const channel = supabase
-      .channel("expenses-realtime")
-      .on(
-        "postgres_changes",
-        {
-          event: "*", // fetch all data on add/edit/deleet event
-          schema: "public",
-          table: "user_expenses",
-          filter: `user_id=eq.${userId}`,
-        },
-        () => {
-          dispatch(getAllExpenses(userId));
-        }
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
   }, [dispatch, userId]);
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error}</p>;
+ //custom hook 
+    useRealtimeTable(
+      "user_expenses", //pasing table name
+      { column: "user_id", value: userId },
+      () => dispatch(getAllExpenses(userId))
+    );
+  
 
   return (
 <div
