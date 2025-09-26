@@ -11,9 +11,9 @@ import supabase from "../../../services/supabaseClient";
 import { BiHome } from "react-icons/bi";
 import ExpenseCard from "./ExpenseCard";
 
-const ExpensesList = ({ userId }) => {
+const ExpensesList = ({ userId,expenses }) => {
   const dispatch = useDispatch();
-  const { expenses, loading, error } = useSelector((state) => state.expenses);
+
    const { userCurrency } = useSelector((state) => state.common);
    
    
@@ -46,8 +46,8 @@ const ExpensesList = ({ userId }) => {
     };
   }, [dispatch, userId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error}</p>;
 
   return (
 <div

@@ -11,8 +11,6 @@ const ExpenseCard = ({userCurrency='INR', category, amount, type, date, bgColor 
         <div className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}>
           <Icon className="text-4xl text-white" />
         </div>
-
-   
         <div className="flex flex-col justify-between flex-1">
        
           <div className="flex justify-between items-center mb-2">
