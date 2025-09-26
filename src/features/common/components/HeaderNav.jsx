@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
  const HeaderNav = ({ title = "default", redirectTo = "/", icon }) => {
@@ -9,4 +10,4 @@ import { Link } from "react-router-dom";
   );
 };
 
-export default HeaderNav;
+export default React.memo(HeaderNav);

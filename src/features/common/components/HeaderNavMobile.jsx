@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
  const HeaderNavMobile = ({ title = "default", redirectTo = "/", icon }) => {
@@ -13,4 +14,4 @@ import { Link } from "react-router-dom";
   );
 };
 
-export default  HeaderNavMobile;
+export default  React.memo(HeaderNavMobile);
