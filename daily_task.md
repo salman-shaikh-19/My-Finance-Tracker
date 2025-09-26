@@ -21,4 +21,5 @@
 - Register account implemented.
 - logout implemented.
 - theme (daisyUI themes) implemented[created theme selection dropdown , many themes avaialbe].
+- created different header for big and small size(on desktop header should be on top and on mobile screen or tablet header should be in bottom).
 
