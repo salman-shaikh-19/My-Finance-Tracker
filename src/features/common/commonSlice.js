@@ -7,7 +7,7 @@ export const commonSlice = createSlice({
     loggedInUserId: null,
     loading: false,
     error: null,
-    userCurrency:'USD',
+    userCurrency:'INR',
     isGetStarted: false,
   },
   reducers: {

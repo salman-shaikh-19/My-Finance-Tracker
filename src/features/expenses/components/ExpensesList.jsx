@@ -71,7 +71,7 @@ const ExpensesList = ({ userId }) => {
               return (
            
                 <ExpenseCard 
-                cardKey={item.id}
+                key={item.id}
                 category={category.name}
                 amount={item.amount}
                 type={item.payment_method}
