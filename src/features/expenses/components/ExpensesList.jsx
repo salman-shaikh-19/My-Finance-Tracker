@@ -6,34 +6,31 @@ import { commonDate } from "../../../utils/dateUtils";
 import {
   expenseCategories,
   getCategoryByName,
-} from "../../../utils/Categories"; // import categories
-import supabase from "../../../services/supabaseClient";
-import { BiHome } from "react-icons/bi";
+} from "../../../utils/Categories"; 
 import ExpenseCard from "./ExpenseCard";
 import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
-const ExpensesList = ({ userId,expenses }) => {
+const ExpensesList = ({ userId, expenses }) => {
   const dispatch = useDispatch();
 
-   const { userCurrency } = useSelector((state) => state.common);
-   useEffect(() => {
+  const { userCurrency } = useSelector((state) => state.common);
+  useEffect(() => {
     if (!userId) return;
     dispatch(getAllExpenses(userId));
   }, [dispatch, userId]);
 
- //custom hook 
-    useRealtimeTable(
-      "user_expenses", //pasing table name
-      { column: "user_id", value: userId },
-      () => dispatch(getAllExpenses(userId))
-    );
-  
+  //custom hook
+  useRealtimeTable(
+    "user_expenses", //pasing table name
+    { column: "user_id", value: userId },
+    () => dispatch(getAllExpenses(userId))
+  );
 
   return (
-<div
-  id="expenses-list"
-  className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide"
->
+    <div
+      id="expenses-list"
+      className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide"
+    >
       <CustomInfiniteScroll
         pageSize={20}
         data={expenses}
@@ -49,23 +46,21 @@ const ExpensesList = ({ userId,expenses }) => {
               const Icon = category.icon;
 
               return (
-           
-                <ExpenseCard 
-                key={item.id}
-                category={category.name}
-                amount={item.amount}
-                type={item.payment_method}
-                date= {commonDate(item.expense_date)}
-                bgColor={category.bg} 
-                Icon={Icon} 
-                userCurrency={userCurrency}
-              />
+                <ExpenseCard
+                  key={item.id}
+                  category={category.name}
+                  amount={item.amount}
+                  type={item.payment_method}
+                  date={commonDate(item.expense_date)}
+                  bgColor={category.bg}
+                  Icon={Icon}
+                  userCurrency={userCurrency}
+                />
               );
             })}
           </div>
         )}
       </CustomInfiniteScroll>
-
     </div>
   );
 };
