@@ -48,7 +48,7 @@ const ExpensesList = ({ userId }) => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="expenses-list"   className="overflow-auto h-[530px] sm:h-[870px] scrollbar-hide">
+    <div id="expenses-list"   className="overflow-auto min-h-[50vh] max-h-[80vh] sm:h-[890px] scrollbar-hide">
       <CustomInfiniteScroll
         pageSize={20}
         data={expenses}
