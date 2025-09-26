@@ -37,7 +37,7 @@ const Header = () => {
           My Finance Tracker
         </Link>
         <HeaderNav title="Home" redirectTo="/"  isActive={currentPath === "/"} />
-        <HeaderNav title="Expanses" redirectTo='/expenses'  isActive={currentPath === "/expenses"} />
+        <HeaderNav title="Expenses" redirectTo='/expenses'  isActive={currentPath === "/expenses"} />
         <HeaderNav title="Incomes"  isActive={currentPath === "/incomes"} />
         <HeaderNav title="Investments"  isActive={currentPath === "/investments"} />
         <HeaderNav title="Savings"  isActive={currentPath === "/savings"} />
@@ -59,7 +59,7 @@ const Header = () => {
       <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
         <div className="flex justify-around items-center h-16 px-4 relative">
           <HeaderNavMobile
-            title="Expanses"
+            title="Expenses"
             redirectTo="/expenses"
             isActive={currentPath === "/expenses"}
             icon={<MdOutlinePayments className="" />}
