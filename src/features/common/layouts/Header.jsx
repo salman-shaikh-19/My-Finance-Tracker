@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../auth/authSlice";
 import ThemeToggle from "../components/ThemeToggle";
 import { MdHome, MdOutlinePayment, MdOutlinePayments } from "react-icons/md";
-import { BiSearch } from "react-icons/bi";
+
 import supabase from "../../../services/supabaseClient";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -10,6 +10,8 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaChartLine, FaMoneyBillWave, FaPiggyBank } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
+import HeaderNavMobile from "../components/HeaderNavMobile";
+import HeaderNav from "../components/HeaderNav";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -115,26 +117,6 @@ const Header = () => {
 };
 
 
-export const HeaderNav = ({ title = "default", redirectTo = "/", icon }) => {
-  return (
-    <Link to={redirectTo} className="px-4 hover:text-primary flex items-center gap-1">
-      {icon && icon}
-      {title}
-    </Link>
-  );
-};
 
-export const HeaderNavMobile = ({ title = "default", redirectTo = "/", icon }) => {
-  return (
-    <Link
-      to={redirectTo}
-      className="flex flex-col items-center justify-center hover:text-primary group"
-    >
-      {icon && icon}
-      <span className="text-xs">{title}</span>
-      <span className="block w-5 h-1 rounded-full bg-primary hidden group-hover:block"></span>
-    </Link>
-  );
-};
 
 export default Header;
