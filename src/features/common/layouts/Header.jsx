@@ -10,7 +10,7 @@ import {
 import HeaderNavMobile from "../components/HeaderNavMobile";
 import HeaderNav from "../components/HeaderNav";
 import SettingsMenu from "../components/SettingsMenu";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
@@ -18,6 +18,8 @@ import { useEffect, useState } from "react";
 
 const Header = () => {
    const [spinning, setSpinning] = useState(false);
+   const location = useLocation(); // gives current URL
+  const currentPath = location.pathname;
      const handleClick = () => {
     setSpinning(true);
     setTimeout(() => setSpinning(false), 500); // remove class after animation
@@ -34,11 +36,11 @@ const Header = () => {
         <Link to={"/"} className="font-bold me-auto select-none ">
           My Finance Tracker
         </Link>
-        <HeaderNav title="Home" redirectTo="/" />
-        <HeaderNav title="Expanses" redirectTo='/expenses' />
-        <HeaderNav title="Incomes" />
-        <HeaderNav title="Investments" />
-        <HeaderNav title="Savings" />
+        <HeaderNav title="Home" redirectTo="/"  isActive={currentPath === "/"} />
+        <HeaderNav title="Expanses" redirectTo='/expenses'  isActive={currentPath === "/expenses"} />
+        <HeaderNav title="Incomes"  isActive={currentPath === "/incomes"} />
+        <HeaderNav title="Investments"  isActive={currentPath === "/investments"} />
+        <HeaderNav title="Savings"  isActive={currentPath === "/savings"} />
         {/* <ThemeToggle />
         <button onClick={handleLogout} className="btn btn-error">
           Logout
@@ -59,10 +61,12 @@ const Header = () => {
           <HeaderNavMobile
             title="Expanses"
             redirectTo="/expenses"
+            isActive={currentPath === "/expenses"}
             icon={<MdOutlinePayments className="" />}
           />
           <HeaderNavMobile
             title="Incomes"
+            isActive={currentPath === "/incomes"}
             icon={<FaMoneyBillWave className="" />}
           />
           <SettingsMenu
@@ -76,17 +80,19 @@ const Header = () => {
             }
           >
             <li>
-              <Link to="/">
+              <Link to="/" className={` ${currentPath==='/' ? "bg-primary text-white" : "hover:bg-base-200"}`}>
                 <GrDashboard /> Dashboard
               </Link>
             </li>
           </SettingsMenu>
           <HeaderNavMobile
             title="Investments"
+            isActive={currentPath === "/investments"}
             icon={<FaChartLine className="" />}
           />
           <HeaderNavMobile
             title="Savings"
+            isActive={currentPath === "/savings"}
             icon={<FaPiggyBank className="" />}
           />
         </div>
