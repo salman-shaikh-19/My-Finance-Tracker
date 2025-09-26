@@ -1,0 +1,30 @@
+import React from "react";
+import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } from "recharts";
+import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
+
+
+const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, isLegend = false, XAxisDataKey, LineDataKey = [], description = "default description of line chart" }) => (
+    <div style={{ width, height }}>
+
+        <ResponsiveContainer width={width} height={height}>
+            <LineChart data={chartData} >
+                <XAxis dataKey={XAxisDataKey} />
+                <YAxis />
+                <Tooltip content={<CustomCommonTooltipForChart />} />
+                {isLegend && <Legend verticalAlign="top" height={36} />}
+                {LineDataKey.map((lineData, index) => (
+                    <Line dataKey={lineData.key} name={lineData.name} strokeWidth={2}
+                        stroke="#26a7b3ff" dot={{ fill: '#15545aff', r: 3 }} />
+                ))}
+            </LineChart>
+        </ResponsiveContainer>
+        {description && (
+            <p className=" mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
+                {description}
+            </p>
+        )}
+    </div>
+));
+
+
+export default CustomLineChart

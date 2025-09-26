@@ -23,10 +23,11 @@ const Header = () => {
     setTimeout(() => setSpinning(false), 500); // remove class after animation
   };
 
-  useEffect(()=>{
-    console.log('logg');
+  // useEffect(()=>{
+  //   console.log('logg');
     
-  },[])
+  // },[])
+  
   return (
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md">
@@ -34,7 +35,7 @@ const Header = () => {
           My Finance Tracker
         </Link>
         <HeaderNav title="Home" redirectTo="/" />
-        <HeaderNav title="Expanses" />
+        <HeaderNav title="Expanses" redirectTo='/expenses' />
         <HeaderNav title="Incomes" />
         <HeaderNav title="Investments" />
         <HeaderNav title="Savings" />
@@ -57,6 +58,7 @@ const Header = () => {
         <div className="flex justify-around items-center h-16 px-4 relative">
           <HeaderNavMobile
             title="Expanses"
+            redirectTo="/expenses"
             icon={<MdOutlinePayments className="" />}
           />
           <HeaderNavMobile

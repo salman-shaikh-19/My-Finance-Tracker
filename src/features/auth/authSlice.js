@@ -2,18 +2,46 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
 
 
+// export const loginUser = createAsyncThunk(
+//   "auth/loginUser",
+//   async ({ email, password }, { rejectWithValue }) => {
+//     try {
+//       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+//       if (error) throw error;
+//       return data.user; // return user object
+//     } catch (err) {
+//       return rejectWithValue(err.message || "Login failed");
+//     }
+//   }
+// );
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      return data.user; // return user object
+ 
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
+      if (authError) throw authError;
+
+      const authUser = authData.user;
+      if (!authUser) throw new Error("Login failed");
+
+     
+      const { data: userData, error: userError } = await supabase
+        .from("users")
+        .select("*")
+        .eq("auth_user_id", authUser.id)
+        .single(); 
+
+      if (userError) throw userError;
+      if (!userData) throw new Error("User not found in users table");
+
+      return userData; 
     } catch (err) {
       return rejectWithValue(err.message || "Login failed");
     }
   }
 );
+
 export const checkEmailExists = createAsyncThunk(
   "auth/checkEmailExists",
   async (email, { rejectWithValue }) => {

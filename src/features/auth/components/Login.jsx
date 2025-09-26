@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { clearError, loginUser } from "../authSlice";
 import { BiLogIn } from "react-icons/bi";
 import { toast } from "react-toastify";
+import { setLoggedInUserId } from "../../common/commonSlice";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -32,6 +33,7 @@ const Login = () => {
     try {
       const user = await dispatch(loginUser(values)).unwrap();
       if (user) {
+         dispatch(setLoggedInUserId(user.user_id)); 
         toast.success("Login successfull");
         navigate("/");
       }

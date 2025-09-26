@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 import { logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
 import { BiReset } from "react-icons/bi";
+import { setLoggedInUserId } from "../commonSlice";
 
 const SettingsMenu = ({
   isMobile = false,
@@ -32,6 +33,7 @@ const SettingsMenu = ({
 
       await dispatch(logoutUser()).unwrap();
       setOpen(false);
+      dispatch(setLoggedInUserId(null));
       navigate("/login");
     } catch (err) {
       // console.error("lgout fail:", err);
