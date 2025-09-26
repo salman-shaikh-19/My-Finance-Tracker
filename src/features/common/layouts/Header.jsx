@@ -28,7 +28,7 @@ const Header = () => {
   };
   return (
     <>
-      <nav className=" md:flex fixed top-0 w-full bg-base-100 text-base-content h-16 items-center justify-around shadow-md">
+      <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-16 items-center justify-around shadow-md">
         <a href="#" className="px-4 hover:text-primary">
           Home
         </a>
@@ -48,7 +48,7 @@ const Header = () => {
       </nav>
 
       {/* Mobile/Tablet Navbar */}
-      {/* <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl">
+      <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl">
         <div className="flex justify-around items-center h-16 px-4">
           <a
             href="#"
@@ -86,7 +86,7 @@ const Header = () => {
           Logout
         </button>
         </div>
-      </nav> */}
+      </nav>
     </>
   );
 };
