@@ -14,7 +14,9 @@ import ExpenseCard from "./ExpenseCard";
 const ExpensesList = ({ userId }) => {
   const dispatch = useDispatch();
   const { expenses, loading, error } = useSelector((state) => state.expenses);
-
+   const { userCurrency } = useSelector((state) => state.common);
+   
+   
   // useEffect(() => {
   //   if (userId) dispatch(getAllExpenses(userId));
   // }, [dispatch, userId]);
@@ -76,6 +78,7 @@ const ExpensesList = ({ userId }) => {
                 date= {commonDate(item.expense_date)}
                 bgColor={category.bg} 
                 Icon={Icon} 
+                userCurrency={userCurrency}
               />
               );
             })}

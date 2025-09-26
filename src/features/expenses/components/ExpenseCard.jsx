@@ -1,7 +1,8 @@
 import React from "react";
 import { BiHome } from "react-icons/bi";
+import { formatCurrency } from "../../../utils/currencyUtils";
 
-const ExpenseCard = ({cardKey, category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
+const ExpenseCard = ({userCurrency='USD',cardKey, category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
   return (
     <div key={cardKey} className="card w-96 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden">
       <div className="flex items-center p-4 gap-4">
@@ -15,7 +16,7 @@ const ExpenseCard = ({cardKey, category, amount, type, date, bgColor = "bg-red-5
        
           <div className="flex justify-between items-center mb-2">
             <span className="font-semibold text-lg">{category}</span>
-            <span className="font-bold text-lg">{amount} ₹</span>
+            <span className="font-bold text-lg">  {formatCurrency(amount, userCurrency)}</span>
           </div>
 
           <div className="flex justify-between items-center text-sm text-gray-500">

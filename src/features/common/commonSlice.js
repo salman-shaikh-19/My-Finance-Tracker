@@ -7,7 +7,7 @@ export const commonSlice = createSlice({
     loggedInUserId: null,
     loading: false,
     error: null,
-
+    userCurrency:'USD',
     isGetStarted: false,
   },
   reducers: {
@@ -17,7 +17,9 @@ export const commonSlice = createSlice({
     setLoggedInUserId(state, action) {
       state.loggedInUserId = action.payload;
     },
-
+    setUserCurrency(state,action){
+        state.userCurrency = action.payload;
+    },
     setGetStarted(state, action) {
       // console.log(action.payload);
 
@@ -26,6 +28,6 @@ export const commonSlice = createSlice({
   },
 });
 
-export const { setTheme, setGetStarted, setLoggedInUserId } =
+export const { setTheme, setGetStarted, setLoggedInUserId,setUserCurrency } =
   commonSlice.actions;
 export default commonSlice.reducer;

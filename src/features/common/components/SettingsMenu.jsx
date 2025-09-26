@@ -8,6 +8,7 @@ import { logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
 import { BiReset } from "react-icons/bi";
 import { setLoggedInUserId } from "../commonSlice";
+import SetUserCurrency from "./SetUserCurrency";
 
 const SettingsMenu = ({
   isMobile = false,
@@ -74,7 +75,7 @@ const SettingsMenu = ({
               : "absolute top-16 right-0"
           }  w-42 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
         >
-          <ul className="menu menu-compact">
+          <ul className="menu menu-compact ">
             {children}
             <li>
               <Link to="/profile" onClick={() => handleClickItem()}>
@@ -86,10 +87,11 @@ const SettingsMenu = ({
                 <CgPassword /> Test test
               </Link>
             </li>
-           
           </ul>
-
-          <div className="mt-3 border-t pt-2">
+          <div className="mt-3 border-t pt-1 ">
+            <SetUserCurrency />
+          </div>
+          <div className="mt-1 ">
             <ThemeToggle onClick={() => handleClickItem()} />
           </div>
 
