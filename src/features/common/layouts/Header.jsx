@@ -6,6 +6,7 @@ import { FaChartLine, FaMoneyBillWave, FaPiggyBank } from "react-icons/fa";
 import HeaderNavMobile from "../components/HeaderNavMobile";
 import HeaderNav from "../components/HeaderNav";
 import SettingsMenu from "../components/SettingsMenu";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -16,7 +17,9 @@ const Header = () => {
   return (
     <>
    
-      <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-16 items-center justify-around shadow-md">
+      <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md">
+        {/* <HeaderNav title="My Finance Tracker"   /> */}
+        <Link to={"/"} className="font-bold me-auto ">My Finance Tracker</Link>
         <HeaderNav title="Expanses" icon={<MdOutlinePayments className="text-xl" />} />
         <HeaderNav title="Incomes" icon={<FaMoneyBillWave className="text-xl" />} />
         <HeaderNav title="Investments" icon={<FaChartLine className="text-xl"  />} />

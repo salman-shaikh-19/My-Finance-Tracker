@@ -43,7 +43,7 @@ function App() {
 
   return (
     <>
-      <div data-theme={theme} className="">
+      <div data-theme={theme} className="select-none lg:select-text">
         {/* <Beta /> */}
          <AppRoutes />
       </div>
