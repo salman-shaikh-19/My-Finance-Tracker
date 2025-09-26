@@ -6,7 +6,7 @@ const Main=({ children })=>{
       <>
 
         <Header />
-        <div className="min-h-screen">
+        <div className="min-h-screen pt-10 lg:pt-20">
         {children}
 
         </div>
