@@ -57,7 +57,7 @@ const Header = () => {
         <HeaderNav title="Savings" icon={<FaPiggyBank className="text-xl"  />} />
         <HeaderNav title="" icon={<FiSettings className="text-xl"  />} />
         <ThemeToggle />
-        <button onClick={handleLogout} className="btn btn-primary">
+        <button onClick={handleLogout} className="btn btn-error">
           Logout
         </button>
       </nav>
