@@ -1,53 +1,17 @@
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../auth/authSlice";
-import ThemeToggle from "../components/ThemeToggle";
+
 import { MdHome, MdOutlinePayment, MdOutlinePayments } from "react-icons/md";
 
-import supabase from "../../../services/supabaseClient";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
-import { BsThreeDots } from "react-icons/bs";
 import { FaChartLine, FaMoneyBillWave, FaPiggyBank } from "react-icons/fa";
-import { FiSettings } from "react-icons/fi";
-import { CgProfile } from "react-icons/cg";
+
 import HeaderNavMobile from "../components/HeaderNavMobile";
 import HeaderNav from "../components/HeaderNav";
+import SettingsMenu from "../components/SettingsMenu";
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
 
-      if (!session) {
-        // console.warn("No active session, skipping logout");
-        navigate("/login");
-        return;
-      }
 
-      await dispatch(logoutUser()).unwrap();
-      navigate("/login");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
-  };
 
-  // close menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <>
@@ -57,11 +21,14 @@ const Header = () => {
         <HeaderNav title="Incomes" icon={<FaMoneyBillWave className="text-xl" />} />
         <HeaderNav title="Investments" icon={<FaChartLine className="text-xl"  />} />
         <HeaderNav title="Savings" icon={<FaPiggyBank className="text-xl"  />} />
-        <HeaderNav title="" icon={<FiSettings className="text-xl"  />} />
-        <ThemeToggle />
+        {/* <ThemeToggle />
         <button onClick={handleLogout} className="btn btn-error">
           Logout
-        </button>
+        </button> */}
+        <SettingsMenu />
+        {/* <HeaderNav title=""  icon={<FiSettings className="text-xl"  />} /> */}
+        
+        
       </nav>
 
  
@@ -76,40 +43,7 @@ const Header = () => {
           <HeaderNavMobile title="Savings" icon={<FaPiggyBank className=""  />} />
 
   
-          <div ref={menuRef}>
-            <button
-              onClick={() => setOpen(!open)}
-              className="flex flex-col items-center justify-center hover:text-primary relative"
-            >
-              <BsThreeDots className="text-xl" />
-              <span className="text-xs">More</span>
-            </button>
-
-            {open && (
-              <div className="absolute bottom-20 right-4 w-44 bg-base-100 shadow-lg rounded-xl border p-3 z-50">
-                <ul className="menu menu-compact">
-                  <li>
-                    <Link to="/profile"><CgProfile  />Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/settings"><FiSettings  />Settings</Link>
-                  </li>
-                  
-                </ul>
-
-                <div className="mt-3 border-t pt-2">
-                  <ThemeToggle />
-                </div>
-
-                <button
-                  onClick={handleLogout}
-                  className="btn btn-sm btn-error mt-3 w-full"
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
+         <SettingsMenu isMobile={true} />
         </div>
       </nav>
     </>
