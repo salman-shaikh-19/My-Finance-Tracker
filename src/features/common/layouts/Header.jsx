@@ -115,6 +115,9 @@ const Header = () => {
                 <a href="#">Help</a>
               </li>
               <li>
+                <ThemeToggle />
+              </li>
+              <li>
                 <button onClick={handleLogout} className="btn btn-sm btn-error mt-2 w-full">
                   Logout
                 </button>
