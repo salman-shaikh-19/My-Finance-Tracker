@@ -50,7 +50,7 @@ const ExpensesList = ({ userId }) => {
   return (
 <div
   id="expenses-list"
-  className="overflow-auto min-h-[70vh] max-h-[87vh] sm:h-[890px] scrollbar-hide"
+  className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide"
 >
       <CustomInfiniteScroll
         pageSize={20}
