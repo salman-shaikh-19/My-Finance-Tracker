@@ -25,3 +25,9 @@
 - created footer [hidden on devices like small/tablet ].
 - make layout proper.
 
+# 29 sep
+- Header active link should be highlightes.
+- set currency implemeneted.
+- set theme implmented.
+- expense card make.
+- expense listed.

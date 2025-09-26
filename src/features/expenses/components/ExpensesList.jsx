@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllExpenses } from "../expensesSlice";
+import React from "react";
+import {  useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import { commonDate } from "../../../utils/dateUtils";
 import {
@@ -8,24 +7,10 @@ import {
   getCategoryByName,
 } from "../../../utils/Categories"; 
 import ExpenseCard from "./ExpenseCard";
-import { useRealtimeTable } from "../../../services/useRealtimeTable";
+// import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
-const ExpensesList = ({ userId, expenses }) => {
-  const dispatch = useDispatch();
-
+const ExpensesList = ({  expenses }) => {
   const { userCurrency } = useSelector((state) => state.common);
-  useEffect(() => {
-    if (!userId) return;
-    dispatch(getAllExpenses(userId));
-  }, [dispatch, userId]);
-
-  //custom hook
-  useRealtimeTable(
-    "user_expenses", //pasing table name
-    { column: "user_id", value: userId },
-    () => dispatch(getAllExpenses(userId))
-  );
-
   return (
     <div
       id="expenses-list"
