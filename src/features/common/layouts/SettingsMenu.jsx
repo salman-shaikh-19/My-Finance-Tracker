@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "react-icons/fi";
 import { CgPassword, CgProfile } from "react-icons/cg";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../components/ThemeToggle";
 import { logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
 import { BiReset } from "react-icons/bi";
 import { setLoggedInUserId } from "../commonSlice";
-import SetUserCurrency from "./SetUserCurrency";
+import SetUserCurrency from "../components/SetUserCurrency";
 
 const SettingsMenu = ({
   isMobile = false,

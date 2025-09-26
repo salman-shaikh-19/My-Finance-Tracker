@@ -9,7 +9,7 @@ import {
 
 import HeaderNavMobile from "../components/HeaderNavMobile";
 import HeaderNav from "../components/HeaderNav";
-import SettingsMenu from "../components/SettingsMenu";
+import SettingsMenu from "./SettingsMenu";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
