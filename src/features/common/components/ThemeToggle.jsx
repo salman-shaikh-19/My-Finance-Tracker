@@ -23,12 +23,12 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="form-control w-52">
+    <div className="">
       {/* <label className="label">
         <span className="label-text">Select Theme</span>
       </label> */}
       <select
-        className="select select-bordered"
+        className="select appearance-none "
         value={theme}
         onChange={handleChange}
       >
