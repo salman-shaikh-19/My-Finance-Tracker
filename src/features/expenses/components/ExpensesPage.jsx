@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useRef } from "react";
 import Main from "../../common/layouts/Main";
-import ExpensesList from "./ExpensesList";
+// import ExpensesList from "./ExpensesList";
+const ExpensesList = lazy(() => import("./ExpensesList"));
 import { useDispatch, useSelector } from "react-redux";
 import { useRealtimeTable } from "../../../services/useRealtimeTable";
 import { addExpense, getAllExpenses } from "../expensesSlice";
@@ -11,6 +12,7 @@ import { toast } from "react-toastify";
 
 import { BiPlus } from "react-icons/bi";
 import AddExpense from "./AddExpense";
+import Loader from "../../common/components/Loader";
 const ExpensesPage = () => {
   const { loggedInUserId } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
@@ -56,7 +58,14 @@ const ExpensesPage = () => {
   return (
     <>
       <Main mainClassName="relative">
+        {/* <ExpensesList userId={loggedInUserId} expenses={expenses} /> */}
+           <Suspense
+        fallback={
+         <Loader />
+        }
+      >
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
+      </Suspense>
         <CommonModal
           ref={modalRef}
           modalId="expense-add-modal"

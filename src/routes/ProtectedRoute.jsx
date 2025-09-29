@@ -9,6 +9,7 @@ import supabase from "../services/supabaseClient";
 import { FaSpinner } from "react-icons/fa";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Loader from "../features/common/components/Loader";
 
 // const ProtectedRoute = ({ children, publicOnly = false }) => {
 //   // const [isLoading, setIsLoading] = useState(true);
@@ -89,10 +90,7 @@ const ProtectedRoute = ({ children, publicOnly = false }) => {
     return (
      
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <div className="flex flex-col items-center">
-        <FaSpinner className="animate-spin text-5xl text- mb-4" />
-        <p className="text-gray-600 font-medium"></p>
-      </div>
+     <Loader />
     </div>
     );
   }

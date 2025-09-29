@@ -45,6 +45,7 @@
 - fixed redirection issue , must stay on same active page if refreshed by user.
 
 # 1 oct
+- make new common loader with daisyUI.
 - explore supabase.
 - if email not confirmed then resend confirmation mail while login and tell user to confirm email, if user confirm redirect to dashboard.
 - custom email body in supabase implemented.
