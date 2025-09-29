@@ -94,7 +94,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           chartData={chartData}
           XAxisDataKey="day"
           BarDataKey={[{ key: "total", name: "Total expenses" }]}
-          isLegend={true}
+          isLegend={false}
           description={`Total expenses of current weak`}
           height={250}
         />
@@ -105,7 +105,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           chartData={chartData}
           XAxisDataKey="day"
           LineDataKey={[{ key: "total", name: "Total expenses" }]}
-          isLegend={true}
+          isLegend={false}
           description="Total expenses of current weak"
              height={250}
         />

@@ -31,4 +31,4 @@
 - set theme implmented.
 - expense card make.
 - expense listed.
-- expense chart implemented
+- expense chart implemented[pie,bar,line charts].
