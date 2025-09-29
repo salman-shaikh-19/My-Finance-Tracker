@@ -40,8 +40,8 @@ const ExpensesPage = () => {
         method: values.expenseMethod,
       })
     )
-      // .unwrap() // <- IMPORTANT: unwrap the thunk to catch rejected errors
-      .then((res) => {
+      // .unwrap() //  note: unwrap the thunk to catch rejected errors
+      .then(() => {
         toast.success("Expense added successfully!");
         resetForm();
       })
