@@ -222,8 +222,8 @@ const ExpenseChart = () => {
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-        // weekLabel={weekLabel()}
         weekOffset={weekOffset}
+        referenceDate={referenceDate}
       />
 
       {!chartData.length ? (
