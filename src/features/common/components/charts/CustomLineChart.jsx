@@ -14,7 +14,8 @@ const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, i
                 {isLegend && <Legend verticalAlign="top" height={36} />}
                 {LineDataKey.map((lineData, index) => (
                     <Line dataKey={lineData.key} name={lineData.name} strokeWidth={2}
-                        stroke="#26a7b3ff" dot={{ fill: '#15545aff', r: 3 }} />
+                        stroke="teal" dot={{ fill: 'teal', r: 4 }} 
+                        />
                 ))}
             </LineChart>
         </ResponsiveContainer>
