@@ -239,6 +239,7 @@ const ExpenseChart = () => {
           {currentChart === "bar" && (
             <CustomBarChart
               chartData={chartData}
+                      //  BarDataKey={"total"}
               XAxisDataKey="day"
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
@@ -250,6 +251,7 @@ const ExpenseChart = () => {
           {currentChart === "line" && (
             <CustomLineChart
               chartData={chartData}
+     
               XAxisDataKey="day"
               LineDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}

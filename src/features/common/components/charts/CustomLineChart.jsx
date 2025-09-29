@@ -7,13 +7,13 @@ const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, i
     <div style={{ width, height }}>
 
         <ResponsiveContainer width={width} height={height}>
-            <LineChart data={chartData} >
+            <LineChart  data={chartData} >
                 <XAxis dataKey={XAxisDataKey} />
                 <YAxis />
                 <Tooltip content={<CustomCommonTooltipForChart />} />
                 {isLegend && <Legend verticalAlign="top" height={36} />}
                 {LineDataKey.map((lineData, index) => (
-                    <Line dataKey={lineData.key} name={lineData.name} strokeWidth={2}
+                    <Line key={index}  dataKey={lineData.key} name={lineData.name} strokeWidth={2}
                         stroke="teal" dot={{ fill: 'teal', r: 4 }} 
                         />
                 ))}

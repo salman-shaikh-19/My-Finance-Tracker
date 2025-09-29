@@ -31,10 +31,12 @@
 - set theme implmented.
 - expense card make.
 - expense listed.
+- reChart documentation.
 - expense chart implemented[pie,bar,line charts].
 
 
 # 30 sep
+- make common tooltip for charts in tailwind.
 - make common modal.
 - add expense implemented.
 - fixed wrong chart data issue. 

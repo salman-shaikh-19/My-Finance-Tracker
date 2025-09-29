@@ -8,6 +8,7 @@ const CustomBarChart = React.memo(({ chartData, width = "100%", height = 400, is
         <div style={{width,height}}>
           
             <ResponsiveContainer width={width} height={height}>
+                
                 <BarChart data={chartData} >
                     <XAxis dataKey={XAxisDataKey} />
                     <YAxis />
