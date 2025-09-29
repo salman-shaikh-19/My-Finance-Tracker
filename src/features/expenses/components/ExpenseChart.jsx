@@ -183,10 +183,8 @@ const ExpenseChart = () => {
   const [currentChart, setCurrentChart] = useState("bar");
   const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
 
-  // calculate reference date based on weekOffset
   const referenceDate = dayjs().add(weekOffset, "week").toDate();
 
-  // fetch weekly expenses whenever user or week changes
   useEffect(() => {
     if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, referenceDate }));
@@ -219,91 +217,81 @@ const ExpenseChart = () => {
     }));
   }, [expenses, referenceDate]);
 
-  const weekLabel = () => {
-    const start = dayjs(referenceDate).startOf("isoWeek").format("DD MMM");
-    const end = dayjs(referenceDate).endOf("isoWeek").format("DD MMM");
-    return `${start} - ${end}`;
-  };
-
-  if (!chartData.length) {
-    return (
-      <div className="w-full h-[400px] bg-base-100 rounded-lg shadow p-4">
-           <PrevNextButton
-      setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
-      setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-      weekLabel={weekLabel()}
-      weekOffset={weekOffset}
-      />
-      <div className="flex justify-center items-center h-full">
-
-        <p>No expense data available</p>
-      </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
-     
       <PrevNextButton
-      setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
-      setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-      weekLabel={weekLabel()}
-      weekOffset={weekOffset}
+        setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
+        setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
+        // weekLabel={weekLabel()}
+        weekOffset={weekOffset}
       />
 
-      <div className="flex flex-wrap mb-2">
-        <div className="flex ml-auto gap-1">
-          {["bar", "line", "pie"].map((type) => {
-            const Icon = type === "bar" ? BiBarChartAlt : type === "line" ? BiLineChart : BiPieChartAlt2;
-            return (
-              <button
-                key={type}
-                title={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
-                className={`flex items-center gap-1 px-2 py-1 rounded-md ${
-                  currentChart === type
-                    ? "text-blue-600 font-semibold"
-                    : "text-gray-500 hover:text-blue-500"
-                }`}
-                onClick={() => setCurrentChart(type)}
-              >
-                <Icon />
-              </button>
-            );
-          })}
+      {!chartData.length ? (
+        <div className="flex justify-center items-center h-full">
+          <p>No expense data available</p>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="flex flex-wrap mb-2">
+            <div className="flex ml-auto gap-1">
+              {["bar", "line", "pie"].map((type) => {
+                const Icon =
+                  type === "bar"
+                    ? BiBarChartAlt
+                    : type === "line"
+                    ? BiLineChart
+                    : BiPieChartAlt2;
+                return (
+                  <button
+                    key={type}
+                    title={`${
+                      type.charAt(0).toUpperCase() + type.slice(1)
+                    } chart`}
+                    className={`flex items-center gap-1 px-2 py-1 rounded-md ${
+                      currentChart === type
+                        ? "text-blue-600 font-semibold"
+                        : "text-gray-500 hover:text-blue-500"
+                    }`}
+                    onClick={() => setCurrentChart(type)}
+                  >
+                    <Icon />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {currentChart === "bar" && (
+            <CustomBarChart
+              chartData={chartData}
+              XAxisDataKey="day"
+              BarDataKey={[{ key: "total", name: "Total expenses" }]}
+              isLegend={false}
+              description="Total expenses of the week"
+              height={275}
+            />
+          )}
 
-      {currentChart === "bar" && (
-        <CustomBarChart
-          chartData={chartData}
-          XAxisDataKey="day"
-          BarDataKey={[{ key: "total", name: "Total expenses" }]}
-          isLegend={false}
-          description="Total expenses of the week"
-          height={280}
-        />
-      )}
+          {currentChart === "line" && (
+            <CustomLineChart
+              chartData={chartData}
+              XAxisDataKey="day"
+              LineDataKey={[{ key: "total", name: "Total expenses" }]}
+              isLegend={false}
+              description="Total expenses of the week"
+              height={275}
+            />
+          )}
 
-      {currentChart === "line" && (
-        <CustomLineChart
-          chartData={chartData}
-          XAxisDataKey="day"
-          LineDataKey={[{ key: "total", name: "Total expenses" }]}
-          isLegend={false}
-          description="Total expenses of the week"
-          height={280}
-        />
-      )}
-
-      {currentChart === "pie" && (
-        <CustomPieChart
-          chartData={chartData}
-          pieDataKey="total"
-          pieNameKey="day"
-          height={280}
-          description="Total expenses of the week"
-        />
+          {currentChart === "pie" && (
+            <CustomPieChart
+              chartData={chartData}
+              pieDataKey="total"
+              pieNameKey="day"
+              height={275}
+              description="Total expenses of the week"
+            />
+          )}
+        </>
       )}
     </div>
   );
