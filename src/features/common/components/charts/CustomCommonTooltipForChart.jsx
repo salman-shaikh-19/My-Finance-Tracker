@@ -7,7 +7,7 @@ function CustomCommonTooltipForChart({ active, payload, label }) {
 
         <div className={`card shadow-2xl bg-base-100  rounded-lg p-3`}>
             <div className="text-center ">
-                <p className="font-bold border-b border-gray-200" >{label}</p>
+                <p className="font-bold border-b " >{label}</p>
             </div>
             <div>
                 {payload.map((item, i) => {
