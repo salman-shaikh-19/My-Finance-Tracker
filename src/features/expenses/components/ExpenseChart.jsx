@@ -1,20 +1,34 @@
 import React, { useMemo, useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
-import isBetween from "dayjs/plugin/isBetween"; 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import CustomLineChart from '../../common/components/charts/CustomLineChart'
-import CustomBarChart from '../../common/components/charts/CustomBarChart'
-import CustomPieChart from '../../common/components/charts/CustomPieChart'
-import { BiBarChartAlt, BiLineChart, BiPieChart } from "react-icons/bi";
+import isBetween from "dayjs/plugin/isBetween";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import CustomLineChart from "../../common/components/charts/CustomLineChart";
+import CustomBarChart from "../../common/components/charts/CustomBarChart";
+import CustomPieChart from "../../common/components/charts/CustomPieChart";
+import {
+  BiBarChartAlt,
+  BiLineChart,
+  BiPieChart,
+  BiPieChartAlt2,
+} from "react-icons/bi";
 import { Link } from "react-router-dom";
 dayjs.extend(isoWeek);
 dayjs.extend(isBetween);
 const ExpenseChart = ({ expenses = [] }) => {
-     const [currentChart, setCurrentChart] = useState('bar');
+  const [currentChart, setCurrentChart] = useState("bar");
   // Process weekly chart data
   const chartData = useMemo(() => {
-    if (!expenses || !Array.isArray(expenses) || expenses.length === 0) return [];
+    if (!expenses || !Array.isArray(expenses) || expenses.length === 0)
+      return [];
 
     // Get start and end of current week (Mon - Sun)
     const startOfWeek = dayjs().startOf("week"); // Sunday as start (default)
@@ -61,34 +75,46 @@ const ExpenseChart = ({ expenses = [] }) => {
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow ">
       <h2 className="text-xl font-semibold mb-4 px-2">Current Week Expenses</h2>
-      <div className="flex flex-wrap ">
-        <div className="flex ms-auto">
-          <Link
-            className={`${
-              currentChart == "bar" ? "active text-primary " : "text-reset"
-            } text-decoration-none me-2  `}
+      <div className="flex flex-wrap">
+        <div className="flex ml-auto ">
+          <button
+          title="Bar chart"
+            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+              currentChart === "bar"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-500 hover:text-blue-500"
+            }`}
             onClick={() => setCurrentChart("bar")}
           >
-            <BiBarChartAlt /> Bar
-          </Link>
-          <Link
-            className={` ${
-              currentChart == "line" ? "active text-primary " : "text-reset"
-            } text-decoration-none me-2  `}
+            <BiBarChartAlt /> 
+          </button>
+
+          <button
+          title="Line chart"
+            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+              currentChart === "line"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-500 hover:text-blue-500"
+            }`}
             onClick={() => setCurrentChart("line")}
           >
-            <BiLineChart /> Line
-          </Link>
-          <Link
-            className={`${
-              currentChart == "pie" ? "active text-primary " : "text-reset"
-            } text-decoration-none me-2  `}
+            <BiLineChart /> 
+          </button>
+
+          <button
+          title="Pie chart"
+            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+              currentChart === "pie"
+                ? "text-blue-600 font-semibold"
+                : "text-gray-500 hover:text-blue-500"
+            }`}
             onClick={() => setCurrentChart("pie")}
           >
-            <BiPieChart /> Pie
-          </Link>
+            <BiPieChartAlt2 /> 
+          </button>
         </div>
       </div>
+
       {currentChart == "bar" && (
         <CustomBarChart
           chartData={chartData}
@@ -107,7 +133,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           LineDataKey={[{ key: "total", name: "Total expenses" }]}
           isLegend={false}
           description="Total expenses of current weak"
-             height={250}
+          height={250}
         />
       )}
 
@@ -117,7 +143,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           pieDataKey="total"
           pieNameKey="day"
           // height={250}
-             height={250}
+          height={250}
           description="Total expenses of current weak"
         />
       )}

@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux"
 
 function CustomCommonTooltipForChart({ active, payload, label }) {
-    const { Theme } = useSelector(state => state.common);
+  
     if (!(active && payload && payload.length)) return null;
     return (
 
-        <div className={`card shadow  rounded p-1 ${Theme == 'dark' ? 'theme-dark' : 'theme-light'} border border-2`}>
+        <div className={`card shadow-2xl bg-base-100  rounded-lg p-1  border-1`}>
             <div className="text-center ">
                 <p className="fw-bold border-bottom" >{label}</p>
             </div>

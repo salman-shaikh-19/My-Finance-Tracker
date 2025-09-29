@@ -5,7 +5,7 @@ import { formatCurrency } from "../../../utils/currencyUtils";
 
 const ExpenseCard = ({userCurrency='INR', category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
   return (
-    <div  className="card w-96 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden">
+    <div  className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden">
       <div className="flex items-center p-4 gap-4">
     
         <div className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}>

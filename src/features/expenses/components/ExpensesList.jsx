@@ -26,7 +26,7 @@ const ExpensesList = ({  expenses }) => {
         scrollTargetId="expenses-list"
       >
         {(items) => (
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap gap-1 lg:pl-4">
             {items.map((item) => {
               const category = getCategoryByName(
                 expenseCategories,

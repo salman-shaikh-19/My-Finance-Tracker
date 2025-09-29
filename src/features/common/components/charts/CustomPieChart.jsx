@@ -13,7 +13,7 @@ const COLORS = [
 ];
 
 const CustomPieChart = React.memo(({ chartData, width = "100%", height = 400, isLegend = true, pieDataKey, pieNameKey, description = "Default description of pie chart" }) => (
-    <div style={{ width, height }}>
+    <div style={{ width, height }} >
 
         <ResponsiveContainer width={width} height={height}>
             <PieChart data={chartData}>
@@ -31,7 +31,7 @@ const CustomPieChart = React.memo(({ chartData, width = "100%", height = 400, is
             </PieChart>
         </ResponsiveContainer>
         {description && (
-            <p className="  mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
+            <p className="text-sm  mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
                 {description}
             </p>
         )}

@@ -19,7 +19,7 @@ const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, i
             </LineChart>
         </ResponsiveContainer>
         {description && (
-            <p className=" mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
+            <p className="text-sm mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
                 {description}
             </p>
         )}
