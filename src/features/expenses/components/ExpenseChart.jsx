@@ -164,7 +164,7 @@
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
-import { BiBarChartAlt, BiLineChart, BiPieChartAlt2 } from "react-icons/bi";
+// import { BiBarChartAlt, BiLineChart, BiPieChartAlt2 } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 
 import CustomLineChart from "../../common/components/charts/CustomLineChart";
@@ -172,7 +172,7 @@ import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "./PrevNextButton";
-
+import ChartMenu from './ChartMenu';
 dayjs.extend(isoWeek);
 
 const ExpenseChart = () => {
@@ -232,34 +232,10 @@ const ExpenseChart = () => {
         </div>
       ) : (
         <>
-          <div className="flex flex-wrap mb-2">
-            <div className="flex ml-auto gap-1">
-              {["bar", "line", "pie"].map((type) => {
-                const Icon =
-                  type === "bar"
-                    ? BiBarChartAlt
-                    : type === "line"
-                    ? BiLineChart
-                    : BiPieChartAlt2;
-                return (
-                  <button
-                    key={type}
-                    title={`${
-                      type.charAt(0).toUpperCase() + type.slice(1)
-                    } chart`}
-                    className={`flex items-center gap-1 px-2 py-1 rounded-md ${
-                      currentChart === type
-                        ? "text-blue-600 font-semibold"
-                        : "text-gray-500 hover:text-blue-500"
-                    }`}
-                    onClick={() => setCurrentChart(type)}
-                  >
-                    <Icon />
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+        <ChartMenu
+        currentChart={currentChart}
+        setCurrentChart={setCurrentChart}
+        />
           {currentChart === "bar" && (
             <CustomBarChart
               chartData={chartData}
