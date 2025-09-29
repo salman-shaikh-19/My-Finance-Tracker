@@ -19,14 +19,16 @@ const ExpensesPage = () => {
 
   useEffect(() => {
     if (!loggedInUserId) return;
-    dispatch(getAllExpenses(loggedInUserId));
+    // dispatch(getAllExpenses(loggedInUserId));
+    dispatch(getAllExpenses({ userId: loggedInUserId }));
   }, [dispatch, loggedInUserId]);
 
   //custom hook
   useRealtimeTable(
     "user_expenses", //pasing table name
     { column: "user_id", value: loggedInUserId },
-    () => dispatch(getAllExpenses(loggedInUserId))
+    () => dispatch(getAllExpenses({ userId: loggedInUserId }))
+    // () => dispatch(getAllExpenses(loggedInUserId))
   );
 
   const handleSubmit = (values, { resetForm, setSubmitting }) => {

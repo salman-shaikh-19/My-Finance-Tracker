@@ -1,15 +1,26 @@
 import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
+import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
 
+dayjs.extend(isoWeek);
 export const getAllExpenses = createAsyncThunk(
   "expenses/getAllExpenses",
-  async (userId, { rejectWithValue }) => {
+  async ({ userId, referenceDate }, { rejectWithValue }) => {
     try {
+         const refDate = referenceDate ? dayjs(referenceDate) : dayjs();
+
+      const startOfWeek = refDate.startOf("isoWeek").format("YYYY-MM-DD");
+      const endOfWeek = refDate.endOf("isoWeek").format("YYYY-MM-DD");
+
       const { data, error } = await supabase
         .from("user_expenses")
         .select("*")
         .eq('user_id',userId)
-        .order("id", { ascending: false });
+         .gte("expense_date", startOfWeek)
+        .lte("expense_date", endOfWeek)
+        // .order("id", { ascending: false });
+         .order("expense_date", { ascending: true });
         // select all fields
 
       if (error) throw error;

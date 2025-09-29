@@ -68,7 +68,7 @@ const ProtectedRoute = ({ children, publicOnly = false }) => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       // setIsLoggedIn(!!session);
-         setIsLoggedIn(!!session && !!loggedInUserId);
+      setIsLoggedIn(!!session && !!loggedInUserId);
       setIsLoading(false);
     };
 
