@@ -74,12 +74,12 @@ const ExpenseChart = ({ expenses = [] }) => {
 
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow ">
-      <h2 className="text-xl font-semibold mb-4 px-2">Current Week Expenses</h2>
+      {/* <h2 className="text-xl font-semibold mb-4 px-2">Current Week Expenses</h2> */}
       <div className="flex flex-wrap">
         <div className="flex ml-auto ">
           <button
           title="Bar chart"
-            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+            className={`flex items-center gap-1 px-2 py-1 rounded-md  ${
               currentChart === "bar"
                 ? "text-blue-600 font-semibold"
                 : "text-gray-500 hover:text-blue-500"
@@ -91,7 +91,7 @@ const ExpenseChart = ({ expenses = [] }) => {
 
           <button
           title="Line chart"
-            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+            className={`flex items-center gap-1 px-2 py-1 rounded-md  ${
               currentChart === "line"
                 ? "text-blue-600 font-semibold"
                 : "text-gray-500 hover:text-blue-500"
@@ -103,7 +103,7 @@ const ExpenseChart = ({ expenses = [] }) => {
 
           <button
           title="Pie chart"
-            className={`flex items-center gap-1 px-2 py-1 rounded-md transition-colors ${
+            className={`flex items-center gap-1 px-2 py-1 rounded-md  ${
               currentChart === "pie"
                 ? "text-blue-600 font-semibold"
                 : "text-gray-500 hover:text-blue-500"
@@ -122,7 +122,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           BarDataKey={[{ key: "total", name: "Total expenses" }]}
           isLegend={false}
           description={`Total expenses of current weak`}
-          height={250}
+          height={350}
         />
       )}
 
@@ -133,7 +133,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           LineDataKey={[{ key: "total", name: "Total expenses" }]}
           isLegend={false}
           description="Total expenses of current weak"
-          height={250}
+          height={350}
         />
       )}
 
@@ -142,8 +142,8 @@ const ExpenseChart = ({ expenses = [] }) => {
           chartData={chartData}
           pieDataKey="total"
           pieNameKey="day"
-          // height={250}
-          height={250}
+          // height={350}
+          height={350}
           description="Total expenses of current weak"
         />
       )}
