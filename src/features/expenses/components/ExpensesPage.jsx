@@ -60,8 +60,8 @@ const ExpensesPage = () => {
         openModalBtnClassName="
           fab fab-flower
           absolute
-          right-4
-          top-24    
+          right-0
+          top-4    
           md:top-auto 
           md:bottom-4 
           text-lg

@@ -38,3 +38,4 @@
 - make common modal.
 - add expense implemented.
 - fixed wrong chart data issue. 
+- add prev-next weak chart data implemnted in expense chart.
