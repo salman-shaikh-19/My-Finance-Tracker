@@ -90,7 +90,7 @@ const ProtectedRoute = ({ children, publicOnly = false }) => {
     return (
      
         <div className="flex items-center justify-center min-h-screen bg-gray-50">
-     <Loader />
+     <Loader isTakeFullScreen={true} />
     </div>
     );
   }

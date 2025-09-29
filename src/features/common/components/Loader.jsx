@@ -1,9 +1,9 @@
 import React from "react";
 
-const Loader=()=>{
+const Loader=({isTakeFullScreen=false})=>{
     return(
         <>
-        <div className="flex justify-center items-center h-[300px]">
+        <div className={`flex justify-center items-center ${isTakeFullScreen ? 'min-h-screen' :'h-[300px]'}`}>
             <span className="loading loading-spinner loading-lg"></span>
           </div>
         </>

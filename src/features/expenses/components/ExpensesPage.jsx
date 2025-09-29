@@ -62,6 +62,9 @@ const ExpensesPage = () => {
            <Suspense
         fallback={
          <Loader />
+
+        // <></>
+        
         }
       >
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
