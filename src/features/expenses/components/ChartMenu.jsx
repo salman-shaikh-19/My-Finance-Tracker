@@ -15,12 +15,12 @@ const ChartMenu=({currentChart,setCurrentChart})=>{
                             : BiPieChartAlt2;
                         return (
                           <button
-                          
+                           
                             key={type}
                             title={`${
                               type.charAt(0).toUpperCase() + type.slice(1)
                             } chart`}
-                            className={`flex items-center gap-1 px-2 py-1 rounded-md ${
+                            className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md ${
                               currentChart === type
                                 ? "text-blue-600 font-semibold"
                                 : "text-gray-500 hover:text-blue-500"

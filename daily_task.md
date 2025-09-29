@@ -37,6 +37,7 @@
 
 # 30 sep
 - make common tooltip for charts in tailwind.
+- fixed design & re-render isssue on luxury theme of daisyui.
 - make common modal.
 - add expense implemented.
 - fixed wrong chart data issue. 

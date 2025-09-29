@@ -12,18 +12,21 @@ const PrevNextButton = ({referenceDate, weekOffset, setPrevWeekOffset, setNextWe
   return (
     <div className="flex justify-between items-center mb-2">
       <div className="flex gap-2">
-        <button className="btn btn-primary btn-sm" onClick={setPrevWeekOffset}>
+        <button 
+        title="Previous weak"
+        className="btn btn-primary btn-sm" onClick={setPrevWeekOffset}>
           Prev Week
         </button>
         <button
-          className="btn btn-primary btn-sm"
+        title="Next weak"
+          className="btn btn-primary btn-sm disabled:cursor-not-allowed"
           onClick={setNextWeekOffset}
           disabled={weekOffset === 0} // disable future weeks
         >
           Next Week
         </button>
       </div>
-      <span className="font-semibold">{weekLabel}</span>
+      <span className="font-semibold" >{weekLabel}</span>
     </div>
   );
 };

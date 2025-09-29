@@ -4,7 +4,7 @@ import { formatCurrency } from "../../../utils/currencyUtils";
 
 
 const ExpenseCard = ({theme,userCurrency='INR', category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
-  console.log('called');
+  // console.log('render');
   
   return (
     <div  className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden">
