@@ -46,7 +46,6 @@ export const loginUser = createAsyncThunk(
           );
         }
 
-
         return rejectWithValue(msg || "Login failed");
       }
 

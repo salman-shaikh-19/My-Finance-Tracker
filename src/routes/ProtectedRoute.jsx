@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClient";
 import { FaSpinner } from "react-icons/fa";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // const ProtectedRoute = ({ children, publicOnly = false }) => {
 //   // const [isLoading, setIsLoading] = useState(true);
@@ -61,24 +62,28 @@ import { Navigate } from "react-router-dom";
 const ProtectedRoute = ({ children, publicOnly = false }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const loggedInUserId = useSelector((state) => state.common.loggedInUserId);
 
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      setIsLoggedIn(!!session);
+      // setIsLoggedIn(!!session);
+         setIsLoggedIn(!!session && !!loggedInUserId);
       setIsLoading(false);
     };
 
     checkUser();
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsLoggedIn(!!session);
+      // setIsLoggedIn(!!session);
+        setIsLoggedIn(!!session && !!loggedInUserId);
     });
 
     return () => {
       listener.subscription.unsubscribe();
     };
-  }, []);
+// }, []);
+  }, [loggedInUserId]);
 
   if (isLoading) {
     return (
