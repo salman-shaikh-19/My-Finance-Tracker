@@ -32,3 +32,9 @@
 - expense card make.
 - expense listed.
 - expense chart implemented[pie,bar,line charts].
+
+
+# 30 sep
+- make common modal.
+- add expense implemented.
+- fixed wrong chart data issue. 

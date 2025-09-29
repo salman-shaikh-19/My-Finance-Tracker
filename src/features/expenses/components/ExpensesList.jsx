@@ -40,7 +40,7 @@ const ExpensesList = ({  expenses }) => {
                   category={category.name}
                   amount={item.amount}
                   type={item.payment_method}
-                  date={commonDate(item.expense_date)}
+                  date={commonDate({date:item.expense_date})}
                   bgColor={category.bg}
                   Icon={Icon}
                   userCurrency={userCurrency}

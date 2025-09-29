@@ -31,12 +31,12 @@ const ExpenseChart = ({ expenses = [] }) => {
       return [];
 
     // Get start and end of current week (Mon - Sun)
-    const startOfWeek = dayjs().startOf("week"); // Sunday as start (default)
-    const endOfWeek = dayjs().endOf("week");
+    // const startOfWeek = dayjs().startOf("week"); // Sunday as start (default)
+    // const endOfWeek = dayjs().endOf("week");
 
     // If you want Monday as start of week instead:
-    // const startOfWeek = dayjs().startOf("isoWeek");
-    // const endOfWeek = dayjs().endOf("isoWeek");
+    const startOfWeek = dayjs().startOf("isoWeek");
+    const endOfWeek = dayjs().endOf("isoWeek");
 
     // Initialize week days with 0
     const weekDays = {};

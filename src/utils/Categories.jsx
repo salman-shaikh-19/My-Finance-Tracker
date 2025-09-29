@@ -26,6 +26,12 @@ export const investmentCategories = [
   { name: "Bonds", icon: FaChartLine, bg: "bg-accent" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
 ];
+export const paymentMethods = [
+  { name: "Cash", bg: "bg-primary" },
+  { name: "Card", bg: "bg-secondary" },
+  { name: "UPI", bg: "bg-accent" },
+  { name: "Other", bg: "bg-info" },
+];
 
 export const savingsCategories = [
   { name: "Emergency Fund", icon: FaPiggyBank, bg: "bg-error" },

@@ -19,7 +19,28 @@ export const getAllExpenses = createAsyncThunk(
     }
   }
 );
+export const addExpense = createAsyncThunk(
+  "expenses/addExpense",
+  async ({ userId, amount, category, date, method }, { rejectWithValue }) => {
+    try {
+      const { data, error } = await supabase.from("user_expenses").insert([
+        {
+          user_id: userId,
+          amount,
+          expense_category:category,
+          expense_date:date,
+          payment_method:method,
+        },
+      ]);
 
+      if (error) throw error;
+      return data[0]; // return added expense
+    } catch (err) {
+
+      return rejectWithValue(err.message);
+    }
+  }
+);
 export const expensesSlice = createSlice({
   name: "expenses",
    initialState: {
@@ -44,6 +65,20 @@ export const expensesSlice = createSlice({
       .addCase(getAllExpenses.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Something went wrong";
+      })
+      // add expense
+      .addCase(addExpense.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addExpense.fulfilled, (state, action) => {
+        state.loading = false;
+        // add the new expense to the beginning of the array
+        // state.expenses.unshift(action.payload);
+      })
+      .addCase(addExpense.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to add expense";
       });
   },
 
