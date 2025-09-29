@@ -20,7 +20,36 @@ export const loginUser = createAsyncThunk(
     try {
  
       const { data: authData, error: authError } = await supabase.auth.signInWithPassword({ email, password });
-      if (authError) throw authError;
+      // const { data: authData, error: authError } = await supabase.auth.signInWithOtp({ email, password });
+
+      // if (authError) throw authError;
+     
+     if (authError) {
+        const code = authError.code || authError?.error || "";
+        const msg = authError.message || String(authError);
+
+        //  email not confirmed ->then send confirmation mail again
+        if (code === "email_not_confirmed" || msg.toLowerCase().includes("email not confirmed")) {
+          const { error: resendError } = await supabase.auth.resend({
+            type: "signup",
+            email,
+             options: { emailRedirectTo: "https://my-finance-tracker-ten.vercel.app/" } // optional
+          });
+
+          if (resendError) {
+
+            return rejectWithValue("Email not confirmed. Failed to resend confirmation email.");
+          }
+
+          return rejectWithValue(
+            "Email not confirmed. A new confirmation email has been sent — please check your inbox/spam."
+          );
+        }
+
+
+        return rejectWithValue(msg || "Login failed");
+      }
+
 
       const authUser = authData.user;
       if (!authUser) throw new Error("Login failed");
@@ -33,7 +62,7 @@ export const loginUser = createAsyncThunk(
         .single(); 
 
       if (userError) throw userError;
-      if (!userData) throw new Error("User not found in users table");
+      if (!userData) throw new Error("User not found");
 
       return userData; 
     } catch (err) {

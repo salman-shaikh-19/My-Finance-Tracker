@@ -56,28 +56,24 @@ const ExpensesPage = () => {
       <Main mainClassName="relative">
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
         <CommonModal
-         ref={modalRef}
+          ref={modalRef}
           modalId="expense-add-modal"
-        openModalBtnClassName="
+          openModalBtnClassName="
           fab fab-flower
           absolute
           right-0
           top-4    
           md:top-auto 
           md:bottom-4 
-          text-2xl
-         
-          btn-primary
+          text-xl
         "
-
-
           openModalBtnText={
             <>
-              <BiPlus className="inline mr-1" />
+              <BiPlus size={30} className="inline mr-1" />
             </>
           }
         >
-        <AddExpense  handleSubmit={handleSubmit} />
+          <AddExpense handleSubmit={handleSubmit} />
         </CommonModal>
       </Main>
     </>

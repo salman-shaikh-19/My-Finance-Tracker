@@ -24,7 +24,7 @@ const CommonModal = ({
 
   return (
     <>
-      <button className={`btn ${openModalBtnClassName}`} onClick={() => ref.current?.showModal()}>
+      <button className={`btn  btn-primary ${openModalBtnClassName}`} onClick={() => ref.current?.showModal()}>
         {openModalBtnText}
       </button>
 

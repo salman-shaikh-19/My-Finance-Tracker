@@ -49,8 +49,6 @@ export const expensesSlice = createSlice({
     error: null,
   },
   reducers: {
-   
-
   },
     extraReducers: (builder) => {
     builder
@@ -73,7 +71,7 @@ export const expensesSlice = createSlice({
       })
       .addCase(addExpense.fulfilled, (state, action) => {
         state.loading = false;
-        // add the new expense to the beginning of the array
+       //add new expense at beginning of array
         // state.expenses.unshift(action.payload);
       })
       .addCase(addExpense.rejected, (state, action) => {
