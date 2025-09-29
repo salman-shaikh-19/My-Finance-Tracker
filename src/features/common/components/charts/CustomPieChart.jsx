@@ -2,6 +2,16 @@ import React from "react";
 import { Cell, ResponsiveContainer, Tooltip, PieChart, Pie, Legend } from "recharts";
 import randomColor from "../../../../utils/randomColorGenerate";
 import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
+const COLORS = [
+  "#3b82f6", // blue-500
+  "#22c55e", // green-500
+  "#eab308", // yellow-500
+  "#ef4444", // red-500
+  "#8b5cf6", // violet-500
+  "#14b8a6", // teal-500
+  "#f97316", // orange-500
+];
+
 const CustomPieChart = React.memo(({ chartData, width = "100%", height = 400, isLegend = true, pieDataKey, pieNameKey, description = "Default description of pie chart" }) => (
     <div style={{ width, height }}>
 
@@ -13,7 +23,8 @@ const CustomPieChart = React.memo(({ chartData, width = "100%", height = 400, is
                     nameKey={pieNameKey} data={chartData} label  >
                     {
                         chartData?.map?.((_, i) => (
-                            <Cell key={i} fill={randomColor()} />
+                            // <Cell key={i} fill={randomColor()} />
+                             <Cell key={i} fill={COLORS[i % COLORS.length]} />
                         ))
                     }
                 </Pie>

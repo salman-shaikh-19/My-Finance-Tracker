@@ -1,141 +1,126 @@
-import React, { useMemo } from "react";
-import { expenseCategories, getCategoryByName } from "../../../utils/Categories";
-import { commonDate } from "../../../utils/dateUtils";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
-const COLORS = ["#26a7b3", "#ff7f50", "#8bc34a", "#ffc107", "#9c27b0", "#ff5722"];
-
+import React, { useMemo, useState } from "react";
+import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
+import isBetween from "dayjs/plugin/isBetween"; 
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import CustomLineChart from '../../common/components/charts/CustomLineChart'
+import CustomBarChart from '../../common/components/charts/CustomBarChart'
+import CustomPieChart from '../../common/components/charts/CustomPieChart'
+import { BiBarChartAlt, BiLineChart, BiPieChart } from "react-icons/bi";
+import { Link } from "react-router-dom";
+dayjs.extend(isoWeek);
+dayjs.extend(isBetween);
 const ExpenseChart = ({ expenses = [] }) => {
-  // Process data for the bar chart
-  const { chartData, chartKeys } = useMemo(() => {
-    if (!expenses || !Array.isArray(expenses) || expenses.length === 0) {
-      return { chartData: [], chartKeys: [] };
+     const [currentChart, setCurrentChart] = useState('bar');
+  // Process weekly chart data
+  const chartData = useMemo(() => {
+    if (!expenses || !Array.isArray(expenses) || expenses.length === 0) return [];
+
+    // Get start and end of current week (Mon - Sun)
+    const startOfWeek = dayjs().startOf("week"); // Sunday as start (default)
+    const endOfWeek = dayjs().endOf("week");
+
+    // If you want Monday as start of week instead:
+    // const startOfWeek = dayjs().startOf("isoWeek");
+    // const endOfWeek = dayjs().endOf("isoWeek");
+
+    // Initialize week days with 0
+    const weekDays = {};
+    for (let i = 0; i < 7; i++) {
+      const day = startOfWeek.add(i, "day");
+      weekDays[day.format("ddd")] = 0;
     }
 
-    const dataMap = {};
-    const allCategories = new Set();
-    const categoryColors = {};
-
-    // First pass: collect all categories and assign colors
-    expenses.forEach((exp) => {
-      if (!exp) return;
-      const category = getCategoryByName(expenseCategories, exp?.expense_category)?.name || exp?.expense_category;
-      if (category) {
-        allCategories.add(category);
-        if (!categoryColors[category]) {
-          categoryColors[category] = COLORS[Object.keys(categoryColors).length % COLORS.length];
-        }
-      }
-    });
-
-    // Second pass: aggregate expenses by date and category
+    // Sum expenses by day
     expenses.forEach((exp) => {
       if (!exp?.expense_date) return;
-      const date = commonDate({ date: exp.expense_date });
-      const category = getCategoryByName(expenseCategories, exp?.expense_category)?.name || exp?.expense_category;
-      const amount = parseFloat(exp.amount) || 0;
-      
-      if (!category || !date || amount <= 0) return;
+      const date = dayjs(exp.expense_date);
 
-      if (!dataMap[date]) {
-        dataMap[date] = { date };
-        // Initialize all categories with 0 for each date
-        allCategories.forEach(cat => {
-          dataMap[date][cat] = 0;
-        });
+      if (date.isBetween(startOfWeek, endOfWeek, "day", "[]")) {
+        const dayLabel = date.format("ddd"); // e.g., Mon, Tue
+        const amount = parseFloat(exp.amount) || 0;
+        weekDays[dayLabel] += amount;
       }
-      
-      dataMap[date][category] = (parseFloat(dataMap[date][category]) || 0) + amount;
     });
 
-    // Prepare chart keys with colors
-    const chartKeys = Array.from(allCategories).map((category, index) => ({
-      key: category,
-      name: category,
-      color: categoryColors[category] || COLORS[index % COLORS.length]
+    // Convert to recharts array format
+    return Object.keys(weekDays).map((day) => ({
+      day,
+      total: weekDays[day],
     }));
-
-    const sortedData = Object.values(dataMap).sort((a, b) => {
-      if (!a?.date || !b?.date) return 0;
-      return new Date(a.date) - new Date(b.date);
-    });
-
-    return {
-      chartData: sortedData,
-      chartKeys: chartKeys.filter(key => 
-        sortedData.some(data => data[key.name] > 0)
-      )
-    };
   }, [expenses]);
 
-  if (!chartData.length || !chartKeys.length) {
+  if (!chartData.length) {
     return (
-      <div className="w-full h-[400px] flex items-center justify-center bg-white rounded-lg shadow p-4">
-        <p className="text-gray-500">No expense data available</p>
+      <div className="w-full h-[400px] flex items-center justify-center bg-base-100 rounded-lg shadow p-4">
+        <p className="">No expense data available</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4 px-2">Expense Overview</h2>
-      <div className="w-full h-[calc(100%-50px)]">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={chartData}
-            margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
-            barGap={0}
-            barCategoryGap="10%"
-            barSize={30}
+    <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow ">
+      <h2 className="text-xl font-semibold mb-4 px-2">Current Week Expenses</h2>
+      <div className="flex flex-wrap ">
+        <div className="flex ms-auto">
+          <Link
+            className={`${
+              currentChart == "bar" ? "active text-primary " : "text-reset"
+            } text-decoration-none me-2  `}
+            onClick={() => setCurrentChart("bar")}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis 
-              dataKey="date" 
-              tick={{ fontSize: 11 }}
-              tickMargin={5}
-              minTickGap={5}
-              interval={0}
-              angle={-45}
-              textAnchor="end"
-              height={60}
-            />
-            <YAxis 
-              tickFormatter={(value) => `$${value}`}
-              tick={{ fontSize: 11 }}
-              tickMargin={5}
-              width={60}
-            />
-            <Tooltip 
-              formatter={(value, name) => [`$${value}`, name]}
-              labelFormatter={(date) => `Date: ${date}`}
-              contentStyle={{
-                backgroundColor: 'white',
-                border: '1px solid #e2e8f0',
-                borderRadius: '0.375rem',
-                padding: '0.5rem'
-              }}
-            />
-            <Legend 
-              wrapperStyle={{ paddingTop: '10px' }}
-              formatter={(value, entry, index) => (
-                <span style={{ color: entry.color, fontSize: '12px' }}>
-                  {value}
-                </span>
-              )}
-            />
-            {chartKeys.map((key, index) => (
-              <Bar
-                key={key.key}
-                dataKey={key.name}
-                name={key.name}
-                fill={key.color}
-                stackId="a"
-                radius={[4, 4, 0, 0]}
-              />
-            ))}
-          </BarChart>
-        </ResponsiveContainer>
+            <BiBarChartAlt /> Bar
+          </Link>
+          <Link
+            className={` ${
+              currentChart == "line" ? "active text-primary " : "text-reset"
+            } text-decoration-none me-2  `}
+            onClick={() => setCurrentChart("line")}
+          >
+            <BiLineChart /> Line
+          </Link>
+          <Link
+            className={`${
+              currentChart == "pie" ? "active text-primary " : "text-reset"
+            } text-decoration-none me-2  `}
+            onClick={() => setCurrentChart("pie")}
+          >
+            <BiPieChart /> Pie
+          </Link>
+        </div>
       </div>
+      {currentChart == "bar" && (
+        <CustomBarChart
+          chartData={chartData}
+          XAxisDataKey="day"
+          BarDataKey={[{ key: "total", name: "Total expenses" }]}
+          isLegend={true}
+          description={`Total expenses of current weak`}
+          height={250}
+        />
+      )}
+
+      {currentChart == "line" && (
+        <CustomLineChart
+          chartData={chartData}
+          XAxisDataKey="day"
+          LineDataKey={[{ key: "total", name: "Total expenses" }]}
+          isLegend={true}
+          description="Total expenses of current weak"
+             height={250}
+        />
+      )}
+
+      {currentChart == "pie" && (
+        <CustomPieChart
+          chartData={chartData}
+          pieDataKey="total"
+          pieNameKey="day"
+          // height={250}
+             height={250}
+          description="Total expenses of current weak"
+        />
+      )}
     </div>
   );
 };

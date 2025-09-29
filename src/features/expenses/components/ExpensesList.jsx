@@ -16,9 +16,9 @@ const ExpensesList = ({  expenses }) => {
     <>
     <div
       id="expenses-list"
-      className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide"
+      className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
     >
-    <ExpenseChart expenses={expenses} />
+      <ExpenseChart expenses={expenses} />
          
       <CustomInfiniteScroll
         pageSize={20}
