@@ -39,3 +39,4 @@
 - add expense implemented.
 - fixed wrong chart data issue. 
 - add prev-next weak chart data implemnted in expense chart.
+- fixed redirection issue , must stay on same active page if refreshed by user.

@@ -82,12 +82,13 @@ const ProtectedRoute = ({ children, publicOnly = false }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <div className="flex flex-col items-center">
-          <FaSpinner className="animate-spin text-5xl mb-4" />
-          <p className="text-gray-600 font-medium">Checking session...</p>
-        </div>
+     
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="flex flex-col items-center">
+        <FaSpinner className="animate-spin text-5xl text- mb-4" />
+        <p className="text-gray-600 font-medium"></p>
       </div>
+    </div>
     );
   }
 
