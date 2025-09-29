@@ -132,7 +132,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           BarDataKey={[{ key: "total", name: "Total expenses" }]}
           isLegend={false}
           description="Total expenses of the week"
-          height={320}
+          height={280}
         />
       )}
 
@@ -143,7 +143,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           LineDataKey={[{ key: "total", name: "Total expenses" }]}
           isLegend={false}
           description="Total expenses of the week"
-          height={320}
+          height={280}
         />
       )}
 
@@ -152,7 +152,7 @@ const ExpenseChart = ({ expenses = [] }) => {
           chartData={chartData}
           pieDataKey="total"
           pieNameKey="day"
-          height={320}
+          height={280}
           description="Total expenses of the week"
         />
       )}
