@@ -11,7 +11,7 @@ import ExpenseChart from "./ExpenseChart";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({  expenses }) => {
-  const { userCurrency } = useSelector((state) => state.common);
+  const { userCurrency,theme } = useSelector((state) => state.common);
   return (
     <>
     <div
@@ -39,6 +39,7 @@ const ExpensesList = ({  expenses }) => {
                   key={item.id}
                   category={category.name}
                   amount={item.amount}
+                  theme={theme}
                   type={item.payment_method}
                   date={commonDate({date:item.expense_date})}
                   bgColor={category.bg}

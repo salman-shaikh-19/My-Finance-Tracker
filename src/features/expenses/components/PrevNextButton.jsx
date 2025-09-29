@@ -12,11 +12,11 @@ const PrevNextButton = ({referenceDate, weekOffset, setPrevWeekOffset, setNextWe
   return (
     <div className="flex justify-between items-center mb-2">
       <div className="flex gap-2">
-        <button className="btn btn-sm" onClick={setPrevWeekOffset}>
+        <button className="btn btn-primary btn-sm" onClick={setPrevWeekOffset}>
           Prev Week
         </button>
         <button
-          className="btn btn-sm"
+          className="btn btn-primary btn-sm"
           onClick={setNextWeekOffset}
           disabled={weekOffset === 0} // disable future weeks
         >

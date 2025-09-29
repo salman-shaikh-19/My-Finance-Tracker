@@ -3,13 +3,15 @@ import { BiHome } from "react-icons/bi";
 import { formatCurrency } from "../../../utils/currencyUtils";
 
 
-const ExpenseCard = ({userCurrency='INR', category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
+const ExpenseCard = ({theme,userCurrency='INR', category, amount, type, date, bgColor = "bg-red-500", Icon = BiHome }) => {
+  console.log('called');
+  
   return (
     <div  className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden">
       <div className="flex items-center p-4 gap-4">
     
         <div className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}>
-          <Icon className="text-4xl text-white" />
+          <Icon className={`text-4xl  ${theme=='luxury' ? 'text-black':'text-white'}`} />
         </div>
         <div className="flex flex-col justify-between flex-1">
        
@@ -28,4 +30,20 @@ const ExpenseCard = ({userCurrency='INR', category, amount, type, date, bgColor 
   );
 };
 
-export default React.memo(ExpenseCard);
+
+export default React.memo(ExpenseCard, (prevProps, nextProps) => {
+  if (prevProps.theme !== nextProps.theme && nextProps.theme === "luxury") { //this will ignore theme, so changing theme never triggers a re-render.
+    return false; // trigger rerender 
+    }
+  return (
+    prevProps.category === nextProps.category &&
+    prevProps.amount === nextProps.amount &&
+    prevProps.type === nextProps.type &&
+    prevProps.date === nextProps.date &&
+    prevProps.bgColor === nextProps.bgColor &&
+    prevProps.userCurrency === nextProps.userCurrency &&
+    prevProps.Icon === nextProps.Icon
+
+  );
+});
+
