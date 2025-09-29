@@ -5,29 +5,30 @@ const CommonModal = ({
   modalId = "defModalId",
   children,
   openModalBtnText = "Open Modal",
-  openModalBtnClassName=''
+  openModalBtnClassName='',
+  ref,
 }) => {
-  const modalRef = useRef(null);
+  
 
   const closeModal = () => {
-    modalRef.current?.close();
+    ref.current?.close();
   };
 
   const handleBackdropClick = (e) => {
     // close only if click is outside modal-box
-    if (e.target === modalRef.current) {
+    if (e.target === ref.current) {
       closeModal();
     }
   };
 
   return (
     <>
-      <button className={`btn ${openModalBtnClassName}`} onClick={() => modalRef.current?.showModal()}>
+      <button className={`btn ${openModalBtnClassName}`} onClick={() => ref.current?.showModal()}>
         {openModalBtnText}
       </button>
 
       <dialog
-        ref={modalRef}
+        ref={ref}
         id={modalId}
         className="modal"
         onClick={handleBackdropClick}

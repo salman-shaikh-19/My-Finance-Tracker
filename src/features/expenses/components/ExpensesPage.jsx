@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Main from "../../common/layouts/Main";
 import ExpensesList from "./ExpensesList";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import { BiPlus } from "react-icons/bi";
 const ExpensesPage = () => {
   const { loggedInUserId } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
+  const modalRef = useRef(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const ExpensesPage = () => {
       .then(() => {
         toast.success("Expense added successfully!");
         resetForm();
+        modalRef.current?.close();
       })
       .catch((err) => {
         toast.error("Error adding expense: " + err);
@@ -56,6 +58,7 @@ const ExpensesPage = () => {
       <Main mainClassName="relative">
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
         <CommonModal
+         ref={modalRef}
           modalId="expense-add-edit-modal"
         openModalBtnClassName="
           fab fab-flower
