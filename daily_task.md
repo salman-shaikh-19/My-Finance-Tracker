@@ -40,3 +40,6 @@
 - fixed wrong chart data issue. 
 - add prev-next weak chart data implemnted in expense chart.
 - fixed redirection issue , must stay on same active page if refreshed by user.
+
+# 1 oct
+- if email not confirmed then resend confirmation mail while login and tell user to confirm email, if user confirm redirect to dashboard.
