@@ -1,0 +1,121 @@
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import React from "react";
+
+import * as Yup from "yup";
+import { expenseCategories, paymentMethods } from "../../../utils/Categories";
+const AddExpense=({handleSubmit})=>{
+    return (
+        <>
+          <h1 className="text-center"> Add expense</h1>
+          <Formik
+            initialValues={{
+              amount: "",
+              expenseCategory: "",
+              expenseDate: new Date().toISOString().slice(0, 10),
+              expenseMethod: "",
+            }}
+            validationSchema={Yup.object({
+              amount: Yup.number()
+                .required("Amount is required")
+                .positive("Amount must be positive"),
+              expenseCategory: Yup.string().required("Category is required"),
+              expenseDate: Yup.date().required("Date is required"),
+              expenseMethod: Yup.string().required("Method is required"),
+            })}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form className="space-y-4">
+                <div>
+                  <label className="label">Amount</label>
+                  <Field
+                    type="number"
+                    name="amount"
+                    placeholder="Expense amount"
+                    className="input input-bordered w-full"
+                  />
+                  <ErrorMessage
+                    name="amount"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">Category</label>
+                  <Field
+                    as="select"
+                    name="expenseCategory"
+                    className="select select-bordered w-full"
+                  >
+                    <option value="">Select Category</option>
+                    {expenseCategories.map((cat) => (
+                      <option key={cat.name} value={cat.name}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="expenseCategory"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">Date</label>
+                  <Field
+                    type="date"
+                    name="expenseDate"
+                    className="input input-bordered w-full"
+                  />
+                  <ErrorMessage
+                    name="expenseDate"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <div>
+                  <label className="label">Method</label>
+                  <Field
+                    as="select"
+                    name="expenseMethod"
+                    className="select select-bordered w-full"
+                  >
+                    <option value="">Select Method</option>
+                    {paymentMethods.map((method) => (
+                      <option key={method.name} value={method.name}>
+                        {method.name}
+                      </option>
+                    ))}
+                  </Field>
+                  <ErrorMessage
+                    name="expenseMethod"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary w-full mt-4"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="loading loading-spinner"></span> Adding
+                      Expense...
+                    </>
+                  ) : (
+                    "Add Expense"
+                  )}
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </>
+    )
+}
+
+export default React.memo(AddExpense);

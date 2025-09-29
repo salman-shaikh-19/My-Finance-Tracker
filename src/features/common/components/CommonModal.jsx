@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { CgClose } from "react-icons/cg";
 
 const CommonModal = ({
@@ -15,6 +15,7 @@ const CommonModal = ({
   };
 
   const handleBackdropClick = (e) => {
+      // e.resetForm();
     // close only if click is outside modal-box
     if (e.target === ref.current) {
       closeModal();

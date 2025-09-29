@@ -4,15 +4,13 @@ import ExpensesList from "./ExpensesList";
 import { useDispatch, useSelector } from "react-redux";
 import { useRealtimeTable } from "../../../services/useRealtimeTable";
 import { addExpense, getAllExpenses } from "../expensesSlice";
-import ExpenseChart from "./ExpenseChart";
-import CommonModal from "../../common/components/CommonModal";
-import { ErrorMessage, Field, Formik } from "formik";
-import { Form } from "formik";
 
-import * as Yup from "yup";
+import CommonModal from "../../common/components/CommonModal";
+
 import { toast } from "react-toastify";
-import { expenseCategories, paymentMethods } from "../../../utils/Categories";
+
 import { BiPlus } from "react-icons/bi";
+import AddExpense from "./AddExpense";
 const ExpensesPage = () => {
   const { loggedInUserId } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
@@ -43,12 +41,12 @@ const ExpensesPage = () => {
     )
       // .unwrap() //  note: unwrap the thunk to catch rejected errors
       .then(() => {
-        toast.success("Expense added successfully!");
+        toast.success("Expense added successfully");
         resetForm();
         modalRef.current?.close();
       })
       .catch((err) => {
-        toast.error("Error adding expense: " + err);
+        toast.error("Error while adding expense: " + err);
       })
       .finally(() => setSubmitting(false));
   };
@@ -59,7 +57,7 @@ const ExpensesPage = () => {
         <ExpensesList userId={loggedInUserId} expenses={expenses} />
         <CommonModal
          ref={modalRef}
-          modalId="expense-add-edit-modal"
+          modalId="expense-add-modal"
         openModalBtnClassName="
           fab fab-flower
           absolute
@@ -67,7 +65,8 @@ const ExpensesPage = () => {
           top-4    
           md:top-auto 
           md:bottom-4 
-          text-lg
+          text-2xl
+         
           btn-primary
         "
 
@@ -78,114 +77,7 @@ const ExpensesPage = () => {
             </>
           }
         >
-          <h1 className="text-center"> Add expense</h1>
-          <Formik
-            initialValues={{
-              amount: "",
-              expenseCategory: "",
-              expenseDate: new Date().toISOString().slice(0, 10),
-              expenseMethod: "",
-            }}
-            validationSchema={Yup.object({
-              amount: Yup.number()
-                .required("Amount is required")
-                .positive("Amount must be positive"),
-              expenseCategory: Yup.string().required("Category is required"),
-              expenseDate: Yup.date().required("Date is required"),
-              expenseMethod: Yup.string().required("Method is required"),
-            })}
-            onSubmit={handleSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form className="space-y-4">
-                <div>
-                  <label className="label">Amount</label>
-                  <Field
-                    type="number"
-                    name="amount"
-                    placeholder="Expense amount"
-                    className="input input-bordered w-full"
-                  />
-                  <ErrorMessage
-                    name="amount"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-
-                <div>
-                  <label className="label">Category</label>
-                  <Field
-                    as="select"
-                    name="expenseCategory"
-                    className="select select-bordered w-full"
-                  >
-                    <option value="">Select Category</option>
-                    {expenseCategories.map((cat) => (
-                      <option key={cat.name} value={cat.name}>
-                        {cat.name}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="expenseCategory"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-
-                <div>
-                  <label className="label">Date</label>
-                  <Field
-                    type="date"
-                    name="expenseDate"
-                    className="input input-bordered w-full"
-                  />
-                  <ErrorMessage
-                    name="expenseDate"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-
-                <div>
-                  <label className="label">Method</label>
-                  <Field
-                    as="select"
-                    name="expenseMethod"
-                    className="select select-bordered w-full"
-                  >
-                    <option value="">Select Method</option>
-                    {paymentMethods.map((method) => (
-                      <option key={method.name} value={method.name}>
-                        {method.name}
-                      </option>
-                    ))}
-                  </Field>
-                  <ErrorMessage
-                    name="expenseMethod"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary w-full mt-4"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="loading loading-spinner"></span> Adding
-                      Expense...
-                    </>
-                  ) : (
-                    "Add Expense"
-                  )}
-                </button>
-              </Form>
-            )}
-          </Formik>
+        <AddExpense  handleSubmit={handleSubmit} />
         </CommonModal>
       </Main>
     </>
