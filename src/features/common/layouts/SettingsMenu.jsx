@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { FiSettings } from "react-icons/fi";
@@ -6,17 +6,20 @@ import { CgPassword, CgProfile } from "react-icons/cg";
 import ThemeToggle from "../components/ThemeToggle";
 import { logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
-import { BiReset } from "react-icons/bi";
-import { setLoggedInUserId } from "../commonSlice";
+import { BiPlus, BiReset } from "react-icons/bi";
+import { setExpenseLimit, setLoggedInUserId } from "../commonSlice";
 import SetUserCurrency from "../components/SetUserCurrency";
-
+import SetExpenseLimit from "../../expenses/components/SetExpenseLimit";
+import CommonModal from "../components/CommonModal";
+import { toast } from "react-toastify";
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
-  children
+  children,
 }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const modalRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,6 +59,14 @@ const SettingsMenu = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleExpenseLimit = (values, { resetForm, setSubmitting }) => {
+    dispatch(setExpenseLimit(values.expenseLimit));
+    toast.success("Expense limit set successfully");
+    resetForm();
+    modalRef.current?.close();
+    setSubmitting(false);
+  };
+
   return (
     <div ref={menuRef} className="relative ">
       <div
@@ -94,6 +105,16 @@ const SettingsMenu = ({
           <div className="mt-2 ">
             <ThemeToggle onClick={() => handleClickItem()} />
           </div>
+          <CommonModal
+            ref={modalRef}
+            modalId="expense-limit-set-modal"
+            openModalBtnClassName="
+                     btn-sm mt-2 w-full
+                  "
+            openModalBtnText={<>Expense Limit</>}
+          >
+            <SetExpenseLimit handleSubmit={handleExpenseLimit}  />
+          </CommonModal>
 
           <button
             onClick={() => handleClickItem(handleLogout)}
@@ -107,4 +128,4 @@ const SettingsMenu = ({
   );
 };
 
-export default SettingsMenu;
+export default React.memo(SettingsMenu);

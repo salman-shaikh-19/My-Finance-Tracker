@@ -13,11 +13,51 @@ import { toast } from "react-toastify";
 import { BiPlus } from "react-icons/bi";
 import AddExpense from "./AddExpense";
 import Loader from "../../common/components/Loader";
+import dayjs from "dayjs";
+import _ from "lodash";
+
 const ExpensesPage = () => {
-  const { loggedInUserId } = useSelector((state) => state.common);
+  const { loggedInUserId,expenseLimit } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
+  // const warningShownRef = useRef(false);
   const modalRef = useRef(null);
   const dispatch = useDispatch();
+  const LIMIT = expenseLimit || 10000;
+  const WARNING_THRESHOLD = 0.9;
+  const warningShownRef = useRef({ warningDate: null, errorDate: null });
+  // console.log(expenseLimit);
+  
+  useEffect(() => {
+    if (!LIMIT) return; 
+    const todayKey = dayjs().format("YYYY-MM-DD");
+    const todayExpenses = _.filter(
+      expenses,
+      (e) => e.expense_date === todayKey
+    );
+    const total = _.sumBy(todayExpenses, "amount");
+
+    // Warning for 90%–99% of limit
+    if (
+      total >= LIMIT * WARNING_THRESHOLD &&
+      total < LIMIT &&
+      warningShownRef.current.warningDate !== todayKey
+    ) {
+      toast.warning(
+        `Warning! You have spent ${total} today, which is over 90% of your daily limit (${LIMIT}).`,
+        { autoClose: false }
+      );
+      warningShownRef.current.warningDate = todayKey; // mark warning as shown for today
+    }
+
+    // error for exceeding 100% of limit
+    if (total >= LIMIT && warningShownRef.current.errorDate !== todayKey) {
+      toast.error(
+        `Alert! You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
+        { autoClose: false }
+      );
+      warningShownRef.current.errorDate = todayKey; // mark error as shown for today
+    }
+  }, [expenses,LIMIT]);
 
   useEffect(() => {
     if (!loggedInUserId) return;
@@ -41,7 +81,7 @@ const ExpensesPage = () => {
         category: values.expenseCategory,
         date: values.expenseDate,
         method: values.expenseMethod,
-        expense_note:values.note,
+        expense_note: values.note,
       })
     )
       // .unwrap() //  note: unwrap the thunk to catch rejected errors
@@ -60,16 +100,15 @@ const ExpensesPage = () => {
     <>
       <Main mainClassName="relative">
         {/* <ExpensesList userId={loggedInUserId} expenses={expenses} /> */}
-           <Suspense
-        fallback={
-         <Loader />
+        <Suspense
+          fallback={
+            <Loader />
 
-        // <></>
-        
-        }
-      >
-        <ExpensesList userId={loggedInUserId} expenses={expenses} />
-      </Suspense>
+            // <></>
+          }
+        >
+          <ExpensesList userId={loggedInUserId} expenses={expenses} />
+        </Suspense>
         <CommonModal
           ref={modalRef}
           modalId="expense-add-modal"
