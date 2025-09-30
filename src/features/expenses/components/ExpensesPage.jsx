@@ -24,7 +24,7 @@ const ExpensesPage = () => {
   const dispatch = useDispatch();
   const LIMIT = expenseLimit || 10000;
   const WARNING_THRESHOLD = 0.9;
-  const warningShownRef = useRef({ warningDate: null, errorDate: null });
+ const warningShownRef = useRef({ warningShown: false, errorShown: false });
   // console.log(expenseLimit);
   
   useEffect(() => {
@@ -40,23 +40,28 @@ const ExpensesPage = () => {
     if (
       total >= LIMIT * WARNING_THRESHOLD &&
       total < LIMIT &&
-      warningShownRef.current.warningDate !== todayKey
+       !warningShownRef.current.warningShown
     ) {
       toast.warning(
         `Warning! You have spent ${total} today, which is over 90% of your daily limit (${LIMIT}).`,
         { autoClose: false }
       );
-      warningShownRef.current.warningDate = todayKey; // mark warning as shown for today
+       warningShownRef.current.warningShown = true;
     }
 
     // error for exceeding 100% of limit
-    if (total >= LIMIT && warningShownRef.current.errorDate !== todayKey) {
+    if (total >= LIMIT &&   !warningShownRef.current.errorShown) {
       toast.error(
         `Alert! You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
         { autoClose: false }
       );
-      warningShownRef.current.errorDate = todayKey; // mark error as shown for today
+       warningShownRef.current.errorShown = true; 
     }
+  // reset flags if total goes below 90% 
+  if (total < LIMIT * WARNING_THRESHOLD) {
+    warningShownRef.current.warningShown = false;
+    warningShownRef.current.errorShown = false;
+  }
   }, [expenses,LIMIT]);
 
   useEffect(() => {
