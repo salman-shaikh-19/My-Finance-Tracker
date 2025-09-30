@@ -19,7 +19,7 @@ const CustomBarChart = React.memo(({ chartData, width = "100%", height = 400, is
                             key={i}
                             dataKey={bar.key}
                             name={bar.name || bar.key}
-                            fill="#FF4C4C"
+                            fill="#DE1010"
 
                         />
                     ))
