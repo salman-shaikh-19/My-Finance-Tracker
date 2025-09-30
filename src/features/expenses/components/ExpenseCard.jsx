@@ -23,8 +23,10 @@ const ExpenseCard = ({
     : false;
   return (
     <div
-      className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden"
+      className={`card ${note ? 'cursor-pointer':''} w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => note && setShowNote(!showNote)}
+      title={note ? 'Click to ' + (showNote ? 'close' : 'show') + ' note' : ''}
+
     >
       <div className="flex items-center p-4 gap-4">
         <div
