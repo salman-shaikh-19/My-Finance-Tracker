@@ -55,3 +55,8 @@
 - manage end msg if user seen all data of expenses.
 - custom email body in supabase implemented.
 - optimize code.
+
+# 2 oct
+- change tables structure.
+- add note (expense note optional).
+- display note on card click.

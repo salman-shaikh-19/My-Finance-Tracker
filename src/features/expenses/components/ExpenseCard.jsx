@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BiHome } from "react-icons/bi";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import dayjs from "dayjs";
+import { MdFiberNew } from "react-icons/md";
 
 const ExpenseCard = ({
   theme,
@@ -49,8 +50,8 @@ const ExpenseCard = ({
         </div>
       </div>
          {isNew && (
-        <div className="absolute top-2 right-2 text-primary  text-xs font-bold px-2 py-1 rounded-full">
-          NEW
+        <div className="absolute z-10 -top-1  right-0 text-primary  text-xs font-bold px-2 py-1 rounded-full">
+         <MdFiberNew size={30} className="animate-pulse"/> 
         </div>
       )}
       {note && showNote && (
