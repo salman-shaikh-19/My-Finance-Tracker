@@ -23,12 +23,10 @@ export const commonSlice = createSlice({
     },
     setGetStarted(state, action) {
       // console.log(action.payload);
-
       state.isGetStarted = action.payload;
     },
       setExpenseLimit(state, action) {
       // console.log(action.payload);
-
       state.expenseLimit = action.payload;
     },
   },
