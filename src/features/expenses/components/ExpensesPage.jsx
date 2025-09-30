@@ -41,6 +41,7 @@ const ExpensesPage = () => {
         category: values.expenseCategory,
         date: values.expenseDate,
         method: values.expenseMethod,
+        expense_note:values.note,
       })
     )
       // .unwrap() //  note: unwrap the thunk to catch rejected errors

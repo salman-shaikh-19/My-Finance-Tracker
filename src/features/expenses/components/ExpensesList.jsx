@@ -45,6 +45,8 @@ const ExpensesList = ({  expenses }) => {
                   date={commonDate({date:item.expense_date})}
                   bgColor={category.bg}
                   Icon={Icon}
+                  createdAt={item.created_at}
+                  note={item.expense_note}
                   userCurrency={userCurrency}
                 />
               );

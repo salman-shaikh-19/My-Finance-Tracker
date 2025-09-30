@@ -13,6 +13,7 @@ const AddExpense=({handleSubmit})=>{
               expenseCategory: "",
               expenseDate: new Date().toISOString().slice(0, 10),
               expenseMethod: "",
+               note: "",
             }}
             validationSchema={Yup.object({
               amount: Yup.number()
@@ -21,6 +22,9 @@ const AddExpense=({handleSubmit})=>{
               expenseCategory: Yup.string().required("Category is required"),
               expenseDate: Yup.date().required("Date is required"),
               expenseMethod: Yup.string().required("Method is required"),
+              note: Yup.string()
+              .max(255, "Note cannot exceed 255 characters")
+              .nullable(),
             })}
             onSubmit={handleSubmit}
           >
@@ -94,6 +98,15 @@ const AddExpense=({handleSubmit})=>{
                     name="expenseMethod"
                     component="div"
                     className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+                 <div>
+                  <label className="label">Note (optional)</label>
+                  <Field
+                    as="textarea"
+                    name="note"
+                    placeholder="Add a note for this expense..."
+                    className="textarea textarea-bordered w-full"
                   />
                 </div>
 

@@ -20,7 +20,7 @@ export const getAllExpenses = createAsyncThunk(
          .gte("expense_date", startOfWeek)
         .lte("expense_date", endOfWeek)
         // .order("id", { ascending: false });
-         .order("expense_date", { ascending: true });
+         .order("created_at", { ascending: false });
         // select all fields
 
       if (error) throw error;
@@ -32,7 +32,7 @@ export const getAllExpenses = createAsyncThunk(
 );
 export const addExpense = createAsyncThunk(
   "expenses/addExpense",
-  async ({ userId, amount, category, date, method }, { rejectWithValue }) => {
+  async ({ userId, amount, category, date, method,expense_note }, { rejectWithValue }) => {
     try {
       const { data, error } = await supabase.from("user_expenses").insert([
         {
@@ -41,6 +41,7 @@ export const addExpense = createAsyncThunk(
           expense_category:category,
           expense_date:date,
           payment_method:method,
+          expense_note
         },
       ]);
 
