@@ -18,6 +18,7 @@ export function useRealtimeTable(table, filter, onChange) {
           filter: `${column}=eq.${value}`,
         },
         onChange
+        
       )
       .subscribe();
 
@@ -25,5 +26,5 @@ export function useRealtimeTable(table, filter, onChange) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [table, filter?.value, onChange]);
+  }, [table, filter?.value, onChange, filter]);
 }

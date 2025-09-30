@@ -54,6 +54,7 @@
   to confirm email, if user confirm redirect to dashboard.
 - manage end msg if user seen all data of expenses.
 - custom email body in supabase implemented.
+- delete expense record.
 - optimize code.
 
 # 2 oct
@@ -66,3 +67,4 @@
 - add custom expense limit length feature[user can set custom limit for expense, that limit only used for notify(warn if user use 90% and exceed limit of today),
   user will be notifid like You have spent 9000 today, which is over 90% of your daily limit and Alert! You have exceeded your daily expense limit of 10000. Total spent: 12000
   ].
+

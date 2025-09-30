@@ -61,7 +61,7 @@ const SettingsMenu = ({
 
   const handleExpenseLimit = (values, { resetForm, setSubmitting }) => {
     dispatch(setExpenseLimit(values.expenseLimit));
-    toast.success("Expense limit set successfully");
+    toast.success(`Expense limit set to ${values.expenseLimit} successfully`);
     resetForm();
     modalRef.current?.close();
     setSubmitting(false);

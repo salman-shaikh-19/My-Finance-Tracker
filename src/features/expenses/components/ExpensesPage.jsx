@@ -15,6 +15,7 @@ import AddExpense from "./AddExpense";
 import Loader from "../../common/components/Loader";
 import dayjs from "dayjs";
 import _ from "lodash";
+// import Swal from "sweetalert2";
 
 const ExpensesPage = () => {
   const { loggedInUserId,expenseLimit } = useSelector((state) => state.common);
@@ -101,6 +102,8 @@ const ExpensesPage = () => {
       .finally(() => setSubmitting(false));
   };
 
+
+
   return (
     <>
       <Main mainClassName="relative">
@@ -112,7 +115,7 @@ const ExpensesPage = () => {
             // <></>
           }
         >
-          <ExpensesList userId={loggedInUserId} expenses={expenses} />
+          <ExpensesList   expenses={expenses} />
         </Suspense>
         <CommonModal
           ref={modalRef}

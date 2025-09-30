@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { BiHome } from "react-icons/bi";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import dayjs from "dayjs";
-import { MdFiberNew } from "react-icons/md";
+import { MdDeleteForever, MdFiberNew } from "react-icons/md";
 
 const ExpenseCard = ({
   theme,
   userCurrency = "INR",
+  deleteExpense,
   category,
   amount,
   type,
@@ -14,17 +15,20 @@ const ExpenseCard = ({
   bgColor = "bg-red-500",
   createdAt,
   note = "",
+
   Icon = BiHome,
 }) => {
     const [showNote, setShowNote] = useState(false);
+    
   // console.log('render');
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
     : false;
   return (
     <div
+   
       className={`card ${note ? 'cursor-pointer':''} w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
-      onClick={() => note && setShowNote(!showNote)}
+      onClick={() =>  setShowNote(!showNote)}
       title={note ? 'Click to ' + (showNote ? 'close' : 'show') + ' note' : ''}
 
     >
@@ -59,13 +63,26 @@ const ExpenseCard = ({
           <MdFiberNew size={30} />
         </div>
       )}
-      {note && showNote && (
+      { showNote && (
+        
         <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-4 overflow-auto z-10">
           <div className="max-h-full overflow-auto">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">
-              <strong>Note:</strong> {note}
+              {
+                note ?
+                (
+                 <>
+                  <strong>Note:</strong> {note}
+                 </>
+                ):''
+              }
+            
             </p>
           </div>
+          <button 
+          title="Delete expense"
+          onClick={deleteExpense}
+          className="btn btn-error btn-sm"><MdDeleteForever size={25} /></button>
         </div>
       )}
     </div>
@@ -78,6 +95,7 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     return false; // trigger rerender
   }
   return (
+   
     prevProps.category === nextProps.category &&
     prevProps.amount === nextProps.amount &&
     prevProps.type === nextProps.type &&
@@ -85,6 +103,6 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     prevProps.bgColor === nextProps.bgColor &&
     prevProps.userCurrency === nextProps.userCurrency &&
     prevProps.Icon === nextProps.Icon &&
-    prevProps.note === nextProps.note
+    prevProps.note === nextProps.note 
   );
 });

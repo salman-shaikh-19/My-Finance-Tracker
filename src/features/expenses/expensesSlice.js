@@ -46,7 +46,25 @@ export const addExpense = createAsyncThunk(
       ]);
 
       if (error) throw error;
+      // getAllExpenses();
       return data[0]; // return added expense
+    } catch (err) {
+
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+export const deleteExpense = createAsyncThunk(
+  "expenses/deleteExpense",
+  async (expenseId, { rejectWithValue }) => {
+    try {
+      const {  error } = await supabase.from("user_expenses").delete().eq('id',expenseId);
+
+      if (error) throw error;
+      // getAllExpenses();
+      return  { id: expenseId };
+
     } catch (err) {
 
       return rejectWithValue(err.message);
@@ -84,12 +102,33 @@ export const expensesSlice = createSlice({
       .addCase(addExpense.fulfilled, (state, action) => {
         state.loading = false;
        //add new expense at beginning of array
-        // state.expenses.unshift(action.payload);
+        //    if (action.payload) {
+        //   state.expenses.unshift(action.payload); // instantly show new expense
+        // }
+        // getAllExpenses();
       })
       .addCase(addExpense.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to add expense";
+      })
+      //deleteExpense
+         .addCase(deleteExpense.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+     .addCase(deleteExpense.fulfilled, (state, action) => {
+        state.loading = false;
+        state.expenses = state.expenses.filter(
+          (exp) => exp.id !== action.payload.id
+        );
+      })
+
+      .addCase(deleteExpense.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to delete expense";
       });
+
+
   },
 
 });

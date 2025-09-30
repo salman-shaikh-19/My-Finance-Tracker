@@ -28,6 +28,8 @@
     "react-toastify": "^11.0.5",
     "recharts": "^3.2.1",
     "redux-persist": "^6.0.0",
+    "sweetalert2": "^11.23.0",
+    "use-long-press": "^3.3.0",
     "xlsx": "^0.18.5",
     "yup": "^1.7.1"
   },
