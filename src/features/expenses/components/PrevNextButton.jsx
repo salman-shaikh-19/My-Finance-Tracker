@@ -2,11 +2,11 @@ import React from "react";
 // import dayjs from "dayjs";
 import { getWeekLabel } from "../../../utils/dateUtils";
 
-const PrevNextButton = ({referenceDate, weekOffset, setPrevWeekOffset, setNextWeekOffset }) => {
+const PrevNextButton = ({customWeakDate, weekOffset, setPrevWeekOffset, setNextWeekOffset }) => {
 
   const weekLabel = React.useMemo(() => {
-    // const referenceDate = dayjs().add(weekOffset, "week").toDate();
-    return getWeekLabel(referenceDate);
+    // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
+    return getWeekLabel(customWeakDate);
   }, [weekOffset]);
 
   return (

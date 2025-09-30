@@ -183,18 +183,18 @@ const ExpenseChart = () => {
   const [currentChart, setCurrentChart] = useState("bar");
   const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
 
-  const referenceDate = dayjs().add(weekOffset, "week").toDate();
+  const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 
   useEffect(() => {
     if (!loggedInUserId) return;
-    dispatch(getAllExpenses({ userId: loggedInUserId, referenceDate }));
+    dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
   }, [dispatch, loggedInUserId, weekOffset]);
 
   // transform expenses to chart data
   const chartData = React.useMemo(() => {
     if (!expenses || !expenses.length) return [];
 
-    const startOfWeek = dayjs(referenceDate).startOf("isoWeek");
+    const startOfWeek = dayjs(customWeakDate).startOf("isoWeek");
     const weekDays = {};
 
     for (let i = 0; i < 7; i++) {
@@ -215,7 +215,7 @@ const ExpenseChart = () => {
       day,
       total: weekDays[day],
     }));
-  }, [expenses, referenceDate]);
+  }, [expenses, customWeakDate]);
 
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
@@ -223,7 +223,7 @@ const ExpenseChart = () => {
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
         weekOffset={weekOffset}
-        referenceDate={referenceDate}
+        customWeakDate={customWeakDate}
       />
 
       {!chartData.length ? (

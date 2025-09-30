@@ -6,12 +6,12 @@ import isoWeek from "dayjs/plugin/isoWeek";
 dayjs.extend(isoWeek);
 export const getAllExpenses = createAsyncThunk(
   "expenses/getAllExpenses",
-  async ({ userId, referenceDate }, { rejectWithValue }) => {
+  async ({ userId, customWeakDate }, { rejectWithValue }) => {
     try {
-         const refDate = referenceDate ? dayjs(referenceDate) : dayjs();
+         const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
 
-      const startOfWeek = refDate.startOf("isoWeek").format("YYYY-MM-DD");
-      const endOfWeek = refDate.endOf("isoWeek").format("YYYY-MM-DD");
+      const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
+      const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
 
       const { data, error } = await supabase
         .from("user_expenses")

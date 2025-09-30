@@ -58,7 +58,6 @@
 - optimize code.
 
 # 2 oct
-
 - change tables structure.
 - add note (expense note optional).
 - display note on card click.
