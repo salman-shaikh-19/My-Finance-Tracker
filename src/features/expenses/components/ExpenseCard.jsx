@@ -65,8 +65,12 @@ const ExpenseCard = ({
       )}
       { showNote && (
         
-        <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-4 overflow-auto z-10">
-          <div className="max-h-full overflow-auto">
+        <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10">
+           <button 
+          title="Delete expense"
+          onClick={deleteExpense}
+          className="btn btn-error btn-xs"><MdDeleteForever size={20} /></button>
+          <div className="max-h-full overflow-auto scrollbar-hide">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">
               {
                 note ?
@@ -79,10 +83,7 @@ const ExpenseCard = ({
             
             </p>
           </div>
-          <button 
-          title="Delete expense"
-          onClick={deleteExpense}
-          className="btn btn-error btn-sm"><MdDeleteForever size={25} /></button>
+         
         </div>
       )}
     </div>
