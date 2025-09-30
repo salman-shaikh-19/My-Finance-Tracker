@@ -102,9 +102,9 @@ export const expensesSlice = createSlice({
       .addCase(addExpense.fulfilled, (state, action) => {
         state.loading = false;
        //add new expense at beginning of array
-        //    if (action.payload) {
-        //   state.expenses.unshift(action.payload); // instantly show new expense
-        // }
+           if (action.payload) {
+          state.expenses.unshift(action.payload); // instantly show new expense
+        }
         // getAllExpenses();
       })
       .addCase(addExpense.rejected, (state, action) => {
