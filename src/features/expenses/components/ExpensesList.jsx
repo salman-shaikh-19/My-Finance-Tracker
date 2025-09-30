@@ -24,6 +24,7 @@ const ExpensesList = ({  expenses }) => {
         pageSize={20}
         data={expenses}
         scrollTargetId="expenses-list"
+        endMsg={expenses.length ? "You have seen all expense data" : ''}
       >
         {(items) => (
           <div className="flex flex-wrap gap-1 lg:pl-4">
