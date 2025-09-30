@@ -36,10 +36,10 @@ const GetStartedPage = () => {
             </p>
            <div className="gap-1">
              <InstallApp
-            className="btn btn-success btn-lg btn-dash"
+            className="btn btn-success btn-lg "
             
             />
-            <button className="btn btn-primary btn-lg btn-dash" onClick={handleClick}>Get Started</button>
+            <button className="btn btn-primary btn-lg " onClick={handleClick}>Get Started</button>
            </div>
           </div>
         </div>
