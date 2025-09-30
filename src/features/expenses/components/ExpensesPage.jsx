@@ -43,7 +43,7 @@ const ExpensesPage = () => {
        !warningShownRef.current.warningShown
     ) {
       toast.warning(
-        `Warning! You have spent ${total} today, which is over 90% of your daily limit (${LIMIT}).`,
+        `You have spent ${total} today, which is over 90% of your daily expense limit (${LIMIT}).`,
         { autoClose: false }
       );
        warningShownRef.current.warningShown = true;
@@ -52,7 +52,7 @@ const ExpensesPage = () => {
     // error for exceeding 100% of limit
     if (total >= LIMIT &&   !warningShownRef.current.errorShown) {
       toast.error(
-        `Alert! You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
+        `You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
         { autoClose: false }
       );
        warningShownRef.current.errorShown = true; 
