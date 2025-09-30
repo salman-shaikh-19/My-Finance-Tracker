@@ -60,3 +60,5 @@
 - change tables structure.
 - add note (expense note optional).
 - display note on card click.
+- display card by created_at instead of expense date.
+- add New badge if expense added recently(within 5 minutes).

@@ -22,16 +22,19 @@ const ExpenseCard = ({
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
     : false;
   return (
-    <div className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden"
-     onClick={() => note && setShowNote(!showNote)}>
+    <div
+      className="card w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden"
+      onClick={() => note && setShowNote(!showNote)}
+    >
       <div className="flex items-center p-4 gap-4">
         <div
           className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}
         >
           <Icon
-            className={`text-4xl  ${
-              theme == "luxury" ? "text-black" : "text-white"
-            }`}
+            className={`  text-4xl 
+            duration-300 
+            ease-in-out    hover:scale-120 
+            ${theme == "luxury" ? "text-black" : "text-white"}`}
           />
         </div>
         <div className="flex flex-col justify-between flex-1">
@@ -49,9 +52,9 @@ const ExpenseCard = ({
           </div>
         </div>
       </div>
-         {isNew && (
+      {isNew && (
         <div className="absolute z-10 -top-1  right-0 text-primary  text-xs font-bold px-2 py-1 rounded-full">
-         <MdFiberNew size={30} className="animate-pulse"/> 
+          <MdFiberNew size={30} />
         </div>
       )}
       {note && showNote && (
