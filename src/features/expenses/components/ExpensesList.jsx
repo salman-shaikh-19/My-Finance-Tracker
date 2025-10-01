@@ -73,8 +73,8 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         <ExpenseChart expenses={expenses} />
        <div className="divider">Total Expenses by Category </div>
 
-        <div className="flex flex-wrap justify-between sm:justify-normal md:justify-normal gap-2 mb-4 ">
-          {expenseCategories.map((category, i) => {
+      <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
+     {expenseCategories.map((category, i) => {
             const Icon = category.icon;
             const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
             return (
