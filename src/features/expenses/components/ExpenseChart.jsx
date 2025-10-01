@@ -217,11 +217,16 @@ const ExpenseChart = () => {
     }));
   }, [expenses, customWeakDate]);
 
+  const refreshData=()=>{
+      if (!loggedInUserId) return;
+    dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
+  }
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
+        refreshData={refreshData}
         weekOffset={weekOffset}
         customWeakDate={customWeakDate}
       />

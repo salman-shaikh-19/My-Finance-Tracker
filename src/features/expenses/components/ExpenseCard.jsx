@@ -147,6 +147,6 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     prevProps.bgColor === nextProps.bgColor &&
     prevProps.userCurrency === nextProps.userCurrency &&
     prevProps.Icon === nextProps.Icon &&
-    prevProps.note === nextProps.note
+    prevProps.note == nextProps.note
   );
 });

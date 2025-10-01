@@ -2,7 +2,11 @@ import React from "react";
 // import dayjs from "dayjs";
 import { getWeekLabel } from "../../../utils/dateUtils";
 
-const PrevNextButton = ({customWeakDate, weekOffset, setPrevWeekOffset, setNextWeekOffset }) => {
+import { MdRefresh } from "react-icons/md";
+import { FcNext, FcPrevious } from "react-icons/fc";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+
+const PrevNextButton = ({customWeakDate,refreshData, weekOffset, setPrevWeekOffset, setNextWeekOffset }) => {
 
   const weekLabel = React.useMemo(() => {
     // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
@@ -15,7 +19,7 @@ const PrevNextButton = ({customWeakDate, weekOffset, setPrevWeekOffset, setNextW
         <button 
         title="Previous weak"
         className="btn btn-primary btn-sm" onClick={setPrevWeekOffset}>
-          Prev Week
+        <BiChevronLeft size={20} />
         </button>
         <button
         title="Next weak"
@@ -23,7 +27,15 @@ const PrevNextButton = ({customWeakDate, weekOffset, setPrevWeekOffset, setNextW
           onClick={setNextWeekOffset}
           disabled={weekOffset === 0} // disable future weeks
         >
-          Next Week
+         <BiChevronRight size={20}  />
+        </button>
+         <button
+        title={`Refresh ${weekLabel} data `}
+          className="btn btn-success btn-sm disabled:cursor-not-allowed"
+          onClick={refreshData}
+          // disabled={} // disable 
+        >
+         <MdRefresh size={20}  /> 
         </button>
       </div>
       <span className="font-semibold" >{weekLabel}</span>
