@@ -52,7 +52,7 @@ const PrevNextButton = ({
         </button>
         <button
           title={`Refresh data of ${weekLabel}  `}
-          className="btn btn-success btn-sm disabled:cursor-not-allowed"
+          className="btn btn-accent btn-sm disabled:cursor-not-allowed"
           onClick={handleRefresh}
           // disabled={} // disable
         >
