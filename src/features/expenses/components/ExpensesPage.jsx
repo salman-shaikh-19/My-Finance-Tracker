@@ -64,7 +64,7 @@ const ExpensesPage = () => {
       warningShownRef.current.errorShown = false;
     }
   }, [expenses, LIMIT]);
-const counts =useMemo(() => {
+const totalAmountByCategory =useMemo(() => {
   // return _.countBy(expenses, "expense_category");
     return expenses.reduce((acc, curr) => {
     const category = curr.expense_category || "Other";
@@ -126,7 +126,7 @@ const counts =useMemo(() => {
             // <></>
           }
         >
-          <ExpensesList expenseCountByCategory={counts} expenses={expenses} />
+          <ExpensesList expenseTotalAmountByCategory={totalAmountByCategory} expenses={expenses} />
         </Suspense>
         <CommonModal
           ref={modalRef}

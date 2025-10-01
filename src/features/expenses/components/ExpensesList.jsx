@@ -11,10 +11,10 @@ import ExpenseChart from "./ExpenseChart";
 import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import ExpenseCategoryCountCard from "./ExpenseCategoryCountCard";
+import ExpenseCategoryTotalAmountCard from "./ExpenseCategoryTotalAmountCard";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
-const ExpensesList = ({ expenses, expenseCountByCategory }) => {
+const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
@@ -74,13 +74,14 @@ const ExpensesList = ({ expenses, expenseCountByCategory }) => {
         <div className="flex flex-wrap justify-center  gap-1 mb-4 ">
           {expenseCategories.map((category, i) => {
             const Icon = category.icon;
-            const count = expenseCountByCategory[category.name] || 0;
+            const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
             return (
-              <ExpenseCategoryCountCard
+              <ExpenseCategoryTotalAmountCard
                 key={i}
                 name={category.name}
-                count={count}
+                totalAmount={totalAmount}
                 Icon={Icon}
+                userCurrency={userCurrency}
                 bg={category.bg}
                 theme={theme}
               />
