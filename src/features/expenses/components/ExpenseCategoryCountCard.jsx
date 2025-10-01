@@ -10,7 +10,7 @@ const ExpenseCategoryCountCard=({
    
   return (
     <div
-      title={`${name} has ${count} ${count === 1 ? "expense" : "expenses"}`}
+      title={`${name} category has expense ${count} `}
       className="flex w-40 items-center bg-base-100  transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl flex-col gap-2 card shadow-lg rounded-lg p-4"
     >
       <div
@@ -28,7 +28,7 @@ const ExpenseCategoryCountCard=({
 
       {/* Expense Count */}
       <span className="text-sm font-medium text-gray-500 ">
-        {count} {count === 1  ? "expense" : "expenses"}
+        {count}
       </span>
     </div>
   );

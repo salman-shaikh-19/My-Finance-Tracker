@@ -65,7 +65,13 @@ const ExpensesPage = () => {
     }
   }, [expenses, LIMIT]);
 const counts =useMemo(() => {
-  return _.countBy(expenses, "expense_category");
+  // return _.countBy(expenses, "expense_category");
+    return expenses.reduce((acc, curr) => {
+    const category = curr.expense_category || "Other";
+    if (!acc[category]) acc[category] = 0;
+    acc[category] += curr.amount || 0;
+    return acc;
+  }, {});
 }, [expenses]);
 
 // console.log(counts);
