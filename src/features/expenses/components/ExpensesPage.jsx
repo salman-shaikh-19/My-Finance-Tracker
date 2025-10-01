@@ -18,18 +18,18 @@ import _ from "lodash";
 // import Swal from "sweetalert2";
 
 const ExpensesPage = () => {
-  const { loggedInUserId,expenseLimit } = useSelector((state) => state.common);
+  const { loggedInUserId, expenseLimit } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
   // const warningShownRef = useRef(false);
   const modalRef = useRef(null);
   const dispatch = useDispatch();
   const LIMIT = expenseLimit || 10000;
   const WARNING_THRESHOLD = 0.9;
- const warningShownRef = useRef({ warningShown: false, errorShown: false });
+  const warningShownRef = useRef({ warningShown: false, errorShown: false });
   // console.log(expenseLimit);
-  
+
   useEffect(() => {
-    if (!LIMIT) return; 
+    if (!LIMIT) return;
     const todayKey = dayjs().format("YYYY-MM-DD");
     const todayExpenses = _.filter(
       expenses,
@@ -41,29 +41,29 @@ const ExpensesPage = () => {
     if (
       total >= LIMIT * WARNING_THRESHOLD &&
       total < LIMIT &&
-       !warningShownRef.current.warningShown
+      !warningShownRef.current.warningShown
     ) {
       toast.warning(
         `You have spent ${total} today, which is over 90% of your daily expense limit (${LIMIT}).`,
         { autoClose: false }
       );
-       warningShownRef.current.warningShown = true;
+      warningShownRef.current.warningShown = true;
     }
 
     // error for exceeding 100% of limit
-    if (total >= LIMIT &&   !warningShownRef.current.errorShown) {
+    if (total >= LIMIT && !warningShownRef.current.errorShown) {
       toast.error(
         `You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
         { autoClose: false }
       );
-       warningShownRef.current.errorShown = true; 
+      warningShownRef.current.errorShown = true;
     }
-  // reset flags if total goes below 90% 
-  if (total < LIMIT * WARNING_THRESHOLD) {
-    warningShownRef.current.warningShown = false;
-    warningShownRef.current.errorShown = false;
-  }
-  }, [expenses,LIMIT]);
+    // reset flags if total goes below 90%
+    if (total < LIMIT * WARNING_THRESHOLD) {
+      warningShownRef.current.warningShown = false;
+      warningShownRef.current.errorShown = false;
+    }
+  }, [expenses, LIMIT]);
 
   useEffect(() => {
     if (!loggedInUserId) return;
@@ -102,8 +102,6 @@ const ExpensesPage = () => {
       .finally(() => setSubmitting(false));
   };
 
-
-
   return (
     <>
       <Main mainClassName="relative">
@@ -115,7 +113,7 @@ const ExpensesPage = () => {
             // <></>
           }
         >
-          <ExpensesList   expenses={expenses} />
+          <ExpensesList expenses={expenses} />
         </Suspense>
         <CommonModal
           ref={modalRef}

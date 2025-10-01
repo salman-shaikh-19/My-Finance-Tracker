@@ -5,17 +5,15 @@ const CommonModal = ({
   modalId = "defModalId",
   children,
   openModalBtnText = "Open Modal",
-  openModalBtnClassName='',
+  openModalBtnClassName = "",
   ref,
 }) => {
-  
-
   const closeModal = () => {
     ref.current?.close();
   };
 
   const handleBackdropClick = (e) => {
-      // e.resetForm();
+    // e.resetForm();
     // close only if click is outside modal-box
     if (e.target === ref.current) {
       closeModal();
@@ -24,15 +22,18 @@ const CommonModal = ({
 
   return (
     <>
-      <button className={`btn  btn-primary ${openModalBtnClassName}`}   onClick={(e) => {
-    e.stopPropagation();
-    ref.current?.showModal();
-  }}>
+      <button
+        className={`btn  btn-primary ${openModalBtnClassName}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          ref.current?.showModal();
+        }}
+      >
         {openModalBtnText}
       </button>
 
       <dialog
-      title=""
+        title=""
         ref={ref}
         id={modalId}
         className="modal"
@@ -42,10 +43,9 @@ const CommonModal = ({
           <button
             className="hover:cursor-pointer absolute right-2 top-2"
             onClick={(e) => {
-                e.stopPropagation();
-                closeModal();
-              }}
-            
+              e.stopPropagation();
+              closeModal();
+            }}
           >
             <CgClose />
           </button>

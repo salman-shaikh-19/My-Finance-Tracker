@@ -23,20 +23,19 @@ const ExpenseCard = ({
   editExpenseHandler,
   Icon = BiHome,
 }) => {
-    const [showNote, setShowNote] = useState(false);
-  
-    
+  const [showNote, setShowNote] = useState(false);
+
   // console.log('render');
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
     : false;
   return (
     <div
-   
-      className={`card ${note ? 'cursor-pointer':''} w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
-      onClick={() =>  setShowNote(!showNote)}
-      title={note ? 'Click to ' + (showNote ? 'close' : 'show') + ' note' : ''}
-
+      className={`card ${
+        note ? "cursor-pointer" : ""
+      } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      onClick={() => setShowNote(!showNote)}
+      title={note ? "Click to " + (showNote ? "close" : "show") + " note" : ""}
     >
       <div className="flex items-center p-4 gap-4">
         <div
@@ -69,62 +68,66 @@ const ExpenseCard = ({
           <MdFiberNew size={30} />
         </div>
       )}
-      { showNote && (
-        
-        <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10"
-         onClick={(e) => e.stopPropagation()} 
+      {showNote && (
+        <div
+          className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10"
+          onClick={(e) => e.stopPropagation()}
         >
-          <button className="btn btn-info btn-xs mr-2 " onClick={() =>  setShowNote(false)}><BiX size={20}/></button>
-        
-           <button 
-          title="Delete expense"
-          onClick={deleteExpense}
-          className="btn btn-error btn-xs"><MdDeleteForever size={20} /></button>
+          <button
+            className="btn btn-info btn-xs mr-2 "
+            onClick={() => setShowNote(false)}
+          >
+            <BiX size={20} />
+          </button>
 
-            <CommonModal
-                    ref={editModelRef}
-                    modalId="expense-edit-modal"
-                    openModalBtnClassName="
+          <button
+            title="Delete expense"
+            onClick={deleteExpense}
+            className="btn btn-error btn-xs"
+          >
+            <MdDeleteForever size={20} />
+          </button>
+
+          <CommonModal
+            ref={editModelRef}
+            modalId="expense-edit-modal"
+            openModalBtnClassName="
                    
                     btn-xs
                     mx-2
                   "
-                    openModalBtnText={
-                      <>
-                        <BiEdit size={20} className="" />
-                      </>
-                    }
-                  >
-                    {/* <AddExpense handleSubmit={handleSubmit} /> */}
-                    <ExpenseForm 
-                  initialValues={{
-                    id: expenseId, 
-                    amount: amount,
-                    expenseCategory:category,
-                    expenseDate: dayjs(date).format("YYYY-MM-DD"),
-                    expenseMethod:type,
-                    note:note,
-                  }}
-                  handleSubmit={editExpenseHandler}
-                  isEdit={true}
-                />
+            openModalBtnText={
+              <>
+                <BiEdit size={20} className="" />
+              </>
+            }
+          >
+            {/* <AddExpense handleSubmit={handleSubmit} /> */}
+            <ExpenseForm
+              initialValues={{
+                id: expenseId,
+                amount: amount,
+                expenseCategory: category,
+                expenseDate: dayjs(date).format("YYYY-MM-DD"),
+                expenseMethod: type,
+                note: note,
+              }}
+              handleSubmit={editExpenseHandler}
+              isEdit={true}
+            />
+          </CommonModal>
 
-                  </CommonModal>
-
-                    <div className="max-h-full overflow-auto scrollbar-hide">
+          <div className="max-h-full overflow-auto scrollbar-hide">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">
-              {
-                note ?
-                (
-                 <>
+              {note ? (
+                <>
                   <strong>Note:</strong> {note}
-                 </>
-                ):''
-              }
-            
+                </>
+              ) : (
+                ""
+              )}
             </p>
           </div>
-         
         </div>
       )}
     </div>
@@ -137,7 +140,6 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     return false; // trigger rerender
   }
   return (
-   
     prevProps.category === nextProps.category &&
     prevProps.amount === nextProps.amount &&
     prevProps.type === nextProps.type &&
@@ -145,6 +147,6 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     prevProps.bgColor === nextProps.bgColor &&
     prevProps.userCurrency === nextProps.userCurrency &&
     prevProps.Icon === nextProps.Icon &&
-    prevProps.note === nextProps.note 
+    prevProps.note === nextProps.note
   );
 });
