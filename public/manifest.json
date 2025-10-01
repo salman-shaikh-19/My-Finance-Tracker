@@ -1,6 +1,6 @@
 {
-  "name": "MyFinance Tracker",
-  "short_name": "FinanceApp",
+  "name": "My Finance Tracker",
+  "short_name": "MyFinanceTracker",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

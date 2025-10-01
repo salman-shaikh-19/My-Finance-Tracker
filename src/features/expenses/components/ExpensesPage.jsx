@@ -64,6 +64,8 @@ const ExpensesPage = () => {
       warningShownRef.current.errorShown = false;
     }
   }, [expenses, LIMIT]);
+
+  //total sum of amount by category
 const totalAmountByCategory =useMemo(() => {
   // return _.countBy(expenses, "expense_category");
     return expenses.reduce((acc, curr) => {
