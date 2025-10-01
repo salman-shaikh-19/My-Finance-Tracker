@@ -42,7 +42,7 @@ const handleSubmit = async (values, { setSubmitting,setFieldError }) => {
       setSubmitting(false);
       return;
     }
-    const user = await dispatch(registerUser(values)).unwrap();
+    await dispatch(registerUser(values)).unwrap();
     // toast.success("Account created successfully"); 
     toast.info("Account created! Please confirm your email to activate your account.");
 

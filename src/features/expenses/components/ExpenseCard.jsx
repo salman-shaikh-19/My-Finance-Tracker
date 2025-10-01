@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { BiHome } from "react-icons/bi";
+import React, { useRef, useState } from "react";
+import { BiEdit, BiHome, BiX } from "react-icons/bi";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import dayjs from "dayjs";
 import { MdDeleteForever, MdFiberNew } from "react-icons/md";
+import CommonModal from "../../common/components/CommonModal";
+import ExpenseForm from "./ExpenseForm";
+import { commonDate } from "../../../utils/dateUtils";
 
 const ExpenseCard = ({
+  expenseId,
   theme,
   userCurrency = "INR",
   deleteExpense,
@@ -15,10 +19,12 @@ const ExpenseCard = ({
   bgColor = "bg-red-500",
   createdAt,
   note = "",
-
+  editModelRef,
+  editExpenseHandler,
   Icon = BiHome,
 }) => {
     const [showNote, setShowNote] = useState(false);
+  
     
   // console.log('render');
   const isNew = createdAt
@@ -54,7 +60,7 @@ const ExpenseCard = ({
 
           <div className="flex justify-between items-center text-sm text-gray-500">
             <span>{type}</span>
-            <span>{date}</span>
+            <span>{commonDate({ date })}</span>
           </div>
         </div>
       </div>
@@ -65,12 +71,47 @@ const ExpenseCard = ({
       )}
       { showNote && (
         
-        <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10">
+        <div className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10"
+         onClick={(e) => e.stopPropagation()} 
+        >
+          <button className="btn btn-info btn-xs mr-2 " onClick={() =>  setShowNote(false)}><BiX size={20}/></button>
+        
            <button 
           title="Delete expense"
           onClick={deleteExpense}
           className="btn btn-error btn-xs"><MdDeleteForever size={20} /></button>
-          <div className="max-h-full overflow-auto scrollbar-hide">
+
+            <CommonModal
+                    ref={editModelRef}
+                    modalId="expense-edit-modal"
+                    openModalBtnClassName="
+                   
+                    btn-xs
+                    mx-2
+                  "
+                    openModalBtnText={
+                      <>
+                        <BiEdit size={20} className="" />
+                      </>
+                    }
+                  >
+                    {/* <AddExpense handleSubmit={handleSubmit} /> */}
+                    <ExpenseForm 
+                  initialValues={{
+                    id: expenseId, 
+                    amount: amount,
+                    expenseCategory:category,
+                    expenseDate: dayjs(date).format("YYYY-MM-DD"),
+                    expenseMethod:type,
+                    note:note,
+                  }}
+                  handleSubmit={editExpenseHandler}
+                  isEdit={true}
+                />
+
+                  </CommonModal>
+
+                    <div className="max-h-full overflow-auto scrollbar-hide">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">
               {
                 note ?

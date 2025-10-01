@@ -56,6 +56,28 @@
 - custom email body in supabase implemented.
 - delete expense record.
 - optimize code.
+- php knowledge sharing session.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 2 oct
 - change tables structure.

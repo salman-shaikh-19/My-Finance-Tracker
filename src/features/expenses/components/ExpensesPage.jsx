@@ -11,7 +11,7 @@ import CommonModal from "../../common/components/CommonModal";
 import { toast } from "react-toastify";
 
 import { BiPlus } from "react-icons/bi";
-import AddExpense from "./AddExpense";
+import ExpenseForm from "./ExpenseForm";
 import Loader from "../../common/components/Loader";
 import dayjs from "dayjs";
 import _ from "lodash";
@@ -135,7 +135,7 @@ const ExpensesPage = () => {
             </>
           }
         >
-          <AddExpense handleSubmit={handleSubmit} />
+          <ExpenseForm handleSubmit={handleSubmit} />
         </CommonModal>
       </Main>
     </>

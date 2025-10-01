@@ -71,6 +71,28 @@ export const deleteExpense = createAsyncThunk(
     }
   }
 );
+
+
+//update expense
+export const updateExpense = createAsyncThunk(
+  'expenses/updateExpense',
+  async ({ id, updatedData }, { rejectWithValue }) => {
+    try {
+      const { data, error } = await supabase
+        .from('user_expenses')
+        .update(updatedData)
+        .eq('id', id);
+
+      if (error) {
+        return rejectWithValue(error.message);
+      }
+
+      return data[0]; // return the updated record
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 export const expensesSlice = createSlice({
   name: "expenses",
    initialState: {
@@ -126,9 +148,23 @@ export const expensesSlice = createSlice({
       .addCase(deleteExpense.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "Failed to delete expense";
+      })
+
+       .addCase(updateExpense.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateExpense.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.expenses.findIndex(t => t.id === action.payload.id);
+        if (index !== -1) {
+          state.expenses[index] = action.payload;
+        }
+      })
+      .addCase(updateExpense.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
-
-
   },
 
 });

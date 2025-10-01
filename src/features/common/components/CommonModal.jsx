@@ -24,11 +24,15 @@ const CommonModal = ({
 
   return (
     <>
-      <button className={`btn  btn-primary ${openModalBtnClassName}`} onClick={() => ref.current?.showModal()}>
+      <button className={`btn  btn-primary ${openModalBtnClassName}`}   onClick={(e) => {
+    e.stopPropagation();
+    ref.current?.showModal();
+  }}>
         {openModalBtnText}
       </button>
 
       <dialog
+      title=""
         ref={ref}
         id={modalId}
         className="modal"
@@ -37,7 +41,11 @@ const CommonModal = ({
         <div className="modal-box relative">
           <button
             className="hover:cursor-pointer absolute right-2 top-2"
-            onClick={closeModal}
+            onClick={(e) => {
+                e.stopPropagation();
+                closeModal();
+              }}
+            
           >
             <CgClose />
           </button>

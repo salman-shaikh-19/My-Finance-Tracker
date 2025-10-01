@@ -3,18 +3,19 @@ import React from "react";
 
 import * as Yup from "yup";
 import { expenseCategories, paymentMethods } from "../../../utils/Categories";
-const AddExpense=({handleSubmit})=>{
+const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
+    const defaultValues = {
+    amount: "",
+    expenseCategory: "",
+    expenseDate: new Date().toISOString().slice(0, 10),
+    expenseMethod: "",
+    note: "",
+  };
     return (
         <>
-          <h1 className="text-center"> Add expense</h1>
+   <h1 className="text-center">{isEdit ? "Edit Expense" : "Add Expense"}</h1>
           <Formik
-            initialValues={{
-              amount: "",
-              expenseCategory: "",
-              expenseDate: new Date().toISOString().slice(0, 10),
-              expenseMethod: "",
-               note: "",
-            }}
+            initialValues={initialValues || defaultValues}
             validationSchema={Yup.object({
               amount: Yup.number()
                 .required("Amount is required")
@@ -111,18 +112,19 @@ const AddExpense=({handleSubmit})=>{
                 </div>
 
                 <button
+                title={isEdit ? 'Update expense':'Add expense'}
                   type="submit"
                   className="btn btn-primary w-full mt-4"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <span className="loading loading-spinner"></span> Adding
-                      Expense...
-                    </>
-                  ) : (
-                    "Add Expense"
-                  )}
+                    {isSubmitting ? (
+                <>
+                  <span className="loading loading-spinner"></span>{" "}
+                  {isEdit ? "Updating Expense..." : "Adding Expense..."}
+                </>
+              ) : (
+                isEdit ? "Update Expense" : "Add Expense"
+              )}
                 </button>
               </Form>
             )}
@@ -131,4 +133,4 @@ const AddExpense=({handleSubmit})=>{
     )
 }
 
-export default React.memo(AddExpense);
+export default React.memo(ExpenseForm);

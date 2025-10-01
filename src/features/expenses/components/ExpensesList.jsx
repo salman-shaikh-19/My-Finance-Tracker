@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {  useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import { commonDate } from "../../../utils/dateUtils";
@@ -8,12 +8,14 @@ import {
 } from "../../../utils/Categories"; 
 import ExpenseCard from "./ExpenseCard";
 import ExpenseChart from "./ExpenseChart";
-import { deleteExpense } from "../expensesSlice";
+import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({  expenses }) => {
   const { userCurrency,theme } = useSelector((state) => state.common);
+     const editModelRef = useRef(null);
   const dispatch=useDispatch();
  const handleDelete = (expenseId) => {
   Swal.fire({
@@ -37,6 +39,33 @@ const ExpensesList = ({  expenses }) => {
     }
   });
 };
+
+const editExpenseHandler = (values, { resetForm, setSubmitting }) => {
+  const { id, amount, expenseCategory, expenseDate, expenseMethod, note } = values;
+
+  dispatch(
+    updateExpense({
+      id,
+      updatedData: {
+        amount,
+        expense_category: expenseCategory,
+        expense_date: expenseDate,
+        payment_method: expenseMethod,
+        expense_note: note,
+      },
+    })
+  )
+    .then(() => {
+      toast.success("Expense updated successfully");
+      resetForm();
+      editModelRef.current?.close();
+    })
+    .catch((err) => {
+      toast.error("Error while updating expense: " + err);
+    })
+    .finally(() => setSubmitting(false));
+};
+
   return (
     <>
     <div
@@ -61,21 +90,26 @@ const ExpensesList = ({  expenses }) => {
               const Icon = category.icon;
 
               return (
+             
                 <ExpenseCard
               
-                  key={item.id}
+              key={item.id}
+              expenseId={item.id}
                   deleteExpense={()=>handleDelete(item.id)}
                   category={category.name}
                   amount={item.amount}
                   theme={theme}
                   type={item.payment_method}
-                  date={commonDate({date:item.expense_date})}
+                  date={item.expense_date}
                   bgColor={category.bg}
                   Icon={Icon}
                   createdAt={item.created_at}
                   note={item.expense_note}
                   userCurrency={userCurrency}
-                />
+                  editModelRef={editModelRef}
+                  editExpenseHandler={editExpenseHandler}
+                  />
+            
               );
             })}
           </div>
