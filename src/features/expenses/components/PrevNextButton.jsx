@@ -4,7 +4,7 @@ import { getWeekLabel } from "../../../utils/dateUtils";
 import { debounce } from "lodash";
 import { MdRefresh } from "react-icons/md";
 import { FcNext, FcPrevious } from "react-icons/fc";
-import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight, BiRefresh } from "react-icons/bi";
 
 const PrevNextButton = ({
   customWeakDate,
@@ -56,7 +56,7 @@ const PrevNextButton = ({
           onClick={handleRefresh}
           // disabled={} // disable
         >
-          <MdRefresh size={20} />
+          <BiRefresh size={20} />
         </button>
       </div>
       <span className="font-semibold">{weekLabel}</span>
