@@ -30,7 +30,7 @@ const PrevNextButton = ({customWeakDate,refreshData, weekOffset, setPrevWeekOffs
          <BiChevronRight size={20}  />
         </button>
          <button
-        title={`Refresh ${weekLabel} data `}
+        title={`Refresh data of ${weekLabel}  `}
           className="btn btn-success btn-sm disabled:cursor-not-allowed"
           onClick={refreshData}
           // disabled={} // disable 
