@@ -71,7 +71,7 @@ const ExpensesList = ({ expenses, expenseCountByCategory }) => {
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
         <ExpenseChart expenses={expenses} />
-        <div className="flex flex-wrap   gap-1 mb-4 ">
+        <div className="flex flex-wrap justify-center  gap-1 mb-4 ">
           {expenseCategories.map((category, i) => {
             const Icon = category.icon;
             const count = expenseCountByCategory[category.name] || 0;
