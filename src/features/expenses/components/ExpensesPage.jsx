@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useRef } from "react";
+import React, { lazy, Suspense, useEffect, useMemo, useRef } from "react";
 import Main from "../../common/layouts/Main";
 // import ExpensesList from "./ExpensesList";
 const ExpensesList = lazy(() => import("./ExpensesList"));
@@ -64,11 +64,18 @@ const ExpensesPage = () => {
       warningShownRef.current.errorShown = false;
     }
   }, [expenses, LIMIT]);
+const counts =useMemo(() => {
+  return _.countBy(expenses, "expense_category");
+}, [expenses]);
 
+// console.log(counts);
   useEffect(() => {
     if (!loggedInUserId) return;
     // dispatch(getAllExpenses(loggedInUserId));
     dispatch(getAllExpenses({ userId: loggedInUserId }));
+     
+
+
   }, [dispatch, loggedInUserId]);
 
   //custom hook
@@ -113,7 +120,7 @@ const ExpensesPage = () => {
             // <></>
           }
         >
-          <ExpensesList expenses={expenses} />
+          <ExpensesList expenseCountByCategory={counts} expenses={expenses} />
         </Suspense>
         <CommonModal
           ref={modalRef}

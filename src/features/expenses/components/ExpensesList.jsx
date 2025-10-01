@@ -11,9 +11,10 @@ import ExpenseChart from "./ExpenseChart";
 import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import ExpenseCategoryCountCard from "./ExpenseCategoryCountCard";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
-const ExpensesList = ({ expenses }) => {
+const ExpensesList = ({ expenses, expenseCountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
@@ -70,6 +71,22 @@ const ExpensesList = ({ expenses }) => {
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
         <ExpenseChart expenses={expenses} />
+        <div className="flex flex-wrap justify-center  gap-3 mb-4 ">
+          {expenseCategories.map((category, i) => {
+            const Icon = category.icon;
+            const count = expenseCountByCategory[category.name] || 0;
+            return (
+              <ExpenseCategoryCountCard
+                key={i}
+                name={category.name}
+                count={count}
+                Icon={Icon}
+                bg={category.bg}
+                theme={theme}
+              />
+            );
+          })}
+        </div>
 
         <CustomInfiniteScroll
           pageSize={20}
