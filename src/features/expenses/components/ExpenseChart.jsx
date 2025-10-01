@@ -218,6 +218,7 @@ const ExpenseChart = () => {
   }, [expenses, customWeakDate]);
 
   const refreshData=()=>{
+    // console.log('called');
       if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
   }

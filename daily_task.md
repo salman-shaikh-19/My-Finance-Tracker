@@ -89,3 +89,9 @@
   user will be notifid like You have spent 9000 today, which is over 90% of your daily limit and Alert! You have exceeded your daily expense limit of 10000. Total spent: 12000
   ].
 
+# 3 oct
+- make common compoent for add/edit expense.
+- edit expense implemented.
+- refresh data button added.
+- fixed many bugs in expense module.
+- prevent multiple call for refresh data using debounce.

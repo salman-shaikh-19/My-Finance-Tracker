@@ -1,44 +1,65 @@
-import React from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 // import dayjs from "dayjs";
 import { getWeekLabel } from "../../../utils/dateUtils";
-
+import { debounce } from "lodash";
 import { MdRefresh } from "react-icons/md";
 import { FcNext, FcPrevious } from "react-icons/fc";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 
-const PrevNextButton = ({customWeakDate,refreshData, weekOffset, setPrevWeekOffset, setNextWeekOffset }) => {
-
-  const weekLabel = React.useMemo(() => {
+const PrevNextButton = ({
+  customWeakDate,
+  refreshData,
+  weekOffset,
+  setPrevWeekOffset,
+  setNextWeekOffset,
+}) => {
+  const weekLabel = useMemo(() => {
     // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
     return getWeekLabel(customWeakDate);
   }, [weekOffset]);
 
+  const debouncedRefreshRef = useRef(
+    debounce(
+      () => {
+        refreshData();
+      },
+      8000,
+      { leading: true, trailing: false }
+    )
+  );
+
+  const handleRefresh = useCallback(() => {
+    debouncedRefreshRef.current();
+  }, []);
+
   return (
     <div className="flex justify-between items-center mb-2">
       <div className="flex gap-2">
-        <button 
-        title="Previous weak"
-        className="btn btn-primary btn-sm" onClick={setPrevWeekOffset}>
-        <BiChevronLeft size={20} />
+        <button
+          title="Previous weak"
+          className="btn btn-primary btn-sm"
+          onClick={setPrevWeekOffset}
+        >
+          <BiChevronLeft size={20} />
         </button>
         <button
-        title="Next weak"
+          title="Next weak"
           className="btn btn-primary btn-sm disabled:cursor-not-allowed"
           onClick={setNextWeekOffset}
           disabled={weekOffset === 0} // disable future weeks
         >
-         <BiChevronRight size={20}  />
+          <BiChevronRight size={20} />
         </button>
-         <button
-        title={`Refresh data of ${weekLabel}  `}
+        <button
+          title={`Refresh data of ${weekLabel}  `}
           className="btn btn-success btn-sm disabled:cursor-not-allowed"
-          onClick={refreshData}
-          // disabled={} // disable 
+          onClick={handleRefresh}
+          // disabled={} // disable
         >
-         <MdRefresh size={20}  /> 
+          <MdRefresh size={20} />
         </button>
       </div>
-      <span className="font-semibold" >{weekLabel}</span>
+      <span className="font-semibold">{weekLabel}</span>
     </div>
   );
 };
