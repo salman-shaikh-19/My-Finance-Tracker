@@ -71,6 +71,8 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
         <ExpenseChart expenses={expenses} />
+       <div className="divider">Total Expenses by Category </div>
+
         <div className="flex flex-wrap justify-center  gap-1 mb-4 ">
           {expenseCategories.map((category, i) => {
             const Icon = category.icon;
@@ -88,7 +90,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             );
           })}
         </div>
-
+  <div className="divider">Expenses</div>
         <CustomInfiniteScroll
           pageSize={20}
           data={expenses}
