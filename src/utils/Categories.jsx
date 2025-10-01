@@ -1,6 +1,6 @@
 import { MdOutlinePayments } from "react-icons/md";
-import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt } from "react-icons/fa";
-import { BiRestaurant, BiBus, BiHealth } from "react-icons/bi";
+import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt, FaPlane, FaHome, FaLaptop } from "react-icons/fa";
+import { BiRestaurant, BiBus, BiHealth, BiBook } from "react-icons/bi";
 import { GiShoppingCart } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
 
@@ -22,6 +22,10 @@ export const expenseCategories = [
   { name: "Entertainment", icon: FaBeer, bg: "bg-success" },
   { name: "Gifts", icon: FaGift, bg: "bg-purple-500" },
   { name: "Vehicle", icon: FaCarAlt, bg: "bg-yellow-500" },
+  { name: "Education", icon: BiBook, bg: "bg-indigo-500" },
+  { name: "Travel", icon: FaPlane, bg: "bg-pink-500" },
+  { name: "Home", icon: FaHome, bg: "bg-emerald-500" },
+  { name: "Electronics", icon: FaLaptop, bg: "bg-teal-500" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },
 ];
 
