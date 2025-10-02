@@ -15,6 +15,7 @@ import ExpenseForm from "./ExpenseForm";
 import Loader from "../../common/components/Loader";
 import dayjs from "dayjs";
 import _ from "lodash";
+import { getTotalByGroup } from "../../../utils/getCountBy";
 // import Swal from "sweetalert2";
 
 const ExpensesPage = () => {
@@ -67,13 +68,7 @@ const ExpensesPage = () => {
 
   //total sum of amount by category
 const totalAmountByCategory =useMemo(() => {
-  // return _.countBy(expenses, "expense_category");
-    return expenses.reduce((acc, curr) => {
-    const category = curr.expense_category || "Other";
-    if (!acc[category]) acc[category] = 0;
-    acc[category] += curr.amount || 0;
-    return acc;
-  }, {});
+   return getTotalByGroup(expenses, "expense_category", "amount");
 }, [expenses]);
 
 // console.log(counts);

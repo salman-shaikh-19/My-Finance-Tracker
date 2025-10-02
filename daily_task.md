@@ -59,26 +59,6 @@
 - php knowledge sharing session.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 2 oct
 - change tables structure.
 - add note (expense note optional).
@@ -88,6 +68,27 @@
 - add custom expense limit length feature[user can set custom limit for expense, that limit only used for notify(warn if user use 90% and exceed limit of today),
   user will be notifid like You have spent 9000 today, which is over 90% of your daily limit and Alert! You have exceeded your daily expense limit of 10000. Total spent: 12000
   ].
+- UI changes.
+- fixed title issue on expense card hover.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 3 oct
 - make common compoent for add/edit expense.

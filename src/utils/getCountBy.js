@@ -12,4 +12,16 @@ function getCountBy({ data, countByField, omitThem = [] }) {
     // console.log(omitedData);
 }
 
+export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Other") => {
+  return data.reduce((acc, curr) => {
+    const group = curr[groupKey] || defaultGroup;
+    const value = Number(curr[sumKey]) || 0;
+
+    if (!acc[group]) acc[group] = 0;
+    acc[group] += value;
+
+    return acc;
+  }, {});
+};
+
 export default getCountBy;
