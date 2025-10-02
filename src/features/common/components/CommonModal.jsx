@@ -7,6 +7,7 @@ const CommonModal = ({
   openModalBtnText = "Open Modal",
   openModalBtnClassName = "",
   ref,
+  btnTitle="",
 }) => {
   const closeModal = () => {
     ref.current?.close();
@@ -23,7 +24,8 @@ const CommonModal = ({
   return (
     <>
       <button
-        className={`btn  btn-primary ${openModalBtnClassName}`}
+        className={`btn  btn-primary  ${openModalBtnClassName}`}
+        title={btnTitle}
         onClick={(e) => {
           e.stopPropagation();
           ref.current?.showModal();
@@ -41,6 +43,7 @@ const CommonModal = ({
       >
         <div className="modal-box relative">
           <button
+          
             className="hover:cursor-pointer absolute right-2 top-2"
             onClick={(e) => {
               e.stopPropagation();

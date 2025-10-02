@@ -1,5 +1,8 @@
 import React from "react";
 import { BiBarChartAlt, BiLineChart, BiPieChartAlt2 } from "react-icons/bi";
+import { FaChartBar, FaRegChartBar } from "react-icons/fa";
+import { FaChartLine, FaChartPie } from "react-icons/fa6";
+import { MdBarChart, MdOutlineBarChart, MdOutlinePieChart, MdShowChart } from "react-icons/md";
 
 const ChartMenu=({currentChart,setCurrentChart})=>{
     return(
@@ -9,10 +12,10 @@ const ChartMenu=({currentChart,setCurrentChart})=>{
                       {["bar", "line", "pie"].map((type) => {
                         const Icon =
                           type === "bar"
-                            ? BiBarChartAlt
+                            ? MdOutlineBarChart
                             : type === "line"
-                            ? BiLineChart
-                            : BiPieChartAlt2;
+                            ? MdShowChart
+                            : MdOutlinePieChart;
                         return (
                           <button
                            
@@ -27,7 +30,7 @@ const ChartMenu=({currentChart,setCurrentChart})=>{
                             }`}
                             onClick={() => setCurrentChart(type)}
                           >
-                            <Icon />
+                            <Icon size={22} /> 
                           </button>
                         );
                       })}

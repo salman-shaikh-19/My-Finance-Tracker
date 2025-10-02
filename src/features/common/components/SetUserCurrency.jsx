@@ -21,7 +21,7 @@ const SetUserCurrency = () => {
       </label> */}
     <select
     title="Set your Currency"
-  className="select appearance-none"
+  className="select  "
   value={userCurrency}
   onChange={handleChange}
 >

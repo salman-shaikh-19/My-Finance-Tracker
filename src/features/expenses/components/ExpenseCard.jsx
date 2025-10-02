@@ -31,11 +31,9 @@ const ExpenseCard = ({
     : false;
   return (
     <div
-      className={`card ${
-        note ? "cursor-pointer" : ""
-      } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      className={`card ${!showNote ? ' cursor-pointer ':''}  w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
-      title={note ? "Click to " + (showNote ? "close" : "show") + " note" : ""}
+      title={!showNote ? "Click to " + (showNote ? "close" : "show") + " action bar" :""}
     >
       <div className="flex items-center p-4 gap-4">
         <div
@@ -76,6 +74,7 @@ const ExpenseCard = ({
           <button
             className="btn btn-info btn-xs mr-2 "
             onClick={() => setShowNote(false)}
+            title="Close"
           >
             <BiX size={20} />
           </button>
@@ -91,6 +90,7 @@ const ExpenseCard = ({
           <CommonModal
             ref={editModelRef}
             modalId="expense-edit-modal"
+            btnTitle="Edit expense"
             openModalBtnClassName="
                    
                     btn-xs

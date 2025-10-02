@@ -37,14 +37,14 @@ const PrevNextButton = ({
       <div className="flex gap-2">
         <button
           title="Previous weak"
-          className="btn btn-primary btn-sm"
+          className="btn btn-primary btn-outline btn-sm"
           onClick={setPrevWeekOffset}
         >
           <BiChevronLeft size={20} />
         </button>
         <button
           title="Next weak"
-          className="btn btn-primary btn-sm disabled:cursor-not-allowed"
+          className="btn btn-primary btn-outline btn-sm disabled:cursor-not-allowed"
           onClick={setNextWeekOffset}
           disabled={weekOffset === 0} // disable future weeks
         >
@@ -52,7 +52,7 @@ const PrevNextButton = ({
         </button>
         <button
           title={`Refresh data of ${weekLabel}  `}
-          className="btn btn-accent btn-sm disabled:cursor-not-allowed"
+          className="btn btn-accent btn-outline btn-sm disabled:cursor-not-allowed"
           onClick={handleRefresh}
           // disabled={} // disable
         >
