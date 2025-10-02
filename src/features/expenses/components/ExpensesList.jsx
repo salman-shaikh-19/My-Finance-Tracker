@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 // import { commonDate } from "../../../utils/dateUtils";
@@ -17,6 +17,7 @@ import ExpenseCategoryTotalAmountCard from "./ExpenseCategoryTotalAmountCard";
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
+  // const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
   const dispatch = useDispatch();
   const handleDelete = (expenseId) => {
     Swal.fire({
@@ -70,7 +71,10 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         id="expenses-list"
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
-        <ExpenseChart expenses={expenses} />
+        <ExpenseChart
+        // setWeekOffset={setWeekOffset}
+        // weekOffset={weekOffset}
+        expenses={expenses} />
        <div className="divider">Total Expenses by Category </div>
 
       <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
@@ -91,6 +95,9 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           })}
         </div>
   <div className="divider">Expenses</div>
+  {
+    expenses.length ? 
+
         <CustomInfiniteScroll
           pageSize={20}
           data={expenses}
@@ -129,6 +136,14 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             </div>
           )}
         </CustomInfiniteScroll>
+        :
+        <>
+        <div className="flex flex-wrap gap-1 lg:pl-4 justify-center">
+          <span className="alert alert-info alert-soft">No expense data found</span>
+        </div>
+        </>
+          }
+        
       </div>
     </>
   );

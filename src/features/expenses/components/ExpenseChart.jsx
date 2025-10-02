@@ -173,7 +173,6 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "./PrevNextButton";
 import ChartMenu from './ChartMenu';
-import { formatCurrency } from "../../../utils/currencyUtils";
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 dayjs.extend(isoWeek);
@@ -182,9 +181,9 @@ const ExpenseChart = () => {
   const dispatch = useDispatch();
   const { loggedInUserId,userCurrency,expenseLimit } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
-
+const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
   const [currentChart, setCurrentChart] = useState("bar");
-  const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
+  
 
   const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 
@@ -224,6 +223,7 @@ const ExpenseChart = () => {
     // console.log('called');
       if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
+    setWeekOffset(0);
   }
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
