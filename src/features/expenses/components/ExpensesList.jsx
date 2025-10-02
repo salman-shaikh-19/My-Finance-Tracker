@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 // import { commonDate } from "../../../utils/dateUtils";
@@ -8,14 +8,17 @@ import {
 } from "../../../utils/Categories";
 import ExpenseCard from "./ExpenseCard";
 import ExpenseChart from "./ExpenseChart";
-import { deleteExpense, updateExpense } from "../expensesSlice";
+import { deleteExpense, getAllExpenses, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import ExpenseCategoryTotalAmountCard from "./ExpenseCategoryTotalAmountCard";
+import dayjs from "dayjs";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
-  const { userCurrency, theme } = useSelector((state) => state.common);
+  const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
+    const [currentCategory, setCurrentCategory] = useState(null);
+  const { userCurrency, theme,loggedInUserId } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
   const handleDelete = (expenseId) => {
@@ -63,6 +66,13 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
       })
       .finally(() => setSubmitting(false));
   };
+// const customWeakDate = dayjs().add(weekOffset, "week").toDate();
+const customWeakDate = useMemo(
+  () => dayjs().add(weekOffset, "week").toDate(),
+  [weekOffset]
+);
+
+
 
   return (
     <>
@@ -70,13 +80,24 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         id="expenses-list"
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
-        <ExpenseChart expenses={expenses} />
-       <div className="divider">Total Expenses by Category </div>
+        <ExpenseChart expenses={expenses} customWeakDate={customWeakDate}
+        currentCategory={currentCategory}
+        weekOffset={weekOffset}
+        setWeekOffset={setWeekOffset} />
+       <div className="divider">Total Expenses by Category  </div>
 
       <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
      {expenseCategories.map((category, i) => {
+    
+      
             const Icon = category.icon;
-            const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
+            // const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
+              const categoryData = expenseTotalAmountByCategory.find(
+      (item) => item.expense_category === category.name
+    );
+    
+    const totalAmount = categoryData ? categoryData.total_amount : 0
+    // console.log(totalAmount);
             return (
               <ExpenseCategoryTotalAmountCard
                 key={i}
@@ -86,11 +107,22 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                 userCurrency={userCurrency}
                 bg={category.bg}
                 theme={theme}
+           getData={() => {
+  dispatch(
+    getAllExpenses({
+      userId: loggedInUserId,
+      customWeakDate, 
+      category: category?.name
+    })
+  );
+  setCurrentCategory(category?.name);
+}}
+
               />
             );
           })}
         </div>
-  <div className="divider">Expenses</div>
+  <div className="divider">Expenses {currentCategory && "of "+currentCategory}</div>
         <CustomInfiniteScroll
           pageSize={20}
           data={expenses}

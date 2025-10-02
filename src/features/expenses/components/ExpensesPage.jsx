@@ -4,7 +4,7 @@ import Main from "../../common/layouts/Main";
 const ExpensesList = lazy(() => import("./ExpensesList"));
 import { useDispatch, useSelector } from "react-redux";
 import { useRealtimeTable } from "../../../services/useRealtimeTable";
-import { addExpense, getAllExpenses } from "../expensesSlice";
+import { addExpense, getAllExpenses, getExpensesByCategory } from "../expensesSlice";
 
 import CommonModal from "../../common/components/CommonModal";
 
@@ -20,7 +20,7 @@ import { getTotalByGroup } from "../../../utils/aggregateUtils";
 
 const ExpensesPage = () => {
   const { loggedInUserId, expenseLimit } = useSelector((state) => state.common);
-  const { expenses } = useSelector((state) => state.expenses);
+  const { expenses,byCategory } = useSelector((state) => state.expenses);
   // const warningShownRef = useRef(false);
   const modalRef = useRef(null);
   const dispatch = useDispatch();
@@ -77,7 +77,7 @@ const totalAmountByCategory =useMemo(() => {
     // dispatch(getAllExpenses(loggedInUserId));
     dispatch(getAllExpenses({ userId: loggedInUserId }));
      
-
+   
 
   }, [dispatch, loggedInUserId]);
 
@@ -85,7 +85,9 @@ const totalAmountByCategory =useMemo(() => {
   useRealtimeTable(
     "user_expenses", //pasing table name
     { column: "user_id", value: loggedInUserId },
-    () => dispatch(getAllExpenses({ userId: loggedInUserId }))
+    () =>{ dispatch(getAllExpenses({ userId: loggedInUserId }))
+     
+  }
     // () => dispatch(getAllExpenses(loggedInUserId))
   );
 
@@ -111,7 +113,7 @@ const totalAmountByCategory =useMemo(() => {
       })
       .finally(() => setSubmitting(false));
   };
-
+  // console.log(byCategory);
   return (
     <>
       <Main mainClassName="relative">
@@ -123,7 +125,8 @@ const totalAmountByCategory =useMemo(() => {
             // <></>
           }
         >
-          <ExpensesList expenseTotalAmountByCategory={totalAmountByCategory} expenses={expenses} />
+          <ExpensesList expenseTotalAmountByCategory={byCategory} expenses={expenses} 
+          />
         </Suspense>
         <CommonModal
           ref={modalRef}
