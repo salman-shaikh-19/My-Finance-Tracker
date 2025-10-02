@@ -12,21 +12,18 @@ const PrevNextButton = ({
   weekOffset,
   setPrevWeekOffset,
   setNextWeekOffset,
-  setWeekOffSet,
 }) => {
   const weekLabel = useMemo(() => {
-    
     // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
     return getWeekLabel(customWeakDate);
-  }, [customWeakDate]);
+  }, [weekOffset]);
 
   const debouncedRefreshRef = useRef(
     debounce(
       () => {
-        setWeekOffSet(0);
         refreshData();
       },
-      2000,
+      8000,
       { leading: true, trailing: false }
     )
   );

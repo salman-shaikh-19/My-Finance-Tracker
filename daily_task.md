@@ -102,3 +102,4 @@
 # 6 oct
 - make timeline for expense like total expenses on monday of currentweek if user crossed its expense limit then marked with red color.
 - prevent future date selection in add/edit expense.
+- display category wise data in expense module 

@@ -131,8 +131,7 @@
 //           XAxisDataKey="day"
 //           BarDataKey={[{ key: "total", name: "Total expenses" }]}
 //           isLegend={false}
-//                         description={`Total expenses of the week ${currentCategory && "of "+currentCategory}`}
-
+//           description="Total expenses of the week"
 //           height={280}
 //         />
 //       )}
@@ -143,8 +142,7 @@
 //           XAxisDataKey="day"
 //           LineDataKey={[{ key: "total", name: "Total expenses" }]}
 //           isLegend={false}
-//                         description={`Total expenses of the week ${currentCategory && "of "+currentCategory}`}
-
+//           description="Total expenses of the week"
 //           height={280}
 //         />
 //       )}
@@ -155,8 +153,7 @@
 //           pieDataKey="total"
 //           pieNameKey="day"
 //           height={280}
-//                         description={`Total expenses of the week ${currentCategory && "of "+currentCategory}`}
-
+//           description="Total expenses of the week"
 //         />
 //       )}
 //     </div>
@@ -175,29 +172,21 @@ import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "./PrevNextButton";
-import ChartMenu from "./ChartMenu";
+import ChartMenu from './ChartMenu';
 import { formatCurrency } from "../../../utils/currencyUtils";
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 dayjs.extend(isoWeek);
 
-const ExpenseChart = ({
-  customWeakDate,
-  weekOffset,
-  setWeekOffset,
-  currentCategory="",
-}) => {
+const ExpenseChart = () => {
   const dispatch = useDispatch();
-  // console.log('d:',customWeakDate);
-  
-  const { loggedInUserId, userCurrency, expenseLimit } = useSelector(
-    (state) => state.common
-  );
+  const { loggedInUserId,userCurrency,expenseLimit } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
 
   const [currentChart, setCurrentChart] = useState("bar");
+  const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
 
-  // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
+  const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 
   useEffect(() => {
     if (!loggedInUserId) return;
@@ -231,13 +220,11 @@ const ExpenseChart = ({
     }));
   }, [expenses, customWeakDate]);
 
-  const refreshData = () => {
-    // console.log('called',customWeakDate);
-    if (!loggedInUserId) return;
+  const refreshData=()=>{
+    // console.log('called');
+      if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
-    
-   
-  };
+  }
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
       <PrevNextButton
@@ -245,7 +232,6 @@ const ExpenseChart = ({
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
         refreshData={refreshData}
         weekOffset={weekOffset}
-        setWeekOffSet={setWeekOffset}
         customWeakDate={customWeakDate}
       />
 
@@ -267,9 +253,7 @@ const ExpenseChart = ({
               XAxisDataKey="day"
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
-              description={`Total expenses of the week ${
-                currentCategory && "of " + currentCategory
-              }`}
+              description="Total expenses of the week"
               height={270}
             />
           )}
@@ -280,9 +264,7 @@ const ExpenseChart = ({
               XAxisDataKey="day"
               LineDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
-              description={`Total expenses of the week ${
-                currentCategory && "of " + currentCategory
-              }`}
+              description="Total expenses of the week"
               height={270}
             />
           )}
@@ -293,9 +275,7 @@ const ExpenseChart = ({
               pieDataKey="total"
               pieNameKey="day"
               height={270}
-              description={`Total expenses of the week ${
-                currentCategory && "of " + currentCategory
-              }`}
+              description="Total expenses of the week"
             />
           )}
           <ul className="steps  w-full mt-10 scrollbar-hide ">
