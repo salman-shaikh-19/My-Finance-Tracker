@@ -111,7 +111,7 @@ const SettingsMenu = ({
             openModalBtnClassName="
                      btn-sm mt-2 w-full
                   "
-            openModalBtnText={<>Expense Limit</>}
+            openModalBtnText={<>Expense Limit </>}
           >
             <SetExpenseLimit handleSubmit={handleExpenseLimit}  />
           </CommonModal>
@@ -121,7 +121,9 @@ const SettingsMenu = ({
             className="btn btn-sm btn-error mt-3 w-full"
           >
             Logout
+            
           </button>
+          
         </div>
       )}
     </div>

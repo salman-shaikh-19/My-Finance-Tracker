@@ -29,7 +29,6 @@ const ExpenseCategoryTotalAmountCard = ({
       </div>
       <p className="mt-3 text-lg font-semibold  text-center">{name}</p>
 
-      {/* Expense Count */}
       <span className="text-sm font-medium text-gray-500 ">
         {formattedCurrency}
       </span>

@@ -173,11 +173,14 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "./PrevNextButton";
 import ChartMenu from './ChartMenu';
+import { formatCurrency } from "../../../utils/currencyUtils";
+import { CiWarning } from "react-icons/ci";
+import ExpenseSteps from "./ExpenseSteps";
 dayjs.extend(isoWeek);
 
 const ExpenseChart = () => {
   const dispatch = useDispatch();
-  const { loggedInUserId } = useSelector((state) => state.common);
+  const { loggedInUserId,userCurrency,expenseLimit } = useSelector((state) => state.common);
   const { expenses } = useSelector((state) => state.expenses);
 
   const [currentChart, setCurrentChart] = useState("bar");
@@ -223,7 +226,7 @@ const ExpenseChart = () => {
     dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
   }
   return (
-    <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
+    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
@@ -238,31 +241,31 @@ const ExpenseChart = () => {
         </div>
       ) : (
         <>
-        <ChartMenu
-        currentChart={currentChart}
-        setCurrentChart={setCurrentChart}
-        />
+          <ChartMenu
+            currentChart={currentChart}
+            setCurrentChart={setCurrentChart}
+          />
+
           {currentChart === "bar" && (
             <CustomBarChart
               chartData={chartData}
-                      //  BarDataKey={"total"}
+              //  BarDataKey={"total"}
               XAxisDataKey="day"
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
               description="Total expenses of the week"
-              height={275}
+              height={300}
             />
           )}
 
           {currentChart === "line" && (
             <CustomLineChart
               chartData={chartData}
-     
               XAxisDataKey="day"
               LineDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
               description="Total expenses of the week"
-              height={275}
+              height={300}
             />
           )}
 
@@ -271,10 +274,22 @@ const ExpenseChart = () => {
               chartData={chartData}
               pieDataKey="total"
               pieNameKey="day"
-              height={275}
+              height={300}
               description="Total expenses of the week"
             />
           )}
+          <ul className="steps w-full mt-10 scrollbar-hide ">
+            {chartData.map((dayData) => (
+              <ExpenseSteps
+                key={dayData.day}
+                day={dayData.day}
+                weekOffset={weekOffset}
+                total={dayData.total}
+                expenseLimit={expenseLimit}
+                userCurrency={userCurrency}
+              />
+            ))}
+          </ul>
         </>
       )}
     </div>

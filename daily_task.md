@@ -91,9 +91,10 @@
 
 
 # 3 oct
+- explore lodash.
 - make common compoent for add/edit expense.
 - edit expense implemented.
 - refresh data button added.
-- fixed many bugs in expense module.
+- fixed many bugs in expense module and code optimization.
 - prevent multiple call for refresh data using debounce.
 - make card that displays total expenses category wise in expense module.

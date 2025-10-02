@@ -1,6 +1,6 @@
 import _ from 'lodash'
-
-function aggregateUtils({ data, countByField, omitThem = [] }) {
+//get total count by  specific field
+export const getCountBy=({ data, countByField, omitThem = [] })=> {
     // console.log(data);
     //  console.log("called: getCountBy");
     const countData = _.countBy(data, countByField);
@@ -12,7 +12,7 @@ function aggregateUtils({ data, countByField, omitThem = [] }) {
     // console.log(omitedData);
 }
 
-//get total by group for example: get total expense by expense catgory
+//get total by specific field for example: get total expense by expense catgory
 export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Other") => {
   return data.reduce((acc, curr) => {
     const group = curr[groupKey] || defaultGroup;
@@ -25,4 +25,3 @@ export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Other") 
   }, {});
 };
 
-export default aggregateUtils;

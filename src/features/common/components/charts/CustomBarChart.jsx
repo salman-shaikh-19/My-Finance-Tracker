@@ -30,6 +30,7 @@ const CustomBarChart = React.memo(({ chartData, width = "100%", height = 400, is
             {description && (
                 <p className="text-sm mt-auto" style={{ textAlign: "center", marginBottom: "10px" }}>
                     {description}
+                    
                 </p>
             )}
         </div>
