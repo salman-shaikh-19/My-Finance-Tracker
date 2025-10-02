@@ -15,7 +15,7 @@ import ExpenseForm from "./ExpenseForm";
 import Loader from "../../common/components/Loader";
 import dayjs from "dayjs";
 import _ from "lodash";
-import { getTotalByGroup } from "../../../utils/getCountBy";
+import { getTotalByGroup } from "../../../utils/aggregateUtils";
 // import Swal from "sweetalert2";
 
 const ExpensesPage = () => {

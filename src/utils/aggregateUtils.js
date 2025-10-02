@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-function getCountBy({ data, countByField, omitThem = [] }) {
+function aggregateUtils({ data, countByField, omitThem = [] }) {
     // console.log(data);
     //  console.log("called: getCountBy");
     const countData = _.countBy(data, countByField);
@@ -25,4 +25,4 @@ export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Other") 
   }, {});
 };
 
-export default getCountBy;
+export default aggregateUtils;
