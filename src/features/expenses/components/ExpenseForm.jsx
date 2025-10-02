@@ -21,7 +21,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                 .required("Amount is required")
                 .positive("Amount must be positive"),
               expenseCategory: Yup.string().required("Category is required"),
-              expenseDate: Yup.date().required("Date is required"),
+              expenseDate: Yup.date().required("Expense date is required").max(new Date(), "Expense date cannot be in the future"),
               expenseMethod: Yup.string().required("Method is required"),
               note: Yup.string()
               .max(255, "Note cannot exceed 255 characters")
@@ -73,6 +73,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                     type="date"
                     name="expenseDate"
                     className="input input-bordered w-full"
+                    max={new Date().toISOString().slice(0, 10)}
                   />
                   <ErrorMessage
                     name="expenseDate"
