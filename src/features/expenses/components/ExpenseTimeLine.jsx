@@ -6,7 +6,7 @@ dayjs.extend(isoWeek);
 
 const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-const ExpenseSteps = ({
+const ExpenseTimeLine = ({
   day,
   total,
   expenseLimit,
@@ -40,9 +40,12 @@ const ExpenseSteps = ({
   return (
     <li className={`step ${isActive ? "step-primary" : ""}`} title={title}>
       <span
-        className={`step-icon !w-6 !h-6 text-xs ${
+        className={`step-icon !w-6 !h-6  text-xs transition-all duration-500 ease-in-out  ${
           isOverLimit ? "!bg-red-500 text-white" :  ''
-        }`}
+        }
+        
+         transform hover:scale-125 hover:shadow-xl
+        `}
       >
         {day}
       </span>
@@ -57,4 +60,4 @@ const ExpenseSteps = ({
   );
 };
 
-export default React.memo(ExpenseSteps);
+export default React.memo(ExpenseTimeLine);

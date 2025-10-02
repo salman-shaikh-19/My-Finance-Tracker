@@ -98,3 +98,6 @@
 - fixed many bugs in expense module and code optimization.
 - prevent multiple call for refresh data using debounce.
 - make card that displays total expenses category wise in expense module.
+
+# 6 oct
+- make timeline for expense like total expenses on monday of currentweek if user crossed its expense limit then marked with red color.

@@ -175,7 +175,7 @@ import PrevNextButton from "./PrevNextButton";
 import ChartMenu from './ChartMenu';
 import { formatCurrency } from "../../../utils/currencyUtils";
 import { CiWarning } from "react-icons/ci";
-import ExpenseSteps from "./ExpenseSteps";
+import ExpenseTimeLine from "./ExpenseTimeLine";
 dayjs.extend(isoWeek);
 
 const ExpenseChart = () => {
@@ -280,7 +280,7 @@ const ExpenseChart = () => {
           )}
           <ul className="steps w-full mt-10 scrollbar-hide ">
             {chartData.map((dayData) => (
-              <ExpenseSteps
+              <ExpenseTimeLine
                 key={dayData.day}
                 day={dayData.day}
                 weekOffset={weekOffset}
