@@ -254,7 +254,7 @@ const ExpenseChart = () => {
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
               description="Total expenses of the week"
-              height={300}
+              height={270}
             />
           )}
 
@@ -265,7 +265,7 @@ const ExpenseChart = () => {
               LineDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
               description="Total expenses of the week"
-              height={300}
+              height={270}
             />
           )}
 
@@ -274,11 +274,11 @@ const ExpenseChart = () => {
               chartData={chartData}
               pieDataKey="total"
               pieNameKey="day"
-              height={300}
+              height={270}
               description="Total expenses of the week"
             />
           )}
-          <ul className="steps w-full mt-10 scrollbar-hide ">
+          <ul className="steps  w-full mt-10 scrollbar-hide ">
             {chartData.map((dayData) => (
               <ExpenseTimeLine
                 key={dayData.day}
