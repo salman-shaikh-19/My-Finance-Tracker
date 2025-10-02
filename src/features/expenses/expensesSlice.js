@@ -8,8 +8,7 @@ export const getAllExpenses = createAsyncThunk(
   "expenses/getAllExpenses",
   async ({ userId, customWeakDate }, { rejectWithValue }) => {
     try {
-         const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
-
+      const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
       const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
       const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
 
