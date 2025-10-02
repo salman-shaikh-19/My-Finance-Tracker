@@ -29,7 +29,7 @@ const ThemeToggle = () => {
       </label> */}
       <select
       title="Set Theme"
-        className="select appearance-none "
+        className="select "
         value={theme}
         onChange={handleChange}
       >
