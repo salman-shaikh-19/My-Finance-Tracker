@@ -1,5 +1,5 @@
 import { BiCopyright } from "react-icons/bi";
-import { CgCopyright } from "react-icons/cg";
+
 
 const Footer = () => {
   return (
