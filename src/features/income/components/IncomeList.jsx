@@ -9,28 +9,20 @@ import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmount
 import { getCategoryByName, incomeCategories } from "../../../utils/Categories";
 import IncomeChart from "./IncomeChart";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
+import { confirmDelete } from "../../../utils/confirmDelete";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
+
   const handleDelete = (incomeId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This income will be deleted!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteIncome(incomeId));
-        Swal.fire("Deleted!", "Income record deleted.", "success");
-      }
-    });
-  };
+  confirmDelete({
+    itemName: "income",
+    onDelete: () => dispatch(deleteIncome(incomeId)),
+  });
+};
 
 
   const editIncomeHandler = (values, { resetForm, setSubmitting }) => {

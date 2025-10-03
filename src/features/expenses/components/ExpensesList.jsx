@@ -12,6 +12,8 @@ import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
+
+import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
@@ -20,24 +22,13 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const editModelRef = useRef(null);
  
   const dispatch = useDispatch();
-  const handleDelete = (expenseId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // Call your delete function here
-        dispatch(deleteExpense(expenseId));
 
-        Swal.fire("Deleted!", "Your expense has been deleted ", "success");
-      }
-    });
-  };
+  const handleDelete = (expenseId) => {
+  confirmDelete({
+    itemName: "expense",
+    onDelete: () => dispatch(deleteExpense(expenseId)),
+  });
+};
 
   const editExpenseHandler = (values, { resetForm, setSubmitting }) => {
      const { id, amount, expenseCategory, expenseDate, expenseMethod, note } =
