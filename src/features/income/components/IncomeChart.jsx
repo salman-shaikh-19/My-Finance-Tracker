@@ -21,7 +21,7 @@ const IncomeChart = () => {
   const { loggedInUserId } = useSelector((state) => state.common);
   const { incomes } = useSelector((state) => state.income);
   const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
-  const [currentChart, setCurrentChart] = useState("bar");
+  const [currentChart, setCurrentChart] = useState("line");
 
   const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 
