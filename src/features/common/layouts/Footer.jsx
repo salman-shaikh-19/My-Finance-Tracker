@@ -1,9 +1,12 @@
+import { BiCopyright } from "react-icons/bi";
+import { CgCopyright } from "react-icons/cg";
+
 const Footer = () => {
   return (
-    <footer className="hidden lg:flex w-full items-center justify-center bg-base-300 text-base-content p-4 ">
+ <footer className="hidden lg:flex w-full items-center justify-center bg-base-300 text-base-content p-4 ">
       <aside>
-        <p className="text-center text-sm">
-          Copyright © {new Date().getFullYear()} - All rights reserved by
+        <p className="text-center text-sm flex items-center gap-1">
+           <BiCopyright /> {new Date().getFullYear()} - All rights reserved by
           Finance Tracker Ltd
         </p>
       </aside>

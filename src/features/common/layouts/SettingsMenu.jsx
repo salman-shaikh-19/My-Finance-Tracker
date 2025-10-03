@@ -121,7 +121,6 @@ const SettingsMenu = ({
             className="btn  btn-error btn-sm mt-3 w-full"
           >
             Logout
-            
           </button>
           
         </div>
