@@ -24,7 +24,7 @@ const CommonModal = ({
   return (
     <>
       <button
-        className={`btn  btn-primary  ${openModalBtnClassName}`}
+        className={`btn btn-primary   ${openModalBtnClassName}`}
         title={btnTitle}
         onClick={(e) => {
           e.stopPropagation();
@@ -41,10 +41,10 @@ const CommonModal = ({
         className="modal"
         onClick={handleBackdropClick}
       >
-        <div className="modal-box relative">
+        <div className="modal-box relative ">
           <button
           
-            className="hover:cursor-pointer absolute right-2 top-2"
+            className="hover:cursor-pointer absolute right-2 top-2 btn btn-sm btn-circle btn-ghost"
             onClick={(e) => {
               e.stopPropagation();
               closeModal();

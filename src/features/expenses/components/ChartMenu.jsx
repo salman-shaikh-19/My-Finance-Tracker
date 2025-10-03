@@ -7,7 +7,7 @@ import { MdBarChart, MdOutlineBarChart, MdOutlinePieChart, MdShowChart } from "r
 const ChartMenu=({currentChart,setCurrentChart})=>{
     return(
         <>
-         <div className="flex flex-wrap mb-2">
+         <div className="flex flex-wrap mb-2 ">
                     <div className="flex ml-auto gap-1">
                       {["bar", "line", "pie"].map((type) => {
                         const Icon =
@@ -25,8 +25,8 @@ const ChartMenu=({currentChart,setCurrentChart})=>{
                             } chart`}
                             className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md ${
                               currentChart === type
-                                ? "text-blue-600 font-semibold"
-                                : "text-gray-500 hover:text-blue-500"
+                                ? "btn btn-primary btn-sm font-semibold"
+                                : "btn btn-ghost btn-sm hover:text-primary"
                             }`}
                             onClick={() => setCurrentChart(type)}
                           >

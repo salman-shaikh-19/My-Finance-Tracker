@@ -68,7 +68,7 @@ const SettingsMenu = ({
   };
 
   return (
-    <div ref={menuRef} className="relative ">
+    <div ref={menuRef} className="relative  ">
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -118,7 +118,7 @@ const SettingsMenu = ({
 
           <button
             onClick={() => handleClickItem(handleLogout)}
-            className="btn btn-sm btn-error mt-3 w-full"
+            className="btn  btn-error btn-sm mt-3 w-full"
           >
             Logout
             

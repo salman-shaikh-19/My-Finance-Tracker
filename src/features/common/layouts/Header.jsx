@@ -32,8 +32,8 @@ const Header = () => {
   
   return (
     <>
-      <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md z-50">
-        <Link to={"/"} className="font-bold me-auto select-none ">
+      <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md z-50  ">
+        <Link to={"/"} className="font-bold me-auto select-none text-lg ">
           My Finance Tracker
         </Link>
         <HeaderNav title="Home" redirectTo="/"  isActive={currentPath === "/"} />
@@ -56,8 +56,8 @@ const Header = () => {
         {/* <HeaderNav title=""  icon={<FiSettings className="text-xl"  />} /> */}
       </nav>
 
-      <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
-        <div className="flex justify-around items-center h-16 px-4 relative">
+      <nav className="md:hidden  fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
+        <div className="flex justify-around items-center h-16 px-4 relative ">
           <HeaderNavMobile
             title="Expenses"
             redirectTo="/expenses"
