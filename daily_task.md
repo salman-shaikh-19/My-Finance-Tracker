@@ -110,3 +110,11 @@
 - make timeline for expense like total expenses on monday of currentweek if user crossed its expense limit then marked with red color.
 - prevent future date selection in add/edit expense.
 - display alert message if no data found
+- income listing.
+- add income.
+- delete income.
+
+# 7 oct 
+- update income.
+- code optimization.
+- income charts.

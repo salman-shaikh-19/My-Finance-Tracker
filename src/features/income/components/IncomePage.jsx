@@ -20,8 +20,6 @@ const IncomePage = () => {
   const modalRef = useRef(null);
   const dispatch = useDispatch();
 
-
-
   // total sum by category
   const totalAmountByCategory = useMemo(() => {
     return getTotalByGroup(incomes, "income_category", "income_amount");
