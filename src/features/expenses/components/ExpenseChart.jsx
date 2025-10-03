@@ -172,19 +172,21 @@ import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "../../common/components/PrevNextButton";
-import ChartMenu from '../../common/components/charts/ChartMenu';
+import ChartMenu from "../../common/components/charts/ChartMenu";
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 import { refreshData } from "../../../utils/refreshData";
+import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 dayjs.extend(isoWeek);
 const chartColor = "#EF4444";
 const ExpenseChart = () => {
   const dispatch = useDispatch();
-  const { loggedInUserId,userCurrency,expenseLimit } = useSelector((state) => state.common);
+  const { loggedInUserId, userCurrency, expenseLimit } = useSelector(
+    (state) => state.common
+  );
   const { expenses } = useSelector((state) => state.expenses);
-const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
+  const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
   const [currentChart, setCurrentChart] = useState("bar");
-  
 
   const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 
@@ -195,29 +197,12 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
 
   // transform expenses to chart data
   const chartData = React.useMemo(() => {
-    if (!expenses || !expenses.length) return [];
-
-    const startOfWeek = dayjs(customWeakDate).startOf("isoWeek");
-    const weekDays = {};
-
-    for (let i = 0; i < 7; i++) {
-      const day = startOfWeek.add(i, "day");
-      weekDays[day.format("ddd")] = 0;
-    }
-
-    expenses.forEach((exp) => {
-      if (!exp?.expense_date) return;
-      const date = dayjs(exp.expense_date);
-      const dayLabel = date.format("ddd");
-      if (dayLabel in weekDays) {
-        weekDays[dayLabel] += parseFloat(exp.amount) || 0;
-      }
+    return getWeeklyChartData({
+      items: expenses,
+      dateKey: "expense_date",
+      valueKey: "amount",
+      referenceDate: customWeakDate,
     });
-
-    return Object.keys(weekDays).map((day) => ({
-      day,
-      total: weekDays[day],
-    }));
   }, [expenses, customWeakDate]);
 
   // const refreshData=()=>{
@@ -226,7 +211,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
   //   dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
   //   setWeekOffset(0);
   // }
-   const refreshExpenses = () => {
+  const refreshExpenses = () => {
     refreshData({
       loggedInUserId,
       dispatch,
