@@ -1,8 +1,7 @@
 import React, { useMemo } from "react";
 import { formatCurrency } from "../../../utils/currencyUtils";
 
-
-const IncomeCategoryTotalAmountCard = ({
+const CategoryTotalAmountCard = ({
   name,
   totalAmount = 0,
   Icon,
@@ -10,16 +9,13 @@ const IncomeCategoryTotalAmountCard = ({
   userCurrency = "INR",
   theme,
 }) => {
-
-
-  
   const formattedCurrency = useMemo(
     () => formatCurrency(totalAmount, userCurrency),
     [totalAmount, userCurrency]
   );
   return (
     <div
-      title={`you have received total ${formattedCurrency} from ${name} `}
+      title={`You have spent ${formattedCurrency} on ${name} `}
       className="flex w-40 items-center bg-base-100  transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl flex-col gap-2 card shadow-lg rounded-lg p-4 "
     >
       <div
@@ -39,4 +35,4 @@ const IncomeCategoryTotalAmountCard = ({
     </div>
   );
 };
-export default React.memo(IncomeCategoryTotalAmountCard);
+export default React.memo(CategoryTotalAmountCard);

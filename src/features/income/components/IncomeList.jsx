@@ -5,7 +5,7 @@ import IncomeCard from "./IncomeCard";
 import { deleteIncome, updateIncome, } from "../incomeSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import IncomeCategoryTotalAmountCard from "./IncomeCategoryTotalAmountCard";
+import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
 import { getCategoryByName, incomeCategories } from "../../../utils/Categories";
 import IncomeChart from "./IncomeChart";
 
@@ -70,7 +70,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
           
           const totalAmount = incomeTotalAmountByCategory[category.name] || 0;
           return (
-            <IncomeCategoryTotalAmountCard
+            <CategoryTotalAmountCard
               key={i}
               name={category.name}
               Icon={Icon}

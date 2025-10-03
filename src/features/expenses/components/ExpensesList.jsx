@@ -11,7 +11,7 @@ import ExpenseChart from "./ExpenseChart";
 import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import ExpenseCategoryTotalAmountCard from "./ExpenseCategoryTotalAmountCard";
+import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
@@ -81,7 +81,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             const Icon = category.icon;
             const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
             return (
-              <ExpenseCategoryTotalAmountCard
+              <CategoryTotalAmountCard
                 key={i}
                 name={category.name}
                 totalAmount={totalAmount}
