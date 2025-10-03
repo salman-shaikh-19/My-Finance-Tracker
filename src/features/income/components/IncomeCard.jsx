@@ -50,13 +50,13 @@ const IncomeCard = ({
         <div className="flex flex-col flex-1">
           <div className="flex justify-between items-center mb-2">
             <span className="font-semibold text-lg">{category}</span>
-            <span className="font-bold text-lg">
+            <span className="font-bold text-lg cursor-auto">
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
           <div className="flex justify-between items-center text-sm text-gray-500">
         
-            <span>{commonDate({ date })}</span>
+            <span className="cursor-auto" title="income date">{commonDate({ date })}</span>
           </div>
         </div>
       </div>

@@ -56,19 +56,19 @@ const ExpenseCard = ({
         <div className="flex flex-col justify-between flex-1 h-full ">
           <div className="flex justify-between items-center mb-2  ">
             <span className="font-semibold text-lg ">{category}</span>
-            <span className="font-bold text-lg ">
+            <span className="font-bold text-lg cursor-auto ">
               {" "}
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
 
           <div className="flex justify-between items-center text-sm text-gray-500">
-            <span className="flex items-center gap-2 bg-base-300 dark:bg-gray-800 px-2 py-1 rounded-full text-sm font-medium shadow-sm">
+            <span title="Payment method" className="flex items-center cursor-auto gap-2 bg-base-300    px-2 py-1 rounded-full text-sm font-medium shadow-sm">
               <PaymentIcon size={16} className="text-green-600" />
-              <span className="">Payment by:</span>
+             
               <span className="font-semibold ">{type}</span>
             </span>
-            <span>{commonDate({ date })}</span>
+            <span title="expense date " className="cursor-auto">{commonDate({ date })}</span>
           </div>
         </div>
       </div>
