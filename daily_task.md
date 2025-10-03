@@ -77,7 +77,9 @@
 - refresh data button added.
 - fixed many bugs in expense module and code optimization.
 - prevent multiple call for refresh data using debounce.
-- make card that displays total expenses category wise in expense module.
+- make card that displays total expenses category wise in expense module [ex: shopping : totalShoppingAmount(like2000)].
+- fixed bugs in expense lisiting card.
+- display payment method icon in expense card and enhanced ui.
 
 
 
