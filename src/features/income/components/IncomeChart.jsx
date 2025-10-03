@@ -10,12 +10,12 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 
 import PrevNextButton from "../../common/components/PrevNextButton";
 import ChartMenu from "../../common/components/charts/ChartMenu";
-const chartColor = "#10B981";
 import { getAllIncomes } from "../incomeSlice";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 dayjs.extend(isoWeek);
 
+const chartColor = "#10B981";
 const IncomeChart = () => {
   const dispatch = useDispatch();
   const { loggedInUserId } = useSelector((state) => state.common);

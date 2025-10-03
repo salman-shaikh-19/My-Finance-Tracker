@@ -178,6 +178,7 @@ import ExpenseTimeLine from "./ExpenseTimeLine";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 dayjs.extend(isoWeek);
+
 const chartColor = "#EF4444";
 const ExpenseChart = () => {
   const dispatch = useDispatch();
