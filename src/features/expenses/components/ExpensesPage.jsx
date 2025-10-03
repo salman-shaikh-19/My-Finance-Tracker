@@ -89,28 +89,6 @@ const totalAmountByCategory =useMemo(() => {
     // () => dispatch(getAllExpenses(loggedInUserId))
   );
 
-  // const handleSubmit = (values, { resetForm, setSubmitting }) => {
-  //   dispatch(
-  //     addExpense({
-  //       userId: loggedInUserId,
-  //       amount: values.amount,
-  //       category: values.expenseCategory,
-  //       date: values.expenseDate,
-  //       method: values.expenseMethod,
-  //       expense_note: values.note,
-  //     })
-  //   )
-  //     // .unwrap() //  note: unwrap the thunk to catch rejected errors
-  //     .then(() => {
-  //       toast.success("Expense added successfully");
-  //       resetForm();
-  //       modalRef.current?.close();
-  //     })
-  //     .catch((err) => {
-  //       toast.error("Error while adding expense: " + err);
-  //     })
-  //     .finally(() => setSubmitting(false));
-  // };
 
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
   handleFormSubmit({

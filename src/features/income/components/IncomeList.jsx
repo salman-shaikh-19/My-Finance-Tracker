@@ -2,9 +2,7 @@ import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import IncomeCard from "./IncomeCard";
-import { deleteIncome, updateIncome, } from "../incomeSlice";
-import Swal from "sweetalert2";
-import { toast } from "react-toastify";
+import { deleteIncome, updateIncome } from "../incomeSlice";
 import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
 import { getCategoryByName, incomeCategories } from "../../../utils/Categories";
 import IncomeChart from "./IncomeChart";
@@ -16,22 +14,20 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
-
   const handleDelete = (incomeId) => {
-  confirmDelete({
-    itemName: "income",
-    onDelete: () => dispatch(deleteIncome(incomeId)),
-  });
-};
-
+    confirmDelete({
+      itemName: "income",
+      onDelete: () => dispatch(deleteIncome(incomeId)),
+    });
+  };
 
   const editIncomeHandler = (values, { resetForm, setSubmitting }) => {
     const { id, incomeCategory, incomeAmount, recievedOn, incomeNote } = values;
     // console.log(incomeNote);
-    
-  handleFormSubmit({
-    action: (payload) => dispatch(updateIncome(payload)),
-    payload: {
+
+    handleFormSubmit({
+      action: (payload) => dispatch(updateIncome(payload)),
+      payload: {
         id,
         updatedData: {
           income_category: incomeCategory,
@@ -39,28 +35,26 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
           received_on: recievedOn,
           income_note: incomeNote,
         },
-    },
-    resetForm,
-    setSubmitting,
-    editModelRef,
-    successMessage: "Income updated successfully",
-    errorMessage: "Error while updating income",
-  });
-};
+      },
+      resetForm,
+      setSubmitting,
+      editModelRef,
+      successMessage: "Income updated successfully",
+      errorMessage: "Error while updating income",
+    });
+  };
   return (
     <div
       id="incomes-list"
       className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
     >
-           <IncomeChart
-            />
+      <IncomeChart />
       <div className="divider">Total Incomes by Category</div>
 
       <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
         {incomeCategories.map((category, i) => {
           const Icon = category.icon;
-   
-          
+
           const totalAmount = incomeTotalAmountByCategory[category.name] || 0;
           return (
             <CategoryTotalAmountCard

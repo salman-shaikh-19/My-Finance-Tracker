@@ -9,8 +9,7 @@ import {
 import ExpenseCard from "./ExpenseCard";
 import ExpenseChart from "./ExpenseChart";
 import { deleteExpense, updateExpense } from "../expensesSlice";
-import Swal from "sweetalert2";
-import { toast } from "react-toastify";
+
 import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
 
 import { confirmDelete } from "../../../utils/confirmDelete";
@@ -20,24 +19,24 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
- 
+
   const dispatch = useDispatch();
 
   const handleDelete = (expenseId) => {
-  confirmDelete({
-    itemName: "expense",
-    onDelete: () => dispatch(deleteExpense(expenseId)),
-  });
-};
+    confirmDelete({
+      itemName: "expense",
+      onDelete: () => dispatch(deleteExpense(expenseId)),
+    });
+  };
 
   const editExpenseHandler = (values, { resetForm, setSubmitting }) => {
-     const { id, amount, expenseCategory, expenseDate, expenseMethod, note } =
+    const { id, amount, expenseCategory, expenseDate, expenseMethod, note } =
       values;
     // console.log(incomeNote);
-    
-  handleFormSubmit({
-    action: (payload) => dispatch(updateExpense(payload)),
-    payload: {
+
+    handleFormSubmit({
+      action: (payload) => dispatch(updateExpense(payload)),
+      payload: {
         id,
         updatedData: {
           amount,
@@ -46,29 +45,28 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           payment_method: expenseMethod,
           expense_note: note,
         },
-    },
-    resetForm,
-    setSubmitting,
-    editModelRef,
-    successMessage: "Expense updated successfully",
-    errorMessage: "Error while updating expense",
-  });
-};
+      },
+      resetForm,
+      setSubmitting,
+      editModelRef,
+      successMessage: "Expense updated successfully",
+      errorMessage: "Error while updating expense",
+    });
+  };
   return (
     <>
       <div
         id="expenses-list"
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5  "
       >
-        <ExpenseChart
-    
-       />
-       <div className="divider">Total Expenses by Category </div>
+        <ExpenseChart />
+        <div className="divider">Total Expenses by Category </div>
 
-      <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4 ">
-     {expenseCategories.map((category, i) => {
+        <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4 ">
+          {expenseCategories.map((category, i) => {
             const Icon = category.icon;
-            const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
+            const totalAmount =
+              expenseTotalAmountByCategory[category.name] || 0;
             return (
               <CategoryTotalAmountCard
                 key={i}
@@ -82,56 +80,55 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             );
           })}
         </div>
-  <div className="divider">Expenses</div>
-  {
-    expenses.length ? 
+        <div className="divider">Expenses</div>
+        {expenses.length ? (
+          <CustomInfiniteScroll
+            pageSize={20}
+            data={expenses}
+            scrollTargetId="expenses-list"
+            endMsg={expenses.length ? "You have seen all expense data " : ""}
+          >
+            {(items) => (
+              <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
+                {items.map((item) => {
+                  const category = getCategoryByName(
+                    expenseCategories,
+                    item.expense_category
+                  );
+                  const Icon = category.icon;
 
-        <CustomInfiniteScroll
-          pageSize={20}
-          data={expenses}
-          scrollTargetId="expenses-list"
-          endMsg={expenses.length ? "You have seen all expense data " : ""}
-        >
-          {(items) => (
-            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
-              {items.map((item) => {
-                const category = getCategoryByName(
-                  expenseCategories,
-                  item.expense_category
-                );
-                const Icon = category.icon;
-
-                return (
-                  <ExpenseCard
-                    key={item.id}
-                    expenseId={item.id}
-                    deleteExpense={() => handleDelete(item.id)}
-                    category={category.name}
-                    amount={item.amount}
-                    theme={theme}
-                    type={item.payment_method}
-                    date={item.expense_date}
-                    bgColor={category.bg}
-                    Icon={Icon}
-                    createdAt={item.created_at}
-                    note={item.expense_note}
-                    userCurrency={userCurrency}
-                    editModelRef={editModelRef}
-                    editExpenseHandler={editExpenseHandler}
-                  />
-                );
-              })}
+                  return (
+                    <ExpenseCard
+                      key={item.id}
+                      expenseId={item.id}
+                      deleteExpense={() => handleDelete(item.id)}
+                      category={category.name}
+                      amount={item.amount}
+                      theme={theme}
+                      type={item.payment_method}
+                      date={item.expense_date}
+                      bgColor={category.bg}
+                      Icon={Icon}
+                      createdAt={item.created_at}
+                      note={item.expense_note}
+                      userCurrency={userCurrency}
+                      editModelRef={editModelRef}
+                      editExpenseHandler={editExpenseHandler}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </CustomInfiniteScroll>
+        ) : (
+          <>
+            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
+              <span className="alert alert-info alert-soft ">
+                No expense data found{" "}
+              </span>
             </div>
-          )}
-        </CustomInfiniteScroll>
-        :
-        <>
-        <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
-          <span className="alert alert-info alert-soft ">No expense data found </span>
-        </div>
-        </>
-          }
-        
+          </>
+        )}
       </div>
     </>
   );

@@ -6,7 +6,7 @@ import { useRealtimeTable } from "../../../services/useRealtimeTable";
 import { addIncome, getAllIncomes } from "../incomeSlice";
 
 import CommonModal from "../../common/components/CommonModal";
-import { toast } from "react-toastify";
+
 import { BiPlus } from "react-icons/bi";
 import Loader from "../../common/components/Loader";
 
