@@ -7,8 +7,7 @@ function App() {
   const {theme}=useSelector(state=>state.common);
 
   useEffect(() => {
-    // block screenshots, printing, copying, cutting, selecting all, dev tools, viewing page source
-    // and right click with toasts
+    // block screenshots, printing, copying, cutting, selecting all, dev tools, viewing page source and right click 
     const handleKeyDown = (e) => {
       if (e.key === "PrintScreen") {
         toast.warning("Screenshots are disabled!");
@@ -52,11 +51,11 @@ function App() {
       }
 
       //disbale right click and prevent duplicate toasts
-      // document.oncontextmenu = function (e) {
-      //   e.preventDefault();
-      //   toast.warning("Right click is disabled!");
-      //   return false;
-      // };
+      document.oncontextmenu = function (e) {
+        e.preventDefault();
+        toast.warning("Right click is disabled!");
+        return false;
+      };
  
 
        

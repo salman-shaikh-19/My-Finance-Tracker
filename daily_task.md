@@ -118,3 +118,6 @@
 - update income.
 - code optimization.
 - income charts.
+
+# 8 oct
+-  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
