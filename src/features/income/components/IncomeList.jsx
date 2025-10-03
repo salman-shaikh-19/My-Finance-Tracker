@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
 import { getCategoryByName, incomeCategories } from "../../../utils/Categories";
 import IncomeChart from "./IncomeChart";
+import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
@@ -31,29 +32,29 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
     });
   };
 
-  const editIncomeHandler = (values, { resetForm, setSubmitting }) => {
-    const { id, incomeCategory, incomeAmount, recievedOn, note } = values;
 
-    dispatch(
-      updateIncome({
+  const editIncomeHandler = (values, { resetForm, setSubmitting }) => {
+    const { id, incomeCategory, incomeAmount, recievedOn, incomeNote } = values;
+    // console.log(incomeNote);
+    
+  handleFormSubmit({
+    action: (payload) => dispatch(updateIncome(payload)),
+    payload: {
         id,
         updatedData: {
           income_category: incomeCategory,
           income_amount: incomeAmount,
           received_on: recievedOn,
-          income_note: note,
+          income_note: incomeNote,
         },
-      })
-    )
-      .then(() => {
-        toast.success("Income updated successfully!");
-        resetForm();
-        editModelRef.current?.close();
-      })
-      .catch((err) => toast.error("Error updating income: " + err))
-      .finally(() => setSubmitting(false));
-  };
-
+    },
+    resetForm,
+    setSubmitting,
+    editModelRef,
+    successMessage: "Income updated successfully",
+    errorMessage: "Error while updating income",
+  });
+};
   return (
     <div
       id="incomes-list"

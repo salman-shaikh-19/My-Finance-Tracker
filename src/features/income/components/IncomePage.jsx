@@ -13,6 +13,7 @@ import Loader from "../../common/components/Loader";
 import _ from "lodash";
 import { getTotalByGroup } from "../../../utils/aggregateUtils";
 import IncomeForm from "./IncomeForm";
+import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 
 const IncomePage = () => {
   const { loggedInUserId } = useSelector((state) => state.common);
@@ -38,26 +39,24 @@ const IncomePage = () => {
     () => dispatch(getAllIncomes({ userId: loggedInUserId }))
   );
 
+
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
-    dispatch(
-      addIncome({
-        user_id: loggedInUserId,
+  handleFormSubmit({
+    action: (payload) => dispatch(addIncome(payload)),
+    payload: {
+      user_id: loggedInUserId,
         income_category: values.incomeCategory,
         income_amount: values.incomeAmount,
         received_on: values.recievedOn,
         income_note: values.incomeNote,
-      })
-    )
-      .then(() => {
-        toast.success("Income added successfully");
-        resetForm();
-        modalRef.current?.close();
-      })
-      .catch((err) => {
-        toast.error("Error while adding income: " + err);
-      })
-      .finally(() => setSubmitting(false));
-  };
+    },
+    resetForm,
+    setSubmitting,
+    modalRef,
+    successMessage: "Income added successfully",
+    errorMessage: "Error while add income",
+  });
+};
 
   return (
     <Main mainClassName="relative">

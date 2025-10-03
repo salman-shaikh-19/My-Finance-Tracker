@@ -12,6 +12,7 @@ import { deleteExpense, updateExpense } from "../expensesSlice";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmountCard";
+import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
@@ -39,11 +40,13 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   };
 
   const editExpenseHandler = (values, { resetForm, setSubmitting }) => {
-    const { id, amount, expenseCategory, expenseDate, expenseMethod, note } =
+     const { id, amount, expenseCategory, expenseDate, expenseMethod, note } =
       values;
-
-    dispatch(
-      updateExpense({
+    // console.log(incomeNote);
+    
+  handleFormSubmit({
+    action: (payload) => dispatch(updateExpense(payload)),
+    payload: {
         id,
         updatedData: {
           amount,
@@ -52,19 +55,14 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           payment_method: expenseMethod,
           expense_note: note,
         },
-      })
-    )
-      .then(() => {
-        toast.success("Expense updated successfully ");
-        resetForm();
-        editModelRef.current?.close();
-      })
-      .catch((err) => {
-        toast.error("Error while updating expense: " + err);
-      })
-      .finally(() => setSubmitting(false));
-  };
-
+    },
+    resetForm,
+    setSubmitting,
+    editModelRef,
+    successMessage: "Expense updated successfully",
+    errorMessage: "Error while updating expense",
+  });
+};
   return (
     <>
       <div

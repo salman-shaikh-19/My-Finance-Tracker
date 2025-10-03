@@ -16,6 +16,7 @@ import Loader from "../../common/components/Loader";
 import dayjs from "dayjs";
 import _ from "lodash";
 import { getTotalByGroup } from "../../../utils/aggregateUtils";
+import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 // import Swal from "sweetalert2";
 
 const ExpensesPage = () => {
@@ -87,29 +88,47 @@ const totalAmountByCategory =useMemo(() => {
     // () => dispatch(getAllExpenses(loggedInUserId))
   );
 
-  const handleSubmit = (values, { resetForm, setSubmitting }) => {
-    dispatch(
-      addExpense({
-        userId: loggedInUserId,
-        amount: values.amount,
-        category: values.expenseCategory,
-        date: values.expenseDate,
-        method: values.expenseMethod,
-        expense_note: values.note,
-      })
-    )
-      // .unwrap() //  note: unwrap the thunk to catch rejected errors
-      .then(() => {
-        toast.success("Expense added successfully");
-        resetForm();
-        modalRef.current?.close();
-      })
-      .catch((err) => {
-        toast.error("Error while adding expense: " + err);
-      })
-      .finally(() => setSubmitting(false));
-  };
+  // const handleSubmit = (values, { resetForm, setSubmitting }) => {
+  //   dispatch(
+  //     addExpense({
+  //       userId: loggedInUserId,
+  //       amount: values.amount,
+  //       category: values.expenseCategory,
+  //       date: values.expenseDate,
+  //       method: values.expenseMethod,
+  //       expense_note: values.note,
+  //     })
+  //   )
+  //     // .unwrap() //  note: unwrap the thunk to catch rejected errors
+  //     .then(() => {
+  //       toast.success("Expense added successfully");
+  //       resetForm();
+  //       modalRef.current?.close();
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Error while adding expense: " + err);
+  //     })
+  //     .finally(() => setSubmitting(false));
+  // };
 
+  const handleSubmit = (values, { resetForm, setSubmitting }) => {
+  handleFormSubmit({
+    action: (payload) => dispatch(addExpense(payload)),
+    payload: {
+      userId: loggedInUserId,
+      amount: values.amount,
+      category: values.expenseCategory,
+      date: values.expenseDate,
+      method: values.expenseMethod,
+      expense_note: values.note,
+    },
+    resetForm,
+    setSubmitting,
+    modalRef,
+    successMessage: "Expense added successfully",
+    errorMessage: "Error while adding expense",
+  });
+};
   return (
     <>
       <Main mainClassName="relative ">
