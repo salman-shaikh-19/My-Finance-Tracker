@@ -173,7 +173,7 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
 import PrevNextButton from "../../common/components/PrevNextButton";
 import ChartMenu from "../../common/components/charts/ChartMenu";
-import { CiWarning } from "react-icons/ci";
+
 import ExpenseTimeLine from "./ExpenseTimeLine";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
