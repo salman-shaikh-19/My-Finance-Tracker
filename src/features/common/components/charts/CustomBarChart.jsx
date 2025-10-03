@@ -2,7 +2,7 @@ import React from "react";
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
-const CustomBarChart = React.memo(({ chartData, width = "100%", height = 400, isLegend = false, XAxisDataKey, BarDataKey = [], description = "Bar Chart Deafult description" }) => {
+const CustomBarChart = React.memo(({ chartData,barColor="teal", width = "100%", height = 400, isLegend = false, XAxisDataKey, BarDataKey = [], description = "Bar Chart Deafult description" }) => {
     // const colors = useMemo(() => BarDataKey.map(() => randomColor()), [BarDataKey]);
     return (
         <div style={{width,height}}>
@@ -19,7 +19,7 @@ const CustomBarChart = React.memo(({ chartData, width = "100%", height = 400, is
                             key={i}
                             dataKey={bar.key}
                             name={bar.name || bar.key}
-                            fill="#DE1010"
+                            fill={barColor}
 
                         />
                     ))

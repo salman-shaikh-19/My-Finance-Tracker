@@ -51,7 +51,7 @@ const ExpenseCard = ({
             <span className="font-semibold text-lg ">{category}</span>
             <span className="font-bold text-lg ">
               {" "}
-              {formatCurrency(amount, userCurrency)}
+              {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
 

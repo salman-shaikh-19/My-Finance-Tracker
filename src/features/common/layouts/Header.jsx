@@ -38,7 +38,7 @@ const Header = () => {
         </Link>
         <HeaderNav title="Home" redirectTo="/"  isActive={currentPath === "/"} />
         <HeaderNav title="Expenses" redirectTo='/expenses'  isActive={currentPath === "/expenses"} />
-        <HeaderNav title="Incomes"  isActive={currentPath === "/incomes"} />
+        <HeaderNav title="Incomes" redirectTo="/incomes"  isActive={currentPath === "/incomes"} />
         <HeaderNav title="Investments"  isActive={currentPath === "/investments"} />
         <HeaderNav title="Savings"  isActive={currentPath === "/savings"} />
         {/* <ThemeToggle />
@@ -66,6 +66,7 @@ const Header = () => {
           />
           <HeaderNavMobile
             title="Incomes"
+            redirectTo="/incomes"
             isActive={currentPath === "/incomes"}
             icon={<FaMoneyBillWave className="" />}
           />

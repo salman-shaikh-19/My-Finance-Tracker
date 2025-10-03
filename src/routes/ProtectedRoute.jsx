@@ -65,12 +65,16 @@
     const [isLoggedIn, setIsLoggedIn] = useState(false);
       const loggedInUserId = useSelector((state) => state.common.loggedInUserId);
 
+
     useEffect(() => {
       const checkUser = async () => {
+
         const { data: { session } } = await supabase.auth.getSession();
         // setIsLoggedIn(!!session);
         setIsLoggedIn(!!session && !!loggedInUserId);
         setIsLoading(false);
+        // console.log('session',session);
+        // console.log('loggedInUserId',loggedInUserId);
       };
 
       checkUser();
@@ -78,6 +82,8 @@
       const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
         // setIsLoggedIn(!!session);
           setIsLoggedIn(!!session && !!loggedInUserId);
+        setIsLoading(false);
+
       });
 
       return () => {
@@ -88,7 +94,7 @@
 
     if (isLoading) {
       return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="flex items-center justify-center min-h-screen bg-base-100">
           <Loader isTakeFullScreen={true} />
         </div>
       );

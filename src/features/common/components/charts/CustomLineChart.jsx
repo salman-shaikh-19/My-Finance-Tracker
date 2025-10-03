@@ -3,7 +3,7 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis, Legend } f
 import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
 
-const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, isLegend = false, XAxisDataKey, LineDataKey = [], description = "default description of line chart" }) => (
+const CustomLineChart = React.memo(({ chartData,lineColor="teal",strokeColor="teal", width = "100%", height = 400, isLegend = false, XAxisDataKey, LineDataKey = [], description = "default description of line chart" }) => (
     <div style={{ width, height }}>
 
         <ResponsiveContainer width={width} height={height}>
@@ -14,7 +14,7 @@ const CustomLineChart = React.memo(({ chartData, width = "100%", height = 400, i
                 {isLegend && <Legend verticalAlign="top" height={36} />}
                 {LineDataKey.map((lineData, index) => (
                     <Line key={index}  dataKey={lineData.key} name={lineData.name} strokeWidth={2}
-                        stroke="#FF4C4C" dot={{ fill: '#DE1010', r: 4 }} 
+                        stroke={strokeColor} dot={{ fill: lineColor, r: 4 }} 
                         />
                 ))}
             </LineChart>

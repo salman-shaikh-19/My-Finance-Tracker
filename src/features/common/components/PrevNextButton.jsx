@@ -2,8 +2,6 @@ import React, { useCallback, useMemo, useRef } from "react";
 // import dayjs from "dayjs";
 import { getWeekLabel } from "../../../utils/dateUtils";
 import { debounce } from "lodash";
-import { MdRefresh } from "react-icons/md";
-import { FcNext, FcPrevious } from "react-icons/fc";
 import { BiChevronLeft, BiChevronRight, BiRefresh } from "react-icons/bi";
 
 const PrevNextButton = ({

@@ -5,6 +5,7 @@ export function useRealtimeTable(table, filter, onChange) {
   useEffect(() => {
     if (!filter?.value) return; //user id null or empty then return
 
+    
     const { column, value } = filter;
 
     const channel = supabase
@@ -18,9 +19,14 @@ export function useRealtimeTable(table, filter, onChange) {
           filter: `${column}=eq.${value}`,
         },
         onChange
+        // (payload) => {
+        //   // console.log("Change received!", payload);
+        //   onChange(payload);
+        // }
         
       )
       .subscribe();
+
 
     // cleanup on unmount
     return () => {
@@ -28,3 +34,7 @@ export function useRealtimeTable(table, filter, onChange) {
     };
   }, [table, filter?.value, onChange, filter]);
 }
+
+
+
+

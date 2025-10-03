@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import commonReducer from '../features/common/commonSlice'
 import expensesReducer from '../features/expenses/expensesSlice'
 import authReducer from '../features/auth/authSlice'
+import incomeReducer from '../features/income/incomeSlice'
 // import chatReducer from '../features/chat/chatSlice'
 
 import { persistReducer, persistStore } from "redux-persist";
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
 //   user:userReducer,
   expenses:expensesReducer,
   auth:authReducer,
+  income:incomeReducer,
 //   chat: chatReducer,
 });
 

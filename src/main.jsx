@@ -13,6 +13,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <App />
         <ToastContainer 
+          
           position="top-right" 
           autoClose={3000} 
           hideProgressBar={false} 
@@ -22,6 +23,8 @@ createRoot(document.getElementById("root")).render(
           pauseOnFocusLoss 
           draggable 
           pauseOnHover 
+          
+            
         />
     </BrowserRouter>
     </Provider>

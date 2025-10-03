@@ -73,7 +73,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
       >
         <ExpenseChart
     
-        expenses={expenses} />
+       />
        <div className="divider">Total Expenses by Category </div>
 
       <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4 ">

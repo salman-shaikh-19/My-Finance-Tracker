@@ -1,7 +1,4 @@
 import React from "react";
-import { BiBarChartAlt, BiLineChart, BiPieChartAlt2 } from "react-icons/bi";
-import { FaChartBar, FaRegChartBar } from "react-icons/fa";
-import { FaChartLine, FaChartPie } from "react-icons/fa6";
 import { MdBarChart, MdOutlineBarChart, MdOutlinePieChart, MdShowChart } from "react-icons/md";
 
 const ChartMenu=({currentChart,setCurrentChart})=>{

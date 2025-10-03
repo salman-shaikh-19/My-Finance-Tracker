@@ -171,8 +171,8 @@ import CustomLineChart from "../../common/components/charts/CustomLineChart";
 import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import { getAllExpenses } from "../expensesSlice";
-import PrevNextButton from "./PrevNextButton";
-import ChartMenu from './ChartMenu';
+import PrevNextButton from "../../common/components/PrevNextButton";
+import ChartMenu from '../../common/components/charts/ChartMenu';
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 dayjs.extend(isoWeek);
@@ -255,6 +255,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total expenses of the week "
               height={270}
+              barColor="#DE1010"
             />
           )}
 
@@ -266,6 +267,8 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total expenses of the week "
               height={270}
+              lineColor="#DE1010"
+              strokeColor="#DE1010"
             />
           )}
 

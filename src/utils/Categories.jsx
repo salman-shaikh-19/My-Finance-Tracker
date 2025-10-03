@@ -32,9 +32,14 @@ export const expenseCategories = [
 export const incomeCategories = [
   { name: "Salary", icon: FaMoneyBillWave, bg: "bg-success" },
   { name: "Bonus", icon: FaMoneyBillWave, bg: "bg-accent" },
+  { name: "Business", icon: FaMoneyBillWave, bg: "bg-warning" },
   { name: "Investments", icon: FaChartLine, bg: "bg-info" },
   { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },
-  { name: "Other", icon: MdOutlineCategory, bg: "bg-neutral" },
+  { name: "Gifts", icon: FaGift, bg: "bg-secondary" },
+  { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },
+
+
+  
 
 ];
 
@@ -42,7 +47,10 @@ export const investmentCategories = [
   { name: "Stocks", icon: FaChartLine, bg: "bg-primary" },
   { name: "Mutual Funds", icon: FaChartLine, bg: "bg-secondary" },
   { name: "Bonds", icon: FaChartLine, bg: "bg-accent" },
+  { name: "Real Estate", icon: FaHome, bg: "bg-info" },
+  { name: "Cryptocurrency", icon: FaChartLine, bg: "bg-warning" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
+
   
 ];
 // export const paymentMethods = [
