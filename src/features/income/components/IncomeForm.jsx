@@ -90,6 +90,8 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
                     name="incomeNote"
                     placeholder="Add a note for this income..."
                     className="textarea textarea-bordered w-full "
+                    maxLength={255}
+                    rows={3}
                   />
                 </div>
 

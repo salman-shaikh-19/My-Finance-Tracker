@@ -109,6 +109,8 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                     name="note"
                     placeholder="Add a note for this expense..."
                     className="textarea textarea-bordered w-full "
+                     maxLength={255}
+                    rows={3}
                   />
                 </div>
 
