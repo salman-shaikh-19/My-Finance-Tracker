@@ -120,6 +120,7 @@
 - update income.
 - code optimization.
 - income charts.
+- enhanced ui of expense/income card.
 
 # 8 oct
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
