@@ -9,7 +9,7 @@ import { commonDate } from "../../../utils/dateUtils";
 
 const ExpenseCard = ({
   expenseId,
-  theme,
+ 
   userCurrency = "INR",
   deleteExpense,
   category,
@@ -50,7 +50,7 @@ const ExpenseCard = ({
             className={`  text-4xl 
             duration-300 
             ease-in-out    hover:scale-120  
-            ${theme == "luxury" ? "text-black" : "text-white"} `}
+            text-white `}
           />
         </div>
         <div className="flex flex-col justify-between flex-1 h-full ">
@@ -151,7 +151,7 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
   //   return false; // trigger rerender
   // }
   return (
-    prevProps.theme === nextProps.theme &&
+   
     prevProps.category === nextProps.category &&
     prevProps.amount === nextProps.amount &&
     prevProps.type === nextProps.type &&

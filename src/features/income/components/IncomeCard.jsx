@@ -17,7 +17,7 @@ const IncomeCard = ({
   note = "",
   bgColor = "bg-green-500",
   createdAt,
-  theme,
+
   userCurrency = "INR",
   deleteIncome,
   editModelRef,
@@ -27,6 +27,7 @@ const IncomeCard = ({
 }) => {
   const [showNote, setShowNote] = useState(false);
 
+    // console.log('rerender',category);
     
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
@@ -41,9 +42,7 @@ const IncomeCard = ({
       <div className="flex items-center p-4 gap-4">
         <div className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}>
           <Icon
-            className={`text-4xl duration-300 ease-in-out hover:scale-120 ${
-              theme === "luxury" ? "text-black" : "text-white"
-            }`}
+            className={`text-4xl duration-300 ease-in-out hover:scale-120 text-white`}
           />
         </div>
 
@@ -128,7 +127,7 @@ export default React.memo(IncomeCard, (prevProps, nextProps) => {
   //   return false; // trigger rerender
   // }
   return (
-    prevProps.theme === nextProps.theme &&
+  
     prevProps.category === nextProps.category &&
     prevProps.amount === nextProps.amount &&
 

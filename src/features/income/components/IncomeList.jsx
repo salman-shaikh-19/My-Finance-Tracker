@@ -10,7 +10,7 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { confirmDelete } from "../../../utils/confirmDelete";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
-  const { userCurrency, theme } = useSelector((state) => state.common);
+  const { userCurrency } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -63,7 +63,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
               Icon={Icon}
               totalAmount={totalAmount}
               userCurrency={userCurrency}
-              theme={theme}
+             
               bg={category.bg}
             />
           );
@@ -98,7 +98,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                     createdAt={income.created_at}
                     note={income.income_note}
                     userCurrency={userCurrency}
-                    theme={theme}
+                   
                     deleteIncome={() => handleDelete(income.id)}
                     editModelRef={editModelRef}
                     editIncomeHandler={editIncomeHandler}

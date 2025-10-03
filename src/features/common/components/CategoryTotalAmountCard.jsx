@@ -7,7 +7,7 @@ const CategoryTotalAmountCard = ({
   Icon,
   bg,
   userCurrency = "INR",
-  theme,
+
 }) => {
   const formattedCurrency = useMemo(
     () => formatCurrency(totalAmount, userCurrency),
@@ -22,9 +22,7 @@ const CategoryTotalAmountCard = ({
         className={`avatar rounded-full p-4 flex justify-center items-center  ${bg}`}
       >
         <Icon
-          className={`text-4xl duration-300 ease-in-out hover:scale-120  ${
-            theme === "luxury" ? "text-black" : "text-white"
-          }`}
+          className={`text-4xl duration-300 ease-in-out hover:scale-120  text-white`}
         />
       </div>
       <p className="mt-3 text-lg font-semibold  text-center  ">{name}</p>

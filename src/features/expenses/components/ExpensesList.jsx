@@ -18,7 +18,7 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
-  const { userCurrency, theme } = useSelector((state) => state.common);
+  const { userCurrency } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                 Icon={Icon}
                 userCurrency={userCurrency}
                 bg={category.bg}
-                theme={theme}
+            
               />
             );
           })}
@@ -110,7 +110,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                       deleteExpense={() => handleDelete(item.id)}
                       category={category.name}
                       amount={item.amount}
-                      theme={theme}
+                    
                       type={item.payment_method}
                       date={item.expense_date}
                       bgColor={category.bg}
