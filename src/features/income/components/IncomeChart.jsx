@@ -13,6 +13,7 @@ import PrevNextButton from "../../common/components/PrevNextButton";
 import ChartMenu from '../../common/components/charts/ChartMenu';
 const chartColor = "#10B981"; 
 import { getAllIncomes } from "../incomeSlice";
+import { refreshData } from "../../../utils/refreshData";
 dayjs.extend(isoWeek);
 
 const IncomeChart = () => {
@@ -57,18 +58,21 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
     }));
   }, [incomes, customWeakDate]);
 
-  const refreshData=()=>{
-    // console.log('called');
-      if (!loggedInUserId) return;
-    dispatch(getAllIncomes({ userId: loggedInUserId, customWeakDate }));
-    setWeekOffset(0);
-  }
+    const refreshIncomes = () => {
+    refreshData({
+      loggedInUserId,
+      dispatch,
+      action: getAllIncomes,
+      customDate: customWeakDate,
+      setOffset: setWeekOffset,
+    });
+  };
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-        refreshData={refreshData}
+        refreshData={refreshIncomes}
         weekOffset={weekOffset}
         customWeakDate={customWeakDate}
       />

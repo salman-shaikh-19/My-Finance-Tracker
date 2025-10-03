@@ -175,6 +175,7 @@ import PrevNextButton from "../../common/components/PrevNextButton";
 import ChartMenu from '../../common/components/charts/ChartMenu';
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
+import { refreshData } from "../../../utils/refreshData";
 dayjs.extend(isoWeek);
 const chartColor = "#EF4444";
 const ExpenseChart = () => {
@@ -219,18 +220,27 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
     }));
   }, [expenses, customWeakDate]);
 
-  const refreshData=()=>{
-    // console.log('called');
-      if (!loggedInUserId) return;
-    dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
-    setWeekOffset(0);
-  }
+  // const refreshData=()=>{
+  //   // console.log('called');
+  //     if (!loggedInUserId) return;
+  //   dispatch(getAllExpenses({ userId: loggedInUserId, customWeakDate }));
+  //   setWeekOffset(0);
+  // }
+   const refreshExpenses = () => {
+    refreshData({
+      loggedInUserId,
+      dispatch,
+      action: getAllExpenses,
+      customDate: customWeakDate,
+      setOffset: setWeekOffset,
+    });
+  };
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-        refreshData={refreshData}
+        refreshData={refreshExpenses}
         weekOffset={weekOffset}
         customWeakDate={customWeakDate}
       />
