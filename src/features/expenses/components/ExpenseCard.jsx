@@ -79,7 +79,7 @@ const ExpenseCard = ({
       )}
       {showNote && (
         <div
-          className="absolute inset-0 bg-base-100 bg-opacity-90  rounded-xl p-3 overflow-auto z-10"
+          className="absolute inset-0 bg-base-100 bg-opacity-90  rounded-xl p-3 overflow-auto z-10 scrollbar-hide "
           onClick={(e) => e.stopPropagation()}
         >
           <button
