@@ -7,7 +7,7 @@ const SetExpenseLimit=({handleSubmit})=>{
     const expenseLimit=useSelector(state=>state.common.expenseLimit)
     return (
         <>
-          <h1 className="text-center"> Set Expense Limit</h1>
+          <h1 className="text-center "> Set Expense Limit</h1>
           <Formik
             initialValues={{
               expenseLimit: expenseLimit || "",
@@ -16,32 +16,32 @@ const SetExpenseLimit=({handleSubmit})=>{
             validationSchema={Yup.object({
               expenseLimit: Yup.number()
                 .required("Amount is required")
-                .positive("Amount must be positive"),
+                .positive("Amount must be positive "),
              
             })}
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form className="space-y-4">
+              <Form className="space-y-4 mt-4">
                 <div>
-                  <label className="label">Expense Limit</label>
+                  <label className="label ">Expense Limit</label>
                   <Field
                     type="number"
                     name="expenseLimit"
                     placeholder="Expense limit amount"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full  "
                   />
                   <ErrorMessage
                     name="expenseLimit"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 text-sm mt-1  "
                   />
                 </div>
 
 
                 <button
                   type="submit"
-                  className="btn btn-primary w-full mt-4"
+                  className="btn btn-primary w-full mt-4  "   
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
@@ -50,7 +50,7 @@ const SetExpenseLimit=({handleSubmit})=>{
                       Expense Limit...
                     </>
                   ) : (
-                    "Set Expense Limit"
+                    "Set Expense Limit  "
                   )}
                 </button>
               </Form>

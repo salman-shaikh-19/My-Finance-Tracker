@@ -30,28 +30,28 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form className="space-y-4">
+              <Form className="space-y-4 mt-4">
                 <div>
-                  <label className="label">Amount</label>
+                  <label className="label ">Amount</label>
                   <Field
                     type="number"
                     name="amount"
                     placeholder="Expense amount"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full "
                   />
                   <ErrorMessage
                     name="amount"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 text-sm mt-1 "
                   />
                 </div>
 
                 <div>
-                  <label className="label">Category</label>
+                  <label className="label ">Category</label>
                   <Field
                     as="select"
                     name="expenseCategory"
-                    className="select select-bordered w-full"
+                    className="select select-bordered w-full "
                   >
                     <option value="">Select Category</option>
                     {expenseCategories.map((cat) => (
@@ -63,16 +63,16 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <ErrorMessage
                     name="expenseCategory"
                     component="div"
-                    className="text-red-500 text-sm mt-1"
+                    className="text-red-500 text-sm mt-1 "
                   />
                 </div>
 
                 <div>
-                  <label className="label">Date</label>
+                  <label className="label ">Date</label>
                   <Field
                     type="date"
                     name="expenseDate"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full "
                     max={new Date().toISOString().slice(0, 10)}
                   />
                   <ErrorMessage
@@ -108,19 +108,19 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                     as="textarea"
                     name="note"
                     placeholder="Add a note for this expense..."
-                    className="textarea textarea-bordered w-full"
+                    className="textarea textarea-bordered w-full "
                   />
                 </div>
 
                 <button
                 title={isEdit ? 'Update expense':'Add expense'}
                   type="submit"
-                  className="btn btn-primary w-full mt-4"
+                  className="btn btn-primary w-full mt-4 "
                   disabled={isSubmitting}
                 >
                     {isSubmitting ? (
                 <>
-                  <span className="loading loading-spinner"></span>{" "}
+                  <span className="loading loading-spinner "></span>{" "}
                   {isEdit ? "Updating Expense..." : "Adding Expense..."}
                 </>
               ) : (

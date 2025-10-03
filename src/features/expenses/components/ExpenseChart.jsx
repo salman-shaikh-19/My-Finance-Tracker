@@ -226,7 +226,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
     setWeekOffset(0);
   }
   return (
-    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg shadow">
+    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
         setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
@@ -236,7 +236,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
       />
 
       {!chartData.length ? (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex justify-center items-center  h-full">
           <p>No expense data available</p>
         </div>
       ) : (
@@ -253,7 +253,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               XAxisDataKey="day"
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
-              description="Total expenses of the week"
+              description="Total expenses of the week "
               height={270}
             />
           )}
@@ -262,9 +262,9 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
             <CustomLineChart
               chartData={chartData}
               XAxisDataKey="day"
-              LineDataKey={[{ key: "total", name: "Total expenses" }]}
+              LineDataKey={[{ key: "total", name: "Total expenses " }]}
               isLegend={false}
-              description="Total expenses of the week"
+              description="Total expenses of the week "
               height={270}
             />
           )}
@@ -278,7 +278,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               description="Total expenses of the week"
             />
           )}
-          <ul className="steps  w-full mt-10 scrollbar-hide ">
+          <ul className="steps w-full mt-10 scrollbar-hide  ">
             {chartData.map((dayData) => (
               <ExpenseTimeLine
                 key={dayData.day}

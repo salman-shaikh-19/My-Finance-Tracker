@@ -31,25 +31,25 @@ const ExpenseCard = ({
     : false;
   return (
     <div
-      className={`card ${!showNote ? ' cursor-pointer ':''}  w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      className={`card ${!showNote ? ' cursor-pointer ':''}   w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
       title={!showNote ? "Click to " + (showNote ? "close" : "show") + " action bar" :""}
     >
-      <div className="flex items-center p-4 gap-4">
+      <div className="flex items-center p-4 gap-4 ">
         <div
-          className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}
+          className={`avatar rounded-full p-4 flex justify-center items-center  ${bgColor}`}
         >
           <Icon
             className={`  text-4xl 
             duration-300 
-            ease-in-out    hover:scale-120 
+            ease-in-out    hover:scale-120  
             ${theme == "luxury" ? "text-black" : "text-white"}`}
           />
         </div>
-        <div className="flex flex-col justify-between flex-1">
-          <div className="flex justify-between items-center mb-2">
-            <span className="font-semibold text-lg">{category}</span>
-            <span className="font-bold text-lg">
+        <div className="flex flex-col justify-between flex-1 h-full ">
+          <div className="flex justify-between items-center mb-2  ">
+            <span className="font-semibold text-lg ">{category}</span>
+            <span className="font-bold text-lg ">
               {" "}
               {formatCurrency(amount, userCurrency)}
             </span>
@@ -68,7 +68,7 @@ const ExpenseCard = ({
       )}
       {showNote && (
         <div
-          className="absolute inset-0 bg-base-100 bg-opacity-90 rounded-xl p-3 overflow-auto z-10"
+          className="absolute inset-0 bg-base-100 bg-opacity-90  rounded-xl p-3 overflow-auto z-10"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -82,7 +82,7 @@ const ExpenseCard = ({
           <button
             title="Delete expense"
             onClick={deleteExpense}
-            className="btn btn-error btn-xs"
+            className="btn btn-error  btn-xs"
           >
             <MdDeleteForever size={20} />
           </button>
@@ -117,8 +117,8 @@ const ExpenseCard = ({
             />
           </CommonModal>
 
-          <div className="max-h-full overflow-auto scrollbar-hide">
-            <p className="text-sm leading-relaxed whitespace-pre-wrap">
+          <div className="max-h-full overflow-auto scrollbar-hide  ">
+            <p className="text-sm leading-relaxed whitespace-pre-wrap   ">
               {note ? (
                 <>
                   <strong>Note:</strong> {note}

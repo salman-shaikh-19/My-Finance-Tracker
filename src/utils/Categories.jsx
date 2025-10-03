@@ -35,6 +35,7 @@ export const incomeCategories = [
   { name: "Investments", icon: FaChartLine, bg: "bg-info" },
   { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-neutral" },
+
 ];
 
 export const investmentCategories = [
@@ -42,6 +43,7 @@ export const investmentCategories = [
   { name: "Mutual Funds", icon: FaChartLine, bg: "bg-secondary" },
   { name: "Bonds", icon: FaChartLine, bg: "bg-accent" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
+  
 ];
 // export const paymentMethods = [
 //   { name: "Cash", bg: "bg-primary" },

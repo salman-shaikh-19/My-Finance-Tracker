@@ -33,7 +33,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         // Call your delete function here
         dispatch(deleteExpense(expenseId));
 
-        Swal.fire("Deleted!", "Your expense has been deleted.", "success");
+        Swal.fire("Deleted!", "Your expense has been deleted ", "success");
       }
     });
   };
@@ -55,7 +55,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
       })
     )
       .then(() => {
-        toast.success("Expense updated successfully");
+        toast.success("Expense updated successfully ");
         resetForm();
         editModelRef.current?.close();
       })
@@ -69,14 +69,14 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
     <>
       <div
         id="expenses-list"
-        className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
+        className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5  "
       >
         <ExpenseChart
     
         expenses={expenses} />
        <div className="divider">Total Expenses by Category </div>
 
-      <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
+      <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4 ">
      {expenseCategories.map((category, i) => {
             const Icon = category.icon;
             const totalAmount = expenseTotalAmountByCategory[category.name] || 0;
@@ -101,10 +101,10 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           pageSize={20}
           data={expenses}
           scrollTargetId="expenses-list"
-          endMsg={expenses.length ? "You have seen all expense data" : ""}
+          endMsg={expenses.length ? "You have seen all expense data " : ""}
         >
           {(items) => (
-            <div className="flex flex-wrap gap-1 lg:pl-4">
+            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
               {items.map((item) => {
                 const category = getCategoryByName(
                   expenseCategories,
@@ -137,8 +137,8 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         </CustomInfiniteScroll>
         :
         <>
-        <div className="flex flex-wrap gap-1 lg:pl-4 justify-center">
-          <span className="alert alert-info alert-soft">No expense data found</span>
+        <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
+          <span className="alert alert-info alert-soft ">No expense data found </span>
         </div>
         </>
           }

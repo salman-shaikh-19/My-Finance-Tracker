@@ -54,7 +54,7 @@ const ExpensesPage = () => {
     // error for exceeding 100% of limit
     if (total >= LIMIT && !warningShownRef.current.errorShown) {
       toast.error(
-        `You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total}.`,
+        `You have exceeded your daily expense limit of ${LIMIT}. Total spent: ${total} `,
         { autoClose: false }
       );
       warningShownRef.current.errorShown = true;
@@ -112,7 +112,7 @@ const totalAmountByCategory =useMemo(() => {
 
   return (
     <>
-      <Main mainClassName="relative">
+      <Main mainClassName="relative ">
         {/* <ExpensesList userId={loggedInUserId} expenses={expenses} /> */}
         <Suspense
           fallback={
@@ -137,7 +137,7 @@ const totalAmountByCategory =useMemo(() => {
         "
           openModalBtnText={
             <>
-              <BiPlus size={30} className="inline mr-1" />
+              <BiPlus size={30} className="inline mr-1 " />
             </>
           }
         >

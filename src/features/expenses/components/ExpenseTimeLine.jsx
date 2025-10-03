@@ -39,20 +39,20 @@ const ExpenseTimeLine = ({
 
   return (
     
-    <li className={`step ${isActive ? "step-primary" : ""}`} title={title}>
+    <li className={`step  ${isActive ? "step-primary " : ""}`} title={title}>
       <span
         className={`step-icon !w-6 !h-6  text-xs transition-all duration-500 ease-in-out  ${
-          isOverLimit ? "!bg-red-500 text-white" :  ''
+          isOverLimit ? "!bg-red-500 text-white " :  ''
         }
         
-         transform hover:scale-125 hover:shadow-xl
+         transform hover:scale-125 hover:shadow-xl 
         `}
       >
         {day}
       </span>
       <span
-        className={`text-xs ${
-          isOverLimit ? "!text-red-500 font-semibold" : ""
+        className={`text-xs  ${
+          isOverLimit ? "!text-red-500 font-semibold  " : " font-medium "
         }`}
       >
         {formattedCurrency}

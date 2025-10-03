@@ -5,6 +5,7 @@ export const currencySymbols = [
   { code: "EUR", symbol: "€" },
   { code: "GBP", symbol: "£" },
   { code: "JPY", symbol: "¥" },
+  
 ];
 // format amount with symbol
 export function formatCurrency(amount, currency = "INR") {
