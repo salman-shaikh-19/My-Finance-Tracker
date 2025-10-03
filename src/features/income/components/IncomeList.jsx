@@ -86,6 +86,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                   income.income_category
                 );
                 const Icon = category.icon;
+             
 
                 return (
                   <IncomeCard
@@ -102,6 +103,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                     editModelRef={editModelRef}
                     editIncomeHandler={editIncomeHandler}
                     Icon={Icon}
+                 
                   />
                 );
               })}

@@ -5,6 +5,7 @@ import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import {
   expenseCategories,
   getCategoryByName,
+  paymentMethods,
 } from "../../../utils/Categories";
 import ExpenseCard from "./ExpenseCard";
 import ExpenseChart from "./ExpenseChart";
@@ -96,7 +97,12 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                     item.expense_category
                   );
                   const Icon = category.icon;
-
+                  const paymentMethod = getCategoryByName(
+                    paymentMethods,
+                    item.payment_method
+                  );
+                  const PaymentIcon = paymentMethod.icon;
+                  
                   return (
                     <ExpenseCard
                       key={item.id}
@@ -114,6 +120,8 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                       userCurrency={userCurrency}
                       editModelRef={editModelRef}
                       editExpenseHandler={editExpenseHandler}
+                      PaymentIcon={PaymentIcon}
+                     
                     />
                   );
                 })}

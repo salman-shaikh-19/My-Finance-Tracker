@@ -1,8 +1,9 @@
 import { MdOutlinePayments } from "react-icons/md";
-import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt, FaPlane, FaHome, FaLaptop } from "react-icons/fa";
+import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt, FaPlane, FaHome, FaLaptop, FaBriefcase, FaHandHoldingUsd, FaCreditCard, FaMobileAlt, FaUniversity, FaWallet, FaRegFileAlt, FaQuestionCircle } from "react-icons/fa";
 import { BiRestaurant, BiBus, BiHealth, BiBook } from "react-icons/bi";
 import { GiShoppingCart } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
+import { FaRegMoneyBill1 } from "react-icons/fa6";
 
 // export const expenseCategories = [
 //   { name: "Payments", icon: MdOutlinePayments, bg: "bg-primary" },
@@ -30,17 +31,13 @@ export const expenseCategories = [
 ];
 
 export const incomeCategories = [
-  { name: "Salary", icon: FaMoneyBillWave, bg: "bg-success" },
-  { name: "Bonus", icon: FaMoneyBillWave, bg: "bg-accent" },
-  { name: "Business", icon: FaMoneyBillWave, bg: "bg-warning" },
-  { name: "Investments", icon: FaChartLine, bg: "bg-info" },
-  { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },
-  { name: "Gifts", icon: FaGift, bg: "bg-secondary" },
-  { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },
-
-
-  
-
+  { name: "Salary", icon: FaMoneyBillWave, bg: "bg-success" },         // Regular income
+  { name: "Bonus", icon: FaHandHoldingUsd, bg: "bg-accent" },         // Extra cash/bonus
+  { name: "Business", icon: FaBriefcase, bg: "bg-warning" },          // Business income
+  { name: "Investments", icon: FaChartLine, bg: "bg-info" },          // Stocks, market, growth
+  { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },  // Rent savings
+  { name: "Gifts", icon: FaGift, bg: "bg-secondary" },                // Presents, gifts
+  { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },     
 ];
 
 export const investmentCategories = [
@@ -59,14 +56,15 @@ export const investmentCategories = [
 //   { name: "UPI", bg: "bg-accent" },
 //   { name: "Other", bg: "bg-info" },
 // ];
+
 export const paymentMethods = [
-  { name: "Cash", bg: "bg-primary" },
-  { name: "Card", bg: "bg-secondary" },
-  { name: "UPI", bg: "bg-accent" },
-  { name: "Net Banking", bg: "bg-green-500" },
-  { name: "Wallet", bg: "bg-yellow-500" },
-  { name: "Cheque", bg: "bg-purple-500" },
-  { name: "Other", bg: "bg-info" },
+  { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },          // Physical cash
+  { name: "Card", icon: FaCreditCard, bg: "bg-secondary" },           // Debit/Credit card
+  { name: "UPI", icon: FaMobileAlt, bg: "bg-accent" },                // Mobile payments
+  { name: "Net Banking", icon: FaUniversity, bg: "bg-green-500" },    // Bank transfer
+  { name: "Wallet", icon: FaWallet, bg: "bg-yellow-500" },            // Digital wallet
+  { name: "Cheque", icon: FaRegFileAlt, bg: "bg-purple-500" },        // Cheque payments
+  { name: "Other", icon: FaRegMoneyBill1, bg: "bg-info" },           // Miscellaneous
 ];
 
 export const savingsCategories = [

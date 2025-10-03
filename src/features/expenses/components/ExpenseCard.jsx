@@ -1,5 +1,5 @@
-import React, {  useState } from "react";
-import { BiEdit, BiHome, BiX } from "react-icons/bi";
+import React, { useState } from "react";
+import { BiEdit, BiHome, BiMoney, BiX } from "react-icons/bi";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import dayjs from "dayjs";
 import { MdDeleteForever, MdFiberNew } from "react-icons/md";
@@ -22,18 +22,25 @@ const ExpenseCard = ({
   editModelRef,
   editExpenseHandler,
   Icon = BiHome,
+  PaymentIcon = BiMoney,
 }) => {
   const [showNote, setShowNote] = useState(false);
 
-  // console.log('render');
+  // console.log('render',theme);
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
     : false;
   return (
     <div
-      className={`card ${!showNote ? ' cursor-pointer ':''}   w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      className={`card ${
+        !showNote ? " cursor-pointer " : ""
+      }   w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
-      title={!showNote ? "Click to " + (showNote ? "close" : "show") + " action bar" :""}
+      title={
+        !showNote
+          ? "Click to " + (showNote ? "close" : "show") + " action bar"
+          : ""
+      }
     >
       <div className="flex items-center p-4 gap-4 ">
         <div
@@ -43,7 +50,7 @@ const ExpenseCard = ({
             className={`  text-4xl 
             duration-300 
             ease-in-out    hover:scale-120  
-            ${theme == "luxury" ? "text-black" : "text-white"}`}
+            ${theme == "luxury" ? "text-black" : "text-white"} `}
           />
         </div>
         <div className="flex flex-col justify-between flex-1 h-full ">
@@ -56,7 +63,11 @@ const ExpenseCard = ({
           </div>
 
           <div className="flex justify-between items-center text-sm text-gray-500">
-            <span>{type}</span>
+            <span className="flex items-center gap-2 bg-base-300 dark:bg-gray-800 px-2 py-1 rounded-full text-sm font-medium shadow-sm">
+              <PaymentIcon size={16} className="text-green-600" />
+              <span className="">Payment by:</span>
+              <span className="font-semibold ">{type}</span>
+            </span>
             <span>{commonDate({ date })}</span>
           </div>
         </div>
@@ -135,11 +146,12 @@ const ExpenseCard = ({
 };
 
 export default React.memo(ExpenseCard, (prevProps, nextProps) => {
-  if (prevProps.theme !== nextProps.theme && nextProps.theme === "luxury") {
-    //this will ignore theme, so changing theme never triggers a re-render.
-    return false; // trigger rerender
-  }
+  // if (prevProps.theme !== nextProps.theme && nextProps.theme === "luxury") {
+  //   //this will ignore theme, so changing theme never triggers a re-render.
+  //   return false; // trigger rerender
+  // }
   return (
+    prevProps.theme === nextProps.theme &&
     prevProps.category === nextProps.category &&
     prevProps.amount === nextProps.amount &&
     prevProps.type === nextProps.type &&

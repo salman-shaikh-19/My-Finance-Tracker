@@ -23,6 +23,7 @@ const IncomeCard = ({
   editModelRef,
   editIncomeHandler,
   Icon = BiMoney,
+ 
 }) => {
   const [showNote, setShowNote] = useState(false);
 
