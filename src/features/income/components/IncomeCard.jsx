@@ -121,4 +121,21 @@ const IncomeCard = ({
   );
 };
 
-export default React.memo(IncomeCard);
+// export default React.memo(IncomeCard);
+export default React.memo(IncomeCard, (prevProps, nextProps) => {
+  // if (prevProps.theme !== nextProps.theme && nextProps.theme === "luxury") {
+  //   //this will ignore theme, so changing theme never triggers a re-render.
+  //   return false; // trigger rerender
+  // }
+  return (
+    prevProps.theme === nextProps.theme &&
+    prevProps.category === nextProps.category &&
+    prevProps.amount === nextProps.amount &&
+
+    prevProps.date === nextProps.date &&
+    prevProps.bgColor === nextProps.bgColor &&
+    prevProps.userCurrency === nextProps.userCurrency &&
+    prevProps.Icon === nextProps.Icon &&
+    prevProps.note == nextProps.note
+  );
+});
