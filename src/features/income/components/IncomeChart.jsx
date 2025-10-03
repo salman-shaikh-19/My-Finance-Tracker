@@ -11,7 +11,7 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 
 import PrevNextButton from "../../common/components/PrevNextButton";
 import ChartMenu from '../../common/components/charts/ChartMenu';
-
+const chartColor = "#10B981"; 
 import { getAllIncomes } from "../incomeSlice";
 dayjs.extend(isoWeek);
 
@@ -93,7 +93,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total income of the week "
               height={270}
-              barColor="green"
+              barColor={chartColor}
             />
           )}
 
@@ -105,8 +105,8 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total income of the week "
               height={270}
-              lineColor="green"
-                strokeColor="green"
+              lineColor={chartColor}
+                strokeColor={chartColor}
               
             />
           )}

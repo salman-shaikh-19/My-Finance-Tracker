@@ -176,7 +176,7 @@ import ChartMenu from '../../common/components/charts/ChartMenu';
 import { CiWarning } from "react-icons/ci";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 dayjs.extend(isoWeek);
-
+const chartColor = "#EF4444";
 const ExpenseChart = () => {
   const dispatch = useDispatch();
   const { loggedInUserId,userCurrency,expenseLimit } = useSelector((state) => state.common);
@@ -255,7 +255,7 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total expenses of the week "
               height={270}
-              barColor="#DE1010"
+              barColor={chartColor}
             />
           )}
 
@@ -267,8 +267,8 @@ const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
               isLegend={false}
               description="Total expenses of the week "
               height={270}
-              lineColor="#DE1010"
-              strokeColor="#DE1010"
+              lineColor={chartColor}
+              strokeColor={chartColor}
             />
           )}
 
