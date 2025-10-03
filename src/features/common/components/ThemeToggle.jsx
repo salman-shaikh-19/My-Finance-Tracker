@@ -3,7 +3,7 @@ import { setTheme } from "../commonSlice"
 import React from "react";
 
 const themes = [
-  "light", "dark", "cupcake", "synthwave", "dracula", "forest", "luxury",
+  "light", "dark", "cupcake", "synthwave", "dracula", "forest",
   "night", "coffee", "winter", "nord", "caramel", "abyss", "sunset",
   "halloween", "garden", "retro", "cyberpunk", "valentine", "black", "aqua",
   "lofi", "pastel", "bumblebee", "emerald", "corporate", "fantasy", "wireframe",
