@@ -13,7 +13,7 @@ export const getCountBy=({ data, countByField, omitThem = [] })=> {
 }
 
 //get total by specific field for example: get total expense by expense catgory
-export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Other") => {
+export const getTotalByGroup = (data, groupKey, sumKey, defaultGroup = "Default") => {
   return data.reduce((acc, curr) => {
     const group = curr[groupKey] || defaultGroup;
     const value = Number(curr[sumKey]) || 0;

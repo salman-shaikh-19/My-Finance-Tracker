@@ -77,8 +77,6 @@ const totalAmountByCategory =useMemo(() => {
     // dispatch(getAllExpenses(loggedInUserId));
     dispatch(getAllExpenses({ userId: loggedInUserId }));
      
-
-
   }, [dispatch, loggedInUserId]);
 
   //custom hook

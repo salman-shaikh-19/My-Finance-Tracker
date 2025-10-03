@@ -29,7 +29,7 @@ const ThemeToggle = () => {
       </label> */}
       <select
       title="Set Theme"
-        className="select "
+        className="select select-bordered select-sm w-full max-w-xs"
         value={theme}
         onChange={handleChange}
       >

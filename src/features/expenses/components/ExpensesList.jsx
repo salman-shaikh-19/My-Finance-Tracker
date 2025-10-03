@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 // import { commonDate } from "../../../utils/dateUtils";
@@ -17,7 +17,7 @@ import ExpenseCategoryTotalAmountCard from "./ExpenseCategoryTotalAmountCard";
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency, theme } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
-  // const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
+ 
   const dispatch = useDispatch();
   const handleDelete = (expenseId) => {
     Swal.fire({
@@ -72,8 +72,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
       >
         <ExpenseChart
-        // setWeekOffset={setWeekOffset}
-        // weekOffset={weekOffset}
+    
         expenses={expenses} />
        <div className="divider">Total Expenses by Category </div>
 
