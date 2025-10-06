@@ -50,7 +50,7 @@ function App() {
         e.preventDefault();
       }
 
-      // //disbale right click and prevent duplicate toasts
+      //disbale right click and prevent duplicate toasts
       document.oncontextmenu = function (e) {
         e.preventDefault();
         toast.warning("Right click is disabled!");

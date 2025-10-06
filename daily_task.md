@@ -165,3 +165,4 @@
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
 - fixed re-render issues in chart,infinite scroll and custom chart tooltip component.
 - fixed delete income issue .
+- fetch user profile and display 

@@ -1,4 +1,4 @@
-import {  createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
@@ -15,12 +15,12 @@ export const getAllExpenses = createAsyncThunk(
       const { data, error } = await supabase
         .from("user_expenses")
         .select("*")
-        .eq('user_id',userId)
-         .gte("expense_date", startOfWeek)
+        .eq("user_id", userId)
+        .gte("expense_date", startOfWeek)
         .lte("expense_date", endOfWeek)
         // .order("id", { ascending: false });
-         .order("created_at", { ascending: false });
-        // select all fields
+        .order("created_at", { ascending: false });
+      // select all fields
 
       if (error) throw error;
       return data; // return the fetched data
@@ -31,16 +31,19 @@ export const getAllExpenses = createAsyncThunk(
 );
 export const addExpense = createAsyncThunk(
   "expenses/addExpense",
-  async ({ userId, amount, category, date, method,expense_note }, { rejectWithValue }) => {
+  async (
+    { userId, amount, category, date, method, expense_note },
+    { rejectWithValue }
+  ) => {
     try {
       const { data, error } = await supabase.from("user_expenses").insert([
         {
           user_id: userId,
           amount,
-          expense_category:category,
-          expense_date:date,
-          payment_method:method,
-          expense_note
+          expense_category: category,
+          expense_date: date,
+          payment_method: method,
+          expense_note,
         },
       ]);
 
@@ -48,7 +51,6 @@ export const addExpense = createAsyncThunk(
       // getAllExpenses();
       return data[0]; // return added expense
     } catch (err) {
-
       return rejectWithValue(err.message);
     }
   }
@@ -58,29 +60,29 @@ export const deleteExpense = createAsyncThunk(
   "expenses/deleteExpense",
   async (expenseId, { rejectWithValue }) => {
     try {
-      const {  error } = await supabase.from("user_expenses").delete().eq('id',expenseId);
+      const { error } = await supabase
+        .from("user_expenses")
+        .delete()
+        .eq("id", expenseId);
 
       if (error) throw error;
       // getAllExpenses();
-      return  { id: expenseId };
-
+      return { id: expenseId };
     } catch (err) {
-
       return rejectWithValue(err.message);
     }
   }
 );
 
-
 //update expense
 export const updateExpense = createAsyncThunk(
-  'expenses/updateExpense',
+  "expenses/updateExpense",
   async ({ id, updatedData }, { rejectWithValue }) => {
     try {
       const { data, error } = await supabase
-        .from('user_expenses')
+        .from("user_expenses")
         .update(updatedData)
-        .eq('id', id);
+        .eq("id", id);
 
       if (error) {
         return rejectWithValue(error.message);
@@ -94,14 +96,13 @@ export const updateExpense = createAsyncThunk(
 );
 export const expensesSlice = createSlice({
   name: "expenses",
-   initialState: {
+  initialState: {
     expenses: [],
     loading: false,
     error: null,
   },
-  reducers: {
-  },
-    extraReducers: (builder) => {
+  reducers: {},
+  extraReducers: (builder) => {
     builder
       .addCase(getAllExpenses.pending, (state) => {
         state.loading = true;
@@ -122,8 +123,8 @@ export const expensesSlice = createSlice({
       })
       .addCase(addExpense.fulfilled, (state, action) => {
         state.loading = false;
-       //add new expense at beginning of array
-           if (action.payload) {
+        //add new expense at beginning of array
+        if (action.payload) {
           state.expenses.unshift(action.payload); // instantly show new expense
         }
         // getAllExpenses();
@@ -133,11 +134,11 @@ export const expensesSlice = createSlice({
         state.error = action.payload || "Failed to add expense";
       })
       //deleteExpense
-         .addCase(deleteExpense.pending, (state) => {
+      .addCase(deleteExpense.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-     .addCase(deleteExpense.fulfilled, (state, action) => {
+      .addCase(deleteExpense.fulfilled, (state, action) => {
         state.loading = false;
         state.expenses = state.expenses.filter(
           (exp) => exp.id !== action.payload.id
@@ -149,13 +150,15 @@ export const expensesSlice = createSlice({
         state.error = action.payload || "Failed to delete expense";
       })
 
-       .addCase(updateExpense.pending, (state) => {
+      .addCase(updateExpense.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(updateExpense.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.expenses.findIndex(t => t.id === action.payload.id);
+        const index = state.expenses.findIndex(
+          (t) => t.id === action.payload.id
+        );
         if (index !== -1) {
           state.expenses[index] = action.payload;
         }
@@ -165,7 +168,6 @@ export const expensesSlice = createSlice({
         state.error = action.payload;
       });
   },
-
 });
 
 // export const { } = expensesSlice.actions;

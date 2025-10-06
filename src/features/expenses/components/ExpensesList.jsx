@@ -81,7 +81,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             );
           })}
         </div>
-        <div className="divider">Expenses</div>
+        <div className="divider" title={`total ${expenses.length ? 'expenses '+expenses.length : 'expense '+expenses.length}`}>Expenses ({expenses.length})</div>
         {expenses.length ? (
           <CustomInfiniteScroll
             pageSize={20}
