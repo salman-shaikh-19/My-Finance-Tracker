@@ -164,3 +164,4 @@
 # 8 oct
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
 - fixed re-render issues in chart,infinite scroll and custom chart tooltip component.
+- fixed delete income issue .

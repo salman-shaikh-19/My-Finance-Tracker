@@ -62,7 +62,8 @@ export const loginUser = createAsyncThunk(
 
       if (userError) throw userError;
       if (!userData) throw new Error("User not found");
-
+      // console.log("userData:", userData);
+      
       return userData; 
     } catch (err) {
       return rejectWithValue(err.message || "Login failed");
@@ -90,7 +91,7 @@ export const checkEmailExists = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
-  async ({ name, email, password, avatar = null }, { rejectWithValue }) => {
+  async ({ name, email, password }, { rejectWithValue }) => {
     try {
      
       const { data, error } = await supabase.auth.signUp({ email, password });
@@ -105,7 +106,7 @@ export const registerUser = createAsyncThunk(
             auth_user_id: authUser.id,  
             user_name: name,
             user_email:email,
-            user_avatar: avatar,
+          
           },
         ]);
 
@@ -136,13 +137,33 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+//profile data
+export const fetchUserProfile = createAsyncThunk(
+  "auth/fetchUserProfile",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("user_id", userId)
+        .single();
 
+      if (error) throw error;
+      // console.log("fetched profile data:", data);
+      
+      return data; 
+    } catch (err) {
+      return rejectWithValue(err.message || "Failed to fetch user profile");
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     userLoading: false,
     user: null,
     error: null,
+    profile: null,
   },
   reducers: {
     clearError: (state) => {
@@ -204,7 +225,19 @@ const authSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.userLoading = false;
         state.error = action.payload || "Logout failed";
-      });
+      })
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.userLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.profile = action.payload;
+      })
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.userLoading = false;
+        state.error = action.payload || "Failed to fetch user profile";
+      }); 
   },
 });
 

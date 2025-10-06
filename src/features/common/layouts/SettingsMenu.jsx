@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FiSettings } from "react-icons/fi";
 import { CgPassword, CgProfile } from "react-icons/cg";
 import ThemeToggle from "../components/ThemeToggle";
-import { logoutUser } from "../../auth/authSlice";
+import { fetchUserProfile, logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
 import { BiPlus, BiReset } from "react-icons/bi";
 import { setExpenseLimit, setLoggedInUserId } from "../commonSlice";
@@ -22,7 +22,8 @@ const SettingsMenu = ({
   const modalRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const loggedInUserId = useSelector((state) => state.common.loggedInUserId);
+  const { profile } = useSelector((state) => state.auth);
   const handleLogout = async () => {
     try {
       const {
@@ -50,6 +51,12 @@ const SettingsMenu = ({
   };
 
   useEffect(() => {
+    //profile data get
+    if (loggedInUserId) dispatch(fetchUserProfile(loggedInUserId));
+  }, [dispatch, loggedInUserId]);
+
+  useEffect(() => {
+    // Close the menu when clicking outside
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setOpen(false);
@@ -84,15 +91,22 @@ const SettingsMenu = ({
             isMobile
               ? "absolute bottom-20 -right-15 "
               : "absolute top-16 right-0"
-          }  w-42 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
+          }  w-50 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
         >
+            <div className="flex gap-3 border-b pb-3 mb-2 ">
+              <div >
+                <p className="font-semibold text-sm truncate w-32">
+                  {profile?.user_name || "User Name"}
+                </p>
+                <p className="text-xs text-gray-500 ">
+                  {profile?.user_email || "User Email "}
+                </p>
+              </div>
+            </div>
           <ul className="menu menu-compact ">
             {children}
-            <li>
-              <Link to="/profile" onClick={() => handleClickItem()}>
-                <CgProfile /> Profile
-              </Link>
-            </li>
+     
+
             <li>
               <Link to="/settings" onClick={() => handleClickItem()}>
                 <CgPassword /> Test test
@@ -113,7 +127,7 @@ const SettingsMenu = ({
                   "
             openModalBtnText={<>Expense Limit </>}
           >
-            <SetExpenseLimit handleSubmit={handleExpenseLimit}  />
+            <SetExpenseLimit handleSubmit={handleExpenseLimit} />
           </CommonModal>
 
           <button
@@ -122,7 +136,6 @@ const SettingsMenu = ({
           >
             Logout
           </button>
-          
         </div>
       )}
     </div>
