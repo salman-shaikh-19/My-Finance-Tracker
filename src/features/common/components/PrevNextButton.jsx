@@ -11,6 +11,8 @@ const PrevNextButton = ({
   setPrevWeekOffset,
   setNextWeekOffset,
 }) => {
+  // console.log('logg from prev next button');
+  
   const weekLabel = useMemo(() => {
     // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
     return getWeekLabel(customWeakDate);
@@ -62,4 +64,9 @@ const PrevNextButton = ({
   );
 };
 
-export default React.memo(PrevNextButton);
+export default React.memo(PrevNextButton, (prevProps, nextProps) => {
+  return (
+    prevProps.customWeakDate === nextProps.customWeakDate &&
+    prevProps.weekOffset === nextProps.weekOffset
+  );
+});

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
  const HeaderNav = ({ title = "default", redirectTo = "/", icon,isActive }) => {
+  // console.log('logg from header nav');
+  
   return (
     <Link to={redirectTo} className={`   hover:text-primary flex items-center gap-1 ${
          isActive

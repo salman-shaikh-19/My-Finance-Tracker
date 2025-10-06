@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { FaSpinner } from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from './Loader';
@@ -10,6 +10,8 @@ function CustomInfiniteScroll({
   isTable = false,
   endMsg = "",
 }) {
+  // console.log('logg from infinite scroll');
+  
   const [dataToScroll, setDataToScroll] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -86,4 +88,9 @@ function CustomInfiniteScroll({
   );
 }
 
-export default CustomInfiniteScroll;
+export default React.memo(CustomInfiniteScroll, (prevProps, nextProps) => {
+  return (
+    JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data) &&
+    prevProps.pageSize === nextProps.pageSize
+  );
+});

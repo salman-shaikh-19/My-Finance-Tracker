@@ -36,6 +36,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <Field
                     type="number"
                     name="amount"
+                    id="amount"
                     placeholder="Expense amount"
                     className="input input-bordered w-full "
                   />
@@ -51,6 +52,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <Field
                     as="select"
                     name="expenseCategory"
+                    id="expenseCategory"
                     className="select select-bordered w-full "
                   >
                     <option value="">Select Category</option>
@@ -72,6 +74,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <Field
                     type="date"
                     name="expenseDate"
+                    id="expenseDate"
                     className="input input-bordered w-full "
                     max={new Date().toISOString().slice(0, 10)}
                   />
@@ -87,6 +90,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <Field
                     as="select"
                     name="expenseMethod"
+                    id="expenseMethod"
                     className="select select-bordered w-full"
                   >
                     <option value="">Select Method</option>
@@ -107,6 +111,7 @@ const ExpenseForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <Field
                     as="textarea"
                     name="note"
+                    id="note"
                     placeholder="Add a note for this expense..."
                     className="textarea textarea-bordered w-full "
                      maxLength={255}
