@@ -4,6 +4,8 @@ import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
 const CustomBarChart = React.memo(({ chartData,barColor="teal", width = "100%", height = 400, isLegend = false, XAxisDataKey, BarDataKey = [], description = "Bar Chart Deafult description" }) => {
     // const colors = useMemo(() => BarDataKey.map(() => randomColor()), [BarDataKey]);
+    // console.log('hii from bar chart');
+    
     return (
         <div style={{width,height}}>
           
@@ -39,4 +41,6 @@ const CustomBarChart = React.memo(({ chartData,barColor="teal", width = "100%", 
 })
 
 
-export default CustomBarChart
+export default React.memo(CustomBarChart, (prevProps, nextProps) => {
+    return JSON.stringify(prevProps.chartData) === JSON.stringify(nextProps.chartData)
+});

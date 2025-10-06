@@ -14,33 +14,44 @@ import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Header = () => {
-   const [spinning, setSpinning] = useState(false);
-   const location = useLocation(); // gives current URL
+  const [spinning, setSpinning] = useState(false);
+  const location = useLocation();
   const currentPath = location.pathname;
-     const handleClick = () => {
+  const handleClick = () => {
     setSpinning(true);
     setTimeout(() => setSpinning(false), 500); // remove class after animation
   };
 
   // useEffect(()=>{
   //   console.log('logg');
-    
+
   // },[])
-  
+
   return (
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5  shadow-md z-50  ">
         <Link to={"/"} className="font-bold me-auto select-none text-lg ">
           My Finance Tracker
         </Link>
-        <HeaderNav title="Home" redirectTo="/"  isActive={currentPath === "/"} />
-        <HeaderNav title="Expenses" redirectTo='/expenses'  isActive={currentPath === "/expenses"} />
-        <HeaderNav title="Incomes" redirectTo="/incomes"  isActive={currentPath === "/incomes"} />
-        <HeaderNav title="Investments"  isActive={currentPath === "/investments"} />
-        <HeaderNav title="Savings"  isActive={currentPath === "/savings"} />
+        <HeaderNav title="Home" redirectTo="/" isActive={currentPath === "/"} />
+        <HeaderNav
+          title="Expenses"
+          redirectTo="/expenses"
+          isActive={currentPath === "/expenses"}
+        />
+        <HeaderNav
+          title="Incomes"
+          redirectTo="/incomes"
+          isActive={currentPath === "/incomes"}
+        />
+        <HeaderNav
+          title="Investments"
+          isActive={currentPath === "/investments"}
+        />
+        <HeaderNav title="Savings" isActive={currentPath === "/savings"} />
         {/* <ThemeToggle />
         <button onClick={handleLogout} className="btn btn-error">
           Logout
@@ -73,15 +84,24 @@ const Header = () => {
           <SettingsMenu
             isMobile={true}
             triggerIcon={
-               <BiPlusCircle
-              className={`text-5xl cursor-pointer hover:text-primary ${spinning ? "animate-spin" : ""}`}
-              title="More"
-              onClick={handleClick}
-            />
+              <BiPlusCircle
+                className={`text-5xl cursor-pointer hover:text-primary ${
+                  spinning ? "animate-spin" : ""
+                }`}
+                title="More"
+                onClick={handleClick}
+              />
             }
           >
             <li>
-              <Link to="/" className={` ${currentPath==='/' ? "bg-primary text-white" : "hover:bg-base-200"}`}>
+              <Link
+                to="/"
+                className={` ${
+                  currentPath === "/"
+                    ? "bg-primary text-white"
+                    : "hover:bg-base-200"
+                }`}
+              >
                 <GrDashboard /> Dashboard
               </Link>
             </li>

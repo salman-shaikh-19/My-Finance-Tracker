@@ -40,4 +40,6 @@ const CustomPieChart = React.memo(({ chartData, width = "100%", height = 400, is
 ));
 
 
-export default CustomPieChart
+export default React.memo(CustomPieChart, (prevProps, nextProps) => {
+    return JSON.stringify(prevProps.chartData) === JSON.stringify(nextProps.chartData)
+});

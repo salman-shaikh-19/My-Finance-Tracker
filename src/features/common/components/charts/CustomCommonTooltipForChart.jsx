@@ -1,6 +1,9 @@
-import { useSelector } from "react-redux"
+import React from "react";
 
-function CustomCommonTooltipForChart({ active, payload, label }) {
+
+function CustomCommonTooltipForChart({ active, payload, label }) {  
+// console.log('hii from tooltip');
+
   
     if (!(active && payload && payload.length)) return null;
     return (
@@ -27,4 +30,7 @@ function CustomCommonTooltipForChart({ active, payload, label }) {
     )
 
 }
-export default CustomCommonTooltipForChart
+
+export default React.memo(CustomCommonTooltipForChart, (prevProps, nextProps) => {
+    return JSON.stringify(prevProps.payload) === JSON.stringify(nextProps.payload)
+});

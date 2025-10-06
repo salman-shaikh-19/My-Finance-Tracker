@@ -82,32 +82,6 @@
 - display payment method icon in expense card and enhanced ui.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 6 oct
 - make timeline for expense like total expenses on monday of currentweek if user crossed its expense limit then marked with red color.
 - prevent future date selection in add/edit expense.
@@ -116,11 +90,76 @@
 - add income.
 - delete income.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 7 oct 
 - update income.
 - code optimization.
 - income charts.
 - enhanced ui of expense/income card.
+- fixed re-render issues in chart.
 
 # 8 oct
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
