@@ -7,12 +7,13 @@ const CategoryTotalAmountCard = ({
   Icon,
   bg,
   userCurrency = "INR",
-
 }) => {
   const formattedCurrency = useMemo(
     () => formatCurrency(totalAmount, userCurrency),
     [totalAmount, userCurrency]
   );
+  // console.log('logg from category total amount card');
+  
   return (
     <div
       title={`You have spent ${formattedCurrency} on ${name} `}

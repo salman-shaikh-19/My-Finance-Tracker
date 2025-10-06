@@ -159,7 +159,8 @@
 - code optimization.
 - income charts.
 - enhanced ui of expense/income card.
-- fixed re-render issues in chart.
+
 
 # 8 oct
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
+- fixed re-render issues in chart and custom chart tooltip component.
