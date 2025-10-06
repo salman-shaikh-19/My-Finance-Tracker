@@ -60,13 +60,17 @@ export const deleteIncome = createAsyncThunk(
   "income/deleteIncome",
   async (incomeId, { rejectWithValue }) => {
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("user_incomes")
         .delete()
         .eq("id", incomeId);
+        
 
       if (error) throw error;
-      return data[0]; // return deleted income
+      // console.log("deleted income data:", data);
+      
+      // return data[0]; // return deleted income
+      return { id: incomeId }; // return deleted income id
     } catch (err) {
       return rejectWithValue(err.message);
     }
