@@ -1,3 +1,4 @@
+import React from "react";
 import { BiCopyright } from "react-icons/bi";
 
 
@@ -14,4 +15,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

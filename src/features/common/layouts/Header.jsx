@@ -14,7 +14,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Header = () => {
    const [spinning, setSpinning] = useState(false);
@@ -102,4 +102,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);
