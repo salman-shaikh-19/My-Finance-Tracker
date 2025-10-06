@@ -81,7 +81,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
             );
           })}
         </div>
-        <div className="divider" title={`total ${expenses.length ? 'expenses '+expenses.length : 'expense '+expenses.length}`}>Expenses ({expenses.length})</div>
+        <div className="divider" title={`Total ${expenses.length ? 'expenses '+expenses.length : 'expense '+expenses.length}`}>Expenses ({expenses.length})</div>
         {expenses.length ? (
           <CustomInfiniteScroll
             pageSize={20}
@@ -132,7 +132,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           <>
             <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
               <span className="alert alert-info alert-soft ">
-                No expense data found{" "}
+                No expense data found
               </span>
             </div>
           </>

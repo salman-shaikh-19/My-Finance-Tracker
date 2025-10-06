@@ -3,6 +3,7 @@ import { MdHome, MdOutlinePayment, MdOutlinePayments } from "react-icons/md";
 import {
   FaChartLine,
   FaEllipsisV,
+  FaHandHoldingUsd,
   FaMoneyBillWave,
   FaPiggyBank,
 } from "react-icons/fa";
@@ -46,6 +47,11 @@ const Header = () => {
           title="Incomes"
           redirectTo="/incomes"
           isActive={currentPath === "/incomes"}
+        />
+            <HeaderNav
+          title="Liabilities"
+          redirectTo="/liabilities"
+          isActive={currentPath === "/liabilities"}
         />
         <HeaderNav
           title="Investments"
@@ -103,6 +109,18 @@ const Header = () => {
                 }`}
               >
                 <GrDashboard /> Dashboard
+              </Link>
+            </li>
+             <li>
+              <Link
+                to="/liabilities"
+                className={` ${
+                  currentPath === "/liabilities"
+                    ? "bg-primary text-white"
+                    : "hover:bg-base-200"
+                }`}
+              >
+                <FaHandHoldingUsd /> Liabilities
               </Link>
             </li>
           </SettingsMenu>

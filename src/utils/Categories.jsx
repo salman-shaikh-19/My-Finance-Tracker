@@ -67,6 +67,18 @@ export const paymentMethods = [
   { name: "Other", icon: FaRegMoneyBill1, bg: "bg-info" },           // Miscellaneous
 ];
 
+export const liabilitesCategories = [
+  { name: "Credit Card", icon: FaRegCreditCard, bg: "bg-primary" },
+  { name: "Personal Loan", icon: FaHandHoldingUsd, bg: "bg-secondary" },
+  {name:"Home Loan", icon: FaHome, bg: "bg-success" },
+  {name:"Borrowed Money", icon: FaHandHoldingUsd, bg: "bg-warning" },
+  { name: "Mortgage", icon: FaHome, bg: "bg-accent" },
+  { name: "Auto Loan", icon: FaCarAlt, bg: "bg-info" },
+  { name: "Student Loan", icon: BiBook, bg: "bg-warning" },
+  { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
+];
+
+
 export const savingsCategories = [
   { name: "Emergency Fund", icon: FaPiggyBank, bg: "bg-error" },
   { name: "Retirement", icon: FaPiggyBank, bg: "bg-warning" },

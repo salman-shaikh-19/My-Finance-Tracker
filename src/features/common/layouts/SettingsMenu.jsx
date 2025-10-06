@@ -107,11 +107,7 @@ const SettingsMenu = ({
             {children}
      
 
-            <li>
-              <Link to="/settings" onClick={() => handleClickItem()}>
-                <CgPassword /> Test test
-              </Link>
-            </li>
+          
           </ul>
           <div className="mt-3 border-t pt-2 ">
             <SetUserCurrency />

@@ -9,6 +9,7 @@ import NotFoundPage from "../features/common/components/NotFoundPage";
 import RegisterAccount from "../features/auth/components/RegisterAccount";
 import ExpensesPage from "../features/expenses/components/ExpensesPage";
 import IncomePage from "../features/income/components/IncomePage";
+import LiabilityPage from "../features/liabilities/components/LiabilityPage";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -59,6 +60,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <IncomePage />
+          </ProtectedRoute>
+        }
+      />
+         <Route 
+        path="/liabilities"
+        element={
+          <ProtectedRoute>
+            <LiabilityPage />
           </ProtectedRoute>
         }
       />
