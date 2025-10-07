@@ -163,7 +163,7 @@ const { userCurrency } = useSelector(state => state.common);
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
              <span
               title="Liability type"
-              className="badge badge-success badge-sm"
+              className="badge badge-info badge-sm"
             >
               {liabilityType}
             </span>

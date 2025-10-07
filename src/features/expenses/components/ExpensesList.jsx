@@ -111,7 +111,6 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                       deleteExpense={() => handleDelete(item.id)}
                       category={category.name}
                       amount={item.amount}
-                    
                       type={item.payment_method}
                       date={item.expense_date}
                       bgColor={category.bg}
