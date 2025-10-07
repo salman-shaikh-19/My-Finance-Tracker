@@ -35,9 +35,11 @@ const LiabilityCard = ({
   const paymentsPerYear = {
     Monthly: 12,
     Quarterly: 4,
-    HalfYearly: 2,
+
     Yearly: 1,
     Weekly: 52,
+    "No Payment Schedule": 0,
+    Custom: 0,
   };
 
   let numberOfPayments = 1;
@@ -58,14 +60,18 @@ const LiabilityCard = ({
       case "Quarterly":
         numberOfPayments = Math.ceil((end.diff(start, "month") + 1) / 3);
         break;
-      case "HalfYearly":
-        numberOfPayments = Math.ceil((end.diff(start, "month") + 1) / 6);
-        break;
+     
       case "Yearly":
         numberOfPayments = end.diff(start, "year") + 1;
         break;
       case "Weekly":
         numberOfPayments = end.diff(start, "week") + 1;
+        break;
+      case "No Payment Schedule":
+        numberOfPayments = 1;
+        break;
+        case "Custom":
+        numberOfPayments = 1;
         break;
       default:
         numberOfPayments = paymentsPerYear[paymentSchedule];
@@ -103,29 +109,35 @@ const LiabilityCard = ({
          
             <div className="flex items-center gap-1 ms-auto text-sm text-gray-500">
               {paymentSchedule && (
-                <span>
-                  {formatCurrency(perInstallment, userCurrency || "INR")} /{" "}
-                  {paymentSchedule.toLowerCase()}
-                </span>
+                <span >
+                  {formatCurrency(perInstallment, userCurrency || "INR")} {" "}
+                  {paymentSchedule.toLowerCase()==="no payment schedule"?"":paymentSchedule.toLowerCase()==="custom" ? "":"/"+paymentSchedule.toLowerCase()}
+             
+                    </span>
               )}
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2  text-sm text-gray-500 items-center">
-            <span className="font-medium">{liabilityType}</span>
-            <span title="Start date" className="ms-auto">{commonDate({ date: startDate })}</span>
+            <span className="badge badge-outline badge-sm cursor-auto" title="Liability started from">
+              <MdPayment className="inline mb-0.5" /> {commonDate({ date: startDate })}
+            </span>
             {paymentSchedule && (
-              <div className="badge badge-primary" title="Payment schedule">
-                <MdPayment className="inline mr-1" />
+              <div className="badge badge-primary badge-xs lg:badge-sm md:badge:sm" title="Payment schedule">
+                
                 {paymentSchedule}
               </div>
             )}
             {endDate && (
-              <span title="End date">{commonDate({ date: endDate })}</span>
+              // <span title="End date">{commonDate({ date: endDate })}</span>
+                <span className="badge badge-outline badge-sm cursor-auto" title="Liability deadline">
+              <MdPayment className="inline mb-0.5" /> {commonDate({ date: endDate })}
+            </span>
             )}
+            
           </div>
 
-          <div className="flex flex-wrap gap-3 text-sm text-gray-500 items-center mt-2">
+          <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
             {interestRate > 0 && (
               <span
                 title="Interest rate"
@@ -167,9 +179,12 @@ const LiabilityCard = ({
               className={`badge badge-sm ${
                 remainingAmount === 0 ? "badge-success" : "badge-warning"
               }`}
+              title="Liability status"
             >
               {remainingAmount === 0 ? "Cleared" : "Ongoing"}
             </span>
+               <span title="Liability type"
+                className="badge badge-success badge-sm">{liabilityType}</span>
           </div>
 
           <div></div>
@@ -178,8 +193,8 @@ const LiabilityCard = ({
 
       {/* New Badge */}
       {isNew && (
-        <div className="absolute top-2 right-2 text-primary">
-          <MdFiberNew size={28} />
+        <div className="absolute  top-0 right-0 text-primary">
+          <MdFiberNew size={25} />
         </div>
       )}
 
