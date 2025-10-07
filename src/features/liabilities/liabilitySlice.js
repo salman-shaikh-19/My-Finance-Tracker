@@ -1,4 +1,3 @@
-
 //slice for liabilities with thunk
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
@@ -14,10 +13,9 @@ export const getAllLiabilities = createAsyncThunk(
       const { data, error } = await supabase
         .from("user_liabilities")
         .select("*")
-        .eq('user_id',userId)
+        .eq("user_id", userId)
         // .neq("remaining_amount", 0)
         .order("created_at", { ascending: false });
-
 
       if (error) throw error;
       return data; // return the fetched data
@@ -28,7 +26,7 @@ export const getAllLiabilities = createAsyncThunk(
 );
 export const addLiability = createAsyncThunk(
   "liabilities/addLiability",
-   async (
+  async (
     {
       userId,
       creditor_name,
@@ -40,7 +38,9 @@ export const addLiability = createAsyncThunk(
       start_date,
       end_date,
       liability_note,
-    }, { rejectWithValue }) => {
+    },
+    { rejectWithValue }
+  ) => {
     try {
       const payload = {
         user_id: userId,
@@ -54,13 +54,14 @@ export const addLiability = createAsyncThunk(
         end_date: end_date || null,
         liability_note: liability_note || null,
       };
-      const { data, error } = await supabase.from("user_liabilities").insert([payload]);
+      const { data, error } = await supabase
+        .from("user_liabilities")
+        .insert([payload]);
 
       if (error) throw error;
       // getAllExpenses();
       return data[0]; // return added expense
     } catch (err) {
-
       return rejectWithValue(err.message);
     }
   }
@@ -83,7 +84,7 @@ export const deleteLiability = createAsyncThunk(
   }
 );
 
-//pay liability 
+//pay liability
 export const payLiability = createAsyncThunk(
   "liabilities/payLiability",
   async ({ liabilityId, paymentAmount }, { rejectWithValue }) => {
@@ -107,7 +108,7 @@ export const payLiability = createAsyncThunk(
         .eq("id", liabilityId)
         .select()
         .single();
-      
+
       if (updateError) throw updateError;
 
       return updated;
@@ -117,6 +118,25 @@ export const payLiability = createAsyncThunk(
   }
 );
 
+//updated liability
+export const updatedLiability = createAsyncThunk(
+  "liabilities/updatedLiability",
+  async ({ id, updatedData }, { rejectWithValue }) => {
+    try {
+      const { data, error } = await supabase
+        .from("user_liabilities")
+        .update(updatedData)
+        .eq("id", id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return data; // return updated expense
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 const liabilitySlice = createSlice({
   name: "liabilities",
   initialState: {
@@ -151,7 +171,7 @@ const liabilitySlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-        .addCase(deleteLiability.pending, (state) => {  
+      .addCase(deleteLiability.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -171,14 +191,30 @@ const liabilitySlice = createSlice({
         state.error = null;
       })
       .addCase(payLiability.fulfilled, (state, action) => {
-  state.loading = false;
-  const updated = action.payload;
-  state.liabilities = state.liabilities.map(liab =>
-    liab.id === updated.id ? updated : liab
-  );
-})
+        state.loading = false;
+        const updated = action.payload;
+        state.liabilities = state.liabilities.map((liab) =>
+          liab.id === updated.id ? updated : liab
+        );
+      })
 
       .addCase(payLiability.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(updatedLiability.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updatedLiability.fulfilled, (state, action) => {
+        state.loading = false;
+        const updated = action.payload;
+        state.liabilities = state.liabilities.map((liab) =>
+          liab.id === updated.id ? updated : liab
+        );
+      })
+      .addCase(updatedLiability.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

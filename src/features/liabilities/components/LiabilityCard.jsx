@@ -209,6 +209,7 @@ const LiabilityCard = ({
               title="Liability status"
             >
               {remainingAmount === 0 ? "Cleared" : "Ongoing"}
+              
             </span>
            
           </div>
