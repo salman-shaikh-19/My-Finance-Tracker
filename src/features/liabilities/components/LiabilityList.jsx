@@ -13,6 +13,7 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { deleteLiability, updatedLiability } from "../liabilitySlice";
 import LiabilityCard from "./LiabilityCard";
 import LiabilityChart from "./LiabilityChart";
+import NoDataFound from "../../common/components/NoDataFound";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const LiabilityList = ({ liabilites }) => {
@@ -130,11 +131,7 @@ const LiabilityList = ({ liabilites }) => {
           </CustomInfiniteScroll>
         ) : (
           <>
-            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
-              <span className="alert alert-info alert-soft ">
-                No liabilites data found
-              </span>
-            </div>
+         <NoDataFound NoDataFoundFor="liability" />
           </>
         )}
       </div>

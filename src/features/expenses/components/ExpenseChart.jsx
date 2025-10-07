@@ -177,6 +177,7 @@ import ChartMenu from "../../common/components/charts/ChartMenu";
 import ExpenseTimeLine from "./ExpenseTimeLine";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
+import NoDataFound from "../../common/components/NoDataFound";
 dayjs.extend(isoWeek);
 
 const chartColor = "#EF4444";
@@ -232,9 +233,7 @@ const ExpenseChart = () => {
       />
 
       {!chartData.length ? (
-        <div className="flex justify-center items-center  h-full">
-          <p>No expense data available</p>
-        </div>
+      <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
           <ChartMenu

@@ -9,6 +9,7 @@ import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import ChartMenu from "../../common/components/charts/ChartMenu";
 import { getAllLiabilities } from "../liabilitySlice";
+import NoDataFound from "../../common/components/NoDataFound";
 dayjs.extend(isoWeek);
 
 const chartColor = "#EF4444";
@@ -45,9 +46,7 @@ const chartData = liabilities.reduce((acc, liab) => {
  
 
       {!chartData.length ? (
-        <div className="flex justify-center items-center  h-full">
-          <p>No liabilites data available</p>
-        </div>
+       <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
           <ChartMenu

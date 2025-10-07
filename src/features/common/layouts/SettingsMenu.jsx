@@ -104,12 +104,9 @@ const SettingsMenu = ({
               </div>
             </div>
           <ul className="menu menu-compact ">
-            {children}
-     
-
-          
+            {children || ""}
           </ul>
-          <div className="mt-3 border-t pt-2 ">
+          <div className="mt-3 lg:mt-0 lg:pt-0 lg:border-t-0 border-t pt-2 ">
             <SetUserCurrency />
           </div>
           <div className="mt-2 ">

@@ -13,6 +13,7 @@ import ChartMenu from "../../common/components/charts/ChartMenu";
 import { getAllIncomes } from "../incomeSlice";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
+import NoDataFound from "../../common/components/NoDataFound";
 dayjs.extend(isoWeek);
 
 const chartColor = "#10B981";
@@ -61,9 +62,7 @@ const IncomeChart = () => {
       />
 
       {!chartData.length ? (
-        <div className="flex justify-center items-center  h-full">
-          <p>No income data available</p>
-        </div>
+         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
           <ChartMenu

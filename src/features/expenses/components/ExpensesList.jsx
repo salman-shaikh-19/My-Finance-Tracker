@@ -15,6 +15,7 @@ import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmount
 
 import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
+import NoDataFound from "../../common/components/NoDataFound";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
@@ -130,11 +131,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
           </CustomInfiniteScroll>
         ) : (
           <>
-            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center items-center h-40">
-              <span className="alert alert-info alert-soft ">
-                No expense data found
-              </span>
-            </div>
+           <NoDataFound NoDataFoundFor="expense" />
           </>
         )}
       </div>

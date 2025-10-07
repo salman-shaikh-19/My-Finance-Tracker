@@ -8,6 +8,7 @@ import { getCategoryByName, incomeCategories } from "../../../utils/Categories";
 import IncomeChart from "./IncomeChart";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { confirmDelete } from "../../../utils/confirmDelete";
+import NoDataFound from "../../common/components/NoDataFound";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
@@ -111,11 +112,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
           )}
         </CustomInfiniteScroll>
       ) : (
-        <div className="flex justify-center items-center h-40">
-          <span className="alert alert-info alert-soft">
-            No income data found
-          </span>
-        </div>
+       <NoDataFound NoDataFoundFor="income" />
       )}
     </div>
   );
