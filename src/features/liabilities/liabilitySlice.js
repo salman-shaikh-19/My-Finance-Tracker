@@ -15,7 +15,7 @@ export const getAllLiabilities = createAsyncThunk(
         .from("user_liabilities")
         .select("*")
         .eq('user_id',userId)
-        .neq("remaining_amount", 0)
+        // .neq("remaining_amount", 0)
         .order("created_at", { ascending: false });
 
 
@@ -82,6 +82,41 @@ export const deleteLiability = createAsyncThunk(
     }
   }
 );
+
+//pay liability 
+export const payLiability = createAsyncThunk(
+  "liabilities/payLiability",
+  async ({ liabilityId, paymentAmount }, { rejectWithValue }) => {
+    try {
+      // Fetch current remaining
+      const { data: liability, error: fetchError } = await supabase
+        .from("user_liabilities")
+        .select("remaining_amount")
+        .eq("id", liabilityId)
+        .single();
+
+      if (fetchError) throw fetchError;
+
+      const currentRemaining = Number(liability.remaining_amount);
+      const newRemaining = Math.max(currentRemaining - paymentAmount, 0);
+
+      // Update with .select() to return updated record
+      const { data: updated, error: updateError } = await supabase
+        .from("user_liabilities")
+        .update({ remaining_amount: newRemaining })
+        .eq("id", liabilityId)
+        .select()
+        .single();
+      
+      if (updateError) throw updateError;
+
+      return updated;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
 const liabilitySlice = createSlice({
   name: "liabilities",
   initialState: {
@@ -127,6 +162,23 @@ const liabilitySlice = createSlice({
         );
       })
       .addCase(deleteLiability.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(payLiability.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(payLiability.fulfilled, (state, action) => {
+  state.loading = false;
+  const updated = action.payload;
+  state.liabilities = state.liabilities.map(liab =>
+    liab.id === updated.id ? updated : liab
+  );
+})
+
+      .addCase(payLiability.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

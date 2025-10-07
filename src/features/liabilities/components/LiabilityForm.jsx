@@ -139,11 +139,11 @@ const LiabilityForm=({handleSubmit,initialValues,isEdit = false})=>{
                     className="select select-bordered w-full "
                   >
                     <option value="">Select Payment Schedule</option>
-                    <option value="Weekly">Weekly</option>
+
                     <option value="Monthly">Monthly</option>
                     <option value="Quarterly">Quarterly</option>
                     <option value="Yearly">Yearly</option>
-                    <option value="Custom">Custom</option>
+
                     <option value="No Payment Schedule">No Payment Schedule</option>
                   </Field>
                   <ErrorMessage

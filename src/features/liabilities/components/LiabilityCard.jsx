@@ -6,6 +6,9 @@ import { formatCurrency } from "../../../utils/currencyUtils";
 import CommonModal from "../../common/components/CommonModal";
 import { commonDate } from "../../../utils/dateUtils";
 import LiabilityForm from "./LiabilityForm";
+import { payLiability } from "../liabilitySlice";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const LiabilityCard = ({
   liabilityId,
@@ -37,9 +40,8 @@ const LiabilityCard = ({
     Quarterly: 4,
 
     Yearly: 1,
-    Weekly: 52,
+
     "No Payment Schedule": 0,
-    Custom: 0,
   };
 
   let numberOfPayments = 1;
@@ -55,32 +57,44 @@ const LiabilityCard = ({
 
     switch (paymentSchedule) {
       case "Monthly":
-        numberOfPayments = end.diff(start, "month") + 1; // +1 to include start month
+        numberOfPayments = Math.max(end.diff(start, "month"), 1);
         break;
       case "Quarterly":
-        numberOfPayments = Math.ceil((end.diff(start, "month") + 1) / 3);
+        numberOfPayments = Math.max(Math.ceil(end.diff(start, "month") / 3), 1);
         break;
-     
       case "Yearly":
-        numberOfPayments = end.diff(start, "year") + 1;
+        numberOfPayments = Math.max(end.diff(start, "year"), 1);
         break;
-      case "Weekly":
-        numberOfPayments = end.diff(start, "week") + 1;
-        break;
-      case "No Payment Schedule":
-        numberOfPayments = 1;
-        break;
-        case "Custom":
-        numberOfPayments = 1;
-        break;
+
       default:
-        numberOfPayments = paymentsPerYear[paymentSchedule];
+        numberOfPayments = 1;
     }
   }
+
   let totalInterest = interestRate ? (remainingAmount * interestRate) / 100 : 0;
   let perInstallment =
     remainingAmount / numberOfPayments + totalInterest / numberOfPayments;
-
+  const dispatch = useDispatch();
+  const handlePay = async () => {
+    //confirm before paying sweet alert
+    await Swal.fire({
+      title: "Are you sure?",
+      text: `You are about to pay ${formatCurrency(
+        perInstallment,
+        userCurrency || "INR"
+      )}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, pay it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(payLiability({ liabilityId, paymentAmount: perInstallment }));
+        Swal.fire("Paid!", "Your payment has been recorded.", "success");
+      }
+    });
+  };
   return (
     <div
       className={`card relative w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden ${
@@ -99,45 +113,65 @@ const LiabilityCard = ({
 
         <div className="flex flex-col flex-1">
           <div className="flex gap-5 items-center mb-1">
-            <span className="font-semibold text-lg truncate">
-              Creditor:{" "}
-              <span className="font-normal">
-                {creditorName || "No creditor name"}
-              </span>{" "}
+            <span
+              className="font-semibold lg:text-sm badge badge-primary badge-xs"
+              title="creditor name"
+            >
+              {creditorName}
             </span>
-            
-         
+
             <div className="flex items-center gap-1 ms-auto text-sm text-gray-500">
-              {paymentSchedule && (
-                <span >
-                  {formatCurrency(perInstallment, userCurrency || "INR")} {" "}
-                  {paymentSchedule.toLowerCase()==="no payment schedule"?"":paymentSchedule.toLowerCase()==="custom" ? "":"/"+paymentSchedule.toLowerCase()}
-             
-                    </span>
+              {paymentSchedule && paymentSchedule !== "No Payment Schedule" && (
+                <span>
+                  {formatCurrency(perInstallment, userCurrency || "INR")} /
+                  {paymentSchedule.toLowerCase()}
+                </span>
               )}
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2  text-sm text-gray-500 items-center">
-            <span className="badge badge-outline badge-sm cursor-auto" title="Liability started from">
-              <MdPayment className="inline mb-0.5" /> {commonDate({ date: startDate })}
+            <span
+              className="badge badge-outline badge-sm cursor-auto"
+              title="Liability started from"
+            >
+              <MdPayment className="inline mb-0.5" />{" "}
+              {commonDate({ date: startDate })}
             </span>
             {paymentSchedule && (
-              <div className="badge badge-primary badge-xs lg:badge-sm md:badge:sm" title="Payment schedule">
-                
+              <div
+                className="badge badge-primary badge-xs lg:badge-sm md:badge:sm"
+                title="Payment schedule"
+              >
                 {paymentSchedule}
               </div>
             )}
             {endDate && (
               // <span title="End date">{commonDate({ date: endDate })}</span>
-                <span className="badge badge-outline badge-sm cursor-auto" title="Liability deadline">
-              <MdPayment className="inline mb-0.5" /> {commonDate({ date: endDate })}
-            </span>
+              <span
+                className="badge badge-outline badge-sm cursor-auto"
+                title="Liability deadline"
+              >
+                <MdPayment className="inline mb-0.5" />{" "}
+                {commonDate({ date: endDate })}
+              </span>
             )}
-            
           </div>
 
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
+             <span
+              title="Liability type"
+              className="badge badge-success badge-sm"
+            >
+              {liabilityType}
+            </span>
+            <span
+              className="badge badge-neutral badge-sm cursor-auto"
+              title="Total amount borrowed"
+            >
+              Total: {formatCurrency(totalAmount, userCurrency || "INR")}
+            </span>
+            
             {interestRate > 0 && (
               <span
                 title="Interest rate"
@@ -145,15 +179,8 @@ const LiabilityCard = ({
               >
                 Interest: {interestRate}%
               </span>
-              
             )}
 
-            <span
-              className="badge badge-neutral badge-sm cursor-auto"
-              title="Total amount borrowed"
-            >
-             Total: {formatCurrency(totalAmount, userCurrency || "INR")}
-            </span>
             {/* {interestRate > 0 && remainingAmount > 0 && (
               <span
                 title="Current interest"
@@ -168,11 +195,11 @@ const LiabilityCard = ({
             )} */}
 
             <span
-              title="Remaining amount"
+              title={`Total remaining amount ${interestRate > 0 ? `including ${interestRate}% interest` : ""}`}
               className="badge badge-accent badge-sm"
             >
               Remaining:{" "}
-              {formatCurrency(remainingAmount, userCurrency || "INR")}
+              {formatCurrency( remainingAmount+(remainingAmount * interestRate) / 100, userCurrency || "INR")}
             </span>
 
             <span
@@ -183,8 +210,7 @@ const LiabilityCard = ({
             >
               {remainingAmount === 0 ? "Cleared" : "Ongoing"}
             </span>
-               <span title="Liability type"
-                className="badge badge-success badge-sm">{liabilityType}</span>
+           
           </div>
 
           <div></div>
@@ -221,6 +247,16 @@ const LiabilityCard = ({
               >
                 <MdDeleteForever size={20} />
               </button>
+              {remainingAmount > 0 && (
+                <button
+                  title="Add payment"
+                  onClick={handlePay}
+                  className="btn btn-success btn-xs"
+                >
+                  <MdPayment size={20} /> Pay{" "}
+                  {formatCurrency(perInstallment, userCurrency || "INR")}
+                </button>
+              )}
 
               <CommonModal
                 ref={editModelRef}
