@@ -118,8 +118,59 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 8 oct
 -  prevent user to copying, cutting, selecting all, dev tools, viewing page source and right click for security.
 - fixed re-render issues in chart,infinite scroll and custom chart tooltip component.
 - fixed delete income issue .
 - fetch user profile and display 
+
+
+# 9 oct
+- fixed currency change issue in expense and incomes.
+- add liability implemented.
+- list liabilities.
+- liability chart done.
+
+# 10 oct
+- delete liabilities.
+- updated liability.
+- add/pay liability[updated remaining amount].
+- fixed issues in liabilities module.

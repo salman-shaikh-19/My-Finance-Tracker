@@ -10,17 +10,7 @@ const Footer = () => {
            <BiCopyright /> {new Date().getFullYear()} - All rights reserved by
           Finance Tracker Ltd
         </p>
-        <p className="text-center text-sm">
-          Developed by{" "}
-          <a
-            href="/test"
-            target="_blank"
-            rel="noreferrer"
-            className="underline"
-          >
-            Md. Rakibul Islam
-          </a>
-        </p>
+        
       </aside>
     </footer>
   );

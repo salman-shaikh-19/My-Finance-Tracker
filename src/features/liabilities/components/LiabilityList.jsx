@@ -12,6 +12,7 @@ import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { deleteLiability, updatedLiability } from "../liabilitySlice";
 import LiabilityCard from "./LiabilityCard";
+import LiabilityChart from "./LiabilityChart";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const LiabilityList = ({ liabilites }) => {
@@ -61,6 +62,9 @@ const LiabilityList = ({ liabilites }) => {
         id="liabilites-list"
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5  "
       >
+        <LiabilityChart
+
+        />
         <div
           className="divider"
           title={`Total ${
