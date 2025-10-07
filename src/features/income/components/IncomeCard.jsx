@@ -7,6 +7,7 @@ import CommonModal from "../../common/components/CommonModal";
 // import IncomeForm from "./IncomeForm";
 import { commonDate } from "../../../utils/dateUtils";
 import IncomeForm from "./IncomeForm";
+import { useSelector } from "react-redux";
 
 const IncomeCard = ({
   incomeId,
@@ -18,7 +19,7 @@ const IncomeCard = ({
   bgColor = "bg-green-500",
   createdAt,
 
-  userCurrency = "INR",
+  // userCurrency = "INR",
   deleteIncome,
   editModelRef,
   editIncomeHandler,
@@ -26,7 +27,7 @@ const IncomeCard = ({
  
 }) => {
   const [showNote, setShowNote] = useState(false);
-
+const { userCurrency } = useSelector(state => state.common);
     // console.log('rerender',category);
     
   const isNew = createdAt
@@ -133,7 +134,7 @@ export default React.memo(IncomeCard, (prevProps, nextProps) => {
 
     prevProps.date === nextProps.date &&
     prevProps.bgColor === nextProps.bgColor &&
-    prevProps.userCurrency === nextProps.userCurrency &&
+    // prevProps.userCurrency === nextProps.userCurrency &&
     prevProps.Icon === nextProps.Icon &&
     prevProps.note == nextProps.note
   );

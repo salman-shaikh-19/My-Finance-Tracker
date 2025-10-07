@@ -9,7 +9,7 @@ export const currencySymbols = [
 ];
 // format amount with symbol
 export function formatCurrency(amount, currency = "INR") {
-  // find the symbol for the given currency code
+
   const currencyObj = currencySymbols.find((c) => c.code === currency);
   const symbol = currencyObj ? currencyObj.symbol : "";
 

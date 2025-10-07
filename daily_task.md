@@ -92,10 +92,11 @@
 
 
 # 7 oct 
-- update income.
+- update income details.
 - code optimization.
-- income charts.
+- income charts implemnted.
 - enhanced ui of expense/income card.
+
 
 
 

@@ -16,7 +16,7 @@ import LiabilityChart from "./LiabilityChart";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const LiabilityList = ({ liabilites }) => {
-  const { userCurrency } = useSelector((state) => state.common);
+  // const { userCurrency } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ const LiabilityList = ({ liabilites }) => {
       onDelete: () => dispatch(deleteLiability(liabilityId)),
     });
   };
-
+// console.log(userCurrency);
   const editLiabilityHandler = (values, { resetForm, setSubmitting }) => {
     const { id } = values;
     console.log(id);
@@ -117,7 +117,7 @@ const LiabilityList = ({ liabilites }) => {
                         Icon={Icon}
                         createdAt={item.created_at}
                         liabilityNote={item.liability_note}
-                        userCurrency={userCurrency}
+                        // userCurrency={userCurrency}
                         editModelRef={editModelRef}
                         editLiabilityHandler={editLiabilityHandler}
                         // PaymentIcon={PaymentIcon}

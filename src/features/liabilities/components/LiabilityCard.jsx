@@ -7,7 +7,7 @@ import CommonModal from "../../common/components/CommonModal";
 import { commonDate } from "../../../utils/dateUtils";
 import LiabilityForm from "./LiabilityForm";
 import { payLiability } from "../liabilitySlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 const LiabilityCard = ({
@@ -25,12 +25,14 @@ const LiabilityCard = ({
   Icon,
   createdAt,
   liabilityNote,
-  userCurrency,
+  // userCurrency,
   editModelRef,
   editLiabilityHandler,
   PaymentIcon,
 }) => {
   const [showActions, setShowActions] = useState(false);
+const { userCurrency } = useSelector(state => state.common);
+
 
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
@@ -103,7 +105,7 @@ const LiabilityCard = ({
       onClick={() => setShowActions(!showActions)}
       title={!showActions ? "Click to show actions" : ""}
     >
-      {/* Top Section */}
+
       <div className="flex items-center p-4 gap-4">
         <div
           className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}
@@ -218,14 +220,13 @@ const LiabilityCard = ({
         </div>
       </div>
 
-      {/* New Badge */}
+  
       {isNew && (
         <div className="absolute  top-0 right-0 text-primary">
           <MdFiberNew size={25} />
         </div>
       )}
 
-      {/* Actions Overlay */}
       {showActions && (
         <div
           className="absolute inset-0 bg-base-100 bg-opacity-95 rounded-xl p-3 overflow-auto z-10 scrollbar-hide flex flex-col"
@@ -305,7 +306,7 @@ export default React.memo(LiabilityCard, (prev, next) => {
     prev.startDate === next.startDate &&
     prev.endDate === next.endDate &&
     prev.bgColor === next.bgColor &&
-    prev.userCurrency === next.userCurrency &&
+    // prev.userCurrency === next.userCurrency &&
     prev.Icon === next.Icon &&
     prev.liabilityNote === next.liabilityNote
   );

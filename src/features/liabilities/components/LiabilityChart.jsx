@@ -4,14 +4,10 @@ import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 // import { BiBarChartAlt, BiLineChart, BiPieChartAlt2 } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-
 import CustomLineChart from "../../common/components/charts/CustomLineChart";
 import CustomBarChart from "../../common/components/charts/CustomBarChart";
 import CustomPieChart from "../../common/components/charts/CustomPieChart";
-
 import ChartMenu from "../../common/components/charts/ChartMenu";
-
-import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import { getAllLiabilities } from "../liabilitySlice";
 dayjs.extend(isoWeek);
 
@@ -22,17 +18,14 @@ const LiabilityChart = () => {
     (state) => state.common
   );
   const { liabilities } = useSelector((state) => state.liabilities);
-
   const [currentChart, setCurrentChart] = useState("pie");
-
-
 
   useEffect(() => {
     if (!loggedInUserId) return;
     dispatch(getAllLiabilities({ userId: loggedInUserId }));
   }, [dispatch, loggedInUserId]);
 
-// Aggregate liabilities per type
+// liabilities per type
 const chartData = liabilities.reduce((acc, liab) => {
   const type = liab.liability_type || "Other";
   const existing = acc.find((c) => c.liability_type === type);
@@ -46,9 +39,6 @@ const chartData = liabilities.reduce((acc, liab) => {
   }
   return acc;
 }, []);
-
-//   console.log(chartData);
-  
 
   return (
     <div className="w-full  max-w-full h-[370px] p-4 bg-base-100 rounded-lg   shadow">

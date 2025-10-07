@@ -6,11 +6,12 @@ import { MdDeleteForever, MdFiberNew } from "react-icons/md";
 import CommonModal from "../../common/components/CommonModal";
 import ExpenseForm from "./ExpenseForm";
 import { commonDate } from "../../../utils/dateUtils";
+import { useSelector } from "react-redux";
 
 const ExpenseCard = ({
   expenseId,
  
-  userCurrency = "INR",
+  // userCurrency = "INR",
   deleteExpense,
   category,
   amount,
@@ -25,7 +26,7 @@ const ExpenseCard = ({
   PaymentIcon = BiMoney,
 }) => {
   const [showNote, setShowNote] = useState(false);
-
+const { userCurrency } = useSelector(state => state.common);
   // console.log('render',theme);
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
@@ -157,7 +158,7 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
     prevProps.type === nextProps.type &&
     prevProps.date === nextProps.date &&
     prevProps.bgColor === nextProps.bgColor &&
-    prevProps.userCurrency === nextProps.userCurrency &&
+    // prevProps.userCurrency === nextProps.userCurrency &&
     prevProps.Icon === nextProps.Icon &&
     prevProps.note == nextProps.note
   );

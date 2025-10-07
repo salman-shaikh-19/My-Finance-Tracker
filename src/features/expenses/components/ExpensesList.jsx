@@ -117,7 +117,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                       Icon={Icon}
                       createdAt={item.created_at}
                       note={item.expense_note}
-                      userCurrency={userCurrency}
+                      // userCurrency={userCurrency}
                       editModelRef={editModelRef}
                       editExpenseHandler={editExpenseHandler}
                       PaymentIcon={PaymentIcon}
