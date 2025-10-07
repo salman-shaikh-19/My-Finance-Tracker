@@ -28,10 +28,10 @@ const LiabilityChart = () => {
 
 // liabilities per type
 const chartData = liabilities.reduce((acc, liab) => {
-  const type = liab.liability_type || "Other";
-  const existing = acc.find((c) => c.liability_type === type);
+  const type = liab.liability_type || "Other"; 
+  const existing = acc.find((c) => c.liability_type === type); // check if type already exists in acc
   if (existing) {
-    existing.remaining_amount += liab.remaining_amount;
+    existing.remaining_amount += liab.remaining_amount; // accumulate remaining amount
   } else {
     acc.push({
       liability_type: type,

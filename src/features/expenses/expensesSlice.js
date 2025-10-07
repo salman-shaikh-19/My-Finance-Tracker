@@ -20,7 +20,7 @@ export const getAllExpenses = createAsyncThunk(
         .lte("expense_date", endOfWeek)
         // .order("id", { ascending: false });
         .order("created_at", { ascending: false });
-      // select all fields
+    
 
       if (error) throw error;
       return data; // return the fetched data
