@@ -13,12 +13,18 @@ export const getAllLiabilities = createAsyncThunk(
       const { data, error } = await supabase
         .from("user_liabilities")
         .select("*")
-        .eq("user_id", userId)
-        // .neq("remaining_amount", 0)
-        .order("created_at", { ascending: false });
+        .eq("user_id", userId);
+
+      const sorted = data.sort((a, b) => {
+        // unpaid first
+        if (a.remaining_amount === 0 && b.remaining_amount > 0) return 1;
+        if (a.remaining_amount > 0 && b.remaining_amount === 0) return -1;
+        // then latest first
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
 
       if (error) throw error;
-      return data; // return the fetched data
+      return sorted; // return the fetched data
     } catch (err) {
       return rejectWithValue(err.message);
     }

@@ -5,7 +5,7 @@ import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import {
   liabilitesCategories,
   getCategoryByName,
-  paymentMethods,
+  
 } from "../../../utils/Categories";
 
 import { confirmDelete } from "../../../utils/confirmDelete";
