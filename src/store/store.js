@@ -6,7 +6,7 @@ import authReducer from '../features/auth/authSlice'
 import incomeReducer from '../features/income/incomeSlice'
 // import chatReducer from '../features/chat/chatSlice'
 import liabilitiesReducer from '../features/liabilities/liabilitySlice'
-
+import investmentReducer from '../features/investments/investmentsSlice'
 import { persistReducer, persistStore } from "redux-persist";
 import {
   FLUSH,
@@ -26,6 +26,7 @@ const rootReducer = combineReducers({
   auth:authReducer,
   income:incomeReducer,
   liabilities:liabilitiesReducer,
+  investments:investmentReducer,
 //   chat: chatReducer,
 });
 

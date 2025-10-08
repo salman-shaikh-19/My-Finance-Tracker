@@ -10,6 +10,7 @@ import RegisterAccount from "../features/auth/components/RegisterAccount";
 import ExpensesPage from "../features/expenses/components/ExpensesPage";
 import IncomePage from "../features/income/components/IncomePage";
 import LiabilityPage from "../features/liabilities/components/LiabilityPage";
+import InvestmentsPage from "../features/investments/components/InvestmentsPage";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -68,6 +69,15 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <LiabilityPage />
+          </ProtectedRoute>
+        }
+      />
+
+        <Route 
+        path="/investments"
+        element={
+          <ProtectedRoute>
+            <InvestmentsPage />
           </ProtectedRoute>
         }
       />

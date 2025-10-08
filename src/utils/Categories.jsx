@@ -46,6 +46,8 @@ export const investmentCategories = [
   { name: "Bonds", icon: FaChartLine, bg: "bg-accent" },
   { name: "Real Estate", icon: FaHome, bg: "bg-info" },
   { name: "Cryptocurrency", icon: FaChartLine, bg: "bg-warning" },
+  {name: "Fixed Deposits", icon: FaPiggyBank, bg: "bg-success" },
+  {name:'Gold', icon: FaRegMoneyBill1, bg: "bg-yellow-500" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
 
   

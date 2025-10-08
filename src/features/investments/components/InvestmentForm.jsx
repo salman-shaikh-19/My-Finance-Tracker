@@ -2,29 +2,33 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 
 import * as Yup from "yup";
-import { incomeCategories } from "../../../utils/Categories";
-const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
+import { investmentCategories } from "../../../utils/Categories";
+const InvestmentForm=({handleSubmit,initialValues,isEdit = false})=>{
     const defaultValues = {
-    incomeAmount: "",
-    incomeCategory: "",
-    recievedOn: new Date().toISOString().slice(0, 10),
-
-    incomeNote: "",
+    investmentCategory: "",
+    investedAmount: "",
+    startDate: new Date().toISOString().slice(0, 10),
+    maturityDate: new Date().toISOString().slice(0, 10),
+    
+    investmentNote: "",
   };
     return (
         <>
-   <h1 className="text-center">{isEdit ? "Edit Income" : "Add Income"}</h1>
+   <h1 className="text-center">{isEdit ? "Edit Investment" : "Add Investment"}</h1>
           <Formik
             initialValues={initialValues || defaultValues}
             validationSchema={Yup.object({
-              incomeAmount: Yup.number()
+              investedAmount: Yup.number()
                 .required("Amount is required")
                 .positive("Amount must be positive"),
-              incomeCategory: Yup.string().required("Category is required"),
-              recievedOn: Yup.date().required("Income date is required").max(new Date(), "Income date cannot be in the future"),
-             
-              incomeNote: Yup.string()
-              .max(255, "Note cannot exceed 255 characters")
+              investmentCategory: Yup.string().required("Category is required"),
+              startDate: Yup.date().required("Investment date is required").max(new Date(), "Investment date cannot be in the future"),
+             maturityDate: Yup.date().min(
+                Yup.ref('startDate'),
+                "Maturity date cannot be before investment date"
+              ).nullable(),
+              investmentNote: Yup.string()
+              .max(200, "Note cannot exceed 200 characters")
               .nullable(),
             })}
             onSubmit={handleSubmit}
@@ -32,15 +36,15 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
             {({ isSubmitting }) => (
               <Form className="space-y-4 mt-4">
                 <div>
-                  <label className="label ">Amount</label>
+                  <label className="label ">Investment Amount</label>
                   <Field
                     type="number"
-                    name="incomeAmount"
-                    placeholder="Income amount"
+                    name="investedAmount"
+                    placeholder="Investment amount"
                     className="input input-bordered w-full "
                   />
                   <ErrorMessage
-                    name="incomeAmount"
+                    name="investedAmount"
                     component="div"
                     className="text-red-500 text-sm mt-1 "
                   />
@@ -50,45 +54,59 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
                   <label className="label ">Category</label>
                   <Field
                     as="select"
-                    name="incomeCategory"
+                    name="investmentCategory"
                     className="select select-bordered w-full "
                   >
                     <option value="">Select Category</option>
-                    {incomeCategories.map((cat) => (
+                    {investmentCategories.map((cat) => (
                       <option key={cat.name} value={cat.name}>
                         {cat.name}
                       </option>
                     ))}
                   </Field>
                   <ErrorMessage
-                    name="incomeCategory"
+                    name="investmentCategory"
                     component="div"
                     className="text-red-500 text-sm mt-1 "
                   />
                 </div>
 
                 <div>
-                  <label className="label ">Received Date</label>
+                  <label className="label ">Investment Date</label>
                   <Field
                     type="date"
-                    name="recievedOn"
+                    name="startDate"
                     className="input input-bordered w-full "
                     max={new Date().toISOString().slice(0, 10)}
                   />
                   <ErrorMessage
-                    name="recievedOn"
+                    name="startDate"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
                 </div>
 
+                <div>
+                  <label className="label ">Maturity Date</label>
+                  <Field
+                    type="date"
+                    name="maturityDate"
+                    className="input input-bordered w-full "
+                    min={new Date().toISOString().slice(0, 10)}
+                  />
+                  <ErrorMessage
+                    name="maturityDate"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
             
                  <div>
                   <label className="label">Note (optional)</label>
                   <Field
                     as="textarea"
-                    name="incomeNote"
-                    placeholder="Add a note for this income..."
+                    name="investmentNote"
+                    placeholder="Add a note for this investment..."
                     className="textarea textarea-bordered w-full "
                     maxLength={255}
                     rows={3}
@@ -96,7 +114,7 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
                 </div>
 
                 <button
-                title={isEdit ? 'Update income':'Add income'}
+                title={isEdit ? 'Update investment':'Add investment'}
                   type="submit"
                   className="btn btn-primary w-full mt-4 "
                   disabled={isSubmitting}
@@ -104,10 +122,10 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
                     {isSubmitting ? (
                 <>
                   <span className="loading loading-spinner "></span>{" "}
-                  {isEdit ? "Updating income..." : "Adding income..."}
+                  {isEdit ? "Updating investment..." : "Adding investment..."}
                 </>
                   ) : (
-                    isEdit ? "Update income" : "Add income"
+                    isEdit ? "Update investment" : "Add investment"
                   )}
                 </button>
               </Form>
@@ -117,4 +135,4 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
     )
 }
 
-export default React.memo(IncomeForm);
+export default React.memo(InvestmentForm);

@@ -99,7 +99,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                     createdAt={income.created_at}
                     note={income.income_note}
                     // userCurrency={userCurrency}
-                   
+                    bgColor={category.bg}
                     deleteIncome={() => handleDelete(income.id)}
                     editModelRef={editModelRef}
                     editIncomeHandler={editIncomeHandler}

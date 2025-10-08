@@ -156,3 +156,10 @@
 - updated liability.
 - add/pay liability[updated remaining amount].
 - fixed issues in liabilities module.
+
+# 13 oct 
+- add investment
+- investment listing card and investment listing.
+- update investment.
+- delete investment.
+

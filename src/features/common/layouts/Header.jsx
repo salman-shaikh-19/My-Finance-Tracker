@@ -55,6 +55,7 @@ const Header = () => {
         />
         <HeaderNav
           title="Investments"
+          redirectTo="/investments"
           isActive={currentPath === "/investments"}
         />
         <HeaderNav title="Savings" isActive={currentPath === "/savings"} />
@@ -85,6 +86,12 @@ const Header = () => {
             title="Incomes"
             redirectTo="/incomes"
             isActive={currentPath === "/incomes"}
+            icon={<FaMoneyBillWave className="" />}
+          />
+             <HeaderNavMobile
+            title="Investments"
+            redirectTo="/investments"
+            isActive={currentPath === "/investments"}
             icon={<FaMoneyBillWave className="" />}
           />
           <SettingsMenu

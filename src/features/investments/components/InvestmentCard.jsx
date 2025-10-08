@@ -1,28 +1,30 @@
 import React, { useState } from "react";
 import { BiEdit, BiX, BiMoney } from "react-icons/bi";
-import { MdDeleteForever, MdFiberNew } from "react-icons/md";
+import { MdDeleteForever, MdFiberNew, MdPayment } from "react-icons/md";
 import dayjs from "dayjs";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import CommonModal from "../../common/components/CommonModal";
-// import IncomeForm from "./IncomeForm";
-import { commonDate } from "../../../utils/dateUtils";
-import IncomeForm from "./IncomeForm";
-import { useSelector } from "react-redux";
 
-const IncomeCard = ({
-  incomeId,
+import { commonDate } from "../../../utils/dateUtils";
+
+import { useSelector } from "react-redux";
+import InvestmentForm from "./InvestmentForm";
+
+const InvestmentCard = ({
+  investmentId,
 
   category,
   amount,
   date,
   note = "",
+  maturityDate,
   bgColor = "bg-green-500",
   createdAt,
 
   // userCurrency = "INR",
-  deleteIncome,
+  deleteinvestment,
   editModelRef,
-  editIncomeHandler,
+  editInvestmentHandler,
   Icon = BiMoney,
 }) => {
   const [showNote, setShowNote] = useState(false);
@@ -37,7 +39,7 @@ const IncomeCard = ({
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
-      } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      } w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
       title={!showNote ? "Click to show action bar" : ""}
     >
@@ -52,15 +54,54 @@ const IncomeCard = ({
 
         <div className="flex flex-col flex-1">
           <div className="flex justify-between items-center mb-2">
-            <span className="font-semibold text-lg">{category}</span>
-            <span className="font-bold text-lg cursor-auto">
+            <span className="font-semibold text-lg cursor-auto" title="investment in">{category}</span>
+            <span className="font-bold text-lg cursor-auto" title="Total investment">
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
-          <div className="flex justify-between items-center text-sm text-gray-500">
-            <span className="cursor-auto" title="income date">
+          <div className="flex flex-wrap gap-2  justify-between text-sm text-gray-500 items-center">
+            <span
+              className="badge badge-outline badge-sm cursor-auto"
+              title="Invested on"
+            >
+              <MdPayment className="inline mb-0.5" /> Invested On:{" "}
               {commonDate({ date })}
             </span>
+
+            <div
+              className="badge badge-xs lg:badge-sm md:badge-sm"
+              title="Payment schedule"
+            >
+              <div title="Investment maturity status" className="mt-1">
+                {!maturityDate ? (
+                  <span className="text-xs text-secondary font-semibold">
+                    No maturity date set
+                  </span>
+                ) : dayjs(maturityDate).isSame(dayjs(), "day") ? (
+                  <span className="text-xs text-info font-semibold">
+                    Matures today
+                  </span>
+                ) : dayjs(maturityDate).isAfter(dayjs(), "day") ? (
+                  <span className="text-xs text-primary font-semibold">
+                    {dayjs(maturityDate).diff(dayjs(), "day")} days to mature
+                  </span>
+                ) : (
+                  <span className="text-xs text-success font-semibold">
+                    Matured
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {maturityDate && (
+              <span
+                className="badge badge-outline badge-sm cursor-auto"
+                title="Investment maturity date"
+              >
+                <MdPayment className="inline mb-0.5" /> Maturity:{" "}
+                {commonDate({ date: maturityDate })}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -85,8 +126,8 @@ const IncomeCard = ({
           </button>
 
           <button
-            title="Delete income"
-            onClick={deleteIncome}
+            title="Delete investment"
+            onClick={deleteinvestment}
             className="btn btn-error btn-xs"
           >
             <MdDeleteForever size={20} />
@@ -94,20 +135,21 @@ const IncomeCard = ({
 
           <CommonModal
             ref={editModelRef}
-            modalId="income-edit-modal"
-            btnTitle="Edit income"
+            modalId="investment-edit-modal"
+            btnTitle="Edit investment"
             openModalBtnClassName="btn-xs mx-2"
             openModalBtnText={<BiEdit size={20} />}
           >
-            <IncomeForm
+            <InvestmentForm
               initialValues={{
-                id: incomeId,
-                incomeCategory: category,
-                incomeAmount: amount,
-                recievedOn: dayjs(date).format("YYYY-MM-DD"),
-                incomeNote: note,
+                id: investmentId,
+                investmentCategory: category,
+                investedAmount: amount,
+                startDate: dayjs(date).format("YYYY-MM-DD"),
+                maturityDate: dayjs(maturityDate).format("YYYY-MM-DD"),
+                investmentNote: note,
               }}
-              handleSubmit={editIncomeHandler}
+              handleSubmit={editInvestmentHandler}
               isEdit={true}
             />
           </CommonModal>
@@ -125,8 +167,8 @@ const IncomeCard = ({
   );
 };
 
-// export default React.memo(IncomeCard);
-export default React.memo(IncomeCard, (prevProps, nextProps) => {
+// export default React.memo(InvestmentCard);
+export default React.memo(InvestmentCard, (prevProps, nextProps) => {
   // if (prevProps.theme !== nextProps.theme && nextProps.theme === "luxury") {
   //   //this will ignore theme, so changing theme never triggers a re-render.
   //   return false; // trigger rerender
@@ -136,7 +178,7 @@ export default React.memo(IncomeCard, (prevProps, nextProps) => {
     prevProps.amount === nextProps.amount &&
     prevProps.date === nextProps.date &&
     prevProps.bgColor === nextProps.bgColor &&
-    // prevProps.userCurrency === nextProps.userCurrency &&
+    prevProps.maturityDate === nextProps.maturityDate &&
     prevProps.Icon === nextProps.Icon &&
     prevProps.note == nextProps.note
   );
