@@ -48,7 +48,7 @@ const Header = () => {
           redirectTo="/incomes"
           isActive={currentPath === "/incomes"}
         />
-            <HeaderNav
+        <HeaderNav
           title="Liabilities"
           redirectTo="/liabilities"
           isActive={currentPath === "/liabilities"}
@@ -88,12 +88,7 @@ const Header = () => {
             isActive={currentPath === "/incomes"}
             icon={<FaMoneyBillWave className="" />}
           />
-             <HeaderNavMobile
-            title="Investments"
-            redirectTo="/investments"
-            isActive={currentPath === "/investments"}
-            icon={<FaMoneyBillWave className="" />}
-          />
+
           <SettingsMenu
             isMobile={true}
             triggerIcon={
@@ -118,7 +113,7 @@ const Header = () => {
                 <GrDashboard /> Dashboard
               </Link>
             </li>
-             <li>
+            <li>
               <Link
                 to="/liabilities"
                 className={` ${
@@ -128,6 +123,18 @@ const Header = () => {
                 }`}
               >
                 <FaHandHoldingUsd /> Liabilities
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/investments"
+                className={` ${
+                  currentPath === "/investments"
+                    ? "bg-primary text-white"
+                    : "hover:bg-base-200"
+                }`}
+              >
+                <FaMoneyBillWave /> Investments
               </Link>
             </li>
           </SettingsMenu>
