@@ -31,8 +31,7 @@ const LiabilityCard = ({
   PaymentIcon,
 }) => {
   const [showActions, setShowActions] = useState(false);
-const { userCurrency } = useSelector(state => state.common);
-
+  const { userCurrency } = useSelector((state) => state.common);
 
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5
@@ -105,7 +104,6 @@ const { userCurrency } = useSelector(state => state.common);
       onClick={() => setShowActions(!showActions)}
       title={!showActions ? "Click to show actions" : ""}
     >
-
       <div className="flex items-center p-4 gap-4">
         <div
           className={`avatar rounded-full p-4 flex justify-center items-center ${bgColor}`}
@@ -161,10 +159,7 @@ const { userCurrency } = useSelector(state => state.common);
           </div>
 
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
-             <span
-              title="Liability type"
-              className="badge badge-info badge-sm"
-            >
+            <span title="Liability type" className="badge badge-info badge-sm">
               {liabilityType}
             </span>
             <span
@@ -173,7 +168,7 @@ const { userCurrency } = useSelector(state => state.common);
             >
               Total: {formatCurrency(totalAmount, userCurrency || "INR")}
             </span>
-            
+
             {interestRate > 0 && (
               <span
                 title="Interest rate"
@@ -197,11 +192,16 @@ const { userCurrency } = useSelector(state => state.common);
             )} */}
 
             <span
-              title={`Total remaining amount ${interestRate > 0 ? `including ${interestRate}% interest` : ""}`}
+              title={`Total remaining amount ${
+                interestRate > 0 ? `including ${interestRate}% interest` : ""
+              }`}
               className="badge badge-accent badge-sm"
             >
               Remaining:{" "}
-              {formatCurrency( remainingAmount+(remainingAmount * interestRate) / 100, userCurrency || "INR")}
+              {formatCurrency(
+                remainingAmount + (remainingAmount * interestRate) / 100,
+                userCurrency || "INR"
+              )}
             </span>
 
             <span
@@ -211,16 +211,13 @@ const { userCurrency } = useSelector(state => state.common);
               title="Liability status"
             >
               {remainingAmount === 0 ? "Cleared" : "Ongoing"}
-              
             </span>
-           
           </div>
 
           <div></div>
         </div>
       </div>
 
-  
       {isNew && (
         <div className="absolute  top-0 right-0 text-primary">
           <MdFiberNew size={25} />

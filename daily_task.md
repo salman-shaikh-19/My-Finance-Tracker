@@ -94,67 +94,8 @@
 # 7 oct 
 - update income details.
 - code optimization.
-- income charts implemnted.
+- income charts implemented.
 - enhanced ui of expense/income card.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # 8 oct
@@ -162,6 +103,46 @@
 - fixed re-render issues in chart,infinite scroll and custom chart tooltip component.
 - fixed delete income issue .
 - fetch user profile and display 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 9 oct

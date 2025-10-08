@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
@@ -15,9 +14,7 @@ dayjs.extend(isoWeek);
 const chartColor = "#EF4444";
 const LiabilityChart = () => {
   const dispatch = useDispatch();
-  const { loggedInUserId, } = useSelector(
-    (state) => state.common
-  );
+  const { loggedInUserId } = useSelector((state) => state.common);
   const { liabilities } = useSelector((state) => state.liabilities);
   const [currentChart, setCurrentChart] = useState("pie");
 
@@ -26,27 +23,25 @@ const LiabilityChart = () => {
     dispatch(getAllLiabilities({ userId: loggedInUserId }));
   }, [dispatch, loggedInUserId]);
 
-// liabilities per type
-const chartData = liabilities.reduce((acc, liab) => {
-  const type = liab.liability_type || "Other"; 
-  const existing = acc.find((c) => c.liability_type === type); // check if type already exists in acc
-  if (existing) {
-    existing.remaining_amount += liab.remaining_amount; // accumulate remaining amount
-  } else {
-    acc.push({
-      liability_type: type,
-      remaining_amount: liab.remaining_amount,
-    });
-  }
-  return acc;
-}, []);
+  // liabilities per type
+  const chartData = liabilities.reduce((acc, liab) => {
+    const type = liab.liability_type || "Other";
+    const existing = acc.find((c) => c.liability_type === type); // check if type already exists in acc
+    if (existing) {
+      existing.remaining_amount += liab.remaining_amount; // accumulate remaining amount
+    } else {
+      acc.push({
+        liability_type: type,
+        remaining_amount: liab.remaining_amount,
+      });
+    }
+    return acc;
+  }, []);
 
   return (
     <div className="w-full  max-w-full h-[370px] p-4 bg-base-100 rounded-lg   shadow">
- 
-
       {!chartData.length ? (
-       <NoDataFound NoDataFoundFor="chart" />
+        <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
           <ChartMenu
@@ -59,7 +54,9 @@ const chartData = liabilities.reduce((acc, liab) => {
               chartData={chartData}
               //  BarDataKey={"total"}
               XAxisDataKey="liability_type"
-              BarDataKey={[{ key: "remaining_amount", name: "Remaining Amount" }]}
+              BarDataKey={[
+                { key: "remaining_amount", name: "Remaining Amount" },
+              ]}
               isLegend={false}
               description="Remaining Amount per Liability category "
               height={260}
@@ -71,7 +68,9 @@ const chartData = liabilities.reduce((acc, liab) => {
             <CustomLineChart
               chartData={chartData}
               XAxisDataKey="liability_type"
-              LineDataKey={[{ key: "remaining_amount", name: "Remaining Amount" }]}
+              LineDataKey={[
+                { key: "remaining_amount", name: "Remaining Amount" },
+              ]}
               isLegend={false}
               description="Remaining Amount per Liability category"
               height={260}
@@ -89,7 +88,6 @@ const chartData = liabilities.reduce((acc, liab) => {
               description="Remaining Amount per Liability category"
             />
           )}
-     
         </>
       )}
     </div>

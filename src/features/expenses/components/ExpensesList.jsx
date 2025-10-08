@@ -16,7 +16,6 @@ import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmount
 import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import NoDataFound from "../../common/components/NoDataFound";
-// import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);

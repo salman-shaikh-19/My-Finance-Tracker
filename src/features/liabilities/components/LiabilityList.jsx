@@ -5,7 +5,6 @@ import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 import {
   liabilitesCategories,
   getCategoryByName,
-  
 } from "../../../utils/Categories";
 
 import { confirmDelete } from "../../../utils/confirmDelete";
@@ -28,7 +27,7 @@ const LiabilityList = ({ liabilites }) => {
       onDelete: () => dispatch(deleteLiability(liabilityId)),
     });
   };
-// console.log(userCurrency);
+  // console.log(userCurrency);
   const editLiabilityHandler = (values, { resetForm, setSubmitting }) => {
     const { id } = values;
     console.log(id);
@@ -62,9 +61,7 @@ const LiabilityList = ({ liabilites }) => {
         id="liabilites-list"
         className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5  "
       >
-        <LiabilityChart
-
-        />
+        <LiabilityChart />
         <div
           className="divider"
           title={`Total ${
@@ -130,7 +127,7 @@ const LiabilityList = ({ liabilites }) => {
           </CustomInfiniteScroll>
         ) : (
           <>
-         <NoDataFound NoDataFoundFor="liability" />
+            <NoDataFound NoDataFoundFor="liability" />
           </>
         )}
       </div>

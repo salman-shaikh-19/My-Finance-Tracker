@@ -1,12 +1,11 @@
 import React, { lazy, Suspense, useEffect, useRef } from "react";
 import Main from "../../common/layouts/Main";
 // import   LiabilityList from "./ LiabilityList";
-const   LiabilityList = lazy(() => import("./LiabilityList"));
+const LiabilityList = lazy(() => import("./LiabilityList"));
 import { useDispatch, useSelector } from "react-redux";
 import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 import CommonModal from "../../common/components/CommonModal";
-
 
 import { BiPlus } from "react-icons/bi";
 import Loader from "../../common/components/Loader";
@@ -17,7 +16,6 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import LiabilityForm from "./LiabilityForm";
 import { addLiability, getAllLiabilities } from "../liabilitySlice";
 
-
 // import Swal from "sweetalert2";
 
 const LiabilityPage = () => {
@@ -26,20 +24,17 @@ const LiabilityPage = () => {
   // const warningShownRef = useRef(false);
   const modalRef = useRef(null);
   const dispatch = useDispatch();
- 
 
   //group by category and get total amount by category
   // const counts = useMemo(() => {
   //   return getTotalByGroup(expenses, "category", "amount");
   // }, [expenses]);
 
-
-// console.log(counts);
+  // console.log(counts);
   useEffect(() => {
     if (!loggedInUserId) return;
     // dispatch(getAllExpenses(loggedInUserId));
     dispatch(getAllLiabilities({ userId: loggedInUserId }));
-     
   }, [dispatch, loggedInUserId]);
 
   //custom hook
@@ -50,30 +45,29 @@ const LiabilityPage = () => {
     // () => dispatch(getAllExpenses(loggedInUserId))
   );
 
-
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
-  handleFormSubmit({
-    action: (payload) => dispatch(addLiability(payload)),
-    payload: {
-      userId: loggedInUserId,
-      creditor_name: values.creditorName,
-      total_amount: values.totalAmount,
-      remaining_amount:values.remainingAmount,
-      interest_rate: values.interestRate,
-      liability_type: values.liabilityType,
-      payment_schedule: values.paymentSchedule,
-      start_date: values.startDate,
-      end_date: values.endDate,
+    handleFormSubmit({
+      action: (payload) => dispatch(addLiability(payload)),
+      payload: {
+        userId: loggedInUserId,
+        creditor_name: values.creditorName,
+        total_amount: values.totalAmount,
+        remaining_amount: values.remainingAmount,
+        interest_rate: values.interestRate,
+        liability_type: values.liabilityType,
+        payment_schedule: values.paymentSchedule,
+        start_date: values.startDate,
+        end_date: values.endDate,
 
-      liability_note: values.liabilityNote,
-    },
-    resetForm,
-    setSubmitting,
-    modalRef,
-    successMessage: "liability added successfully",
-    errorMessage: "Error while adding liability",
-  });
-};
+        liability_note: values.liabilityNote,
+      },
+      resetForm,
+      setSubmitting,
+      modalRef,
+      successMessage: "liability added successfully",
+      errorMessage: "Error while adding liability",
+    });
+  };
   return (
     <>
       <Main mainClassName="relative ">
@@ -85,7 +79,7 @@ const LiabilityPage = () => {
             // <></>
           }
         >
-          < LiabilityList  liabilites={liabilities} />
+          <LiabilityList liabilites={liabilities} />
         </Suspense>
         <CommonModal
           ref={modalRef}
