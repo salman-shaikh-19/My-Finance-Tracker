@@ -37,7 +37,7 @@ const Header = () => {
         <Link to={"/"} className="font-bold me-auto select-none text-lg ">
           My Finance Tracker
         </Link>
-        <HeaderNav title="Home" redirectTo="/" isActive={currentPath === "/"} />
+        <HeaderNav title="Dashboard" redirectTo="/" isActive={currentPath === "/"} />
         <HeaderNav
           title="Expenses"
           redirectTo="/expenses"
