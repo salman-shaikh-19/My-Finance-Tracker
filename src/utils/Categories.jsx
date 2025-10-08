@@ -1,9 +1,10 @@
 import { MdOutlinePayments } from "react-icons/md";
-import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt, FaPlane, FaHome, FaLaptop, FaBriefcase, FaHandHoldingUsd, FaCreditCard, FaMobileAlt, FaUniversity, FaWallet, FaRegFileAlt, FaQuestionCircle } from "react-icons/fa";
+import { FaMoneyBillWave, FaChartLine, FaPiggyBank, FaRegCreditCard, FaBeer, FaGift, FaCarAlt, FaPlane, FaHome, FaLaptop, FaBriefcase, FaHandHoldingUsd, FaCreditCard, FaMobileAlt, FaUniversity, FaWallet, FaRegFileAlt, FaQuestionCircle, FaLandmark, FaBitcoin } from "react-icons/fa";
 import { BiRestaurant, BiBus, BiHealth, BiBook } from "react-icons/bi";
-import { GiShoppingCart } from "react-icons/gi";
+import { GiGoldBar, GiMoneyStack, GiShoppingCart } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
 import { FaRegMoneyBill1 } from "react-icons/fa6";
+import { TbBuildingBank } from "react-icons/tb";
 
 
 export const expenseCategories = [
@@ -33,18 +34,19 @@ export const incomeCategories = [
   { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },     
 ];
 
-export const investmentCategories = [
-  { name: "Stocks", icon: FaChartLine, bg: "bg-primary" },
-  { name: "Mutual Funds", icon: FaChartLine, bg: "bg-secondary" },
-  { name: "Bonds", icon: FaChartLine, bg: "bg-accent" },
-  { name: "Real Estate", icon: FaHome, bg: "bg-info" },
-  { name: "Cryptocurrency", icon: FaChartLine, bg: "bg-warning" },
-  {name: "Fixed Deposits", icon: FaPiggyBank, bg: "bg-success" },
-  {name:'Gold', icon: FaRegMoneyBill1, bg: "bg-yellow-500" },
-  { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
+  export const investmentCategories = [
+    { name: "Stock", icon: FaChartLine, bg: "bg-primary" },
+    { name: "Mutual Fund", icon: GiMoneyStack, bg: "bg-secondary" },
+    { name: "Bonds", icon: FaLandmark, bg: "bg-accent" },
+    { name: "Real Estate", icon: FaHome, bg: "bg-info" },
+    { name: "Cryptocurrency", icon: FaBitcoin, bg: "bg-warning" },
+    {name: "Fixed Deposit", icon: TbBuildingBank, bg: "bg-success" },
+    
+    {name:'Gold', icon: GiGoldBar, bg: "bg-amber-500" },
+    { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
 
-  
-];
+    
+  ];
 
 export const paymentMethods = [
   { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },          // Physical cash
