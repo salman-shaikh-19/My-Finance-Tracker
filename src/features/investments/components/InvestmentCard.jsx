@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { BiEdit, BiX, BiMoney } from "react-icons/bi";
 import { MdDeleteForever, MdFiberNew, MdPayment } from "react-icons/md";
 import dayjs from "dayjs";
@@ -9,6 +9,7 @@ import { commonDate } from "../../../utils/dateUtils";
 
 import { useSelector } from "react-redux";
 import InvestmentForm from "./InvestmentForm";
+
 
 const InvestmentCard = ({
   investmentId,
@@ -29,7 +30,10 @@ const InvestmentCard = ({
 }) => {
   const [showNote, setShowNote] = useState(false);
   const { userCurrency } = useSelector((state) => state.common);
+
+
   // console.log('rerender',category);
+
 
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5

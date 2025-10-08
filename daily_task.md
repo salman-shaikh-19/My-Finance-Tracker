@@ -166,4 +166,5 @@
 - delete investment.
 
 # 14 oct 
-- changes in header and bottom navbar of desktop/mobile.
+- investment charts.
+- changes in header and bottom navbar of desktop/mobile and enhanced ui of it.

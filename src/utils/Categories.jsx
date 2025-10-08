@@ -5,14 +5,7 @@ import { GiShoppingCart } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
 import { FaRegMoneyBill1 } from "react-icons/fa6";
 
-// export const expenseCategories = [
-//   { name: "Payments", icon: MdOutlinePayments, bg: "bg-primary" },
-//   { name: "Food", icon: BiRestaurant, bg: "bg-secondary" },
-//   { name: "Transport", icon: BiBus, bg: "bg-accent" },
-//   { name: "Shopping", icon: GiShoppingCart, bg: "bg-info" },
-//   { name: "Credit Cards", icon: FaRegCreditCard, bg: "bg-warning" },
-//   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
-// ];
+
 export const expenseCategories = [
   { name: "Payments", icon: MdOutlinePayments, bg: "bg-primary" },
   { name: "Food", icon: BiRestaurant, bg: "bg-secondary" },
@@ -52,12 +45,6 @@ export const investmentCategories = [
 
   
 ];
-// export const paymentMethods = [
-//   { name: "Cash", bg: "bg-primary" },
-//   { name: "Card", bg: "bg-secondary" },
-//   { name: "UPI", bg: "bg-accent" },
-//   { name: "Other", bg: "bg-info" },
-// ];
 
 export const paymentMethods = [
   { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },          // Physical cash
