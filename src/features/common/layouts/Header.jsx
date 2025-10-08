@@ -58,7 +58,7 @@ const Header = () => {
           redirectTo="/investments"
           isActive={currentPath === "/investments"}
         />
-        <HeaderNav title="Savings" isActive={currentPath === "/savings"} />
+        
         {/* <ThemeToggle />
         <button onClick={handleLogout} className="btn btn-error">
           Logout
@@ -76,17 +76,17 @@ const Header = () => {
 
       <nav className="md:hidden  fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
         <div className="flex justify-around items-center h-16 px-4 relative ">
-          <HeaderNavMobile
+         
+            <HeaderNavMobile
+            title="Dashboard"
+            isActive={currentPath === "/"}
+            icon={<GrDashboard className="" />}
+          />
+           <HeaderNavMobile
             title="Expenses"
             redirectTo="/expenses"
             isActive={currentPath === "/expenses"}
             icon={<MdOutlinePayments className="" />}
-          />
-          <HeaderNavMobile
-            title="Incomes"
-            redirectTo="/incomes"
-            isActive={currentPath === "/incomes"}
-            icon={<FaMoneyBillWave className="" />}
           />
 
           <SettingsMenu
@@ -101,18 +101,7 @@ const Header = () => {
               />
             }
           >
-            <li>
-              <Link
-                to="/"
-                className={` ${
-                  currentPath === "/"
-                    ? "bg-primary text-white"
-                    : "hover:bg-base-200"
-                }`}
-              >
-                <GrDashboard /> Dashboard
-              </Link>
-            </li>
+           
             <li>
               <Link
                 to="/liabilities"
@@ -125,29 +114,22 @@ const Header = () => {
                 <FaHandHoldingUsd /> Liabilities
               </Link>
             </li>
-            <li>
-              <Link
-                to="/investments"
-                className={` ${
-                  currentPath === "/investments"
-                    ? "bg-primary text-white"
-                    : "hover:bg-base-200"
-                }`}
-              >
-                <FaMoneyBillWave /> Investments
-              </Link>
-            </li>
+          
           </SettingsMenu>
+          
+           <HeaderNavMobile
+             title="Incomes"
+             redirectTo="/incomes"
+             isActive={currentPath === "/incomes"}
+             icon={<FaMoneyBillWave className="" />}
+           />
           <HeaderNavMobile
             title="Investments"
             isActive={currentPath === "/investments"}
+            redirectTo="/investments"
             icon={<FaChartLine className="" />}
           />
-          <HeaderNavMobile
-            title="Savings"
-            isActive={currentPath === "/savings"}
-            icon={<FaPiggyBank className="" />}
-          />
+       
         </div>
       </nav>
     </>

@@ -81,12 +81,7 @@ export const liabilitesCategories = [
 ];
 
 
-export const savingsCategories = [
-  { name: "Emergency Fund", icon: FaPiggyBank, bg: "bg-error" },
-  { name: "Retirement", icon: FaPiggyBank, bg: "bg-warning" },
-  { name: "Short-term Goals", icon: FaPiggyBank, bg: "bg-success" },
-  { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
-];
+
 // Get category object by name
 export const getCategoryByName = (object, name) => {
   return (
