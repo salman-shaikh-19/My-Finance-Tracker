@@ -6,7 +6,7 @@ import { MdOutlineCategory } from "react-icons/md";
 import { FaRegMoneyBill1 } from "react-icons/fa6";
 import { TbBuildingBank } from "react-icons/tb";
 
-
+// expense category 
 export const expenseCategories = [
   { name: "Payments", icon: MdOutlinePayments, bg: "bg-primary" },
   { name: "Food", icon: BiRestaurant, bg: "bg-secondary" },
