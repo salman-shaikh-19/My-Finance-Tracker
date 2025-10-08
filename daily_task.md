@@ -145,6 +145,8 @@
 
 
 
+
+
 # 9 oct
 - fixed currency change issue in expense and incomes.
 - add liability implemented.
@@ -163,3 +165,5 @@
 - update investment.
 - delete investment.
 
+# 14 oct 
+- changes in header and bottom navbar of desktop/mobile.

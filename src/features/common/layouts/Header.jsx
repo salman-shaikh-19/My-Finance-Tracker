@@ -80,13 +80,13 @@ const Header = () => {
             <HeaderNavMobile
             title="Dashboard"
             isActive={currentPath === "/"}
-            icon={<GrDashboard className="" />}
+            icon={<GrDashboard className="text-primary" />}
           />
            <HeaderNavMobile
             title="Expenses"
             redirectTo="/expenses"
             isActive={currentPath === "/expenses"}
-            icon={<MdOutlinePayments className="" />}
+            icon={<MdOutlinePayments className="text-error" />}
           />
 
           <SettingsMenu
@@ -111,7 +111,7 @@ const Header = () => {
                     : "hover:bg-base-200"
                 }`}
               >
-                <FaHandHoldingUsd /> Liabilities
+                <FaHandHoldingUsd className="text-error" /> Liabilities
               </Link>
             </li>
           
@@ -121,13 +121,13 @@ const Header = () => {
              title="Incomes"
              redirectTo="/incomes"
              isActive={currentPath === "/incomes"}
-             icon={<FaMoneyBillWave className="" />}
+             icon={<FaMoneyBillWave className="text-success" />}
            />
           <HeaderNavMobile
             title="Investments"
             isActive={currentPath === "/investments"}
             redirectTo="/investments"
-            icon={<FaChartLine className="" />}
+            icon={<FaChartLine className="text-info" />}
           />
        
         </div>
