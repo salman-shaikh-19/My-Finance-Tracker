@@ -1,11 +1,11 @@
-import { MdHome, MdOutlinePayment, MdOutlinePayments } from "react-icons/md";
+import {  MdOutlinePayments } from "react-icons/md";
 
 import {
   FaChartLine,
-  FaEllipsisV,
+
   FaHandHoldingUsd,
   FaMoneyBillWave,
-  FaPiggyBank,
+
 } from "react-icons/fa";
 
 import HeaderNavMobile from "../components/HeaderNavMobile";
@@ -37,7 +37,11 @@ const Header = () => {
         <Link to={"/"} className="font-bold me-auto select-none text-lg ">
           My Finance Tracker
         </Link>
-        <HeaderNav title="Dashboard" redirectTo="/" isActive={currentPath === "/"} />
+        <HeaderNav
+          title="Dashboard"
+          redirectTo="/"
+          isActive={currentPath === "/"}
+        />
         <HeaderNav
           title="Expenses"
           redirectTo="/expenses"
@@ -58,7 +62,7 @@ const Header = () => {
           redirectTo="/investments"
           isActive={currentPath === "/investments"}
         />
-        
+
         {/* <ThemeToggle />
         <button onClick={handleLogout} className="btn btn-error">
           Logout
@@ -76,13 +80,12 @@ const Header = () => {
 
       <nav className="md:hidden  fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
         <div className="flex justify-around items-center h-16 px-4 relative ">
-         
-            <HeaderNavMobile
+          <HeaderNavMobile
             title="Dashboard"
             isActive={currentPath === "/"}
             icon={<GrDashboard className="text-primary" />}
           />
-           <HeaderNavMobile
+          <HeaderNavMobile
             title="Expenses"
             redirectTo="/expenses"
             isActive={currentPath === "/expenses"}
@@ -101,7 +104,6 @@ const Header = () => {
               />
             }
           >
-           
             <li>
               <Link
                 to="/liabilities"
@@ -114,22 +116,20 @@ const Header = () => {
                 <FaHandHoldingUsd className="text-error" /> Liabilities
               </Link>
             </li>
-          
           </SettingsMenu>
-          
-           <HeaderNavMobile
-             title="Incomes"
-             redirectTo="/incomes"
-             isActive={currentPath === "/incomes"}
-             icon={<FaMoneyBillWave className="text-success" />}
-           />
+
+          <HeaderNavMobile
+            title="Incomes"
+            redirectTo="/incomes"
+            isActive={currentPath === "/incomes"}
+            icon={<FaMoneyBillWave className="text-success" />}
+          />
           <HeaderNavMobile
             title="Investments"
             isActive={currentPath === "/investments"}
             redirectTo="/investments"
             icon={<FaChartLine className="text-info" />}
           />
-       
         </div>
       </nav>
     </>

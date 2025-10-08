@@ -10,7 +10,6 @@ const Footer = () => {
            <BiCopyright /> {new Date().getFullYear()} - All rights reserved by
           Finance Tracker Ltd
         </p>
-        
       </aside>
     </footer>
   );
