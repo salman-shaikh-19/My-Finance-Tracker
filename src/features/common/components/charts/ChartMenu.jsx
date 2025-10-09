@@ -1,4 +1,3 @@
-// import html2canvas from "html2canvas";
 import React from "react";
 import { FiDownload } from "react-icons/fi";
 import {
@@ -8,7 +7,7 @@ import {
   MdShowChart,
 } from "react-icons/md";
 
-const ChartMenu = ({ currentChart, setCurrentChart,downloadChart }) => {
+const ChartMenu = ({ currentChart, setCurrentChart, downloadChart }) => {
   // console.log('logg from chart menu');
 
   return (
@@ -37,17 +36,16 @@ const ChartMenu = ({ currentChart, setCurrentChart,downloadChart }) => {
               </button>
             );
           })}
-            <button
-           
-                title={`download chart`}
-                className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md 
-                   btn btn-secondary btn-sm font-semibold
+          <button
+            title={`download ${currentChart} chart`}
+            className={` flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md 
+                 btn btn-ghost btn-sm hover:text-primary
                    
                 `}
-                onClick={downloadChart}
-              >
-                <FiDownload size={22} />
-              </button>
+            onClick={downloadChart}
+          >
+            <FiDownload size={22} />
+          </button>
         </div>
       </div>
     </>

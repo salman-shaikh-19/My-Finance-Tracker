@@ -93,6 +93,10 @@ const LiabilityCard = ({
       if (result.isConfirmed) {
         dispatch(payLiability({ liabilityId, paymentAmount: perInstallment }));
         Swal.fire("Paid!", "Your payment has been recorded.", "success");
+        Swal.fire({
+          title:"paid",
+          text:'i will close in 2 seconds'
+        })
       }
     });
   };
