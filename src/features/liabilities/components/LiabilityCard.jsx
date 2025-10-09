@@ -214,7 +214,7 @@ const LiabilityCard = ({
             </span>
           </div>
 
-          <div></div>
+          
         </div>
       </div>
 

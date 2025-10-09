@@ -55,7 +55,7 @@ function CustomInfiniteScroll({
     }
   }, [page, data, loadMoreData]);
 
-  // memrozie children rendering to avoid unnecessary re-render
+  // memorize children rendering to avoid unnecessary re-render
   const renderedChildren = useMemo(() => {
     return children(dataToScroll);
   }, [dataToScroll, children]);

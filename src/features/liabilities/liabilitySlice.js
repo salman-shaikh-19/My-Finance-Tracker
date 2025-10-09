@@ -1,4 +1,3 @@
-//slice for liabilities with thunk
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
 import dayjs from "dayjs";
