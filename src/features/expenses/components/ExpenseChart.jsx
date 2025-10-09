@@ -225,6 +225,8 @@ const ExpenseChart = () => {
   };
 
   const handleDownloadChart=()=>{
+
+
     downloadAsImage({ currentChartFor: `expense` })
   }
   return (

@@ -25,12 +25,12 @@ export const expenseCategories = [
 ];
 
 export const incomeCategories = [
-  { name: "Salary", icon: FaMoneyBillWave, bg: "bg-success" },         // Regular income
-  { name: "Bonus", icon: FaHandHoldingUsd, bg: "bg-accent" },         // Extra cash/bonus
-  { name: "Business", icon: FaBriefcase, bg: "bg-warning" },          // Business income
-  { name: "Investments", icon: FaChartLine, bg: "bg-info" },          // Stocks, market, growth
-  { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },  // Rent savings
-  { name: "Gifts", icon: FaGift, bg: "bg-secondary" },                // Presents, gifts
+  { name: "Salary", icon: FaMoneyBillWave, bg: "bg-success" },       
+  { name: "Bonus", icon: FaHandHoldingUsd, bg: "bg-accent" },      
+  { name: "Business", icon: FaBriefcase, bg: "bg-warning" },          
+  { name: "Investments", icon: FaChartLine, bg: "bg-info" },         
+  { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },  
+  { name: "Gifts", icon: FaGift, bg: "bg-secondary" },           
   { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },     
 ];
 
@@ -41,21 +41,18 @@ export const incomeCategories = [
     { name: "Real Estate", icon: FaHome, bg: "bg-info" },
     { name: "Cryptocurrency", icon: FaBitcoin, bg: "bg-warning" },
     {name: "Fixed Deposit", icon: TbBuildingBank, bg: "bg-success" },
-    
     {name:'Gold', icon: GiGoldBar, bg: "bg-amber-500" },
     { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
-
-    
   ];
 
 export const paymentMethods = [
-  { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },          // Physical cash
-  { name: "Card", icon: FaCreditCard, bg: "bg-secondary" },           // Debit/Credit card
-  { name: "UPI", icon: FaMobileAlt, bg: "bg-accent" },                // Mobile payments
-  { name: "Net Banking", icon: FaUniversity, bg: "bg-green-500" },    // Bank transfer
-  { name: "Wallet", icon: FaWallet, bg: "bg-yellow-500" },            // Digital wallet
-  { name: "Cheque", icon: FaRegFileAlt, bg: "bg-purple-500" },        // Cheque payments
-  { name: "Other", icon: FaRegMoneyBill1, bg: "bg-info" },           // Miscellaneous
+  { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },       
+  { name: "Card", icon: FaCreditCard, bg: "bg-secondary" },          
+  { name: "UPI", icon: FaMobileAlt, bg: "bg-accent" },               
+  { name: "Net Banking", icon: FaUniversity, bg: "bg-green-500" },  
+  { name: "Wallet", icon: FaWallet, bg: "bg-yellow-500" },           
+  { name: "Cheque", icon: FaRegFileAlt, bg: "bg-purple-500" },       
+  { name: "Other", icon: FaRegMoneyBill1, bg: "bg-info" },         
 ];
 
 export const liabilitesCategories = [
