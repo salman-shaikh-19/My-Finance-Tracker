@@ -8,6 +8,7 @@ const SetUserCurrency = () => {
   const userCurrency = useSelector((state) => state.common.userCurrency);
 
   const handleChange = (e) => {
+    
     dispatch(setUserCurrency(e.target.value));
   };
 

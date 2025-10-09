@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { formatCurrency } from "../../../utils/currencyUtils";
 
+
 const CategoryTotalAmountCard = ({
   name,
   totalAmount = 0,
@@ -12,6 +13,7 @@ const CategoryTotalAmountCard = ({
     () => formatCurrency(totalAmount, userCurrency),
     [totalAmount, userCurrency]
   );
+  
   // console.log('logg from category total amount card');
   
   return (

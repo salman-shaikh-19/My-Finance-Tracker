@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 export const commonSlice = createSlice({
   name: "common",
   initialState: {
@@ -19,6 +20,7 @@ export const commonSlice = createSlice({
       state.loggedInUserId = action.payload;
     },
     setUserCurrency(state,action){
+      
         state.userCurrency = action.payload;
     },
     setGetStarted(state, action) {

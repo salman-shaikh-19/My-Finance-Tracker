@@ -8,6 +8,7 @@ import ExpenseForm from "./ExpenseForm";
 import { commonDate } from "../../../utils/dateUtils";
 import { useSelector } from "react-redux";
 
+
 const ExpenseCard = ({
   expenseId,
  
@@ -27,6 +28,7 @@ const ExpenseCard = ({
 }) => {
   const [showNote, setShowNote] = useState(false);
 const { userCurrency } = useSelector(state => state.common);
+
   // console.log('render',theme);
   const isNew = createdAt
     ? dayjs().diff(dayjs(createdAt), "minute") <= 5

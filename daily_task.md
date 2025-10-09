@@ -111,6 +111,7 @@
 - add liability implemented.
 - list liabilities.
 - liability chart done.
+- enhanced ui of theme dropdown.
 
 
 
@@ -196,6 +197,7 @@
 - investment listing card and investment listing.
 - update investment.
 - delete investment.
+- make new enhanced loader.
 
 # 14 oct 
 - investment charts.

@@ -21,6 +21,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
 
+
   const dispatch = useDispatch();
 
   const handleDelete = (expenseId) => {

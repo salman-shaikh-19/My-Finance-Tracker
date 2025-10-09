@@ -3,8 +3,11 @@ import { toast } from "react-toastify";
 import AppRoutes from "./routes";
 import { useSelector } from "react-redux";
 
+
+
 function App() {
   const {theme}=useSelector(state=>state.common);
+ 
 
   useEffect(() => {
     // block screenshots, printing, copying, cutting, selecting all, dev tools, viewing page source and right click 
