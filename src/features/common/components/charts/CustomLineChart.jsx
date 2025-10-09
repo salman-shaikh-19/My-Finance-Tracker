@@ -25,7 +25,7 @@ const CustomLineChart = React.memo(
     // console.log('hii from line chart');
 
     return (
-      <div style={{ width, height }}>
+      <div style={{ width, height }} id="chart-container">
         <ResponsiveContainer width={width} height={height}>
           <LineChart data={chartData}>
             <XAxis dataKey={XAxisDataKey} />

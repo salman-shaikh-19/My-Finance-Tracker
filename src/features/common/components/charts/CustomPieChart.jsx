@@ -29,7 +29,7 @@ const CustomPieChart = React.memo(
     pieNameKey,
     description = "Default description of pie chart",
   }) => (
-    <div style={{ width, height }}>
+    <div style={{ width, height }} id="chart-container">
       <ResponsiveContainer width={width} height={height}>
         <PieChart data={chartData}>
           {isLegend && <Legend />}

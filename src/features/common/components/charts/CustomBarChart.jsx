@@ -25,7 +25,7 @@ const CustomBarChart = React.memo(
     // console.log('hii from bar chart');
 
     return (
-      <div style={{ width, height }}>
+      <div style={{ width, height }} id="chart-container">
         <ResponsiveContainer width={width} height={height}>
           <BarChart data={chartData}>
             <XAxis dataKey={XAxisDataKey} />

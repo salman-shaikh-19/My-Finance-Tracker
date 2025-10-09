@@ -9,6 +9,7 @@ import CustomPieChart from "../../common/components/charts/CustomPieChart";
 import ChartMenu from "../../common/components/charts/ChartMenu";
 import { getAllLiabilities } from "../liabilitySlice";
 import NoDataFound from "../../common/components/NoDataFound";
+import { downloadAsImage } from "../../../utils/downloadAsImage";
 dayjs.extend(isoWeek);
 
 const chartColor = "#EF4444";
@@ -37,6 +38,9 @@ const LiabilityChart = () => {
     }
     return acc;
   }, []);
+    const handleDownloadChart=()=>{
+        downloadAsImage({ currentChartFor: `liabilities` })
+      }
 
   return (
     <div className="w-full  max-w-full h-[370px] p-4 bg-base-100 rounded-lg   shadow">
@@ -47,6 +51,7 @@ const LiabilityChart = () => {
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
+            downloadChart={handleDownloadChart}
           />
 
           {currentChart === "bar" && (

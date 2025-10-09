@@ -178,6 +178,7 @@ import ExpenseTimeLine from "./ExpenseTimeLine";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import NoDataFound from "../../common/components/NoDataFound";
+import { downloadAsImage } from "../../../utils/downloadAsImage";
 dayjs.extend(isoWeek);
 
 const chartColor = "#EF4444";
@@ -222,6 +223,10 @@ const ExpenseChart = () => {
       setOffset: setWeekOffset,
     });
   };
+
+  const handleDownloadChart=()=>{
+    downloadAsImage({ currentChartFor: `expense` })
+  }
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
@@ -239,6 +244,7 @@ const ExpenseChart = () => {
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
+            downloadChart={handleDownloadChart}
           />
 
           {currentChart === "bar" && (

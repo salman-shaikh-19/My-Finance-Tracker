@@ -14,6 +14,7 @@ import { getAllIncomes } from "../incomeSlice";
 import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import NoDataFound from "../../common/components/NoDataFound";
+import { downloadAsImage } from "../../../utils/downloadAsImage";
 dayjs.extend(isoWeek);
 
 const chartColor = "#10B981";
@@ -51,6 +52,9 @@ const IncomeChart = () => {
       setOffset: setWeekOffset,
     });
   };
+   const handleDownloadChart=()=>{
+      downloadAsImage({ currentChartFor: `income` })
+    }
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
@@ -68,6 +72,7 @@ const IncomeChart = () => {
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
+            downloadChart={handleDownloadChart}
           />
 
           {currentChart === "bar" && (
