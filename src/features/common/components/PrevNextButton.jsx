@@ -1,31 +1,23 @@
 import React, { useCallback, useMemo, useRef } from "react";
-// import dayjs from "dayjs";
-import { getWeekLabel } from "../../../utils/dateUtils";
 import { debounce } from "lodash";
 import { BiChevronLeft, BiChevronRight, BiRefresh } from "react-icons/bi";
 
+
 const PrevNextButton = ({
-  customWeakDate,
+  customLabelDate,
   refreshData,
-  weekOffset,
-  setPrevWeekOffset,
-  setNextWeekOffset,
+  offset,
+  setPrevOffset,
+  setNextOffset,
+  getLabel = (date) => date.toDateString(),
+  disableNext = false,
 }) => {
-  // console.log('logg from prev next button');
-  
-  const weekLabel = useMemo(() => {
-    // const customWeakDate = dayjs().add(weekOffset, "week").toDate();
-    return getWeekLabel(customWeakDate);
-  }, [weekOffset]);
+  const label = useMemo(() => getLabel(customLabelDate), [customLabelDate, getLabel]);
 
   const debouncedRefreshRef = useRef(
-    debounce(
-      () => {
-        refreshData();
-      },
-      1000,
-      { leading: true, trailing: false }
-    )
+    debounce(() => {
+      refreshData?.();
+    }, 500, { leading: true, trailing: false })
   );
 
   const handleRefresh = useCallback(() => {
@@ -33,40 +25,39 @@ const PrevNextButton = ({
   }, []);
 
   return (
-    <div className="flex justify-between items-center mb-2 ">
-      <div className="flex gap-2 ">
+    <div className="flex justify-between items-center mb-2">
+      <div className="flex gap-2">
         <button
-          title="Previous week "
-          className="btn btn-primary btn-outline  btn-sm"
-          onClick={setPrevWeekOffset}
+          title="Previous"
+          className="btn btn-primary btn-outline btn-sm"
+          onClick={setPrevOffset}
         >
           <BiChevronLeft size={20} />
         </button>
         <button
-          title="Next week"
-          className="btn btn-primary btn-outline btn-sm disabled:cursor-not-allowed "
-          onClick={setNextWeekOffset}
-          disabled={weekOffset === 0} // disable future weeks
+          title="Next"
+          className="btn btn-primary btn-outline btn-sm disabled:cursor-not-allowed"
+          onClick={setNextOffset}
+          disabled={disableNext || offset === 0}
         >
           <BiChevronRight size={20} />
         </button>
         <button
-          title={`Refresh data of ${weekLabel} `}
-          className="btn btn-info btn-outline btn-sm disabled:cursor-not-allowed "
+          title={`Refresh ${label}`}
+          className="btn btn-info btn-outline btn-sm"
           onClick={handleRefresh}
-          // disabled={} // disable
         >
           <BiRefresh size={20} />
         </button>
       </div>
-      <span className="font-semibold ">{weekLabel}</span>
+      <span className="font-semibold">{label}</span>
     </div>
   );
 };
 
-export default React.memo(PrevNextButton, (prevProps, nextProps) => {
-  return (
-    prevProps.customWeakDate === nextProps.customWeakDate &&
-    prevProps.weekOffset === nextProps.weekOffset
-  );
-});
+export default React.memo(
+  PrevNextButton,
+  (prevProps, nextProps) =>
+    prevProps.customLabelDate === nextProps.customLabelDate &&
+    prevProps.offset === nextProps.offset
+);

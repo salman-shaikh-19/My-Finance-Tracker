@@ -10,6 +10,7 @@ import { confirmDelete } from "../../../utils/confirmDelete";
 import NoDataFound from "../../common/components/NoDataFound";
 import { deleteInvestment, updateInvestment } from "../investmentsSlice";
 import InvestmentCard from "./InvestmentCard";
+import InvestmentChart from "./InvestmentChart";
 
 const InvestmentList = ({ investments  }) => {
   
@@ -51,7 +52,7 @@ const InvestmentList = ({ investments  }) => {
       id="investment-list"
       className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
     >
-      {/* <IncomeChart /> */}
+      <InvestmentChart />
       {/* <div className="divider">Total Investments by Category</div> */}
 
 

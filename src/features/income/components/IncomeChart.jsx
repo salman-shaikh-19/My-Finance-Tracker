@@ -15,6 +15,7 @@ import { refreshData } from "../../../utils/refreshData";
 import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import NoDataFound from "../../common/components/NoDataFound";
 import { downloadAsImage } from "../../../utils/downloadAsImage";
+import { getWeekLabel } from "../../../utils/dateUtils";
 dayjs.extend(isoWeek);
 
 const chartColor = "#10B981";
@@ -48,8 +49,8 @@ const IncomeChart = () => {
       loggedInUserId,
       dispatch,
       action: getAllIncomes,
-      customDate: customWeakDate,
-      setOffset: setWeekOffset,
+    params: { customWeakDate }, 
+    resetOffset: setWeekOffset, 
     });
   };
    const handleDownloadChart=()=>{
@@ -57,13 +58,16 @@ const IncomeChart = () => {
     }
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg   shadow">
-      <PrevNextButton
-        setPrevWeekOffset={() => setWeekOffset((prev) => prev - 1)}
-        setNextWeekOffset={() => setWeekOffset((prev) => prev + 1)}
-        refreshData={refreshIncomes}
-        weekOffset={weekOffset}
-        customWeakDate={customWeakDate}
-      />
+     
+
+<PrevNextButton
+  customLabelDate={customWeakDate}
+  offset={weekOffset}
+  setPrevOffset={() => setWeekOffset(prev => prev - 1)}
+  setNextOffset={() => setWeekOffset(prev => prev + 1)}
+  refreshData={refreshIncomes}
+  getLabel={(date) => getWeekLabel(date)}
+/>
 
       {!chartData.length ? (
          <NoDataFound NoDataFoundFor=" chart" />

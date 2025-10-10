@@ -6,26 +6,51 @@ import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 
 dayjs.extend(isoWeek);
-export const getAllInvestments = createAsyncThunk(
-  "investments/getAllInvestments",
-  async ({ userId,  }, { rejectWithValue }) => {
-    try {
+// export const getAllInvestments = createAsyncThunk(
+//   "investments/getAllInvestments",
+//   async ({ userId,  }, { rejectWithValue }) => {
+//     try {
 
-      const { data, error } = await supabase
-        .from("user_investments")
-        .select("*")
-        .eq('user_id',userId)
+//       const { data, error } = await supabase
+//         .from("user_investments")
+//         .select("*")
+//         .eq('user_id',userId)
 
-         .order("created_at", { ascending: false });
+//          .order("created_at", { ascending: false });
    
 
+//       if (error) throw error;
+//       return data; // return the fetched data
+//     } catch (err) {
+//       return rejectWithValue(err.message);
+//     }
+//   }
+// );
+export const getAllInvestments = createAsyncThunk(
+  "investments/getAllInvestments",
+  async ({ userId, year }, { rejectWithValue }) => {
+    try {
+      let query = supabase.from("user_investments").select("*").eq("user_id", userId);
+
+      // if year passed then apply below filter
+      if (year) {
+        const start = `${year}-01-01`;
+        const end = `${year}-12-31`;
+        query = query.gte("start_date", start).lte("start_date", end);
+      }
+
+      query = query.order("created_at", { ascending: false });
+
+      const { data, error } = await query;
       if (error) throw error;
-      return data; // return the fetched data
+
+      return data;
     } catch (err) {
       return rejectWithValue(err.message);
     }
   }
 );
+
 export const addInvestment = createAsyncThunk(
   "investments/addInvestment",
   async ({ user_id, investment_category,invested_amount, start_date,maturity_date,investment_note }, { rejectWithValue }) => {

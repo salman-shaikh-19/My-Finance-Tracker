@@ -114,83 +114,37 @@
 - enhanced ui of theme dropdown.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 10 oct
 - delete liabilities.
 - updated liability.
 - add/pay liability[updated remaining amount].
 - fixed issues in liabilities module.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 13 oct 
 - add investment
@@ -205,3 +159,9 @@
 - html2canvas explores.
 - download chart image in expense,income and liabilities module.
 - convert actual currency by its rating.
+
+
+# 15 oct
+
+- chnages in charts of all modules.
+- investment module should display data current year wise or year wise.

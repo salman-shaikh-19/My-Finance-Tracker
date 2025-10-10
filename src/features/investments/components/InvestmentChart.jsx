@@ -1,0 +1,132 @@
+import React, { useEffect, useMemo, useState } from "react";
+import dayjs from "dayjs";
+import isoWeek from "dayjs/plugin/isoWeek";
+import { useDispatch, useSelector } from "react-redux";
+
+import CustomLineChart from "../../common/components/charts/CustomLineChart";
+import CustomBarChart from "../../common/components/charts/CustomBarChart";
+import CustomPieChart from "../../common/components/charts/CustomPieChart";
+
+import PrevNextButton from "../../common/components/PrevNextButton";
+import ChartMenu from "../../common/components/charts/ChartMenu";
+import NoDataFound from "../../common/components/NoDataFound";
+import { downloadAsImage } from "../../../utils/downloadAsImage";
+import { getAllInvestments } from "../investmentsSlice";
+import getYearlyChartData from '../../../utils/getYearlyChartData'
+import getYearlyCategoryData from "../../../utils/getYearlyChartData";
+import { refreshData } from "../../../utils/refreshData";
+dayjs.extend(isoWeek);
+
+const chartColor = "teal";
+
+const InvestmentChart = () => {
+  const dispatch = useDispatch();
+  const { loggedInUserId } = useSelector((state) => state.common);
+  const { investments } = useSelector((state) => state.investments);
+
+  const [yearOffset, setYearOffset] = useState(0); // 0 = current year
+  const [currentChart, setCurrentChart] = useState("line");
+
+  const currentYear = dayjs().add(yearOffset, "year").year();
+
+  // Fetch investments for that year
+  useEffect(() => {
+    if (!loggedInUserId) return;
+    dispatch(getAllInvestments({ userId: loggedInUserId, year: currentYear }));
+  }, [dispatch, loggedInUserId, currentYear]);
+
+ 
+const chartData = React.useMemo(() => {
+  return getYearlyCategoryData({
+    items: investments,
+    dateKey: "start_date",
+    valueKey: "invested_amount",
+    referenceDate: dayjs().add(yearOffset, "year").toDate(),
+  });
+}, [investments, yearOffset]);
+
+
+
+  const handleDownloadChart = () => {
+    downloadAsImage({ currentChartFor: `investments-${currentYear}` });
+  };
+
+  const handleRefresh = () => {
+    if (!loggedInUserId) return;
+    refreshData({
+    loggedInUserId,
+    dispatch,
+    action: getAllInvestments,
+    params: { year: currentYear }, 
+    resetOffset: setYearOffset,
+  });
+  };
+
+  return (
+    <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
+     <PrevNextButton
+  customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
+  offset={yearOffset}
+  setPrevOffset={() => setYearOffset(prev => prev - 1)}
+  setNextOffset={() => setYearOffset(prev => prev + 1)}
+  refreshData={handleRefresh}
+  getLabel={(date) => date.getFullYear()}
+  disableNext={false}
+/>
+
+
+      {!chartData.length ? (
+        <NoDataFound NoDataFoundFor="chart" />
+      ) : (
+        <>
+          <ChartMenu
+            currentChart={currentChart}
+            setCurrentChart={setCurrentChart}
+            downloadChart={handleDownloadChart}
+          />
+
+          {currentChart === "bar" && (
+            <CustomBarChart
+              chartData={chartData}
+              XAxisDataKey="investment_category"
+              BarDataKey={[
+                { key: "invested_amount", name: "Invested Amount" },
+              ]}
+              isLegend={false}
+              description={`Investments in ${currentYear}`}
+              height={270}
+              barColor={chartColor}
+            />
+          )}
+
+          {currentChart === "line" && (
+            <CustomLineChart
+              chartData={chartData}
+              XAxisDataKey="investment_category"
+              LineDataKey={[
+                { key: "invested_amount", name: "Invested Amount" },
+              ]}
+              isLegend={false}
+              description={`Investments in ${currentYear}`}
+              height={270}
+              lineColor={chartColor}
+              strokeColor={chartColor}
+            />
+          )}
+
+          {currentChart === "pie" && (
+            <CustomPieChart
+              chartData={chartData}
+              pieDataKey="invested_amount"
+              pieNameKey="investment_category"
+              height={270}
+              description={`Investments in ${currentYear}`}
+            />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default React.memo(InvestmentChart);
