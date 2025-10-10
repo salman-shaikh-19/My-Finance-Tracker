@@ -12,7 +12,6 @@ import { exportToCsv, exportToExcel } from "../../../../utils/exportTo";
 import { FaFileCsv, FaFileExcel } from "react-icons/fa";
 import { AiOutlineAreaChart } from "react-icons/ai";
 
-// Map chart types to icons
 const chartIcons = {
   bar: MdOutlineBarChart,
   line: MdShowChart,

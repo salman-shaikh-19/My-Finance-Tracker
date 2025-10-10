@@ -48,10 +48,10 @@ function App() {
         toast.warning("Dev tools are disabled!");
         e.preventDefault();
       }
-      // if (e.key === "F12") {
-      //   toast.warning("Dev tools are disabled!");
-      //   e.preventDefault();
-      // }
+      if (e.key === "F12") {
+        toast.warning("Dev tools are disabled!");
+        e.preventDefault();
+      }
 
       //disbale right click and prevent duplicate toasts
       document.oncontextmenu = function (e) {
