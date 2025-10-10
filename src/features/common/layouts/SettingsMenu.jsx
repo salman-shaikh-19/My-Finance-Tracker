@@ -149,7 +149,7 @@ const SettingsMenu = ({
                   }
                   setDeferredPrompt(null);
                 }}
-                className="btn btn-primary btn-sm mt-2 w-full"
+                className="btn btn-info btn-sm mt-2 w-full"
               >
                 Install App
               </button>

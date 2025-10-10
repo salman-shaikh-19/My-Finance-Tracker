@@ -165,3 +165,4 @@
 
 - chnages in charts of all modules.
 - investment module should display data current year wise or year wise.
+- add install appp button in setting profile section of navigaton bar
