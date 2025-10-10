@@ -37,4 +37,10 @@ const CustomRadarChart = ({
   );
 };
 
-export default CustomRadarChart;
+export default React.memo(CustomRadarChart, (prevProps, nextProps) => {
+  return (
+    JSON.stringify(prevProps.chartData) === JSON.stringify(nextProps.chartData)
+  );
+});
+ 
+

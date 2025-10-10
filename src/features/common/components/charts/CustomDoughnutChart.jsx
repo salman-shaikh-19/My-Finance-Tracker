@@ -39,4 +39,9 @@ const CustomDoughnutChart = ({
   );
 };
 
-export default CustomDoughnutChart;
+// export default CustomDoughnutChart;
+export default React.memo(CustomDoughnutChart, (prevProps, nextProps) => {
+  return (
+    JSON.stringify(prevProps.chartData) === JSON.stringify(nextProps.chartData)
+  );
+});

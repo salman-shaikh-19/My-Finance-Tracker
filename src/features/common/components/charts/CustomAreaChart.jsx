@@ -23,7 +23,7 @@ const CustomAreaChart = ({
   isLegend = true,
 }) => {
   return (
-    <div  style={{ width, height }} id="chart-container">
+    <div   style={{ width, height }} id="chart-container">
       <p className="text-center mb-2 font-semibold">{description}</p>
       <ResponsiveContainer width="100%" height={height}>
         <AreaChart data={chartData} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
@@ -48,4 +48,8 @@ const CustomAreaChart = ({
   );
 };
 
-export default CustomAreaChart;
+export default React.memo(CustomAreaChart, (prevProps, nextProps) => {
+  return (
+    JSON.stringify(prevProps.chartData) === JSON.stringify(nextProps.chartData)
+  );
+});
