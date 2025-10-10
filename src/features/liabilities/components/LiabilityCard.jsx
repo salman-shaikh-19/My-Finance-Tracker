@@ -114,12 +114,15 @@ const LiabilityCard = ({
 
         <div className="flex flex-col flex-1">
           <div className="flex gap-5 items-center mb-1">
+            <div className="tooltip tooltip-info tooltip-right" data-tip="Creditor name">
+
             <span
-              className="font-semibold lg:text-sm badge badge-primary badge-xs"
+              className="font-semibold lg:text-sm md:text-sm text-lg badge badge-primary badge-xs"
               title="creditor name"
             >
               {creditorName}
             </span>
+            </div>
 
             <div className="flex items-center gap-1 ms-auto text-sm text-gray-500">
               {paymentSchedule && paymentSchedule !== "No Payment Schedule" && (
