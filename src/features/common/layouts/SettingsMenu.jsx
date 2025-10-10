@@ -18,6 +18,7 @@ const SettingsMenu = ({
   children,
 }) => {
   const [open, setOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
   const menuRef = useRef(null);
   const modalRef = useRef(null);
   const dispatch = useDispatch();
@@ -44,6 +45,18 @@ const SettingsMenu = ({
       // console.error("lgout fail:", err);
     }
   };
+
+useEffect(() => {
+  const handleBeforeInstallPrompt = (e) => {
+    e.preventDefault(); // Prevents the mini-infobar from appearing
+    setDeferredPrompt(e); // Save the event for later use
+  };
+
+  window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+  return () =>
+    window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+}, []);
 
   const handleClickItem = (callback) => {
     if (callback) callback();
@@ -122,10 +135,26 @@ const SettingsMenu = ({
           >
             <SetExpenseLimit handleSubmit={handleExpenseLimit} />
           </CommonModal>
-           <div className="mt-2 ">
-            
-           
-          </div>
+          <div className="mt-2">
+  {deferredPrompt && (
+    <button
+      onClick={async () => {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+          toast.success("App installation accepted!");
+        } else {
+          toast.info("App installation dismissed.");
+        }
+        setDeferredPrompt(null);
+      }}
+      className="btn btn-primary btn-sm mt-2 w-full"
+    >
+      Install App
+    </button>
+  )}
+</div>
+
           <button
             onClick={() => handleClickItem(handleLogout)}
             className="btn  btn-error btn-sm mt-3 w-full"
