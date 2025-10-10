@@ -7,28 +7,36 @@ dayjs.extend(isoWeek);
 
 export const getAllLiabilities = createAsyncThunk(
   "liabilities/getAllLiabilities",
-  async ({ userId }, { rejectWithValue }) => {
+  async ({ userId, year }, { rejectWithValue }) => {
     try {
-      const { data, error } = await supabase
-        .from("user_liabilities")
-        .select("*")
-        .eq("user_id", userId);
+      let query = supabase.from("user_liabilities").select("*").eq("user_id", userId);
 
+      // filter by year
+      if (year) {
+        const start = `${year}-01-01`;
+        const end = `${year}-12-31`;
+        query = query.gte("start_date", start).lte("start_date", end);
+      }
+
+      query = query.order("created_at", { ascending: false });
+
+      const { data, error } = await query;
+      if (error) throw error;
+
+      // unpaid first, then latest
       const sorted = data.sort((a, b) => {
-        // unpaid first
         if (a.remaining_amount === 0 && b.remaining_amount > 0) return 1;
         if (a.remaining_amount > 0 && b.remaining_amount === 0) return -1;
-        // then latest first
         return new Date(b.created_at) - new Date(a.created_at);
       });
 
-      if (error) throw error;
-      return sorted; // return the fetched data
+      return sorted;
     } catch (err) {
       return rejectWithValue(err.message);
     }
   }
 );
+
 export const addLiability = createAsyncThunk(
   "liabilities/addLiability",
   async (
