@@ -46,17 +46,20 @@ const SettingsMenu = ({
     }
   };
 
-useEffect(() => {
-  const handleBeforeInstallPrompt = (e) => {
-    e.preventDefault(); // Prevents the mini-infobar from appearing
-    setDeferredPrompt(e); // Save the event for later use
-  };
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault(); // Prevents the mini-infobar from appearing
+      setDeferredPrompt(e); // Save the event for later use
+    };
 
-  window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
-  return () =>
-    window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-}, []);
+    return () =>
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+  }, []);
 
   const handleClickItem = (callback) => {
     if (callback) callback();
@@ -106,19 +109,17 @@ useEffect(() => {
               : "absolute top-16 right-0"
           }  w-50 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
         >
-            <div className="flex gap-3 border-b pb-3 mb-2 ">
-              <div >
-                <p className="font-semibold text-sm truncate w-32">
-                  {profile?.user_name || "User Name"}
-                </p>
-                <p className="text-xs text-gray-500 ">
-                  {profile?.user_email || "User Email "}
-                </p>
-              </div>
+          <div className="flex gap-3 border-b pb-3 mb-2 ">
+            <div>
+              <p className="font-semibold text-sm truncate w-32">
+                {profile?.user_name || "User Name"}
+              </p>
+              <p className="text-xs text-gray-500 ">
+                {profile?.user_email || "User Email "}
+              </p>
             </div>
-          <ul className="menu menu-compact ">
-            {children || ""}
-          </ul>
+          </div>
+          <ul className="menu menu-compact ">{children || ""}</ul>
           <div className="mt-3 lg:mt-0 lg:pt-0 lg:border-t-0 border-t pt-2 ">
             <SetUserCurrency />
           </div>
@@ -136,24 +137,24 @@ useEffect(() => {
             <SetExpenseLimit handleSubmit={handleExpenseLimit} />
           </CommonModal>
           <div className="mt-2">
-  {deferredPrompt && (
-    <button
-      onClick={async () => {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === "accepted") {
-          toast.success("App installation accepted!");
-        } else {
-          toast.info("App installation dismissed.");
-        }
-        setDeferredPrompt(null);
-      }}
-      className="btn btn-primary btn-sm mt-2 w-full"
-    >
-      Install App
-    </button>
-  )}
-</div>
+            {deferredPrompt && (
+              <button
+                onClick={async () => {
+                  deferredPrompt.prompt();
+                  const { outcome } = await deferredPrompt.userChoice;
+                  if (outcome === "accepted") {
+                    toast.success("App installation started!");
+                  } else {
+                    toast.info("App installation cancelled.");
+                  }
+                  setDeferredPrompt(null);
+                }}
+                className="btn btn-primary btn-sm mt-2 w-full"
+              >
+                Install App
+              </button>
+            )}
+          </div>
 
           <button
             onClick={() => handleClickItem(handleLogout)}
