@@ -25,7 +25,7 @@ const CustomAreaChart = ({
   return (
     <div   style={{ width, height }} id="chart-container">
       <p className="text-center mb-2 font-semibold">{description}</p>
-      <ResponsiveContainer width="100%" height={height}>
+      <ResponsiveContainer width="100%" height={height} >
         <AreaChart data={chartData} margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey={XAxisDataKey} />

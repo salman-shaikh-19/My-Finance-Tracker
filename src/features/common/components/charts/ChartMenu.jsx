@@ -10,13 +10,14 @@ import {
 } from "react-icons/md";
 import { exportToCsv, exportToExcel } from "../../../../utils/exportTo";
 import { FaFileCsv, FaFileExcel } from "react-icons/fa";
+import { AiOutlineAreaChart } from "react-icons/ai";
 
 // Map chart types to icons
 const chartIcons = {
   bar: MdOutlineBarChart,
   line: MdShowChart,
   pie: MdOutlinePieChart,
-  area: MdTimeline,
+  area: AiOutlineAreaChart,
   radar: MdRadar,
   doughnut: MdDonutSmall,
 };
