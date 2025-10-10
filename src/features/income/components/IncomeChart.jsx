@@ -60,7 +60,7 @@ const IncomeChart = () => {
     downloadAsImage({ currentChartFor: `income` });
   };
   return (
-    <div className="w-full mb-4 max-w-full h-[450px] p-4 bg-base-100 rounded-lg   shadow">
+    <div className="w-full mb-4 max-w-full h-[480px] md:h-[450px] lg:h-[450px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         customLabelDate={customWeakDate}
         offset={weekOffset}
@@ -74,7 +74,7 @@ const IncomeChart = () => {
         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
-        <div className="flex flex-row  lg:flex-col items-center">
+        
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -152,7 +152,6 @@ const IncomeChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
-          </div>
         </>
       )}
     </div>

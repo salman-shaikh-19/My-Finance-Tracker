@@ -69,7 +69,7 @@ const LiabilityChart = () => {
   };
 
   return (
-    <div className="w-full mb-4 max-w-full h-[450px] bg-base-100 rounded-lg shadow p-4">
+    <div className="w-full mb-4 max-w-full h-[500px] md:h-[450px] lg:h-[450px] bg-base-100 rounded-lg shadow p-4">
       <PrevNextButton
         customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
         offset={yearOffset}
@@ -84,7 +84,7 @@ const LiabilityChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-        <div className="flex flex-row  lg:flex-col items-center">
+        
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -167,7 +167,6 @@ const LiabilityChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
-          </div>
         </>
       )}
     </div>

@@ -232,7 +232,7 @@ const ExpenseChart = () => {
     downloadAsImage({ currentChartFor: `expense` });
   };
   return (
-    <div className="w-full mb-4 max-w-full h-[520px] p-4 bg-base-100 rounded-lg   shadow">
+    <div className="w-full mb-4 max-w-full h-[555px] md:h-[520px] lg:h-[520px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         customLabelDate={customWeakDate}
         offset={weekOffset}
@@ -245,9 +245,7 @@ const ExpenseChart = () => {
         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
-        <div className="flex flex-row  lg:flex-col items-center">
-
-       
+        
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -325,7 +323,6 @@ const ExpenseChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
-           </div>
           <ul className="steps w-full mt-10 scrollbar-hide  ">
             {chartData.map((dayData) => (
               <ExpenseTimeLine

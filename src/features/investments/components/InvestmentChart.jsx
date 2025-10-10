@@ -63,7 +63,7 @@ const InvestmentChart = () => {
   };
 
   return (
-    <div className="w-full mb-4 max-w-full h-[460px]  bg-base-100 rounded-lg shadow p-4">
+    <div className="w-full mb-4 max-w-full h-[500px] md:h-[460px] lg:h-[460px]  bg-base-100 rounded-lg shadow p-4">
       <PrevNextButton
         customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
         offset={yearOffset}
@@ -88,7 +88,8 @@ const InvestmentChart = () => {
               fileName={`Investments-${currentYear}`}
               excludeKeys={["created_at", "id", "user_id"]}
             />{" "}
-         
+          
+          </div>
 
           {currentChart === "bar" && (
             <CustomBarChart
@@ -156,11 +157,10 @@ const InvestmentChart = () => {
               dataKey="invested_amount"
               nameKey="investment_category"
               description={`Investments in ${currentYear}`}
-              height={270}
+              height={300}
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
-          </div>
         </>
       )}
     </div>

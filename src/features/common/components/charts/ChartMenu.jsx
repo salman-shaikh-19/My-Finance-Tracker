@@ -33,7 +33,7 @@ const ChartMenu = ({
 
   return (
     <div className="flex flex-wrap mb-2">
-      <div className="flex flex-wrap flex-col  lg:flex-row gap-1 mb-2 justify-end  ">
+      <div className="flex flex-wrap gap-1 mb-2 justify-end  ">
         {chartTypes.map((type) => {
           const Icon = chartIcons[type];
           return (
