@@ -33,7 +33,7 @@ const ChartMenu = ({
 
   return (
     <div className="flex flex-wrap mb-2">
-      <div className="flex ml-auto gap-1">
+      <div className="flex flex-wrap flex-col gap-1 mb-2 justify-end  ">
         {chartTypes.map((type) => {
           const Icon = chartIcons[type];
           return (
@@ -43,7 +43,6 @@ const ChartMenu = ({
               data-tip={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
             >
               <button
-              
                 className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md ${
                   currentChart === type
                     ? "btn btn-primary btn-sm font-semibold"
@@ -56,17 +55,7 @@ const ChartMenu = ({
             </div>
           );
         })}
-        <div
-          className="tooltip tooltip-bottom tooltip-primary "
-          data-tip={`Download ${currentChart} chart`}
-        >
-          <button
-            className="flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
-            onClick={downloadChart}
-          >
-            <FiDownload size={22} />
-          </button>
-        </div>
+
         <div
           className="tooltip tooltip-bottom tooltip-primary"
           data-tip="Export to Excel"
@@ -79,7 +68,7 @@ const ChartMenu = ({
           </button>
         </div>
         <div
-          className="tooltip tooltip-bottom tooltip-primary "
+          className="tooltip tooltip-left tooltip-primary "
           data-tip="Export to CSV"
         >
           <button
@@ -89,6 +78,19 @@ const ChartMenu = ({
             <FaFileCsv size={20} />
           </button>
         </div>
+        <div
+          className="tooltip tooltip-bottom tooltip-primary "
+          data-tip={`Download ${currentChart} chart`}
+        >
+          <button
+            className="flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            onClick={downloadChart}
+          >
+            <FiDownload size={22} />
+          </button>
+        </div>
+
+
       </div>
     </div>
   );

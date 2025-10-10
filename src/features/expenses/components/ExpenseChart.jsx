@@ -245,6 +245,9 @@ const ExpenseChart = () => {
         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
+        <div className="flex  items-center">
+
+       
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -322,6 +325,7 @@ const ExpenseChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
+           </div>
           <ul className="steps w-full mt-10 scrollbar-hide  ">
             {chartData.map((dayData) => (
               <ExpenseTimeLine
