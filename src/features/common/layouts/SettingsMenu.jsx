@@ -12,6 +12,7 @@ import SetUserCurrency from "../components/SetUserCurrency";
 import SetExpenseLimit from "../../expenses/components/SetExpenseLimit";
 import CommonModal from "../components/CommonModal";
 import { toast } from "react-toastify";
+import InstallApp from '../components/InstallApp'
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
@@ -122,7 +123,12 @@ const SettingsMenu = ({
           >
             <SetExpenseLimit handleSubmit={handleExpenseLimit} />
           </CommonModal>
-
+           <div className="mt-2 ">
+            
+            <InstallApp
+            className={"btn btn-info btn-sm"}
+            />
+          </div>
           <button
             onClick={() => handleClickItem(handleLogout)}
             className="btn  btn-error btn-sm mt-3 w-full"

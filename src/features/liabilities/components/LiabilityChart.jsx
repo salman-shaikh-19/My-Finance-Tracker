@@ -27,13 +27,13 @@ const LiabilityChart = () => {
 
   const currentYear = dayjs().add(yearOffset, "year").year();
 
-  // Fetch liabilities for current year
+  // fetch liabilities for current year
   useEffect(() => {
     if (!loggedInUserId) return;
     dispatch(getAllLiabilities({ userId: loggedInUserId, year: currentYear }));
   }, [dispatch, loggedInUserId, currentYear]);
 
-  // Aggregate remaining amount by liability type
+  //  remaining amount by liability type
   const chartData = useMemo(() => {
     return liabilities.reduce((acc, liab) => {
       const type = liab.liability_type || "Other";
@@ -50,7 +50,7 @@ const LiabilityChart = () => {
     }, []);
   }, [liabilities]);
 
-  // Refresh chart data
+  // refresh chart data
   const handleRefresh = () => {
     if (!loggedInUserId) return;
     refreshData({
@@ -61,7 +61,7 @@ const LiabilityChart = () => {
       resetOffset: setYearOffset,
     });
   };
-
+// download chart as image
   const handleDownloadChart = () => {
     downloadAsImage({ currentChartFor: `liabilities-${currentYear}` });
   };

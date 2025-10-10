@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 // import { commonDate } from "../../../utils/dateUtils";
 import {

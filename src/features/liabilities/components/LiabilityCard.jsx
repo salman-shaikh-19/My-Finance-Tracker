@@ -77,7 +77,7 @@ const LiabilityCard = ({
     remainingAmount / numberOfPayments + totalInterest / numberOfPayments;
   const dispatch = useDispatch();
   const handlePay = async () => {
-    //confirm before paying sweet alert
+   
     await Swal.fire({
       title: "Are you sure?",
       text: `You are about to pay ${formatCurrency(
