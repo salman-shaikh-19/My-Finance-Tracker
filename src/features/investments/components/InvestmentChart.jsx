@@ -12,7 +12,7 @@ import ChartMenu from "../../common/components/charts/ChartMenu";
 import NoDataFound from "../../common/components/NoDataFound";
 import { downloadAsImage } from "../../../utils/downloadAsImage";
 import { getAllInvestments } from "../investmentsSlice";
-import getYearlyChartData from '../../../utils/getYearlyChartData'
+import getYearlyChartData from "../../../utils/getYearlyChartData";
 import getYearlyCategoryData from "../../../utils/getYearlyChartData";
 import { refreshData } from "../../../utils/refreshData";
 dayjs.extend(isoWeek);
@@ -35,17 +35,14 @@ const InvestmentChart = () => {
     dispatch(getAllInvestments({ userId: loggedInUserId, year: currentYear }));
   }, [dispatch, loggedInUserId, currentYear]);
 
- 
-const chartData = React.useMemo(() => {
-  return getYearlyCategoryData({
-    items: investments,
-    dateKey: "start_date",
-    valueKey: "invested_amount",
-    referenceDate: dayjs().add(yearOffset, "year").toDate(),
-  });
-}, [investments, yearOffset]);
-
-
+  const chartData = React.useMemo(() => {
+    return getYearlyCategoryData({
+      items: investments,
+      dateKey: "start_date",
+      valueKey: "invested_amount",
+      referenceDate: dayjs().add(yearOffset, "year").toDate(),
+    });
+  }, [investments, yearOffset]);
 
   const handleDownloadChart = () => {
     downloadAsImage({ currentChartFor: `investments-${currentYear}` });
@@ -54,26 +51,25 @@ const chartData = React.useMemo(() => {
   const handleRefresh = () => {
     if (!loggedInUserId) return;
     refreshData({
-    loggedInUserId,
-    dispatch,
-    action: getAllInvestments,
-    params: { year: currentYear }, 
-    resetOffset: setYearOffset,
-  });
+      loggedInUserId,
+      dispatch,
+      action: getAllInvestments,
+      params: { year: currentYear },
+      resetOffset: setYearOffset,
+    });
   };
 
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
-     <PrevNextButton
-  customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
-  offset={yearOffset}
-  setPrevOffset={() => setYearOffset(prev => prev - 1)}
-  setNextOffset={() => setYearOffset(prev => prev + 1)}
-  refreshData={handleRefresh}
-  getLabel={(date) => date.getFullYear()}
-  disableNext={false}
-/>
-
+      <PrevNextButton
+        customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
+        offset={yearOffset}
+        setPrevOffset={() => setYearOffset((prev) => prev - 1)}
+        setNextOffset={() => setYearOffset((prev) => prev + 1)}
+        refreshData={handleRefresh}
+        getLabel={(date) => date.getFullYear()}
+        disableNext={false}
+      />
 
       {!chartData.length ? (
         <NoDataFound NoDataFoundFor="chart" />
@@ -89,9 +85,7 @@ const chartData = React.useMemo(() => {
             <CustomBarChart
               chartData={chartData}
               XAxisDataKey="investment_category"
-              BarDataKey={[
-                { key: "invested_amount", name: "Invested Amount" },
-              ]}
+              BarDataKey={[{ key: "invested_amount", name: "Invested Amount" }]}
               isLegend={false}
               description={`Investments in ${currentYear}`}
               height={270}

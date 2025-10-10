@@ -49,28 +49,26 @@ const IncomeChart = () => {
       loggedInUserId,
       dispatch,
       action: getAllIncomes,
-    params: { customWeakDate }, 
-    resetOffset: setWeekOffset, 
+      params: { customWeakDate },
+      resetOffset: setWeekOffset,
     });
   };
-   const handleDownloadChart=()=>{
-      downloadAsImage({ currentChartFor: `income` })
-    }
+  const handleDownloadChart = () => {
+    downloadAsImage({ currentChartFor: `income` });
+  };
   return (
     <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg   shadow">
-     
-
-<PrevNextButton
-  customLabelDate={customWeakDate}
-  offset={weekOffset}
-  setPrevOffset={() => setWeekOffset(prev => prev - 1)}
-  setNextOffset={() => setWeekOffset(prev => prev + 1)}
-  refreshData={refreshIncomes}
-  getLabel={(date) => getWeekLabel(date)}
-/>
+      <PrevNextButton
+        customLabelDate={customWeakDate}
+        offset={weekOffset}
+        setPrevOffset={() => setWeekOffset((prev) => prev - 1)}
+        setNextOffset={() => setWeekOffset((prev) => prev + 1)}
+        refreshData={refreshIncomes}
+        getLabel={(date) => getWeekLabel(date)}
+      />
 
       {!chartData.length ? (
-         <NoDataFound NoDataFoundFor=" chart" />
+        <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
           <ChartMenu

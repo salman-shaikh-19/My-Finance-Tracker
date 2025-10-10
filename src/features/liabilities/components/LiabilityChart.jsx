@@ -38,9 +38,9 @@ const LiabilityChart = () => {
     }
     return acc;
   }, []);
-    const handleDownloadChart=()=>{
-        downloadAsImage({ currentChartFor: `liabilities` })
-      }
+  const handleDownloadChart = () => {
+    downloadAsImage({ currentChartFor: `liabilities` });
+  };
 
   return (
     <div className="w-full  max-w-full h-[370px] p-4 bg-base-100 rounded-lg   shadow">

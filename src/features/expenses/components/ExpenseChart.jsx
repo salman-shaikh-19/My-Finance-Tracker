@@ -220,31 +220,26 @@ const ExpenseChart = () => {
       loggedInUserId,
       dispatch,
       action: getAllExpenses,
-   params: { customWeakDate }, 
- resetOffset: setWeekOffset,
+      params: { customWeakDate },
+      resetOffset: setWeekOffset,
     });
-    
   };
 
-  const handleDownloadChart=()=>{
-
-
-    downloadAsImage({ currentChartFor: `expense` })
-  }
+  const handleDownloadChart = () => {
+    downloadAsImage({ currentChartFor: `expense` });
+  };
   return (
     <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
-  
-
-<PrevNextButton
-  customLabelDate={customWeakDate}
-  offset={weekOffset}
-  setPrevOffset={() => setWeekOffset(prev => prev - 1)}
-  setNextOffset={() => setWeekOffset(prev => prev + 1)}
-  refreshData={refreshExpenses}
-  getLabel={(date) => getWeekLabel(date)}
-/>
+      <PrevNextButton
+        customLabelDate={customWeakDate}
+        offset={weekOffset}
+        setPrevOffset={() => setWeekOffset((prev) => prev - 1)}
+        setNextOffset={() => setWeekOffset((prev) => prev + 1)}
+        refreshData={refreshExpenses}
+        getLabel={(date) => getWeekLabel(date)}
+      />
       {!chartData.length ? (
-      <NoDataFound NoDataFoundFor=" chart" />
+        <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
           <ChartMenu
