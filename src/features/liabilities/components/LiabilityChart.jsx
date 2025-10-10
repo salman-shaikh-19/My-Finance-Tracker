@@ -25,7 +25,7 @@ const LiabilityChart = () => {
   const { liabilities } = useSelector((state) => state.liabilities);
 
   const [yearOffset, setYearOffset] = useState(0); // current year offset
-  const [currentChart, setCurrentChart] = useState("pie");
+  const [currentChart, setCurrentChart] = useState("bar");
 
   const currentYear = dayjs().add(yearOffset, "year").year();
 

@@ -193,7 +193,7 @@ const ExpenseChart = () => {
   );
   const { expenses } = useSelector((state) => state.expenses);
   const [weekOffset, setWeekOffset] = useState(0); // 0 = current week
-  const [currentChart, setCurrentChart] = useState("bar");
+  const [currentChart, setCurrentChart] = useState("pie");
 
   const customWeakDate = dayjs().add(weekOffset, "week").toDate();
 

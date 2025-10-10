@@ -12,7 +12,6 @@ import ChartMenu from "../../common/components/charts/ChartMenu";
 import NoDataFound from "../../common/components/NoDataFound";
 import { downloadAsImage } from "../../../utils/downloadAsImage";
 import { getAllInvestments } from "../investmentsSlice";
-import getYearlyChartData from "../../../utils/getYearlyChartData";
 import getYearlyCategoryData from "../../../utils/getYearlyChartData";
 import { refreshData } from "../../../utils/refreshData";
 import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutChart";
@@ -28,7 +27,7 @@ const InvestmentChart = () => {
   const { investments } = useSelector((state) => state.investments);
 
   const [yearOffset, setYearOffset] = useState(0); // 0 = current year
-  const [currentChart, setCurrentChart] = useState("line");
+  const [currentChart, setCurrentChart] = useState("area");
 
   const currentYear = dayjs().add(yearOffset, "year").year();
 
