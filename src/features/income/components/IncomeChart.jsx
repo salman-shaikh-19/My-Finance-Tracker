@@ -57,7 +57,7 @@ const IncomeChart = () => {
     downloadAsImage({ currentChartFor: `income` });
   };
   return (
-    <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg   shadow">
+    <div className="w-full mb-4 max-w-full h-[450px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         customLabelDate={customWeakDate}
         offset={weekOffset}
@@ -85,7 +85,7 @@ const IncomeChart = () => {
               BarDataKey={[{ key: "total", name: "Total income" }]}
               isLegend={false}
               description="Total income of the week "
-              height={270}
+              height={300}
               barColor={chartColor}
             />
           )}
@@ -97,7 +97,7 @@ const IncomeChart = () => {
               LineDataKey={[{ key: "total", name: "Total income " }]}
               isLegend={false}
               description="Total income of the week "
-              height={270}
+              height={300}
               lineColor={chartColor}
               strokeColor={chartColor}
             />
@@ -108,7 +108,7 @@ const IncomeChart = () => {
               chartData={chartData}
               pieDataKey="total"
               pieNameKey="day"
-              height={270}
+              height={300}
               description="Total income of the week"
             />
           )}

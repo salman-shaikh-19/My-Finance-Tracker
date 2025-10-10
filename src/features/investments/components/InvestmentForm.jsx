@@ -92,7 +92,7 @@ const InvestmentForm=({handleSubmit,initialValues,isEdit = false})=>{
                     type="date"
                     name="maturityDate"
                     className="input input-bordered w-full "
-                    min={new Date().toISOString().slice(0, 10)}
+                    // min={new Date().toISOString().slice(0, 10)}
                   />
                   <ErrorMessage
                     name="maturityDate"

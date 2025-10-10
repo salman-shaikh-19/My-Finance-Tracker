@@ -43,7 +43,7 @@ const LiabilityChart = () => {
   };
 
   return (
-    <div className="w-full  max-w-full h-[370px] p-4 bg-base-100 rounded-lg   shadow">
+    <div className="w-full  max-w-full h-[400px] p-4 bg-base-100 rounded-lg   shadow">
       {!chartData.length ? (
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
@@ -64,7 +64,7 @@ const LiabilityChart = () => {
               ]}
               isLegend={false}
               description="Remaining Amount per Liability category "
-              height={260}
+              height={300}
               barColor={chartColor}
             />
           )}
@@ -78,7 +78,7 @@ const LiabilityChart = () => {
               ]}
               isLegend={false}
               description="Remaining Amount per Liability category"
-              height={260}
+              height={300}
               lineColor={chartColor}
               strokeColor={chartColor}
             />
@@ -89,7 +89,7 @@ const LiabilityChart = () => {
               chartData={chartData}
               pieDataKey="remaining_amount"
               pieNameKey="liability_type"
-              height={260}
+              height={300}
               description="Remaining Amount per Liability category"
             />
           )}

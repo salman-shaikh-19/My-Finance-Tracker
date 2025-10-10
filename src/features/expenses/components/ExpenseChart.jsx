@@ -229,7 +229,7 @@ const ExpenseChart = () => {
     downloadAsImage({ currentChartFor: `expense` });
   };
   return (
-    <div className="w-full mb-4 max-w-full h-[500px] p-4 bg-base-100 rounded-lg   shadow">
+    <div className="w-full mb-4 max-w-full h-[520px] p-4 bg-base-100 rounded-lg   shadow">
       <PrevNextButton
         customLabelDate={customWeakDate}
         offset={weekOffset}
@@ -256,7 +256,7 @@ const ExpenseChart = () => {
               BarDataKey={[{ key: "total", name: "Total expenses" }]}
               isLegend={false}
               description="Total expenses of the week "
-              height={270}
+              height={300}
               barColor={chartColor}
             />
           )}
@@ -268,7 +268,7 @@ const ExpenseChart = () => {
               LineDataKey={[{ key: "total", name: "Total expenses " }]}
               isLegend={false}
               description="Total expenses of the week "
-              height={270}
+              height={300}
               lineColor={chartColor}
               strokeColor={chartColor}
             />
@@ -279,7 +279,7 @@ const ExpenseChart = () => {
               chartData={chartData}
               pieDataKey="total"
               pieNameKey="day"
-              height={270}
+              height={300}
               description="Total expenses of the week"
             />
           )}

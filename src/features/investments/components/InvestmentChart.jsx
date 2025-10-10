@@ -60,7 +60,7 @@ const InvestmentChart = () => {
   };
 
   return (
-    <div className="w-full mb-4 max-w-full h-[400px] p-4 bg-base-100 rounded-lg shadow">
+    <div className="w-full mb-4 max-w-full h-[450px]  bg-base-100 rounded-lg shadow p-4">
       <PrevNextButton
         customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
         offset={yearOffset}
@@ -80,18 +80,19 @@ const InvestmentChart = () => {
             setCurrentChart={setCurrentChart}
             downloadChart={handleDownloadChart}
           />
+   
 
           {currentChart === "bar" && (
-            <CustomBarChart
+              <CustomBarChart
               chartData={chartData}
               XAxisDataKey="investment_category"
               BarDataKey={[{ key: "invested_amount", name: "Invested Amount" }]}
               isLegend={false}
               description={`Investments in ${currentYear}`}
-              height={270}
+              height={300}
               barColor={chartColor}
             />
-          )}
+        )}
 
           {currentChart === "line" && (
             <CustomLineChart
@@ -102,21 +103,22 @@ const InvestmentChart = () => {
               ]}
               isLegend={false}
               description={`Investments in ${currentYear}`}
-              height={270}
+              height={300}
               lineColor={chartColor}
               strokeColor={chartColor}
             />
           )}
 
           {currentChart === "pie" && (
-            <CustomPieChart
+              <CustomPieChart
               chartData={chartData}
               pieDataKey="invested_amount"
               pieNameKey="investment_category"
-              height={270}
+              height={300}
               description={`Investments in ${currentYear}`}
             />
           )}
+
         </>
       )}
     </div>
