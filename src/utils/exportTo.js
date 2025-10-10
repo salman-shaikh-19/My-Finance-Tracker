@@ -46,6 +46,7 @@ const formatExportData = (rows, excludeKeys = []) => {
 
 
 export const exportToExcel = (rows, fileName = "excel-data", excludeKeys = []) => {
+   if (!rows || !rows.length) return null;
   const filteredRows = formatExportData(rows, excludeKeys);
 
   const worksheet = XLSX.utils.json_to_sheet(filteredRows);
@@ -57,6 +58,7 @@ export const exportToExcel = (rows, fileName = "excel-data", excludeKeys = []) =
 
 
 export const exportToCsv = (rows, fileName = "csv-data", excludeKeys = []) => {
+    if (!rows || !rows.length) return null;
   const filteredRows = formatExportData(rows, excludeKeys);
 
   const csv = Papa.unparse(filteredRows);

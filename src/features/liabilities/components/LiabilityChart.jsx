@@ -63,7 +63,7 @@ const LiabilityChart = () => {
       resetOffset: setYearOffset,
     });
   };
-// download chart as image
+  // download chart as image
   const handleDownloadChart = () => {
     downloadAsImage({ currentChartFor: `liabilities-${currentYear}` });
   };
@@ -88,13 +88,18 @@ const LiabilityChart = () => {
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
             downloadChart={handleDownloadChart}
+            data={liabilities}
+            fileName={`Liabilities-${currentYear}`}
+            excludeKeys={["created_at", "id", "user_id"]}
           />
 
           {currentChart === "bar" && (
             <CustomBarChart
               chartData={chartData}
               XAxisDataKey="liability_type"
-              BarDataKey={[{ key: "remaining_amount", name: "Remaining Amount" }]}
+              BarDataKey={[
+                { key: "remaining_amount", name: "Remaining Amount" },
+              ]}
               isLegend={false}
               description={`Remaining Amount per Liability in ${currentYear}`}
               height={300}
@@ -106,7 +111,9 @@ const LiabilityChart = () => {
             <CustomLineChart
               chartData={chartData}
               XAxisDataKey="liability_type"
-              LineDataKey={[{ key: "remaining_amount", name: "Remaining Amount" }]}
+              LineDataKey={[
+                { key: "remaining_amount", name: "Remaining Amount" },
+              ]}
               isLegend={false}
               description={`Remaining Amount per Liability in ${currentYear}`}
               height={300}
@@ -129,7 +136,9 @@ const LiabilityChart = () => {
             <CustomAreaChart
               chartData={chartData}
               XAxisDataKey="liability_type"
-              AreaDataKey={[{ key: "remaining_amount", name: "Remaining Amount" }]}
+              AreaDataKey={[
+                { key: "remaining_amount", name: "Remaining Amount" },
+              ]}
               description={`Remaining Amount per Liability in ${currentYear}`}
               height={300}
               areaColor={chartColor}

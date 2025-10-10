@@ -63,7 +63,7 @@ const InvestmentChart = () => {
   };
 
   return (
-    <div className="w-full mb-4 max-w-full h-[450px]  bg-base-100 rounded-lg shadow p-4">
+    <div className="w-full mb-4 max-w-full h-[460px]  bg-base-100 rounded-lg shadow p-4">
       <PrevNextButton
         customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
         offset={yearOffset}
@@ -78,22 +78,21 @@ const InvestmentChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-        <div className="flex items-center justify-between flex-col lg:flex-row lg:justify-normal ">
-
-          <ChartMenu
-            currentChart={currentChart}
-            setCurrentChart={setCurrentChart}
-            downloadChart={handleDownloadChart}
-          />   <ExportButtons
-        data={investments}
-        fileName={`Investments-${currentYear}`}
-        excludeKeys={["created_at", "id", "user_id", "Icon"]}
-      />
-        </div>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3  bg-base-100 rounded-xl shadow-sm mb-4">
+            <ChartMenu
+              currentChart={currentChart}
+              setCurrentChart={setCurrentChart}
+              downloadChart={handleDownloadChart}
+              //for data export
+              data={investments}
+              fileName={`Investments-${currentYear}`}
+              excludeKeys={["created_at", "id", "user_id"]}
+            />{" "}
           
+          </div>
 
           {currentChart === "bar" && (
-              <CustomBarChart
+            <CustomBarChart
               chartData={chartData}
               XAxisDataKey="investment_category"
               BarDataKey={[{ key: "invested_amount", name: "Invested Amount" }]}
@@ -102,7 +101,7 @@ const InvestmentChart = () => {
               height={300}
               barColor={chartColor}
             />
-        )}
+          )}
 
           {currentChart === "line" && (
             <CustomLineChart
@@ -120,7 +119,7 @@ const InvestmentChart = () => {
           )}
 
           {currentChart === "pie" && (
-              <CustomPieChart
+            <CustomPieChart
               chartData={chartData}
               pieDataKey="invested_amount"
               pieNameKey="investment_category"
@@ -132,7 +131,9 @@ const InvestmentChart = () => {
             <CustomAreaChart
               chartData={chartData}
               XAxisDataKey="investment_category"
-              AreaDataKey={[{ key: "invested_amount", name: "Invested Amount" }]}
+              AreaDataKey={[
+                { key: "invested_amount", name: "Invested Amount" },
+              ]}
               description={`Investments in ${currentYear}`}
               height={300}
               areaColor={chartColor}
@@ -160,10 +161,8 @@ const InvestmentChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
-
         </>
       )}
-      
     </div>
   );
 };

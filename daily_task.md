@@ -163,6 +163,11 @@
 
 # 15 oct
 
-- chnages in charts of all modules and add more charts liek area ,radar and doughnut.
+- chnages in charts of all modules and add more charts like area ,radar and doughnut.
 - investment module should display data current year wise or year wise.
 - add install appp button in setting profile section of navigaton bar.
+- implemented daisyui tooltip.
+
+
+# 15 oct 
+- add export data using excel and csv in all modules.

@@ -249,6 +249,9 @@ const ExpenseChart = () => {
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
             downloadChart={handleDownloadChart}
+            data={expenses}
+            fileName={`Expenses-${dayjs(customWeakDate).format("YYYY-MMM-DD")}`}
+            excludeKeys={["created_at","updated_at", "id", "user_id"]}
           />
 
           {currentChart === "bar" && (
@@ -286,7 +289,6 @@ const ExpenseChart = () => {
               description="Total expenses of the week"
             />
           )}
-
 
           {currentChart === "area" && (
             <CustomAreaChart

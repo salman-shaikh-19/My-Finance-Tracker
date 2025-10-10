@@ -13,7 +13,7 @@ const ExportButtons = ({ data, fileName = "data", excludeKeys = [] }) => {
 
       <button
        
-        className="text-primary btn-sm"
+        className="text-primary text-sm"
         onClick={() => exportToExcel(data, fileName, excludeKeys)}
       >
        <FaFileExcel size={20} />
@@ -22,7 +22,7 @@ const ExportButtons = ({ data, fileName = "data", excludeKeys = [] }) => {
       <div className="tooltip tooltip-bottom tooltip-info " data-tip="Export to CSV">
         
       <button
-        className="text-info btn-sm"
+        className="text-info text-sm"
         onClick={() => exportToCsv(data, fileName, excludeKeys)}
       >
       <FaFileCsv size={20} />

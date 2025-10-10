@@ -8,6 +8,8 @@ import {
   MdRadar, // radar chart (no default icon in material, we’ll simulate)
   MdDonutSmall, // doughnut chart
 } from "react-icons/md";
+import { exportToCsv, exportToExcel } from "../../../../utils/exportTo";
+import { FaFileCsv, FaFileExcel } from "react-icons/fa";
 
 // Map chart types to icons
 const chartIcons = {
@@ -19,7 +21,14 @@ const chartIcons = {
   doughnut: MdDonutSmall,
 };
 
-const ChartMenu = ({ currentChart, setCurrentChart, downloadChart }) => {
+const ChartMenu = ({
+  currentChart,
+  setCurrentChart,
+  downloadChart,
+  data,
+  fileName = "data",
+  excludeKeys = [],
+}) => {
   const chartTypes = Object.keys(chartIcons);
 
   return (
@@ -28,28 +37,58 @@ const ChartMenu = ({ currentChart, setCurrentChart, downloadChart }) => {
         {chartTypes.map((type) => {
           const Icon = chartIcons[type];
           return (
-            <button
+            <div
               key={type}
-              title={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
-              className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md ${
-                currentChart === type
-                  ? "btn btn-primary btn-sm font-semibold"
-                  : "btn btn-ghost btn-sm hover:text-primary"
-              }`}
-              onClick={() => setCurrentChart(type)}
+              className="tooltip tooltip-bottom tooltip-primary "
+              data-tip={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
             >
-              <Icon size={22} />
-            </button>
+              <button
+              
+                className={`flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md ${
+                  currentChart === type
+                    ? "btn btn-primary btn-sm font-semibold"
+                    : "btn btn-ghost btn-sm hover:text-primary"
+                }`}
+                onClick={() => setCurrentChart(type)}
+              >
+                <Icon size={22} />
+              </button>
+            </div>
           );
         })}
-
-        <button
-          title={`Download ${currentChart} chart`}
-          className="flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
-          onClick={downloadChart}
+        <div
+          className="tooltip tooltip-bottom tooltip-primary "
+          data-tip={`Download ${currentChart} chart`}
         >
-          <FiDownload size={22} />
-        </button>
+          <button
+            className="flex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            onClick={downloadChart}
+          >
+            <FiDownload size={22} />
+          </button>
+        </div>
+        <div
+          className="tooltip tooltip-bottom tooltip-primary"
+          data-tip="Export to Excel"
+        >
+          <button
+            className="lex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            onClick={() => exportToExcel(data, fileName, excludeKeys)}
+          >
+            <FaFileExcel size={20} />
+          </button>
+        </div>
+        <div
+          className="tooltip tooltip-bottom tooltip-primary "
+          data-tip="Export to CSV"
+        >
+          <button
+            className="lex items-center cursor-pointer gap-1 px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            onClick={() => exportToCsv(data, fileName, excludeKeys)}
+          >
+            <FaFileCsv size={20} />
+          </button>
+        </div>
       </div>
     </div>
   );
