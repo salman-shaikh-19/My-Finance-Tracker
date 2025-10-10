@@ -324,6 +324,7 @@ const ExpenseChart = () => {
             />
           )}
           <ul className="steps w-full mt-10 scrollbar-hide  ">
+            
             {chartData.map((dayData) => (
               <ExpenseTimeLine
                 key={dayData.day}

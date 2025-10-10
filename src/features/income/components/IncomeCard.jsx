@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiEdit, BiX, BiMoney } from "react-icons/bi";
-import { MdDeleteForever, MdFiberNew } from "react-icons/md";
+import { MdDeleteForever, MdFiberNew, MdPayment } from "react-icons/md";
 import dayjs from "dayjs";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import CommonModal from "../../common/components/CommonModal";
@@ -34,12 +34,13 @@ const IncomeCard = ({
     : false;
 
   return (
+       <div className="tooltip tooltip-top tooltip-info" data-tip={!showNote ? "Click to show action bar" : ""}>
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
       } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
-      title={!showNote ? "Click to show action bar" : ""}
+      
     >
       <div className="flex items-center p-4 gap-4">
         <div
@@ -58,9 +59,14 @@ const IncomeCard = ({
             </span>
           </div>
           <div className="flex justify-between items-center text-sm text-gray-500">
-            <span className="cursor-auto" title="income date">
-              {commonDate({ date })}
+              <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Income received on"
+              >
+            <span className="badge badge-outline badge-sm cursor-auto" >
+               <MdPayment className="inline mb-0.5" />{" "} {commonDate({ date })}
             </span>
+            </div>
           </div>
         </div>
       </div>
@@ -121,6 +127,7 @@ const IncomeCard = ({
           )}
         </div>
       )}
+    </div>
     </div>
   );
 };

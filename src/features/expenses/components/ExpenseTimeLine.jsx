@@ -39,7 +39,7 @@ const ExpenseTimeLine = ({
   }, [total, expenseLimit, userCurrency, day, isOverLimit]);
 
   return (
-    
+     
     <li className={`step  ${isActive ? "step-primary " : ""}`} title={title}>
       <span
         className={`step-icon  !w-6 !h-6  text-xs transition-all duration-500 ease-in-out  ${
@@ -59,6 +59,7 @@ const ExpenseTimeLine = ({
         {formattedCurrency}
       </span>
     </li>
+  
   );
 };
 

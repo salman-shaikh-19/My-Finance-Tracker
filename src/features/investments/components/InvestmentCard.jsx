@@ -40,6 +40,7 @@ const InvestmentCard = ({
     : false;
 
   return (
+    
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""

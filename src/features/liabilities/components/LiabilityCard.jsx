@@ -132,51 +132,81 @@ const LiabilityCard = ({
           </div>
 
           <div className="flex flex-wrap gap-2  text-sm text-gray-500 items-center">
+            <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Liability started from"
+              >
             <span
               className="badge badge-outline badge-sm cursor-auto"
-              title="Liability started from"
+            
             >
               <MdPayment className="inline mb-0.5" />{" "}
               {commonDate({ date: startDate })}
             </span>
+            </div>
             {paymentSchedule && (
+                <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Payment schedule"
+              >
               <div
                 className="badge badge-primary badge-xs lg:badge-sm md:badge:sm"
-                title="Payment schedule"
+           
               >
                 {paymentSchedule}
+              </div>
               </div>
             )}
             {endDate && (
               // <span title="End date">{commonDate({ date: endDate })}</span>
+                  <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Liability deadline"
+              >
               <span
                 className="badge badge-outline badge-sm cursor-auto"
-                title="Liability deadline"
+        
               >
                 <MdPayment className="inline mb-0.5" />{" "}
                 {commonDate({ date: endDate })}
               </span>
+              </div>
             )}
           </div>
 
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
-            <span title="Liability type" className="badge badge-info badge-sm">
+              <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Liability type"
+              >
+            <span  className="badge badge-info badge-sm">
               {liabilityType}
             </span>
+            </div>
+               <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Total amount borrowed"
+              >
             <span
               className="badge badge-neutral badge-sm cursor-auto"
-              title="Total amount borrowed"
+              
             >
               Total: {formatCurrency(totalAmount, userCurrency || "INR")}
             </span>
+            </div>
 
             {interestRate > 0 && (
+                <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Interest rate"
+              >
               <span
-                title="Interest rate"
+                // title="Interest rate"
                 className="badge badge-secondary badge-sm"
               >
                 Interest: {interestRate}%
               </span>
+              </div>
             )}
 
             {/* {interestRate > 0 && remainingAmount > 0 && (
@@ -191,11 +221,14 @@ const LiabilityCard = ({
                 )}
               </span>
             )} */}
-
-            <span
-              title={`Total remaining amount ${
+              <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip={`Total remaining amount ${
                 interestRate > 0 ? `including ${interestRate}% interest` : ""
               }`}
+              >
+            <span
+            
               className="badge badge-accent badge-sm"
             >
               Remaining:{" "}
@@ -204,15 +237,20 @@ const LiabilityCard = ({
                 userCurrency || "INR"
               )}
             </span>
-
+             </div>
+              <div
+                className="tooltip tooltip-top tooltip-info"
+                data-tip="Liability status"
+              >
             <span
               className={`badge badge-sm ${
                 remainingAmount === 0 ? "badge-success" : "badge-warning"
               }`}
-              title="Liability status"
+          
             >
               {remainingAmount === 0 ? "Cleared" : "Ongoing"}
             </span>
+            </div>
           </div>
 
           
