@@ -117,7 +117,7 @@ const LiabilityCard = ({
             <div className="tooltip tooltip-accent tooltip-bottom" data-tip="Creditor name">
 
             <span
-              className="font-semibold lg:text-sm md:text-sm text-md badge badge-primary badge-xs"
+              className="font-semibold lg:text-sm md:text-sm text-lg badge badge-ghost "
               title="creditor name"
             >
               {creditorName}
