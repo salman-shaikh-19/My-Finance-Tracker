@@ -17,6 +17,7 @@ import { refreshData } from "../../../utils/refreshData";
 import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutChart";
 import CustomRadarChart from "../../common/components/charts/CustomRadarChart";
 import CustomAreaChart from "../../common/components/charts/CustomAreaChart";
+import ExportButtons from "../../common/components/ExportButtons";
 dayjs.extend(isoWeek);
 
 const chartColor = "teal";
@@ -77,12 +78,19 @@ const InvestmentChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
+        <div className="flex flex-row items-center justify-between">
+
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
             downloadChart={handleDownloadChart}
-          />
-   
+          />   <ExportButtons
+        data={investments}
+        fileName={`Investments-${currentYear}`}
+        excludeKeys={["created_at", "id", "user_id", "Icon"]}
+      />
+        </div>
+          
 
           {currentChart === "bar" && (
               <CustomBarChart
@@ -155,6 +163,7 @@ const InvestmentChart = () => {
 
         </>
       )}
+      
     </div>
   );
 };

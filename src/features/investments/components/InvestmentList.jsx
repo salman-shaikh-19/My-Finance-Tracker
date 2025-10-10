@@ -2,8 +2,10 @@ import React, { lazy, Suspense, useRef } from "react";
 import { useDispatch } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 
-
-import { getCategoryByName, investmentCategories } from "../../../utils/Categories";
+import {
+  getCategoryByName,
+  investmentCategories,
+} from "../../../utils/Categories";
 
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { confirmDelete } from "../../../utils/confirmDelete";
@@ -11,10 +13,10 @@ import NoDataFound from "../../common/components/NoDataFound";
 import { deleteInvestment, updateInvestment } from "../investmentsSlice";
 import InvestmentCard from "./InvestmentCard";
 import Loader from "../../common/components/Loader";
+import ExportButtons from '../../common/components/ExportButtons'
 // import InvestmentChart from "./InvestmentChart";
 const InvestmentChart = lazy(() => import("./InvestmentChart"));
-const InvestmentList = ({ investments  }) => {
-  
+const InvestmentList = ({ investments }) => {
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -34,11 +36,11 @@ const InvestmentList = ({ investments  }) => {
       payload: {
         id,
         updatedData: {
-       investment_category: values.investmentCategory,
-        invested_amount: values.investedAmount,
-        start_date: values.startDate,
-        maturity_date: values.maturityDate,
-        investment_note: values.investmentNote,
+          investment_category: values.investmentCategory,
+          invested_amount: values.investedAmount,
+          start_date: values.startDate,
+          maturity_date: values.maturityDate,
+          investment_note: values.investmentNote,
         },
       },
       resetForm,
@@ -53,14 +55,22 @@ const InvestmentList = ({ investments  }) => {
       id="investment-list"
       className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
     >
-  
-       <Suspense fallback={<Loader />}>
-           <InvestmentChart />
+      <Suspense fallback={<Loader />}>
+        <InvestmentChart />
       </Suspense>
       {/* <div className="divider">Total Investments by Category</div> */}
+   
 
-
-      <div className="divider" title={`Total ${investments.length ? 'investments '+investments.length : 'investment '+investments.length}`}>Investments ({investments.length})</div>
+      <div
+        className="divider"
+        title={`Total ${
+          investments.length
+            ? "investments " + investments.length
+            : "investment " + investments.length
+        }`}
+      >
+        Investments ({investments.length})
+      </div>
       {investments.length ? (
         <CustomInfiniteScroll
           pageSize={20}
@@ -69,42 +79,39 @@ const InvestmentList = ({ investments  }) => {
           endMsg="You have seen all investments data"
         >
           {(items) => (
-               <div className="container mx-auto p-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-              {items.map((investment) => {
-                const category = getCategoryByName(
-                  investmentCategories,
-                  investment.investment_category
-                );
-                const Icon = category.icon;
-             
+            <div className="container mx-auto p-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                {items.map((investment) => {
+                  const category = getCategoryByName(
+                    investmentCategories,
+                    investment.investment_category
+                  );
+                  const Icon = category.icon;
 
-                return (
-                  <InvestmentCard
-                    key={investment.id}
-                    investmentId={investment.id}
-                    category={investment.investment_category}
-                    amount={investment.invested_amount}
-                    date={investment.start_date}
-                    maturityDate={investment.maturity_date}
-                    createdAt={investment.created_at}
-                    note={investment.investment_note}
-                    bgColor={category.bg}
-                   
-                    deleteinvestment={() => handleDelete(investment.id)}
-                    editModelRef={editModelRef}
-                    editInvestmentHandler={editInvestmentHandler}
-                    Icon={Icon}
-                 
-                  />
-                );
-              })}
-            </div>
+                  return (
+                    <InvestmentCard
+                      key={investment.id}
+                      investmentId={investment.id}
+                      category={investment.investment_category}
+                      amount={investment.invested_amount}
+                      date={investment.start_date}
+                      maturityDate={investment.maturity_date}
+                      createdAt={investment.created_at}
+                      note={investment.investment_note}
+                      bgColor={category.bg}
+                      deleteinvestment={() => handleDelete(investment.id)}
+                      editModelRef={editModelRef}
+                      editInvestmentHandler={editInvestmentHandler}
+                      Icon={Icon}
+                    />
+                  );
+                })}
+              </div>
             </div>
           )}
         </CustomInfiniteScroll>
       ) : (
-       <NoDataFound NoDataFoundFor="investments" />
+        <NoDataFound NoDataFoundFor="investments" />
       )}
     </div>
   );

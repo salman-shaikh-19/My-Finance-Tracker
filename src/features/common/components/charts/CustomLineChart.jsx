@@ -37,6 +37,7 @@ const CustomLineChart = React.memo(
             {LineDataKey.map((lineData, index) => (
               <Line
                 key={index}
+                  
                 dataKey={lineData.key}
                 name={lineData.name}
                 strokeWidth={2}
