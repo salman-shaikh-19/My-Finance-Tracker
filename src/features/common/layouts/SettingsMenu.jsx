@@ -12,7 +12,6 @@ import SetUserCurrency from "../components/SetUserCurrency";
 import SetExpenseLimit from "../../expenses/components/SetExpenseLimit";
 import CommonModal from "../components/CommonModal";
 import { toast } from "react-toastify";
-import InstallApp from '../components/InstallApp'
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
@@ -50,20 +49,7 @@ const SettingsMenu = ({
     if (callback) callback();
     setOpen(false);
   };
- const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-    
-    // Show the install prompt
-    deferredPrompt.prompt();
-    
-    // Wait for the user to respond to the prompt
-     await deferredPrompt.userChoice;
-    // console.log(`User response to the install prompt: ${outcome}`);
-    
-    // Reset the deferred prompt variable, as it can only be used once
-    setDeferredPrompt(null);
-    setIsInstallable(false);
-  };
+
   useEffect(() => {
     //profile data get
     if (loggedInUserId) dispatch(fetchUserProfile(loggedInUserId));
@@ -138,9 +124,7 @@ const SettingsMenu = ({
           </CommonModal>
            <div className="mt-2 ">
             
-            <InstallApp
-            className={"btn btn-info btn-sm"}
-            />
+           
           </div>
           <button
             onClick={() => handleClickItem(handleLogout)}
