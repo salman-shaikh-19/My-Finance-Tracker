@@ -20,7 +20,7 @@ const CustomAreaChart = ({
   description,
 
   areaColor = "#8884d8",
-  isLegend = true,
+  isLegend = false,
 }) => {
   return (
     <div   style={{ width, height }} id="chart-container">

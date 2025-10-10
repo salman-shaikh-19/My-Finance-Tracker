@@ -22,7 +22,7 @@ const CustomDoughnutChart = ({
             nameKey={nameKey}
             cx="50%"
             cy="50%"
-            innerRadius={70} // makes it a doughnut
+            innerRadius={80} 
             outerRadius={100}
             paddingAngle={5}
             label
