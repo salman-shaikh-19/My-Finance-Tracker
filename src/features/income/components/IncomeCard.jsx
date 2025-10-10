@@ -34,12 +34,13 @@ const IncomeCard = ({
     : false;
 
   return (
-       <div className="tooltip tooltip-top tooltip-info" data-tip={!showNote ? "Click to show action bar" : ""}>
+     
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
       } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
+      title={!showNote ? "Click to show action bar" : ""}
       
     >
       <div className="flex items-center p-4 gap-4">
@@ -128,7 +129,7 @@ const IncomeCard = ({
         </div>
       )}
     </div>
-    </div>
+  
   );
 };
 

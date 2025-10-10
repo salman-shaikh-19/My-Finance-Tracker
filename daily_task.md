@@ -172,3 +172,4 @@
 # 15 oct 
 - add export data using excel and csv in all modules.
 - change ui of chart toolbar rendering in all modules.
+- apply tooltip on needed place in app(daisyui tooltip)
