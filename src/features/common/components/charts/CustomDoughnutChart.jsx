@@ -1,5 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
 const CustomDoughnutChart = ({
   chartData,
@@ -30,7 +31,7 @@ const CustomDoughnutChart = ({
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
             ))}
           </Pie>
-          <Tooltip />
+            <Tooltip content={<CustomCommonTooltipForChart />} />
           <Legend />
         </PieChart>
       </ResponsiveContainer>

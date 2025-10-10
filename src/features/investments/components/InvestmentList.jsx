@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { lazy, Suspense, useRef } from "react";
 import { useDispatch } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 
@@ -10,8 +10,9 @@ import { confirmDelete } from "../../../utils/confirmDelete";
 import NoDataFound from "../../common/components/NoDataFound";
 import { deleteInvestment, updateInvestment } from "../investmentsSlice";
 import InvestmentCard from "./InvestmentCard";
-import InvestmentChart from "./InvestmentChart";
-
+import Loader from "../../common/components/Loader";
+// import InvestmentChart from "./InvestmentChart";
+const InvestmentChart = lazy(() => import("./InvestmentChart"));
 const InvestmentList = ({ investments  }) => {
   
   const editModelRef = useRef(null);
@@ -52,7 +53,10 @@ const InvestmentList = ({ investments  }) => {
       id="investment-list"
       className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
     >
-      <InvestmentChart />
+  
+       <Suspense fallback={<Loader />}>
+           <InvestmentChart />
+      </Suspense>
       {/* <div className="divider">Total Investments by Category</div> */}
 
 

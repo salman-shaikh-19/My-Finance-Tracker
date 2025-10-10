@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
 const CustomAreaChart = ({
   chartData,
@@ -29,7 +30,7 @@ const CustomAreaChart = ({
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey={XAxisDataKey} />
           <YAxis />
-          <Tooltip />
+           <Tooltip content={<CustomCommonTooltipForChart />} />
           {isLegend && <Legend />}
           {AreaDataKey.map((item) => (
             <Area

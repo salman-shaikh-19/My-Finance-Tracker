@@ -17,7 +17,7 @@ import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutCh
 import CustomAreaChart from "../../common/components/charts/CustomAreaChart";
 dayjs.extend(isoWeek);
 
-const chartColor = "#EF4444";
+const chartColor = "#f97316";
 
 const LiabilityChart = () => {
   const dispatch = useDispatch();

@@ -185,7 +185,7 @@ import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutCh
 import CustomRadarChart from "../../common/components/charts/CustomRadarChart";
 dayjs.extend(isoWeek);
 
-const chartColor = "#EF4444";
+const chartColor = "#f97316";
 const ExpenseChart = () => {
   const dispatch = useDispatch();
   const { loggedInUserId, userCurrency, expenseLimit } = useSelector(

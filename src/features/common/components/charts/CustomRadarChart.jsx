@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import CustomCommonTooltipForChart from "./CustomCommonTooltipForChart";
 
 const CustomRadarChart = ({
   chartData,
@@ -17,7 +18,7 @@ const CustomRadarChart = ({
   description,
   width = "100%",
     height = 400,
-  color = "#8884d8",
+  color = "#f97316",
 }) => {
   return (
     <div  style={{ width, height }} id="chart-container">
@@ -28,7 +29,7 @@ const CustomRadarChart = ({
           <PolarAngleAxis dataKey={nameKey} />
           <PolarRadiusAxis />
           <Radar name={dataKey} dataKey={dataKey} stroke={color} fill={color} fillOpacity={0.6} />
-          <Tooltip />
+          <Tooltip content={<CustomCommonTooltipForChart />} />
           <Legend />
         </RadarChart>
       </ResponsiveContainer>
