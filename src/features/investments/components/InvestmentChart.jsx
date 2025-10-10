@@ -78,7 +78,7 @@ const InvestmentChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex items-center justify-between flex-col lg:flex-row lg:justify-normal ">
 
           <ChartMenu
             currentChart={currentChart}
