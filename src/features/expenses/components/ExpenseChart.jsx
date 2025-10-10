@@ -245,7 +245,7 @@ const ExpenseChart = () => {
         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
-        <div className="flex  items-center">
+        <div className="flex flex-row  lg:flex-col items-center">
 
        
           <ChartMenu

@@ -84,6 +84,7 @@ const LiabilityChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
+        <div className="flex flex-row  lg:flex-col items-center">
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -166,6 +167,7 @@ const LiabilityChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
+          </div>
         </>
       )}
     </div>

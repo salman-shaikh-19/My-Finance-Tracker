@@ -78,7 +78,7 @@ const InvestmentChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3  bg-base-100 rounded-xl shadow-sm mb-4">
+  <div className="flex flex-row  lg:flex-col items-center">
             <ChartMenu
               currentChart={currentChart}
               setCurrentChart={setCurrentChart}
@@ -88,8 +88,7 @@ const InvestmentChart = () => {
               fileName={`Investments-${currentYear}`}
               excludeKeys={["created_at", "id", "user_id"]}
             />{" "}
-          
-          </div>
+         
 
           {currentChart === "bar" && (
             <CustomBarChart
@@ -157,10 +156,11 @@ const InvestmentChart = () => {
               dataKey="invested_amount"
               nameKey="investment_category"
               description={`Investments in ${currentYear}`}
-              height={300}
+              height={270}
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
+          </div>
         </>
       )}
     </div>

@@ -74,6 +74,7 @@ const IncomeChart = () => {
         <NoDataFound NoDataFoundFor=" chart" />
       ) : (
         <>
+        <div className="flex flex-row  lg:flex-col items-center">
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -151,6 +152,7 @@ const IncomeChart = () => {
               colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
+          </div>
         </>
       )}
     </div>
