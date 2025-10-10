@@ -40,7 +40,7 @@ const ChartMenu = ({
           return (
             <div
               key={type}
-              className="tooltip tooltip-bottom tooltip-primary "
+              className="tooltip tooltip-bottom lg:tooltip-top tooltip-primary "
               data-tip={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
             >
               <button
@@ -58,7 +58,7 @@ const ChartMenu = ({
         })}
 
         <div
-          className="tooltip tooltip-bottom tooltip-primary"
+          className="tooltip tooltip-bottom lg:tooltip-top tooltip-primary"
           data-tip="Export to Excel"
         >
           <button
@@ -69,7 +69,7 @@ const ChartMenu = ({
           </button>
         </div>
         <div
-          className="tooltip tooltip-left tooltip-primary "
+          className="tooltip tooltip-bottom lg:tooltip-top  tooltip-primary "
           data-tip="Export to CSV"
         >
           <button
@@ -80,7 +80,7 @@ const ChartMenu = ({
           </button>
         </div>
         <div
-          className="tooltip tooltip-bottom tooltip-primary "
+          className="tooltip tooltip-bottom lg:tooltip-top tooltip-primary "
           data-tip={`Download ${currentChart} chart`}
         >
           <button
