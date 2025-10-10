@@ -78,7 +78,6 @@ const InvestmentChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-  <div className="flex flex-row  lg:flex-col items-center">
             <ChartMenu
               currentChart={currentChart}
               setCurrentChart={setCurrentChart}
@@ -87,9 +86,9 @@ const InvestmentChart = () => {
               data={investments}
               fileName={`Investments-${currentYear}`}
               excludeKeys={["created_at", "id", "user_id"]}
-            />{" "}
+            />
           
-          </div>
+     
 
           {currentChart === "bar" && (
             <CustomBarChart

@@ -84,7 +84,8 @@ const LiabilityChart = () => {
         <NoDataFound NoDataFoundFor="chart" />
       ) : (
         <>
-        
+         
+
           <ChartMenu
             currentChart={currentChart}
             setCurrentChart={setCurrentChart}
@@ -93,6 +94,7 @@ const LiabilityChart = () => {
             fileName={`Liabilities-${currentYear}`}
             excludeKeys={["created_at", "id", "user_id"]}
           />
+    
 
           {currentChart === "bar" && (
             <CustomBarChart
