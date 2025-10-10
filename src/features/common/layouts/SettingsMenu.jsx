@@ -151,7 +151,7 @@ const SettingsMenu = ({
                 }}
                 className="btn btn-info btn-sm mt-2 w-full"
               >
-                Install App
+                Install App 
               </button>
             )}
           </div>

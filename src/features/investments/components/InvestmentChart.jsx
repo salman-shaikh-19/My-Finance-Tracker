@@ -15,6 +15,9 @@ import { getAllInvestments } from "../investmentsSlice";
 import getYearlyChartData from "../../../utils/getYearlyChartData";
 import getYearlyCategoryData from "../../../utils/getYearlyChartData";
 import { refreshData } from "../../../utils/refreshData";
+import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutChart";
+import CustomRadarChart from "../../common/components/charts/CustomRadarChart";
+import CustomAreaChart from "../../common/components/charts/CustomAreaChart";
 dayjs.extend(isoWeek);
 
 const chartColor = "teal";
@@ -116,6 +119,38 @@ const InvestmentChart = () => {
               pieNameKey="investment_category"
               height={300}
               description={`Investments in ${currentYear}`}
+            />
+          )}
+          {currentChart === "area" && (
+            <CustomAreaChart
+              chartData={chartData}
+              XAxisDataKey="investment_category"
+              AreaDataKey={[{ key: "invested_amount", name: "Invested Amount" }]}
+              description={`Investments in ${currentYear}`}
+              height={300}
+              areaColor={chartColor}
+            />
+          )}
+
+          {currentChart === "radar" && (
+            <CustomRadarChart
+              chartData={chartData}
+              dataKey="invested_amount"
+              nameKey="investment_category"
+              description={`Investments in ${currentYear}`}
+              height={300}
+              color={chartColor}
+            />
+          )}
+
+          {currentChart === "doughnut" && (
+            <CustomDoughnutChart
+              chartData={chartData}
+              dataKey="invested_amount"
+              nameKey="investment_category"
+              description={`Investments in ${currentYear}`}
+              height={300}
+              colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
 

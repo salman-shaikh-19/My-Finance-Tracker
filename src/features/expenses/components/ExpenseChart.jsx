@@ -180,6 +180,9 @@ import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import NoDataFound from "../../common/components/NoDataFound";
 import { downloadAsImage } from "../../../utils/downloadAsImage";
 import { getWeekLabel } from "../../../utils/dateUtils";
+import CustomAreaChart from "../../common/components/charts/CustomAreaChart";
+import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutChart";
+import CustomRadarChart from "../../common/components/charts/CustomRadarChart";
 dayjs.extend(isoWeek);
 
 const chartColor = "#EF4444";
@@ -281,6 +284,40 @@ const ExpenseChart = () => {
               pieNameKey="day"
               height={300}
               description="Total expenses of the week"
+            />
+          )}
+
+
+          {currentChart === "area" && (
+            <CustomAreaChart
+              chartData={chartData}
+              XAxisDataKey="day"
+              AreaDataKey={[{ key: "total", name: "Total expenses" }]}
+              description={`Total expenses of the week`}
+              height={300}
+              areaColor={chartColor}
+            />
+          )}
+
+          {currentChart === "radar" && (
+            <CustomRadarChart
+              chartData={chartData}
+              dataKey="total"
+              nameKey="day"
+              description={`Total expenses of the week`}
+              height={300}
+              color={chartColor}
+            />
+          )}
+
+          {currentChart === "doughnut" && (
+            <CustomDoughnutChart
+              chartData={chartData}
+              dataKey="total"
+              nameKey="day"
+              description={`Total expenses of the week`}
+              height={300}
+              colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
             />
           )}
           <ul className="steps w-full mt-10 scrollbar-hide  ">

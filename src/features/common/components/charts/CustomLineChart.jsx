@@ -26,6 +26,8 @@ const CustomLineChart = React.memo(
 
     return (
       <div style={{ width, height }} id="chart-container">
+          {description && (  <p className="text-center mb-2 font-semibold">{description}</p>)}
+     
         <ResponsiveContainer width={width} height={height}>
           <LineChart data={chartData}>
             <XAxis dataKey={XAxisDataKey} />
@@ -44,14 +46,14 @@ const CustomLineChart = React.memo(
             ))}
           </LineChart>
         </ResponsiveContainer>
-        {description && (
+        {/* {description && (
           <p
             className="text-sm mt-auto"
             style={{ textAlign: "center", marginBottom: "10px" }}
           >
             {description}
           </p>
-        )}
+        )} */}
       </div>
     );
   }

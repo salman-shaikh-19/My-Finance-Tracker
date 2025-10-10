@@ -26,7 +26,9 @@ const CustomBarChart = React.memo(
 
     return (
       <div style={{ width, height }} id="chart-container">
+       {description && (  <p className="text-center mb-2 font-semibold">{description}</p>)}
         <ResponsiveContainer width={width} height={height}>
+          
           <BarChart data={chartData}>
             <XAxis dataKey={XAxisDataKey} />
             <YAxis />
@@ -43,14 +45,14 @@ const CustomBarChart = React.memo(
             ))}
           </BarChart>
         </ResponsiveContainer>
-        {description && (
+        {/* {description && (
           <p
             className="text-sm mt-auto"
             style={{ textAlign: "center", marginBottom: "10px" }}
           >
             {description}
           </p>
-        )}
+        )} */}
       </div>
     );
   }

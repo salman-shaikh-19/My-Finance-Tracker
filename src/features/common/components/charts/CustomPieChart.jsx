@@ -30,6 +30,8 @@ const CustomPieChart = React.memo(
     description = "Default description of pie chart",
   }) => (
     <div style={{ width, height }} id="chart-container">
+        {description && (  <p className="text-center mb-2 font-semibold">{description}</p>)}
+     
       <ResponsiveContainer width={width} height={height}>
         <PieChart data={chartData}>
           {isLegend && <Legend />}
@@ -42,14 +44,14 @@ const CustomPieChart = React.memo(
           </Pie>
         </PieChart>
       </ResponsiveContainer>
-      {description && (
+      {/* {description && (
         <p
           className="text-sm  mt-auto"
           style={{ textAlign: "center", marginBottom: "10px" }}
         >
           {description}
         </p>
-      )}
+      )} */}
     </div>
   )
 );

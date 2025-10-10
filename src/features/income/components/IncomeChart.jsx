@@ -16,6 +16,9 @@ import { getWeeklyChartData } from "../../../utils/getWeeklyChartData";
 import NoDataFound from "../../common/components/NoDataFound";
 import { downloadAsImage } from "../../../utils/downloadAsImage";
 import { getWeekLabel } from "../../../utils/dateUtils";
+import CustomDoughnutChart from "../../common/components/charts/CustomDoughnutChart";
+import CustomRadarChart from "../../common/components/charts/CustomRadarChart";
+import CustomAreaChart from "../../common/components/charts/CustomAreaChart";
 dayjs.extend(isoWeek);
 
 const chartColor = "#10B981";
@@ -112,6 +115,40 @@ const IncomeChart = () => {
               description="Total income of the week"
             />
           )}
+
+          {currentChart === "area" && (
+            <CustomAreaChart
+              chartData={chartData}
+              XAxisDataKey="day"
+              AreaDataKey={[{ key: "total", name: "Total income" }]}
+              description={`Total income of the week`}
+              height={300}
+              areaColor={chartColor}
+            />
+          )}
+
+          {currentChart === "radar" && (
+            <CustomRadarChart
+              chartData={chartData}
+              dataKey="total"
+              nameKey="day"
+              description={`Total income of the week`}
+              height={300}
+              color={chartColor}
+            />
+          )}
+
+          {currentChart === "doughnut" && (
+            <CustomDoughnutChart
+              chartData={chartData}
+              dataKey="total"
+              nameKey="day"
+              description={`Total income of the week`}
+              height={300}
+              colors={[chartColor, "#FBBF24", "#3B82F6", "#10B981", "#8B5CF6"]}
+            />
+          )}
+
         </>
       )}
     </div>
