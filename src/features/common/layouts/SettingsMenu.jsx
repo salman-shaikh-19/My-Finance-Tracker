@@ -50,7 +50,20 @@ const SettingsMenu = ({
     if (callback) callback();
     setOpen(false);
   };
-
+ const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    
+    // Show the install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+     await deferredPrompt.userChoice;
+    // console.log(`User response to the install prompt: ${outcome}`);
+    
+    // Reset the deferred prompt variable, as it can only be used once
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+  };
   useEffect(() => {
     //profile data get
     if (loggedInUserId) dispatch(fetchUserProfile(loggedInUserId));
