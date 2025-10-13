@@ -11,6 +11,7 @@ export const commonSlice = createSlice({
     userCurrency:'INR',
     isGetStarted: false,
     expenseLimit:10000,
+    isSidebarOpen:true,
   },
   reducers: {
     setTheme(state, action) {
@@ -31,9 +32,13 @@ export const commonSlice = createSlice({
       // console.log(action.payload);
       state.expenseLimit = action.payload;
     },
+     setIsSidebarOpen(state, action) {
+      // console.log(action.payload);
+      state.isSidebarOpen = action.payload;
+    },
   },
 });
 
-export const { setTheme, setGetStarted, setLoggedInUserId,setUserCurrency,setExpenseLimit } =
+export const { setTheme, setGetStarted,setIsSidebarOpen, setLoggedInUserId,setUserCurrency,setExpenseLimit } =
   commonSlice.actions;
 export default commonSlice.reducer;

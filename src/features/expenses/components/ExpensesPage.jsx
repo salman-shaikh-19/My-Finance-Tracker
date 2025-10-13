@@ -132,6 +132,8 @@ const totalAmountByCategory =useMemo(() => {
           md:top-auto 
           md:bottom-4 
           text-xl
+           z-50
+          fixed 
         "
           openModalBtnText={
             <>

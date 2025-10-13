@@ -53,7 +53,9 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
       <IncomeChart />
       <div className="divider">Total Incomes by Category</div>
 
-      <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4">
+      {/* <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4"> */}
+     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-1">
+      
         {incomeCategories.map((category, i) => {
           const Icon = category.icon;
 
@@ -81,8 +83,10 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
           endMsg="You have seen all income data"
         >
           {(items) => (
-            <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
-              {items.map((income) => {
+            // <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
+                        <div className="container mx-auto p-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+            {items.map((income) => {
                 const category = getCategoryByName(
                   incomeCategories,
                   income.income_category
@@ -109,6 +113,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                   />
                 );
               })}
+              </div> 
             </div>
           )}
         </CustomInfiniteScroll>

@@ -38,7 +38,7 @@ const IncomeCard = ({
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
-      } w-102 bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      } w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
       onClick={() => setShowNote(!showNote)}
       title={!showNote ? "Click to show action bar" : ""}
       
