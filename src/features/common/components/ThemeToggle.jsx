@@ -50,11 +50,11 @@ import { FaThemeco } from "react-icons/fa6";
 
 const lightThemes = [
   "light", "cupcake", "garden", "lemonade", "corporate", "fantasy",
-  "valentine", "emerald", "caramel", "winter","caramellatte", "lofi", "blackforest", "cmyk", "autumn"
+  "valentine", "emerald", "caramel", "winter","caramellatte", "lofi", "blackforest", "cmyk", "autumn", "nord"
 ];
 
 const darkThemes = [
-  "dark", "synthwave", "dracula", "forest", "night", "coffee", "nord",
+  "dark", "synthwave", "dracula", "forest", "night", "coffee",
   "abyss", "sunset", "halloween", "dim", 
 ];
 
