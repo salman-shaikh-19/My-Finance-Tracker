@@ -49,15 +49,36 @@ import { MdLightMode, MdDarkMode } from "react-icons/md";
 import { FaThemeco } from "react-icons/fa6";
 
 const lightThemes = [
-  "light", "cupcake", "garden", "lemonade", "corporate", "fantasy",
-  "valentine", "emerald", "caramel", "winter","caramellatte", "lofi", "blackforest", "cmyk", "autumn", "nord"
+  "light",
+  "cupcake",
+  "garden",
+  "lemonade",
+  "corporate",
+  "fantasy",
+  "valentine",
+  "emerald",
+  "caramel",
+  "winter",
+  "caramellatte",
+  "lofi",
+  "blackforest",
+  "cmyk",
+  "autumn",
+  "nord",
 ];
 
 const darkThemes = [
-  "dark", "synthwave", "dracula", "forest", "night", "coffee",
-  "abyss", "sunset", "halloween", "dim", 
+  "dark",
+  "synthwave",
+  "dracula",
+  "forest",
+  "night",
+  "coffee",
+  "abyss",
+  "sunset",
+  "halloween",
+  "dim",
 ];
-
 
 // theme colour for  better ui/ux
 const themeColors = {
@@ -92,7 +113,7 @@ const ThemeToggle = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.common.theme);
 
-  // Apply selected theme to the HTML tag (DaisyUI compatibility)
+  // apply selected theme 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
@@ -103,15 +124,12 @@ const ThemeToggle = () => {
 
   return (
     <div className="flex flex-col items-start gap-1">
-    
-
       <select
         title="Set Theme"
         className="select select-bordered select-sm w-full max-w-xs"
         value={theme}
         onChange={handleChange}
       >
-
         <optgroup
           label={`  Light Themes`}
           className="font-semibold text-base-content"
@@ -127,7 +145,6 @@ const ThemeToggle = () => {
           ))}
         </optgroup>
 
-  
         <optgroup
           label="Dark Themes"
           className="font-semibold text-base-content"
@@ -143,9 +160,6 @@ const ThemeToggle = () => {
           ))}
         </optgroup>
       </select>
-
-
-  
     </div>
   );
 };

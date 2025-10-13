@@ -4,14 +4,11 @@ import AppRoutes from "./routes";
 import { useSelector } from "react-redux";
 import NetworkStatus from "./features/common/components/NetworkStatus";
 
-
-
 function App() {
-  const {theme}=useSelector(state=>state.common);
- 
+  const { theme } = useSelector((state) => state.common);
 
   useEffect(() => {
-    // block screenshots, printing, copying, cutting, selecting all, dev tools, viewing page source and right click 
+    // block screenshots, printing, copying, cutting, selecting all, dev tools, viewing page source and right click
     const handleKeyDown = (e) => {
       if (e.key === "PrintScreen") {
         toast.warning("Screenshots are disabled!");
@@ -60,22 +57,11 @@ function App() {
         toast.warning("Right click is disabled!");
         return false;
       };
- 
 
-       
-      if (e.ctrlKey && e.key === 'u') {
+      if (e.ctrlKey && e.key === "u") {
         toast.warning("Viewing page source is disabled!");
         e.preventDefault();
       }
-      
-      
-
-
-         
-
-   
-     
-      
     };
     document.addEventListener("keydown", handleKeyDown);
 
@@ -86,11 +72,9 @@ function App() {
         .then(() => {
           // console.log("Service Worker registered:", reg);
         })
-        .catch(() =>{
-
+        .catch(() => {
           // console.error("Service Worker registration failed:", err)
-        }
-        );
+        });
     }
 
     return () => {
@@ -98,14 +82,15 @@ function App() {
     };
   }, []);
 
-
-
   return (
     <>
-      <div data-theme={theme} className="bg-base-200  select-none lg:select-text transition-colors duration-300  ">
+      <div
+        data-theme={theme}
+        className="bg-base-200  select-none lg:select-text transition-colors duration-300  "
+      >
         {/* <Beta /> */}
-         <AppRoutes />
-          <NetworkStatus />
+        <AppRoutes />
+        <NetworkStatus />
       </div>
     </>
   );

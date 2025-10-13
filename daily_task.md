@@ -179,6 +179,7 @@
 - investment module should display data current year wise or year wise.
 - add install appp button in setting profile section of navigaton bar.
 - implemented daisyui tooltip.
+- fixed issue in navbar.
 
 
 # 16 oct 
