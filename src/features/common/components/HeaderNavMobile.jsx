@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
     >
       {icon && icon}
       <span className="text-xs">{title}</span>
-      <span className="block w-5 h-1 rounded-full bg-primary hidden group-hover:block "></span>
+      <span className={`${  isActive ? 'block':'hidden'} w-5 h-1 rounded-full bg-primary  group-hover:block `}></span>
     </Link>
   );
 };

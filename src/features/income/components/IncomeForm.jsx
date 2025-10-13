@@ -21,7 +21,8 @@ const IncomeForm=({handleSubmit,initialValues,isEdit = false})=>{
                 .required("Amount is required")
                 .positive("Amount must be positive"),
               incomeCategory: Yup.string().required("Category is required"),
-              recievedOn: Yup.date().required("Income date is required").max(new Date(), "Income date cannot be in the future"),
+              recievedOn: Yup.date().required("Income date is required")
+              .max(new Date(), "Income date cannot be in the future"),
              
               incomeNote: Yup.string()
               .max(255, "Note cannot exceed 255 characters")
