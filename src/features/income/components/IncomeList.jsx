@@ -9,6 +9,7 @@ import IncomeChart from "./IncomeChart";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { confirmDelete } from "../../../utils/confirmDelete";
 import NoDataFound from "../../common/components/NoDataFound";
+import isRecent from "../../../utils/isRecent";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
@@ -96,7 +97,7 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
                     category={income.income_category}
                     amount={income.income_amount}
                     date={income.received_on}
-                    createdAt={income.created_at}
+                    isNew={isRecent(income.created_at)}
                     note={income.income_note}
                     // userCurrency={userCurrency}
                     bgColor={category.bg}

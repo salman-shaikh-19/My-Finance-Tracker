@@ -14,6 +14,7 @@ import { deleteInvestment, updateInvestment } from "../investmentsSlice";
 import InvestmentCard from "./InvestmentCard";
 import Loader from "../../common/components/Loader";
 import ExportButtons from '../../common/components/ExportButtons'
+import isRecent from "../../../utils/isRecent";
 // import InvestmentChart from "./InvestmentChart";
 const InvestmentChart = lazy(() => import("./InvestmentChart"));
 const InvestmentList = ({ investments }) => {
@@ -96,7 +97,8 @@ const InvestmentList = ({ investments }) => {
                       amount={investment.invested_amount}
                       date={investment.start_date}
                       maturityDate={investment.maturity_date}
-                      createdAt={investment.created_at}
+                      // createdAt={investment.created_at}
+                      isNew={isRecent(investment.created_at)}
                       note={investment.investment_note}
                       bgColor={category.bg}
                       deleteinvestment={() => handleDelete(investment.id)}

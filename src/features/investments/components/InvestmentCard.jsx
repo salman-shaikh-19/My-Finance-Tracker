@@ -20,7 +20,7 @@ const InvestmentCard = ({
   note = "",
   maturityDate,
   bgColor = "bg-green-500",
-  createdAt,
+  isNew,
 
   // userCurrency = "INR",
   deleteinvestment,
@@ -35,9 +35,9 @@ const InvestmentCard = ({
   // console.log('rerender',category);
 
 
-  const isNew = createdAt
-    ? dayjs().diff(dayjs(createdAt), "minute") <= 5
-    : false;
+  // const isNew = createdAt
+  //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
+  //   : false;
 
   return (
     

@@ -13,6 +13,7 @@ import { deleteLiability, updatedLiability } from "../liabilitySlice";
 import LiabilityCard from "./LiabilityCard";
 import LiabilityChart from "./LiabilityChart";
 import NoDataFound from "../../common/components/NoDataFound";
+import isRecent from "../../../utils/isRecent";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const LiabilityList = ({ liabilites }) => {
@@ -112,7 +113,8 @@ const LiabilityList = ({ liabilites }) => {
                         paymentSchedule={item.payment_schedule}
                         bgColor={category.bg}
                         Icon={Icon}
-                        createdAt={item.created_at}
+                        // createdAt={item.created_at}
+                          isNew={isRecent(item.created_at)}
                         liabilityNote={item.liability_note}
                         // userCurrency={userCurrency}
                         editModelRef={editModelRef}

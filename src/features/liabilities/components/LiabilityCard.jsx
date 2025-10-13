@@ -23,7 +23,7 @@ const LiabilityCard = ({
   paymentSchedule,
   bgColor,
   Icon,
-  createdAt,
+  isNew,
   liabilityNote,
   // userCurrency,
   editModelRef,
@@ -33,9 +33,9 @@ const LiabilityCard = ({
   const [showActions, setShowActions] = useState(false);
   const { userCurrency } = useSelector((state) => state.common);
 
-  const isNew = createdAt
-    ? dayjs().diff(dayjs(createdAt), "minute") <= 5
-    : false;
+  // const isNew = createdAt
+  //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
+  //   : false;
   const paymentsPerYear = {
     Monthly: 12,
     Quarterly: 4,

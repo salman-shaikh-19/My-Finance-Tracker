@@ -18,7 +18,7 @@ const ExpenseCard = ({
   type,
   date,
   bgColor = "bg-red-500",
-  createdAt,
+  isNew,
   note = "",
   editModelRef,
   editExpenseHandler,
@@ -29,9 +29,10 @@ const ExpenseCard = ({
   const { userCurrency } = useSelector((state) => state.common);
 
   // console.log('render',theme);
-  const isNew = createdAt
-    ? dayjs().diff(dayjs(createdAt), "minute") <= 5
-    : false;
+  // const isNew = createdAt
+  //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
+  //   : false;
+ 
   return (
     <div
       className={`card ${

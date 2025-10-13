@@ -17,7 +17,7 @@ const IncomeCard = ({
   date,
   note = "",
   bgColor = "bg-green-500",
-  createdAt,
+  isNew,
 
   // userCurrency = "INR",
   deleteIncome,
@@ -29,9 +29,9 @@ const IncomeCard = ({
   const { userCurrency } = useSelector((state) => state.common);
   // console.log('rerender',category);
 
-  const isNew = createdAt
-    ? dayjs().diff(dayjs(createdAt), "minute") <= 5
-    : false;
+  // const isNew = createdAt
+  //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
+  //   : false;
 
   return (
      

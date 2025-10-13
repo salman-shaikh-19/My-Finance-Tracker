@@ -16,7 +16,7 @@ import CategoryTotalAmountCard from "../../common/components/CategoryTotalAmount
 import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import NoDataFound from "../../common/components/NoDataFound";
-
+import isRecent from '../../../utils/isRecent'
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
   const editModelRef = useRef(null);
@@ -115,7 +115,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                       date={item.expense_date}
                       bgColor={category.bg}
                       Icon={Icon}
-                      createdAt={item.created_at}
+                      isNew={isRecent(item.created_at) }
                       note={item.expense_note}
                       // userCurrency={userCurrency}
                       editModelRef={editModelRef}
