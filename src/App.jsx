@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import AppRoutes from "./routes";
 import { useSelector } from "react-redux";
+import NetworkStatus from "./features/common/components/NetworkStatus";
 
 
 
@@ -104,6 +105,7 @@ function App() {
       <div data-theme={theme} className="bg-base-200  select-none lg:select-text transition-colors duration-300  ">
         {/* <Beta /> */}
          <AppRoutes />
+          <NetworkStatus />
       </div>
     </>
   );

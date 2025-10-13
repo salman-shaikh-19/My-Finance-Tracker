@@ -119,39 +119,51 @@
 - updated liability.
 - add/pay liability[updated remaining amount].
 - fixed issues in liabilities module.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- make new enhanced designed loader.
 
 
 # 13 oct 
 - add investment
-- investment listing card and investment listing.
+- investment listing card design and investment listing.
 - update investment.
 - delete investment.
-- make new enhanced loader.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # 14 oct 
 - investment charts.
@@ -169,7 +181,7 @@
 - implemented daisyui tooltip.
 
 
-# 15 oct 
+# 16 oct 
 - add export data using excel and csv in all modules.
 - change ui of chart toolbar rendering in all modules.
 - apply tooltip on needed place in app(daisyui tooltip)
