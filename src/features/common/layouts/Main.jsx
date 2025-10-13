@@ -11,12 +11,12 @@ const Main = ({ children,mainClassName='' }) => {
       
       >{children}</div> */}
 
-      <main className={`transition-all duration-300 mt-0 lg:mt-14 md:mt-14 min-h-screen ${
+      <main className={`transition-all duration-300 mt-0 bg-base-300  rounded-lg  p-2 lg:mt-14 md:mt-14 min-h-screen ${
           isSidebarOpen ? 'md:ml-64' : 'md:ml-16'
         } ${mainClassName}`}>
-        <div className=" bg-base-300  rounded-lg min-h-screen p-2">
+
           {children}
-        </div>
+     
       </main>
       {/* <Footer /> */}
     </>
