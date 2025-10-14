@@ -133,7 +133,7 @@
 - changes in header and bottom navbar of desktop/mobile and enhanced ui of it.
 - html2canvas explores.
 - download chart image in expense,income and liabilities module.
-
+- meeting for potluck.
 
 
 

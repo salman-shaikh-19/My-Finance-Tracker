@@ -136,7 +136,7 @@ const LiabilityCard = ({
 
           <div className="flex flex-wrap gap-2  text-sm text-gray-500 items-center">
             <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Liability started from"
               >
             <span
@@ -149,7 +149,7 @@ const LiabilityCard = ({
             </div>
             {paymentSchedule && (
                 <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Payment schedule"
               >
               <div
@@ -163,7 +163,7 @@ const LiabilityCard = ({
             {endDate && (
               // <span title="End date">{commonDate({ date: endDate })}</span>
                   <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Liability deadline"
               >
               <span
@@ -179,7 +179,7 @@ const LiabilityCard = ({
 
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
               <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Liability type"
               >
             <span  className="badge badge-info badge-sm">
@@ -187,7 +187,7 @@ const LiabilityCard = ({
             </span>
             </div>
                <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Total amount borrowed"
               >
             <span
@@ -197,10 +197,26 @@ const LiabilityCard = ({
               Total: {formatCurrency(totalAmount, userCurrency || "INR")}
             </span>
             </div>
-
+<div
+                className="tooltip tooltip-top tooltip-info "
+                data-tip={`Total remaining amount ${
+                interestRate > 0 ? `including ${interestRate}% interest` : ""
+              }`}
+              >
+            <span
+            
+              className="badge badge-accent badge-sm"
+            >
+              Remaining: 
+              {formatCurrency(
+                remainingAmount + (remainingAmount * interestRate) / 100,
+                userCurrency || "INR"
+              )}
+            </span>
+             </div>
             {interestRate > 0 && (
                 <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Interest rate"
               >
               <span
@@ -224,25 +240,9 @@ const LiabilityCard = ({
                 )}
               </span>
             )} */}
+              
               <div
-                className="tooltip tooltip-top tooltip-info"
-                data-tip={`Total remaining amount ${
-                interestRate > 0 ? `including ${interestRate}% interest` : ""
-              }`}
-              >
-            <span
-            
-              className="badge badge-accent badge-sm"
-            >
-              Remaining:{" "}
-              {formatCurrency(
-                remainingAmount + (remainingAmount * interestRate) / 100,
-                userCurrency || "INR"
-              )}
-            </span>
-             </div>
-              <div
-                className="tooltip tooltip-top tooltip-info"
+                className="tooltip tooltip-top  break-word w-half"
                 data-tip="Liability status"
               >
             <span

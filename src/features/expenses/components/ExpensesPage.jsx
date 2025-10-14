@@ -129,7 +129,7 @@ const totalAmountByCategory =useMemo(() => {
           fixed z-50 shadow-md bg-primary text-white 
           hover:bg-primary/80 transition-all duration-200
           top-0 right-0 
-          md:top-0 md:right-6 
+          md:top-auto md:right-6 
           lg:top-auto lg:bottom-8 lg:right-8 
         "
           openModalBtnText={

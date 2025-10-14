@@ -176,13 +176,19 @@ const HeaderWithSidebar = () => {
   return (
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5 shadow-md z-40">
-        <button
+        
+        <div
+        data-tip={`${isSidebarOpen ? 'close sidebar':'open sidebar'}`}
+        className="tooltip tooltip-right tooltip-primary">
+          
+          <button
           onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
           className="btn btn-ghost btn-sm"
-          title="Toggle Sidebar"
+          
         >
           <BiMenu size={25} />
         </button>
+          </div>
 
         <Link to={"/"} className="font-bold me-auto select-none text-lg">
           My Finance Tracker
@@ -217,7 +223,7 @@ const HeaderWithSidebar = () => {
         <SettingsMenu
           triggerIcon={
             <CgProfile
-              className="text-2xl cursor-pointer hover:text-primary"
+              className="text-3xl cursor-pointer hover:text-primary"
               title="profile"
             />
           }
@@ -231,16 +237,17 @@ const HeaderWithSidebar = () => {
       >
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
-            <div className="tooltip tooltip-primary tooltip-right" data-tip={item.title}>
-              <li key={item.path}>
+            <div  key={item.path} className="tooltip tooltip-primary tooltip-right" data-tip={item.title}>
+              <li >
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-3 p-2 m-1 rounded-lg transition-colors duration-200 ${
+                  className={`flex items-center gap-3 p-2.5 m-1 rounded-lg transition-colors duration-200 ease-in-out ${
                     currentPath === item.path
                       ? "bg-primary text-white"
                       : "hover:bg-base-300"
                   }`}
                 >
+                  
                   <span className="text-lg">{item.icon}</span>
                   {isSidebarOpen && <span>{item.title}</span>}
                 </Link>
