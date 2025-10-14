@@ -32,7 +32,7 @@ const ChartMenu = ({
   const chartTypes = Object.keys(chartIcons);
 
   return (
-    <div className="flex flex-row  lg:flex-col items-center">
+    <div className="flex flex-row  justify-center items-center">
     <div className="flex flex-wrap mb-2">
       <div className="flex flex-wrap gap-1 mb-2 justify-end  ">
         {chartTypes.map((type) => {
