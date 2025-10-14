@@ -128,49 +128,42 @@
 - update investment.
 - delete investment.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 14 oct 
 - investment charts.
 - changes in header and bottom navbar of desktop/mobile and enhanced ui of it.
 - html2canvas explores.
 - download chart image in expense,income and liabilities module.
-- convert actual currency by its rating.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 15 oct
@@ -188,3 +181,10 @@
 - apply tooltip on needed place in app(daisyui tooltip).
 - prevent access if user goes offline.
 - optimize code.
+
+
+
+# 17 oct
+
+- change navigation design  desktop[make sidebar].
+- fixed design and layout issue after changing to sidebar in whole app.
