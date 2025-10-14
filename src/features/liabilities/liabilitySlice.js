@@ -3,7 +3,7 @@ import supabase from "../../services/supabaseClient";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import { addExpense } from "../expenses/expensesSlice";
-import { useDispatch } from "react-redux";
+
 
 dayjs.extend(isoWeek);
 
