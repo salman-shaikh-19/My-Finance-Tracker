@@ -99,7 +99,7 @@ const LiabilityCard = ({
   };
   return (
     <div
-      className={`card relative w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden ${
+      className={`card relative w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-auto scrollbar-hide ${
         !showActions ? "cursor-pointer" : ""
       }`}
       onClick={() => setShowActions(!showActions)}

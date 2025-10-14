@@ -40,7 +40,7 @@ const InvestmentCard = ({
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
-      } w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-hidden`}
+      } w-half bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-xl overflow-auto scrollbar-hide`}
       onClick={() => setShowNote(!showNote)}
       title={!showNote ? "Click to show action bar" : ""}
     >

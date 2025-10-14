@@ -188,3 +188,4 @@
 
 - change navigation design  desktop[make sidebar].
 - fixed design and layout issue after changing to sidebar in whole app.
+- create new expense record on liabilitie pay.
