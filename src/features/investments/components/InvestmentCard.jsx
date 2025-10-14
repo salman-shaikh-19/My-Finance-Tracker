@@ -64,20 +64,23 @@ const InvestmentCard = ({
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
-          <div className="flex flex-wrap gap-2  justify-between text-sm text-gray-500 items-center">
+          <div className="flex flex-wrap gap-2   text-sm text-gray-500 items-center">
+            
+              <div data-tip="Invested on" className="mt-1 tooltip tooltip-primary tooltip-top">
             <span
               className="badge badge-outline badge-sm cursor-auto"
               title="Invested on"
             >
-              <MdPayment className="inline mb-0.5" /> Invested On:{" "}
+              <MdPayment className="inline mb-0.5" /> 
               {commonDate({ date })}
             </span>
+            </div>
 
             <div
-              className="badge badge-xs lg:badge-sm md:badge-sm"
-              title="Payment schedule"
+              className=" "
+             
             >
-              <div title="Investment maturity status" className="mt-1">
+              <div data-tip="Investment maturity status" className="mt-1 tooltip tooltip-primary tooltip-top">
                 {!maturityDate ? (
                   <span className="text-xs text-secondary font-semibold">
                     No maturity date set
@@ -99,13 +102,16 @@ const InvestmentCard = ({
             </div>
 
             {maturityDate && (
+              <div data-tip="Investment maturity/selling date" className="mt-1 tooltip tooltip-primary tooltip-top">
+           
               <span
                 className="badge badge-outline badge-sm cursor-auto"
-                title="Investment maturity date"
+                // title="Investment maturity date"
               >
-                <MdPayment className="inline mb-0.5" /> Maturity:{" "}
+                <MdPayment className="inline mb-0.5" />
                 {commonDate({ date: maturityDate })}
               </span>
+              </div>
             )}
           </div>
         </div>
