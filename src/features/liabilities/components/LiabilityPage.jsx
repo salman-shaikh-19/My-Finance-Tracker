@@ -85,15 +85,12 @@ const LiabilityPage = () => {
           ref={modalRef}
           modalId="liability-add-modal"
           openModalBtnClassName="
-          fab fab-flower
-          absolute
-          right-0
-          top-4    
-          md:top-auto 
-          md:bottom-4 
-          text-xl
-           z-50
-          fixed 
+         btn-circle btn-sm md:btn-md lg:btn-lg 
+          fixed z-50 shadow-md bg-primary text-white 
+          hover:bg-primary/80 transition-all duration-200
+          top-0 right-3 
+          md:top-0 md:right-6 
+          lg:top-auto lg:bottom-8 lg:right-8
         "
           openModalBtnText={
             <>

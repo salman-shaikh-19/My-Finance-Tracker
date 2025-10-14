@@ -24,7 +24,8 @@ const CommonModal = ({
   return (
     <>
       <button
-        className={`btn btn-primary   ${openModalBtnClassName}`}
+        className={`btn btn-primary 
+                      ${openModalBtnClassName}`}
         title={btnTitle}
         onClick={(e) => {
           e.stopPropagation();

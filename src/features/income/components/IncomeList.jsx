@@ -48,7 +48,13 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   return (
     <div
       id="incomes-list"
-      className="overflow-auto min-h-[70vh] max-h-[85vh] sm:h-[890px] scrollbar-hide mx-5"
+      className="    overflow-auto 
+    h-[calc(100vh-4rem)]      /* full viewport minus header height */
+    sm:h-[calc(100vh-5rem)]   /* adjust for small screen screens if nav height diffrernt */
+    md:h-[calc(100vh-0)]      /* full height for desktop if no bottom nav */
+    scrollbar-hide 
+    mx-0 
+    pb-20  "
     >
       <IncomeChart />
       <div className="divider">Total Incomes by Category</div>
