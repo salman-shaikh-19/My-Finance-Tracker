@@ -141,16 +141,15 @@ import { MdOutlinePayments } from "react-icons/md";
 import { FaChartLine, FaHandHoldingUsd, FaMoneyBillWave } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { BiMenu, BiPlusCircle } from "react-icons/bi";
+import { BiCalculator, BiMenu, BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 
 import HeaderNavMobile from "../components/HeaderNavMobile";
 import HeaderNav from "../components/HeaderNav";
 import SettingsMenu from "./SettingsMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsSidebarOpen } from "../commonSlice";
-import { CiBurger } from "react-icons/ci";
 
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
@@ -158,6 +157,7 @@ const HeaderWithSidebar = () => {
   const { isSidebarOpen } = useSelector((state) => state.common);
   const location = useLocation();
   const dispatch = useDispatch();
+
   const currentPath = location.pathname;
 
   const handleClick = () => {
@@ -254,6 +254,7 @@ const HeaderWithSidebar = () => {
               </li>
             </div>
           ))}
+         
         </ul>
       </aside>
 

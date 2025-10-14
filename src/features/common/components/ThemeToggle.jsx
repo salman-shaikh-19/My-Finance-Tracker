@@ -81,34 +81,7 @@ const darkThemes = [
 ];
 
 // theme colour for  better ui/ux
-const themeColors = {
-  light: "bg-base-200",
-  cupcake: "bg-pink-200",
-  garden: "bg-green-300",
-  lemonade: "bg-yellow-200",
-  corporate: "bg-gray-200",
-  fantasy: "bg-purple-200",
-  valentine: "bg-pink-300",
-  emerald: "bg-green-400",
-  caramel: "bg-yellow-300",
-  winter: "bg-blue-200",
-  caramellatte: "bg-yellow-400",
-  lofi: "bg-purple-300",
-  blackforest: "bg-gray-800",
-  cmyk: "bg-cyan-400",
-  autumn: "bg-orange-400",
-  nord: "bg-blue-300",
-  dark: "bg-gray-900",
-  synthwave: "bg-purple-800",
-  dracula: "bg-purple-900",
-  forest: "bg-green-900",
-  night: "bg-gray-800",
-  coffee: "bg-yellow-900",
-  abyss: "bg-gray-700",
-  sunset: "bg-orange-600",
-  halloween: "bg-orange-700",
-  dim: "bg-gray-600",
-};
+
 const ThemeToggle = () => {
   const dispatch = useDispatch();
   const theme = useSelector((state) => state.common.theme);
@@ -139,10 +112,11 @@ const ThemeToggle = () => {
           </option> */}
           {lightThemes.map((t) => (
             <option key={t} value={t}>
-              <span className={`w-4 h-4 rounded-full ${themeColors[t]}`}></span>
+          
               {t.charAt(0).toUpperCase() + t.slice(1)}
             </option>
           ))}
+          
         </optgroup>
 
         <optgroup
@@ -154,7 +128,7 @@ const ThemeToggle = () => {
           </option> */}
           {darkThemes.map((t) => (
             <option key={t} value={t}>
-              <span className={`w-4 h-4 rounded-full ${themeColors[t]}`}></span>
+          
               {t.charAt(0).toUpperCase() + t.slice(1)}
             </option>
           ))}

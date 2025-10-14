@@ -134,6 +134,7 @@
 - html2canvas explores.
 - download chart image in expense,income and liabilities module.
 - meeting for potluck.
+- 20 minute meeting for upcoming event
 
 
 
