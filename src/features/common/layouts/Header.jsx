@@ -237,7 +237,7 @@ const HeaderWithSidebar = () => {
       >
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
-            <div  key={item.path} className="tooltip tooltip-primary tooltip-right" data-tip={item.title}>
+            <div  key={item.path} className={`${!isSidebarOpen && 'tooltip tooltip-primary tooltip-right'}`} data-tip={item.title}>
               <li >
                 <Link
                   to={item.path}
