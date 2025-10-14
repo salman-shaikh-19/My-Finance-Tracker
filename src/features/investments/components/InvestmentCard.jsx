@@ -64,7 +64,7 @@ const InvestmentCard = ({
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
-          <div className="flex flex-wrap gap-2   text-sm text-gray-500 items-center">
+          <div className="flex flex-wrap gap-1   text-sm text-gray-500 items-center">
             
               <div data-tip="Invested on" className="mt-1 tooltip tooltip-primary tooltip-top">
             <span
@@ -77,10 +77,10 @@ const InvestmentCard = ({
             </div>
 
             <div
-              className=" "
+              className="badge badge-xs mt-1.5 "
              
             >
-              <div data-tip="Investment maturity status" className="mt-1 tooltip tooltip-primary tooltip-top">
+              <div data-tip="Investment maturity status" className=" tooltip tooltip-primary tooltip-top">
                 {!maturityDate ? (
                   <span className="text-xs text-secondary font-semibold">
                     No maturity date set
