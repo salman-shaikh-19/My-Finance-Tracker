@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { BiEdit, BiX, BiMoney } from "react-icons/bi";
 import { MdDeleteForever, MdFiberNew, MdPayment } from "react-icons/md";
 import dayjs from "dayjs";
@@ -9,7 +9,6 @@ import { commonDate } from "../../../utils/dateUtils";
 
 import { useSelector } from "react-redux";
 import InvestmentForm from "./InvestmentForm";
-
 
 const InvestmentCard = ({
   investmentId,
@@ -31,16 +30,13 @@ const InvestmentCard = ({
   const [showNote, setShowNote] = useState(false);
   const { userCurrency } = useSelector((state) => state.common);
 
-
   // console.log('rerender',category);
-
 
   // const isNew = createdAt
   //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
   //   : false;
 
   return (
-    
     <div
       className={`card ${
         !showNote ? "cursor-pointer" : ""
@@ -59,28 +55,38 @@ const InvestmentCard = ({
 
         <div className="flex flex-col flex-1">
           <div className="flex justify-between items-center mb-2">
-            <span className="font-semibold text-lg cursor-auto" title="investment in">{category}</span>
-            <span className="font-bold text-lg cursor-auto" title="Total investment">
+            <span
+              className="font-semibold text-lg cursor-auto"
+              title="investment in"
+            >
+              {category}
+            </span>
+            <span
+              className="font-bold text-lg cursor-auto"
+              title="Total investment"
+            >
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
           <div className="flex flex-wrap gap-1   text-sm text-gray-500 items-center">
-            
-              <div data-tip="Invested on" className="mt-1 tooltip tooltip-primary tooltip-top">
-            <span
-              className="badge badge-outline badge-sm cursor-auto"
-              title="Invested on"
+            <div
+              data-tip="Invested on"
+              className=" tooltip tooltip-primary tooltip-top"
             >
-              <MdPayment className="inline mb-0.5" /> 
-              {commonDate({ date })}
-            </span>
+              <span
+                className="badge badge-outline badge-sm cursor-auto"
+                // title="Invested on"
+              >
+                <MdPayment className="inline mb-0.5" />
+                {commonDate({ date })}
+              </span>
             </div>
 
-            <div
-              className="badge badge-xs mt-1.5 "
-             
-            >
-              <div data-tip="Investment maturity status" className=" tooltip tooltip-primary tooltip-top">
+            <div className="badge badge-xs mt-1 ">
+              <div
+                data-tip="Investment maturity status"
+                className=" tooltip tooltip-primary tooltip-top"
+              >
                 {!maturityDate ? (
                   <span className="text-xs text-secondary font-semibold">
                     No maturity date set
@@ -102,15 +108,17 @@ const InvestmentCard = ({
             </div>
 
             {maturityDate && (
-              <div data-tip="Investment maturity/selling date" className="mt-1 tooltip tooltip-primary tooltip-top">
-           
-              <span
-                className="badge badge-outline badge-sm cursor-auto"
-                // title="Investment maturity date"
+              <div
+                data-tip="Investment maturity/selling date"
+                className=" tooltip tooltip-primary tooltip-top"
               >
-                <MdPayment className="inline mb-0.5" />
-                {commonDate({ date: maturityDate })}
-              </span>
+                <span
+                  className="badge badge-outline badge-sm cursor-auto"
+                  // title="Investment maturity date"
+                >
+                  <MdPayment className="inline mb-0.5" />
+                  {commonDate({ date: maturityDate })}
+                </span>
               </div>
             )}
           </div>
