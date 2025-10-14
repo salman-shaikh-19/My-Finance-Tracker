@@ -91,7 +91,7 @@ const LiabilityCard = ({
       confirmButtonText: "Yes, pay it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(payLiability({ liabilityId, paymentAmount: perInstallment }));
+        dispatch(payLiability({ liabilityId, paymentAmount: perInstallment, }));
         Swal.fire("Paid!", "Your payment has been recorded.", "success");
         
       }
@@ -307,17 +307,31 @@ const LiabilityCard = ({
                 openModalBtnText={<BiEdit size={20} />}
               >
                 <LiabilityForm
-                  initialValues={{
+                  // initialValues={{
+                  //   id: liabilityId,
+                  //   creditorName,
+                  //   totalAmount,
+                  //   remainingAmount,
+                  //   interestRate,
+                  //   liabilityType,
+                  //   paymentSchedule,
+                  //   startDate: dayjs(startDate).format("YYYY-MM-DD"),
+                  //   endDate: endDate ? dayjs(endDate).format("YYYY-MM-DD") : "",
+                  //   liabilityNote,
+                  // }}
+                   initialValues={{
                     id: liabilityId,
-                    creditorName,
-                    totalAmount,
-                    remainingAmount,
-                    interestRate,
-                    liabilityType,
-                    paymentSchedule,
-                    startDate: dayjs(startDate).format("YYYY-MM-DD"),
+                    creditorName: creditorName || "",
+                    totalAmount: totalAmount || 0,
+                    remainingAmount: remainingAmount || 0,
+                    interestRate: interestRate || 0,
+                    liabilityType: liabilityType || "",
+                    paymentSchedule: paymentSchedule || "",
+                    startDate: startDate
+                      ? dayjs(startDate).format("YYYY-MM-DD")
+                      : dayjs().format("YYYY-MM-DD"),
                     endDate: endDate ? dayjs(endDate).format("YYYY-MM-DD") : "",
-                    liabilityNote,
+                    liabilityNote: liabilityNote || "",
                   }}
                   handleSubmit={editLiabilityHandler}
                   isEdit={true}

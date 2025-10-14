@@ -15,6 +15,7 @@ const LiabilityForm = ({ handleSubmit, initialValues, isEdit = false }) => {
     endDate: new Date().toISOString().slice(0, 10),
     liabilityNote: "",
   };
+  
   return (
     <>
       <h1 className="text-center">
@@ -26,17 +27,26 @@ const LiabilityForm = ({ handleSubmit, initialValues, isEdit = false }) => {
           creditorName: Yup.string().required("Creditor name is required"),
           totalAmount: Yup.number()
             .required("Total amount is required")
+              .nullable()
             .positive("Amount must be positive"),
-          remainingAmount: Yup.number()
-            .required("Remaining amount is required")
-            .positive("Amount must be positive")
-            .max(
-              Yup.ref("totalAmount"),
-              "Remaining amount cannot exceed total amount"
-            ),
-          interestRate: Yup.number()
-            .min(0, "Interest rate cannot be negative")
-            .max(100, "Interest rate cannot exceed 100%"),
+   remainingAmount: Yup.number()
+  .required("Remaining amount is required")
+  .nullable()
+  .test(
+    "is-positive",
+    "Remaining amount must be greater than 0",
+    (value) => value === null || value === 0 || value > 0
+  )
+  .max(Yup.ref("totalAmount"), "Remaining amount cannot exceed total amount"),
+
+interestRate: Yup.number()
+  .nullable()
+  .test(
+    "is-positive-or-zero",
+    "Interest rate cannot be negative",
+    (value) => value === null || value >= 0
+  )
+  .max(100, "Interest rate cannot exceed 100%"),
           liabilityType: Yup.string().required("Liability type is required"),
           paymentSchedule: Yup.string().required(
             "Payment schedule is required"

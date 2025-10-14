@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import supabase from "../../services/supabaseClient";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
+import { addExpense } from "../expenses/expensesSlice";
+import { useDispatch } from "react-redux";
 
 dayjs.extend(isoWeek);
 
@@ -100,8 +102,9 @@ export const deleteLiability = createAsyncThunk(
 //pay liability
 export const payLiability = createAsyncThunk(
   "liabilities/payLiability",
-  async ({ liabilityId, paymentAmount }, { rejectWithValue }) => {
+  async ({ liabilityId, paymentAmount }, { rejectWithValue, dispatch  }) => {
     try {
+      
       // Fetch current remaining
       const { data: liability, error: fetchError } = await supabase
         .from("user_liabilities")
@@ -123,6 +126,19 @@ export const payLiability = createAsyncThunk(
         .single();
 
       if (updateError) throw updateError;
+          // automatically create an expense for the payment
+      const expensePayload = {
+        userId: updated.user_id,
+        amount: paymentAmount,
+        // category: updated.liability_type || "Other", // map liability type as expense category
+        category:"Payments",
+        date: new Date().toISOString().split("T")[0],
+        method: "Other", 
+          expense_note: `Paid ${updated.creditor_name ? 'to ' + updated.creditor_name : ''} for ${updated.liability_type ? updated.liability_type.toLowerCase() : 'liability'} of ${Number(paymentAmount).toFixed(2)} on ${new Date().toISOString().split("T")[0]}.\n---- Please ensure payment method if not then update record ----`,
+
+             };
+
+      await dispatch(addExpense(expensePayload));
 
       return updated;
     } catch (err) {

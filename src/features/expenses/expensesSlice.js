@@ -36,6 +36,7 @@ export const addExpense = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
+      
       const { data, error } = await supabase.from("user_expenses").insert([
         {
           user_id: userId,
