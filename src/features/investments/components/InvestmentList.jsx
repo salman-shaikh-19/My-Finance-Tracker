@@ -55,12 +55,12 @@ const InvestmentList = ({ investments }) => {
     <div
       id="investment-list"
       className="    overflow-auto 
-    h-[calc(100vh-4rem)]      /* full viewport minus header height */
-    sm:h-[calc(100vh-5rem)]   /* adjust for small screen screens if nav height diffrernt */
-    md:h-[calc(100vh-0)]      /* full height for desktop if no bottom nav */
-    scrollbar-hide 
-    mx-0 
-    pb-20  "
+          h-[calc(100vh-4rem)]      /* full viewport minus header height */
+          sm:h-[calc(100vh-5rem)]   /* adjust for small screen screens if nav height diffrernt */
+          md:h-[calc(100vh-0)]      /* full height for desktop if no bottom nav */
+          scrollbar-hide 
+          mx-0 
+          pb-20  "
     >
       <Suspense fallback={<Loader />}>
         <InvestmentChart />
@@ -87,7 +87,7 @@ const InvestmentList = ({ investments }) => {
         >
           {(items) => (
             <div className="container mx-auto p-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                 {items.map((investment) => {
                   const category = getCategoryByName(
                     investmentCategories,

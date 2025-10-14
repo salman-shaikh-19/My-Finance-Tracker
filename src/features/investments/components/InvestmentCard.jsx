@@ -68,7 +68,7 @@ const InvestmentCard = ({
               {formatCurrency(amount, userCurrency || "INR")}
             </span>
           </div>
-          <div className="flex flex-wrap gap-1 flex-col lg:flex-row   text-sm text-gray-500 items-center">
+          <div className="flex flex-wrap gap-1    text-sm text-gray-500 items-center">
             <div
               data-tip="Invested on"
               className=" tooltip tooltip-primary tooltip-top"
