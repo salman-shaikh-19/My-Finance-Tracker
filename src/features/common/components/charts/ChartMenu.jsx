@@ -44,10 +44,10 @@ const ChartMenu = ({
               data-tip={`${type.charAt(0).toUpperCase() + type.slice(1)} chart`}
             >
               <button
-                className={`flex items-center cursor-pointer  px-2 py-1 rounded-md ${
+                className={`flex items-center cursor-pointer   px-1 py-1 rounded-md ${
                   currentChart === type
-                    ? "btn btn-primary btn-sm font-semibold"
-                    : "btn btn-ghost btn-sm hover:text-primary"
+                    ? "btn btn-primary btn-xs font-semibold"
+                    : "btn btn-ghost btn-xs hover:text-primary"
                 }`}
                 onClick={() => setCurrentChart(type)}
               >
@@ -62,7 +62,7 @@ const ChartMenu = ({
           data-tip="Export to Excel"
         >
           <button
-            className="lex items-center cursor-pointer  px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="lex items-center cursor-pointer  px-1 py-1 rounded-md btn btn-ghost btn-xs hover:text-primary"
             onClick={() => exportToExcel(data, fileName, excludeKeys)}
           >
             <FaFileExcel size={20} />
@@ -73,7 +73,7 @@ const ChartMenu = ({
           data-tip="Export to CSV"
         >
           <button
-            className="lex items-center cursor-pointer  px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="lex items-center cursor-pointer  px-1 py-1 rounded-md btn btn-ghost btn-xs hover:text-primary"
             onClick={() => exportToCsv(data, fileName, excludeKeys)}
           >
             <FaFileCsv size={20} />
@@ -84,7 +84,7 @@ const ChartMenu = ({
           data-tip={`Download ${currentChart} chart`}
         >
           <button
-            className="flex items-center cursor-pointer  px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="flex items-center cursor-pointer  px-1 py-1 rounded-md btn btn-ghost btn-xs hover:text-primary"
             onClick={downloadChart}
           >
             <FiDownload size={22} />
