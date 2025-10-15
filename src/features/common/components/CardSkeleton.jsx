@@ -3,7 +3,7 @@ import React from "react";
 
 const CardSkeleton = ({ additionalClass = "" }) => {
   return (
-    <div className={`card w-full bg-base-200 shadow-xl animate-pulse ${additionalClass}`}>
+    <div className={`card w-full bg-base-200 shadow-lg animate-pulse ${additionalClass}`}>
       <div className="card-body flex flex-col items-center justify-center gap-4">
         <div className="flex items-center gap-4 w-full">
           <div className="flex flex-col gap-2 flex-1">

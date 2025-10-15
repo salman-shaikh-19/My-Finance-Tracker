@@ -212,7 +212,8 @@ cardContent={<p>No data available</p>}
 
       </div>
 
-      <div className="card shadow-lg bg-base-200 mt-3 p-3">
+      <div className="w-full  max-w-full h-[450px] mt-4 p-4 bg-base-100 rounded-lg   shadow-lg">
+   
         {expensesLoading || incomesLoading ? (
           <ChartSkeleton containerHeight={400} />
         ) : (
