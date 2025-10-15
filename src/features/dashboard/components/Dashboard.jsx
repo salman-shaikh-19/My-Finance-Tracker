@@ -11,10 +11,10 @@ import dayjs from "dayjs";
 import { BiCalendar } from "react-icons/bi";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import TotalOfCard from "./TotalOfCard";
+import StatCard from "./StatCard";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import CustomCommonTooltipForChart from "../../common/components/charts/CustomCommonTooltipForChart";
-
+import ChartSkeleton from'./ChartSkeleton';
 const Dashboard = () => {
   const { expenses, loading: expensesLoading } = useSelector(
     (state) => state.expenses
@@ -30,7 +30,7 @@ const Dashboard = () => {
   );
   const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
   const dispatch = useDispatch();
-
+  const chartHeight=450;
   const init = () => {
     if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year" }));
@@ -80,7 +80,7 @@ const Dashboard = () => {
 
 
   return (
-    <Main>
+    <Main mainClassName="p-4 ">
    
         
             <div className="flex  justify-between">
@@ -90,12 +90,13 @@ const Dashboard = () => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-4">
-              <TotalOfCard
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
+              <StatCard
                 cardTitle="Total Income"
+                
                 loading={incomesLoading}
                 cardTotal={
-                  <span className="text-success">
+                  <span className="text-success ">
                     {formatCurrency(
                       totalOf(incomes, "income_amount"),
                       userCurrency
@@ -103,7 +104,7 @@ const Dashboard = () => {
                   </span>
                 }
               />
-              <TotalOfCard
+              <StatCard
                 cardTitle="Total Expense"
                 loading={expensesLoading}
                 cardTotal={
@@ -112,8 +113,21 @@ const Dashboard = () => {
                   </span>
                 }
               />
-              <TotalOfCard
-                cardTitle="Total Liabilities"
+                <StatCard
+                  cardTitle="Total Savings"
+                  loading={incomesLoading || expensesLoading}
+                  cardTotal={
+                    <span className="text-info">
+                      {formatCurrency(
+                        totalOf(incomes, "income_amount") -
+                        totalOf(expenses, "amount"),
+                        userCurrency
+                      )}
+                    </span>
+                  }
+                />
+              <StatCard
+                cardTitle="Total Liabilities (Debt)"
                 loading={liabilitiesLoading}
                 cardTotal={
                   <span className="text-warning">
@@ -124,8 +138,9 @@ const Dashboard = () => {
                   </span>
                 }
               />
-              <TotalOfCard
+              <StatCard
                 cardTitle="Total Investments"
+                additionalClass=""
                 loading={investmentsLoading}
                 cardTotal={
                   <span className="text-primary">
@@ -136,35 +151,32 @@ const Dashboard = () => {
                   </span>
                 }
               />
-              <TotalOfCard
-                cardTitle="Total Savings"
-                loading={incomesLoading || expensesLoading}
-                cardTotal={
-                  <span className="text-info">
-                    {formatCurrency(
-                      totalOf(incomes, "income_amount") -
-                      totalOf(expenses, "amount"),
-                      userCurrency
-                    )}
-                  </span>
-                }
-              />
+ 
+           
+              
+      
             </div>
             <div>
               {/* display income vs expense data in bar chart with line  chart */}
             </div>
               <div className="card shadow-lg bg-base-200 mt-3 p-3">
-                <ResponsiveContainer  width="100%" height={300}>
-                  <BarChart data={data}>
+                {
+                  expensesLoading || incomesLoading ? (
+                  <ChartSkeleton containerHeight={chartHeight} />
+                  ) : (
+                    <ResponsiveContainer  width="100%" height={chartHeight}>
+                  <BarChart data={data}  >
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="month" />
                     <YAxis />
                     <Tooltip content={<CustomCommonTooltipForChart />} />
-                    <Legend />
-                    <Bar dataKey="income_amount" fill="green" />
-                    <Bar dataKey="amount" fill="red" />
+                    <Legend  />
+                    <Bar dataKey="income_amount" name="Income" fill="green" />
+                    <Bar dataKey="amount" name="Expense" fill="red" />
                   </BarChart>
                 </ResponsiveContainer>
+                  )
+                }
               </div>
        
        
