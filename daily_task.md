@@ -206,3 +206,4 @@
 - make total incomes ,expense and so on card on dashboard and load data into it.
 - explore skeleton loading.
 - implement skeleton loading in dashboard for card and chart.
+- performance rating based on income and expense done.
