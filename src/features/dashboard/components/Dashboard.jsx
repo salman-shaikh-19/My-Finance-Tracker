@@ -212,6 +212,7 @@ const Dashboard = () => {
         <StatCard
           cardTitle="Your Performance"
           loading={expensesLoading || incomesLoading}
+          additionalClass=""
           cardContent={
             <>
               <div className="tooltip   tooltip-bottom tooltip-primary flex items-center gap-2" data-tip="Performance based on your income and expenses">
