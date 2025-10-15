@@ -30,7 +30,7 @@ const Dashboard = () => {
   );
   const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
   const dispatch = useDispatch();
-  const chartHeight=450;
+  const chartHeight=400;
   const init = () => {
     if (!loggedInUserId) return;
     dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year" }));
