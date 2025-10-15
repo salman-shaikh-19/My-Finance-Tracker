@@ -26,6 +26,7 @@ export const getWeeklyChartData = ({ items, dateKey, valueKey, referenceDate }) 
 
   return Object.keys(weekDays).map((day) => ({
     day,
-    total: weekDays[day],
+    // total: weekDays[day],
+     total: Number(weekDays[day].toFixed(2)),
   }));
 };
