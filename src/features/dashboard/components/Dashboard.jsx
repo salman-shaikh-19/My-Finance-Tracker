@@ -5,7 +5,7 @@ import { getAllExpenses } from "../../expenses/expensesSlice";
 import { getAllIncomes } from "../../income/incomeSlice";
 import { getAllInvestments } from "../../investments/investmentsSlice";
 import { getAllLiabilities } from "../../liabilities/liabilitySlice";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatCurrency } from "../../../utils/currencyUtils";
 import dayjs from "dayjs";
 import { BiCalendar, BiLineChartDown } from "react-icons/bi";
@@ -16,6 +16,9 @@ import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAx
 import CustomCommonTooltipForChart from "../../common/components/charts/CustomCommonTooltipForChart";
 import ChartSkeleton from './ChartSkeleton';
 import { PiChartLineUp } from "react-icons/pi";
+import PrevNextButton from "../../common/components/PrevNextButton";
+import { refreshData } from "../../../utils/refreshData";
+import PerformanceSuggestions from "./PerformanceSuggestions";
 const Dashboard = () => {
   const { expenses, loading: expensesLoading } = useSelector(
     (state) => state.expenses
@@ -29,20 +32,30 @@ const Dashboard = () => {
   const { liabilities, loading: liabilitiesLoading } = useSelector(
     (state) => state.liabilities
   );
+
   const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
+
+  const [yearOffset, setYearOffset] = useState(0); // current year offset
+
+
+  const currentYear = dayjs().add(yearOffset, "year").year();
   const dispatch = useDispatch();
   const chartHeight = 400;
-  const init = () => {
+  const init = async () => {
     if (!loggedInUserId) return;
-    dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year" }));
-    dispatch(getAllIncomes({ userId: loggedInUserId, wise: "year" }));
-    dispatch(getAllInvestments({ userId: loggedInUserId }));
-    dispatch(getAllLiabilities({ userId: loggedInUserId }));
+
+    // Fetch current year data
+    dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year", year: currentYear }));
+    dispatch(getAllIncomes({ userId: loggedInUserId, wise: "year", year: currentYear }));
+    dispatch(getAllInvestments({ userId: loggedInUserId, year: currentYear }));
+    dispatch(getAllLiabilities({ userId: loggedInUserId, year: currentYear }));
+
+
   };
 
   useEffect(() => {
     init();
-  }, [dispatch, loggedInUserId]);
+  }, [dispatch, loggedInUserId, yearOffset]);
 
   const totalOf = (items, key) => {
     if (!items || !items.length) return 0;
@@ -90,7 +103,7 @@ const Dashboard = () => {
     // ratio of savings to income (in %)
     const savingPercent = (savings / totalIncome) * 100;
 
-    
+
     if (savingPercent >= 40) return 5; // excellent
     if (savingPercent >= 25) return 4; // good
     if (savingPercent >= 10) return 3; // average
@@ -101,7 +114,17 @@ const Dashboard = () => {
     calculatePerformanceRating(incomes, expenses),
     [incomes, expenses]
   );
+  const handleRefresh = () => {
+    if (!loggedInUserId) return;
+    refreshData({
+      loggedInUserId,
+      dispatch,
+      action: getAllLiabilities,
+      params: { year: currentYear },
+      resetOffset: setYearOffset,
+    });
 
+  };
 
   return (
     <Main mainClassName="p-4 ">
@@ -113,6 +136,15 @@ const Dashboard = () => {
           <BiCalendar /> {dayjs().format("YYYY")}
         </h3>
       </div>
+      <PrevNextButton
+        customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
+        offset={yearOffset}
+        setPrevOffset={() => setYearOffset((prev) => prev - 1)}
+        setNextOffset={() => setYearOffset((prev) => prev + 1)}
+        refreshData={handleRefresh}
+        getLabel={(date) => date.getFullYear()}
+        disableNext={false}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
         <StatCard
@@ -142,7 +174,7 @@ const Dashboard = () => {
           loading={incomesLoading || expensesLoading}
           cardContent={
             <span className={` text-2xl font-bold ${totalOf(incomes, "income_amount") -
-            totalOf(expenses, "amount") > 0 ? "text-success" : "text-error"}`}>
+              totalOf(expenses, "amount") > 0 ? "text-success" : "text-error"}`}>
               {formatCurrency(
                 totalOf(incomes, "income_amount") -
                 totalOf(expenses, "amount"),
@@ -195,15 +227,18 @@ const Dashboard = () => {
                     />
                   ))}
                 </div>
-                <p className={`text-sm badge ${performanceRating >= 4 ? "badge-success" : performanceRating === 3 ? "badge-warning" : performanceRating === 2 ? "badge-error" : "badge-info"}`}>
-                  {performanceRating >= 4
-                    ? "Excellent money management!"
-                    : performanceRating === 3
-                      ? "Average — room to improve."
-                      : performanceRating === 2
-                        ? "Watch your expenses!"
-                        : "Overspending detected!"}
-                </p>
+                <div className="flex flex-col gap-1 ">
+                  <p className={`text-sm  ${performanceRating >= 4 ? "text-success" : performanceRating === 3 ? "text-warning" : performanceRating === 2 ? "text-error" : "text-info"}`}>
+                    {performanceRating >= 4
+                      ? "Excellent money management!"
+                      : performanceRating === 3
+                        ? "Average — room to improve."
+                        : performanceRating === 2
+                          ? "Watch your expenses!"
+                          : "Overspending detected!"}
+                  </p>
+                  <PerformanceSuggestions performanceRating={performanceRating} />
+                </div>
               </div>
             </>
           }
