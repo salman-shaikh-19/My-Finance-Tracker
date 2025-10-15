@@ -75,7 +75,7 @@ const LiabilityForm = ({ handleSubmit, initialValues, isEdit = false }) => {
                 type="text"
                 name="creditorName"
                 placeholder="Creditor Name"
-                className="input input-bordered w-full "
+                className="input input-bordered  w-full "
               />
               <ErrorMessage
                 name="creditorName"

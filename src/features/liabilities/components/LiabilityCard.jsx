@@ -77,7 +77,6 @@ const LiabilityCard = ({
     remainingAmount / numberOfPayments + totalInterest / numberOfPayments;
   const dispatch = useDispatch();
   const handlePay = async () => {
-   
     await Swal.fire({
       title: "Are you sure?",
       text: `You are about to pay ${formatCurrency(
@@ -91,9 +90,8 @@ const LiabilityCard = ({
       confirmButtonText: "Yes, pay it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        dispatch(payLiability({ liabilityId, paymentAmount: perInstallment, }));
+        dispatch(payLiability({ liabilityId, paymentAmount: perInstallment }));
         Swal.fire("Paid!", "Your payment has been recorded.", "success");
-        
       }
     });
   };
@@ -114,117 +112,123 @@ const LiabilityCard = ({
 
         <div className="flex flex-col flex-1">
           <div className="flex gap-5 items-center mb-1">
-            <div className="tooltip tooltip-accent tooltip-bottom" data-tip="Creditor name">
-
-            <span
-              className="badge badge-primary font-semibold text-sm md:text-base lg:text-base truncate max-w-[150px]"
-
+            <div
+              className="tooltip tooltip-accent tooltip-bottom"
+              data-tip="Creditor name"
             >
-              {creditorName}
-            </span>
+              <span className="badge badge-primary font-semibold text-sm md:text-base lg:text-base truncate max-w-[150px]">
+                {creditorName}
+              </span>
             </div>
 
             <div className="flex items-center gap-1 ms-auto text-sm text-gray-500">
-              {paymentSchedule && paymentSchedule !== "No Payment Schedule" && (
+              {paymentSchedule && paymentSchedule !== "No Payment Schedule" ? (
                 <span>
                   {formatCurrency(perInstallment, userCurrency || "INR")} /
                   {paymentSchedule.toLowerCase()}
                 </span>
+              ) : (
+                "One-time Payment"
               )}
             </div>
+          </div>
+          {/* payment progressbar */}
+          <div className="my-2 ">
+            <div className="flex justify-between text-xs mb-1 text-gray-500">
+              <span>Paid  {formatCurrency(totalAmount - remainingAmount, userCurrency || "INR")}</span>
+              
+              <span>
+                {Math.min(
+                  100,
+                  ((totalAmount - remainingAmount) / totalAmount) * 100
+                ).toFixed(1)}
+                %
+              </span>
+            </div>
+            <progress
+              className="progress progress-success w-full h-2"
+              value={Math.min(
+                100,
+                ((totalAmount - remainingAmount) / totalAmount) * 100
+              )}
+              max="100"
+            ></progress>
           </div>
 
           <div className="flex flex-wrap gap-2  text-sm text-gray-500 items-center">
             <div
-                className="tooltip tooltip-top  break-word w-half"
-                data-tip="Liability started from"
-              >
-            <span
-              className="badge badge-outline badge-sm cursor-auto"
-            
+              className="tooltip tooltip-top  break-word w-half"
+              data-tip="Liability started from"
             >
-              <MdPayment className="inline mb-0.5" />{" "}
-              {commonDate({ date: startDate })}
-            </span>
+              <span className="badge badge-outline badge-sm cursor-auto">
+                <MdPayment className="inline mb-0.5" />{" "}
+                {commonDate({ date: startDate })}
+              </span>
             </div>
             {paymentSchedule && (
-                <div
+              <div
                 className="tooltip tooltip-top  break-word w-half"
                 data-tip="Payment schedule"
               >
-              <div
-                className="badge badge-primary badge-xs lg:badge-sm md:badge:sm"
-           
-              >
-                {paymentSchedule}
-              </div>
+                <div className="badge badge-primary badge-xs lg:badge-sm md:badge:sm">
+                  {paymentSchedule}
+                </div>
               </div>
             )}
             {endDate && (
               // <span title="End date">{commonDate({ date: endDate })}</span>
-                  <div
+              <div
                 className="tooltip tooltip-top  break-word w-half"
                 data-tip="Liability deadline"
               >
-              <span
-                className="badge badge-outline badge-sm cursor-auto"
-        
-              >
-                <MdPayment className="inline mb-0.5" />{" "}
-                {commonDate({ date: endDate })}
-              </span>
+                <span className="badge badge-outline badge-sm cursor-auto">
+                  <MdPayment className="inline mb-0.5" />{" "}
+                  {commonDate({ date: endDate })}
+                </span>
               </div>
             )}
           </div>
 
           <div className="flex flex-wrap gap-2 flex-col lg:flex-row md:flex-row lg:items-center md:items-center cursor-auto text-sm text-gray-500 items-start mt-2">
-              <div
-                className="tooltip tooltip-top  break-word w-half"
-                data-tip="Liability type"
-              >
-            <span  className="badge badge-info badge-sm">
-              {liabilityType}
-            </span>
-            </div>
-               <div
-                className="tooltip tooltip-top  break-word w-half"
-                data-tip="Total amount borrowed"
-              >
-            <span
-              className="badge badge-neutral badge-sm cursor-auto"
-              
+            <div
+              className="tooltip tooltip-top  break-word w-half"
+              data-tip="Liability type"
             >
-              Total: {formatCurrency(totalAmount, userCurrency || "INR")}
-            </span>
+              <span className="badge badge-info badge-sm">{liabilityType}</span>
             </div>
-<div
-                className="tooltip tooltip-top tooltip-info "
-                data-tip={`Total remaining amount ${
+            <div
+              className="tooltip tooltip-top  break-word w-half"
+              data-tip="Total amount borrowed"
+            >
+              <span className="badge badge-neutral badge-sm cursor-auto">
+                Total: {formatCurrency(totalAmount, userCurrency || "INR")}
+              </span>
+            </div>
+            <div
+              className="tooltip tooltip-top tooltip-info "
+              data-tip={`Total remaining amount ${
                 interestRate > 0 ? `including ${interestRate}% interest` : ""
               }`}
-              >
-            <span
-            
-              className="badge badge-accent badge-sm"
             >
-              Remaining: 
-              {formatCurrency(
-                remainingAmount + (remainingAmount * interestRate) / 100,
-                userCurrency || "INR"
-              )}
-            </span>
-             </div>
+              <span className="badge badge-accent badge-sm">
+                Remaining:
+                {formatCurrency(
+                  remainingAmount + (remainingAmount * interestRate) / 100,
+                  userCurrency || "INR"
+                )}
+              </span>
+            </div>
             {interestRate > 0 && (
-                <div
+              <div
                 className="tooltip tooltip-top  break-word w-half"
                 data-tip="Interest rate"
               >
-              <span
-                // title="Interest rate"
-                className="badge badge-secondary badge-sm"
-              >
-                Interest: {interestRate}%
-              </span>
+                <span
+                  // title="Interest rate"
+                  className="badge badge-secondary badge-sm"
+                >
+                  Interest: {interestRate}%
+                </span>
               </div>
             )}
 
@@ -240,23 +244,20 @@ const LiabilityCard = ({
                 )}
               </span>
             )} */}
-              
-              <div
-                className="tooltip tooltip-top  break-word w-half"
-                data-tip="Liability status"
-              >
-            <span
-              className={`badge badge-sm ${
-                remainingAmount === 0 ? "badge-success" : "badge-warning"
-              }`}
-          
+
+            <div
+              className="tooltip tooltip-top  break-word w-half"
+              data-tip="Liability status"
             >
-              {remainingAmount === 0 ? "Cleared" : "Ongoing"}
-            </span>
+              <span
+                className={`badge badge-sm ${
+                  remainingAmount === 0 ? "badge-success" : "badge-warning"
+                }`}
+              >
+                {remainingAmount === 0 ? "Cleared" : "Ongoing"}
+              </span>
             </div>
           </div>
-
-          
         </div>
       </div>
 
@@ -319,7 +320,7 @@ const LiabilityCard = ({
                   //   endDate: endDate ? dayjs(endDate).format("YYYY-MM-DD") : "",
                   //   liabilityNote,
                   // }}
-                   initialValues={{
+                  initialValues={{
                     id: liabilityId,
                     creditorName: creditorName || "",
                     totalAmount: totalAmount || 0,

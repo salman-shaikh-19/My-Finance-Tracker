@@ -136,37 +136,6 @@
 - meeting for potluck.
 - 20 minute meeting for upcoming event
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 15 oct
 
 - chnages in charts of all modules and add more charts like area ,radar and doughnut.
@@ -174,6 +143,45 @@
 - add install appp button in setting profile section of navigaton bar.
 - implemented daisyui tooltip.
 - fixed issue in navbar.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 16 oct 
@@ -191,3 +199,7 @@
 - fixed design and layout issue after changing to sidebar in whole app.
 - create new expense record on liabilitie pay.
 - fixed validation issues in liabilities form.
+
+
+# 23 oct
+- add progress bar in liability card.
