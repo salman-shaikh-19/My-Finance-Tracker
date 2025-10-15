@@ -8,7 +8,9 @@ const PerformanceSuggestions = ({ performanceRating }) => {
 
   // pick random suggestion
   const getRandomSuggestion = () => {
-    const rating = performanceRating >= 4 ? 4 : performanceRating <= 1 ? 1 : performanceRating;
+    // const rating = performanceRating >= 4 ? 4 : performanceRating <= 1 ? 1 : performanceRating;
+    const rating = performanceRating >= 4 ? 4 : performanceRating <= 0 ? 0 : performanceRating;
+
     const suggestionList = performanceSuggestions[rating];
     return suggestionList[Math.floor(Math.random() * suggestionList.length)];
   };

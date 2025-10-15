@@ -134,6 +134,28 @@ export const suggestions = {
       "Avoid borrowing from multiple sources at once.",
       "Educate yourself about debt reduction strategies.",
       "Celebrate small wins to stay motivated."
+    ],
+    0: [
+      "You are heavily in debt — prioritize immediate debt reduction.",
+      "List all debts and focus on high-interest loans first.",
+      "Temporarily stop discretionary spending entirely.",
+      "Seek professional financial counseling immediately.",
+      "Negotiate payment plans with creditors where possible.",
+      "Consider debt consolidation to reduce interest rates.",
+      "Temporarily pause any investments until debt is managed.",
+      "Track every expense daily to avoid further debt.",
+      "Use cash-only budgeting to control spending strictly.",
+      "Avoid taking new credit or loans under any circumstances.",
+      "Share financial responsibility with family or support system.",
+      "Look for additional income sources to accelerate debt repayment.",
+      "Set small achievable weekly debt repayment targets.",
+      "Focus on essentials: food, rent, utilities first.",
+      "Avoid large purchases, travel, or luxury items entirely.",
+      "Automate minimum payments to avoid late fees.",
+      "Consider selling non-essential assets to pay off debts.",
+      "Educate yourself on debt reduction strategies immediately.",
+      "Celebrate small wins to stay motivated while reducing debt.",
+      "Use community or government support programs if necessary."
     ]
   };
   

@@ -1,76 +1,60 @@
-import { Link } from "react-router-dom";
-import Main from "../../common/layouts/Main";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+import { BiCalendar } from "react-icons/bi";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, Legend, XAxis, YAxis } from "recharts";
+
+import Main from "../../common/layouts/Main";
+import StatCard from "./StatCard";
+import ChartSkeleton from './ChartSkeleton';
+import CustomCommonTooltipForChart from "../../common/components/charts/CustomCommonTooltipForChart";
+import PrevNextButton from "../../common/components/PrevNextButton";
+import PerformanceSuggestions from "./PerformanceSuggestions";
+import { formatCurrency } from "../../../utils/currencyUtils";
+
 import { getAllExpenses } from "../../expenses/expensesSlice";
 import { getAllIncomes } from "../../income/incomeSlice";
 import { getAllInvestments } from "../../investments/investmentsSlice";
 import { getAllLiabilities } from "../../liabilities/liabilitySlice";
-import { useEffect, useMemo, useState } from "react";
-import { formatCurrency } from "../../../utils/currencyUtils";
-import dayjs from "dayjs";
-import { BiCalendar, BiLineChartDown } from "react-icons/bi";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import StatCard from "./StatCard";
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import CustomCommonTooltipForChart from "../../common/components/charts/CustomCommonTooltipForChart";
-import ChartSkeleton from './ChartSkeleton';
-import { PiChartLineUp } from "react-icons/pi";
-import PrevNextButton from "../../common/components/PrevNextButton";
-import { refreshData } from "../../../utils/refreshData";
-import PerformanceSuggestions from "./PerformanceSuggestions";
-const Dashboard = () => {
-  const { expenses, loading: expensesLoading } = useSelector(
-    (state) => state.expenses
-  );
-  const { incomes, loading: incomesLoading } = useSelector(
-    (state) => state.income
-  );
-  const { investments, loading: investmentsLoading } = useSelector(
-    (state) => state.investments
-  );
-  const { liabilities, loading: liabilitiesLoading } = useSelector(
-    (state) => state.liabilities
-  );
 
+const Dashboard = () => {
+  const dispatch = useDispatch();
   const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
 
-  const [yearOffset, setYearOffset] = useState(0); // current year offset
+  const { expenses, loading: expensesLoading } = useSelector((state) => state.expenses);
+  const { incomes, loading: incomesLoading } = useSelector((state) => state.income);
+  const { investments, loading: investmentsLoading } = useSelector((state) => state.investments);
+  const { liabilities, loading: liabilitiesLoading } = useSelector((state) => state.liabilities);
 
-
+  const [yearOffset, setYearOffset] = useState(0); // 0 = current year
   const currentYear = dayjs().add(yearOffset, "year").year();
-  const dispatch = useDispatch();
-  const chartHeight = 400;
-  const init = async () => {
-    if (!loggedInUserId) return;
+  const custDate = dayjs().add(yearOffset, "year").startOf("year").toDate();
 
-    // Fetch current year data
-    dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year", year: currentYear }));
-    dispatch(getAllIncomes({ userId: loggedInUserId, wise: "year", year: currentYear }));
+  // sum field values
+  const sumBy = (items, key) => {
+    if (!items || !items.length) return 0;
+    return items.reduce((total, item) => total + (item[key] || 0), 0);
+  };
+
+  // fetch all data
+  const fetchData = () => {
+    if (!loggedInUserId) return;
+    dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year", customWeakDate: custDate }));
+    dispatch(getAllIncomes({ userId: loggedInUserId, wise: "year", customWeakDate: custDate }));
     dispatch(getAllInvestments({ userId: loggedInUserId, year: currentYear }));
     dispatch(getAllLiabilities({ userId: loggedInUserId, year: currentYear }));
-
-
   };
 
   useEffect(() => {
-    init();
+    fetchData();
   }, [dispatch, loggedInUserId, yearOffset]);
 
-  const totalOf = (items, key) => {
-    if (!items || !items.length) return 0;
-    return items
-      .reduce((total, item) => total + (item[key] || 0), 0)
-      .toFixed(2);
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const months = [
+  const months = useMemo(() => [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
-  ];
+  ], []);
 
-  const data = useMemo(() => {
+  const chartData = useMemo(() => {
     const getMonthlyTotal = (items, key, dateField) => {
       if (!items || !items.length) return {};
       return items.reduce((acc, item) => {
@@ -91,57 +75,49 @@ const Dashboard = () => {
     }));
   }, [incomes, expenses, months]);
 
-  const calculatePerformanceRating = (incomes, expenses) => {
-    const totalIncome = incomes.reduce((t, i) => t + (i.income_amount || 0), 0);
-    const totalExpense = expenses.reduce((t, e) => t + (e.amount || 0), 0);
+  const calculatePerformanceRating = (incomes, expenses, liabilities) => {
+    const totalIncome = sumBy(incomes, "income_amount");
+    const totalExpense = sumBy(expenses, "amount");
+    const totalLiabilities = sumBy(liabilities, "remaining_amount");
 
+    if (totalIncome === 0) return 1;
+    if (totalLiabilities > totalIncome) return 0;
 
-    if (totalIncome === 0) return 1; // no income, base rating
-
-    const savings = totalIncome - totalExpense;
-
-    // ratio of savings to income (in %)
-    const savingPercent = (savings / totalIncome) * 100;
-
-
-    if (savingPercent >= 40) return 5; // excellent
-    if (savingPercent >= 25) return 4; // good
-    if (savingPercent >= 10) return 3; // average
-    if (savingPercent >= 0) return 2; // poor
-    return 1; // negative savings (overspending)
+    const savingPercent = ((totalIncome - totalExpense - totalLiabilities) / totalIncome) * 100;
+    if (savingPercent >= 40) return 5;
+    if (savingPercent >= 25) return 4;
+    if (savingPercent >= 10) return 3;
+    if (savingPercent >= 0) return 2;
+    return 1;
   };
-  const performanceRating = useMemo(() =>
-    calculatePerformanceRating(incomes, expenses),
-    [incomes, expenses]
+
+  const performanceRating = useMemo(
+    () => calculatePerformanceRating(incomes, expenses, liabilities),
+    [incomes, expenses, liabilities]
   );
-  const handleRefresh = () => {
+
+  const refreshData = () => {
     if (!loggedInUserId) return;
-    refreshData({
-      loggedInUserId,
-      dispatch,
-      action: getAllLiabilities,
-      params: { year: currentYear },
-      resetOffset: setYearOffset,
-    });
+    //reset to currrent year
 
+    setYearOffset(0);
+    fetchData();
   };
-
   return (
-    <Main mainClassName="p-4 ">
-
-
-      <div className="flex  justify-between">
+    <Main mainClassName="p-4">
+      <div className="flex justify-between">
         <h2 className="card-title">Dashboard</h2>
-        <h3 className="text-xl font-bold flex items-center gap-1">
-          <BiCalendar /> {dayjs().format("YYYY")}
-        </h3>
+        {/* <h3 className="text-xl font-bold flex items-center gap-1">
+          <BiCalendar /> {currentYear}
+        </h3> */}
       </div>
+
       <PrevNextButton
         customLabelDate={new Date(new Date().getFullYear() + yearOffset, 0, 1)}
         offset={yearOffset}
         setPrevOffset={() => setYearOffset((prev) => prev - 1)}
         setNextOffset={() => setYearOffset((prev) => prev + 1)}
-        refreshData={handleRefresh}
+        refreshData={refreshData}
         getLabel={(date) => date.getFullYear()}
         disableNext={false}
       />
@@ -149,126 +125,109 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-4">
         <StatCard
           cardTitle="Total Income"
-
           loading={incomesLoading}
-          cardContent={
-            <span className="text-success text-2xl font-bold ">
-              {formatCurrency(
-                totalOf(incomes, "income_amount"),
-                userCurrency
-              )}
-            </span>
-          }
+          cardContent={<span className="text-success text-2xl font-bold">{formatCurrency(sumBy(incomes, "income_amount"), userCurrency)}</span>}
         />
+
         <StatCard
           cardTitle="Total Expense"
           loading={expensesLoading}
-          cardContent={
-            <span className="text-error text-2xl font-bold ">
-              {formatCurrency(totalOf(expenses, "amount"), userCurrency)}
-            </span>
-          }
+          cardContent={<span className="text-error text-2xl font-bold">{formatCurrency(sumBy(expenses, "amount"), userCurrency)}</span>}
         />
+
         <StatCard
           cardTitle="Total Savings"
-          loading={incomesLoading || expensesLoading}
+          loading={expensesLoading || incomesLoading}
           cardContent={
-            <span className={` text-2xl font-bold ${totalOf(incomes, "income_amount") -
-              totalOf(expenses, "amount") > 0 ? "text-success" : "text-error"}`}>
-              {formatCurrency(
-                totalOf(incomes, "income_amount") -
-                totalOf(expenses, "amount"),
-                userCurrency
-              )}
-
+            <span className={`text-2xl font-bold ${sumBy(incomes, "income_amount") - sumBy(expenses, "amount") > 0 ? "text-success" : "text-error"}`}>
+              {formatCurrency(sumBy(incomes, "income_amount") - sumBy(expenses, "amount"), userCurrency)}
             </span>
           }
         />
+
         <StatCard
           cardTitle="Total Liabilities (Debt)"
           loading={liabilitiesLoading}
-          cardContent={
-            <span className="text-warning text-2xl font-bold ">
-              {formatCurrency(
-                totalOf(liabilities, "remaining_amount"),
-                userCurrency
-              )}
-            </span>
-          }
+          cardContent={<span className="text-warning text-2xl font-bold">{formatCurrency(sumBy(liabilities, "remaining_amount"), userCurrency)}</span>}
         />
+
         <StatCard
           cardTitle="Total Investments"
-          additionalClass=""
           loading={investmentsLoading}
-          cardContent={
-            
-            <span className="text-primaryc text-2xl font-bold ">
-              {formatCurrency(
-                totalOf(investments, "invested_amount"),
-                userCurrency
-              )}
-            </span>
-          }
+          cardContent={<span className="text-primaryc text-2xl font-bold">{formatCurrency(sumBy(investments, "invested_amount"), userCurrency)}</span>}
         />
-        <StatCard
-          cardTitle="Your Performance"
-          loading={expensesLoading || incomesLoading}
-          additionalClass=""
-          cardContent={
-            <>
-              <div className="tooltip   tooltip-bottom tooltip-primary flex items-center gap-2" data-tip="Performance based on your income and expenses">
-                <div className="rating   ">
-                  {[1, 2, 3, 4, 5].map((num) => (
-                    <input
-                      key={num}
-                      type="radio"
-                      name="rating"
-                      className="mask mask-star-2 bg-orange-400"
-                      checked={num === performanceRating}
-                      readOnly
-                    />
-                  ))}
-                </div>
-                <div className="flex flex-col gap-1 ">
-                  <p className={`text-sm  ${performanceRating >= 4 ? "text-success" : performanceRating === 3 ? "text-warning" : performanceRating === 2 ? "text-error" : "text-info"}`}>
-                    {performanceRating >= 4
-                      ? "Excellent money management!"
-                      : performanceRating === 3
-                        ? "Average — room to improve."
-                        : performanceRating === 2
-                          ? "Watch your expenses!"
-                          : "Overspending detected!"}
-                  </p>
-                  <PerformanceSuggestions performanceRating={performanceRating} />
-                </div>
-              </div>
-            </>
-          }
-        />
-      </div>
 
+{(incomes.length || expenses.length || liabilities.length) >0 ? (
+  <StatCard
+    cardTitle="Your Performance"
+    loading={expensesLoading || incomesLoading || liabilitiesLoading}
+    cardContent={
+      <div className="tooltip tooltip-bottom tooltip-primary flex items-center gap-2" data-tip="Performance based on your income, expenses, and liabilities">
+        <div className="rating">
+          {[1, 2, 3, 4, 5].map((num) => (
+            <input
+              key={num}
+              type="radio"
+              name="rating"
+              className="mask mask-star-2 bg-orange-400"
+              checked={num === performanceRating}
+              readOnly
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-1">
+          <p
+            className={`text-sm ${
+              performanceRating >= 4
+                ? "text-success"
+                : performanceRating === 3
+                ? "text-warning"
+                : performanceRating === 2
+                ? "text-error"
+                : performanceRating === 0
+                ? "text-info"
+                : "text-info"
+            }`}
+          >
+            {performanceRating >= 4
+              ? "Excellent money management!"
+              : performanceRating === 3
+              ? "Average — room to improve."
+              : performanceRating === 2
+              ? "Watch your expenses!"
+              : performanceRating === 0
+              ? "You are in debt!"
+              : "Overspending detected!"}
+          </p>
+          <PerformanceSuggestions performanceRating={performanceRating} />
+        </div>
+      </div>
+    }
+  />
+):  <StatCard
+cardTitle="Your Performance"
+loading={investmentsLoading}
+cardContent={<p>No data available</p>}
+/>}
+
+      </div>
 
       <div className="card shadow-lg bg-base-200 mt-3 p-3">
-        {
-          expensesLoading || incomesLoading ? (
-            <ChartSkeleton containerHeight={chartHeight} />
-          ) : (
-            <ResponsiveContainer width="100%" height={chartHeight}>
-              <BarChart data={data}  >
-                {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                <XAxis dataKey="month" />
-                <YAxis />
-                <Tooltip content={<CustomCommonTooltipForChart />} />
-                <Legend />
-                <Bar dataKey="income_amount" name="Income" fill="green" />
-                <Bar dataKey="amount" name="Expense" fill="red" />
-              </BarChart>
-            </ResponsiveContainer>
-          )
-        }
+        {expensesLoading || incomesLoading ? (
+          <ChartSkeleton containerHeight={400} />
+        ) : (
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={chartData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip content={<CustomCommonTooltipForChart />} />
+              <Legend />
+              <Bar dataKey="income_amount" name="Income" fill="green" />
+              <Bar dataKey="amount" name="Expense" fill="red" />
+            </BarChart>
+          </ResponsiveContainer>
+        )}
       </div>
-
-
     </Main>
   );
 };

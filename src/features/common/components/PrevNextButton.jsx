@@ -57,7 +57,7 @@ const PrevNextButton = ({
         </div>
         <div
           className="tooltip tooltip-info tooltip-bottom"
-          data-tip={`Refresh ${label}`}
+          data-tip={`Refresh `}
         >
           <button
             // title={`Refresh ${label}`}
