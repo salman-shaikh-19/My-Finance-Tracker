@@ -50,6 +50,7 @@ const Dashboard = () => {
       .toFixed(2);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const months = [
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
@@ -74,23 +75,22 @@ const Dashboard = () => {
       income_amount: incomeMonthly[month] || 0,
       amount: expenseMonthly[month] || 0,
     }));
-  }, [incomes, expenses]);
+  }, [incomes, expenses, months]);
 
 
 
   return (
     <Main>
-      <div className="text-center flex flex-col items-center justify-center gap-4">
-        <div className="card w-full bg-base-100 shadow-xl">
-          <div className="card-body">
-            <div className="flex justify-between">
+   
+        
+            <div className="flex  justify-between">
               <h2 className="card-title">Dashboard</h2>
               <h3 className="text-xl font-bold flex items-center gap-1">
                 <BiCalendar /> {dayjs().format("YYYY")}
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mt-4">
               <TotalOfCard
                 cardTitle="Total Income"
                 loading={incomesLoading}
@@ -153,8 +153,8 @@ const Dashboard = () => {
             <div>
               {/* display income vs expense data in bar chart with line  chart */}
             </div>
-              <div className="card shadow-lg bg-base-300 p-3">
-                <ResponsiveContainer width="100%" className="w-full" height={300}>
+              <div className="card shadow-lg bg-base-200 mt-3 p-3">
+                <ResponsiveContainer  width="100%" height={300}>
                   <BarChart data={data}>
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis dataKey="month" />
@@ -166,9 +166,8 @@ const Dashboard = () => {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-          </div>
-        </div>
-      </div>
+       
+       
     </Main>
   );
 };
