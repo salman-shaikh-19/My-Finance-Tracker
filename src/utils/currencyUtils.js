@@ -8,6 +8,7 @@ export const currencySymbols = [
   
 ];
 // format amount with symbol
+
 export function formatCurrency(amount=0, currency = "INR") {
 
   const currencyObj = currencySymbols.find((c) => c.code === currency);

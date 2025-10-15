@@ -8,24 +8,44 @@ import isoWeek from "dayjs/plugin/isoWeek";
 dayjs.extend(isoWeek);
 export const getAllIncomes = createAsyncThunk(
   "income/getAllIncomes",
-  async ({ userId, customWeakDate }, { rejectWithValue }) => {
+  async ({ userId, customWeakDate,wise='week' }, { rejectWithValue }) => {
     try {
-      const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
-      const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
-      const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
-
-      const { data, error } = await supabase
-        .from("user_incomes")
-        .select("*")
-        .eq('user_id',userId)
-         .gte("received_on", startOfWeek)
-        .lte("received_on", endOfWeek)
-        // .order("id", { ascending: false });
-         .order("created_at", { ascending: false });
-   
-
-      if (error) throw error;
-      return data; // return the fetched data
+      if(wise==='week'){
+        
+        const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
+        const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
+        const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
+  
+        const { data, error } = await supabase
+          .from("user_incomes")
+          .select("*")
+          .eq('user_id',userId)
+           .gte("received_on", startOfWeek)
+          .lte("received_on", endOfWeek)
+          // .order("id", { ascending: false });
+           .order("created_at", { ascending: false });
+     
+  
+        if (error) throw error;
+        return data; // return the fetched data
+      }else if(wise==='year'){
+        const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
+        const startOfYear = custDate.startOf("year").format("YYYY-MM-DD");
+        const endOfYear = custDate.endOf("year").format("YYYY-MM-DD");
+        const { data, error } = await supabase
+          .from("user_incomes")
+          .select("*")
+          .eq('user_id',userId)
+           .gte("received_on", startOfYear)
+          .lte("received_on", endOfYear)
+          // .order("id", { ascending: false });
+           .order("created_at", { ascending: false });
+     
+  
+        if (error) throw error;
+        return data; // return the fetched data
+        
+      }
     } catch (err) {
       return rejectWithValue(err.message);
     }

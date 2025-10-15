@@ -52,11 +52,11 @@ function App() {
       }
 
       //disbale right click and prevent duplicate toasts
-      document.oncontextmenu = function (e) {
-        e.preventDefault();
-        toast.warning("Right click is disabled!");
-        return false;
-      };
+      // document.oncontextmenu = function (e) {
+      //   e.preventDefault();
+      //   toast.warning("Right click is disabled!");
+      //   return false;
+      // };
 
       if (e.ctrlKey && e.key === "u") {
         toast.warning("Viewing page source is disabled!");

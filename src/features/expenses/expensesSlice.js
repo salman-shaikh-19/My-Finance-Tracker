@@ -6,29 +6,49 @@ import isoWeek from "dayjs/plugin/isoWeek";
 dayjs.extend(isoWeek);
 export const getAllExpenses = createAsyncThunk(
   "expenses/getAllExpenses",
-  async ({ userId, customWeakDate }, { rejectWithValue }) => {
+  async ({ userId, customWeakDate,wise='week' }, { rejectWithValue }) => {
     try {
-      const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
-      const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
-      const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
-
-      const { data, error } = await supabase
-        .from("user_expenses")
-        .select("*")
-        .eq("user_id", userId)
-        .gte("expense_date", startOfWeek)
-        .lte("expense_date", endOfWeek)
-        // .order("id", { ascending: false });
-        .order("created_at", { ascending: false });
-    
-
-      if (error) throw error;
-      return data; // return the fetched data
+      if(wise==='week'){
+          // console.log('week');
+          
+        const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
+        const startOfWeek = custDate.startOf("isoWeek").format("YYYY-MM-DD");
+        const endOfWeek = custDate.endOf("isoWeek").format("YYYY-MM-DD");
+        const { data, error } = await supabase
+          .from("user_expenses")
+          .select("*")
+          .eq("user_id", userId)
+          .gte("expense_date", startOfWeek)
+          .lte("expense_date", endOfWeek)
+          // .order("id", { ascending: false });
+          .order("created_at", { ascending: false });
+          if (error) throw error;
+          return data; // return the fetched data
+      }else if(wise==='year'){
+ 
+        
+        const custDate = customWeakDate ? dayjs(customWeakDate) : dayjs();
+        const startOfYear = custDate.startOf("year").format("YYYY-MM-DD");
+        const endOfYear = custDate.endOf("year").format("YYYY-MM-DD");
+        const { data, error } = await supabase
+          .from("user_expenses")
+          .select("*")
+          .eq("user_id", userId)
+          .gte("expense_date", startOfYear)
+          .lte("expense_date", endOfYear)
+          // .order("id", { ascending: false });
+          .order("created_at", { ascending: false }); 
+          if (error) throw error;
+          return data; // return the fetched data
+      }
+     
     } catch (err) {
       return rejectWithValue(err.message);
     }
   }
 );
+
+
 export const addExpense = createAsyncThunk(
   "expenses/addExpense",
   async (
