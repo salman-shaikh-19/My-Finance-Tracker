@@ -201,6 +201,7 @@ const Dashboard = () => {
           additionalClass=""
           loading={investmentsLoading}
           cardContent={
+            
             <span className="text-primaryc text-2xl font-bold ">
               {formatCurrency(
                 totalOf(investments, "invested_amount"),
