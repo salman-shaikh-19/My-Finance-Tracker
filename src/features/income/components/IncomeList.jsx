@@ -10,9 +10,11 @@ import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import { confirmDelete } from "../../../utils/confirmDelete";
 import NoDataFound from "../../common/components/NoDataFound";
 import isRecent from "../../../utils/isRecent";
+import CardSkeleton from "../../common/components/CardSkeleton";
 
 const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
+  const { loading } = useSelector((state) => state.income);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -60,8 +62,8 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
       <div className="divider">Total Incomes by Category</div>
 
       {/* <div className="flex flex-wrap justify-around sm:justify-normal md:justify-normal lg:justify-around xl:justify-evenly gap-2 mb-4"> */}
-     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-1">
-      
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6 gap-1">
+
         {incomeCategories.map((category, i) => {
           const Icon = category.icon;
 
@@ -73,14 +75,14 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
               Icon={Icon}
               totalAmount={totalAmount}
               userCurrency={userCurrency}
-             
+              loading={loading}
               bg={category.bg}
             />
           );
         })}
       </div>
 
-      <div className="divider" title={`Total ${incomes.length ? 'incomes '+incomes.length : 'income '+incomes.length}`}>Incomes ({incomes.length})</div>
+      <div className="divider" title={`Total ${incomes.length ? 'incomes ' + incomes.length : 'income ' + incomes.length}`}>Incomes ({incomes.length})</div>
       {incomes.length ? (
         <CustomInfiniteScroll
           pageSize={20}
@@ -90,41 +92,45 @@ const IncomeList = ({ incomes, incomeTotalAmountByCategory }) => {
         >
           {(items) => (
             // <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
-                        <div className="container mx-auto p-2">
+            <div className="container mx-auto p-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
-            {items.map((income) => {
-                const category = getCategoryByName(
-                  incomeCategories,
-                  income.income_category
-                );
-                const Icon = category.icon;
-             
+                {items.map((income) => {
+                  const category = getCategoryByName(
+                    incomeCategories,
+                    income.income_category
+                  );
+                  const Icon = category.icon;
 
-                return (
-                  <IncomeCard
-                    key={income.id}
-                    incomeId={income.id}
-                    category={income.income_category}
-                    amount={income.income_amount}
-                    date={income.received_on}
-                    isNew={isRecent(income.created_at)}
-                    note={income.income_note}
-                    // userCurrency={userCurrency}
-                    bgColor={category.bg}
-                    deleteIncome={() => handleDelete(income.id)}
-                    editModelRef={editModelRef}
-                    editIncomeHandler={editIncomeHandler}
-                    Icon={Icon}
-                 
-                  />
-                );
-              })}
-              </div> 
+
+                  return (
+                    <>
+                      {loading ? <CardSkeleton key={income.id} additionalClass="w-half" /> : (
+                        <IncomeCard
+                          key={income.id}
+                          incomeId={income.id}
+                          category={income.income_category}
+                          amount={income.income_amount}
+                          date={income.received_on}
+                          isNew={isRecent(income.created_at)}
+                          note={income.income_note}
+                          // userCurrency={userCurrency}
+                          bgColor={category.bg}
+                          deleteIncome={() => handleDelete(income.id)}
+                          editModelRef={editModelRef}
+                          editIncomeHandler={editIncomeHandler}
+                          Icon={Icon}
+
+                        />
+                      )}
+                    </>
+                  );
+                })}
+              </div>
             </div>
           )}
         </CustomInfiniteScroll>
       ) : (
-       <NoDataFound NoDataFoundFor="income" />
+        <NoDataFound NoDataFoundFor="income" />
       )}
     </div>
   );

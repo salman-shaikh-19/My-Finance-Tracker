@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 // import { commonDate } from "../../../utils/dateUtils";
 import {
@@ -14,10 +14,12 @@ import LiabilityCard from "./LiabilityCard";
 import LiabilityChart from "./LiabilityChart";
 import NoDataFound from "../../common/components/NoDataFound";
 import isRecent from "../../../utils/isRecent";
+import CardSkeleton from "../../common/components/CardSkeleton";
 // import { useRealtimeTable } from "../../../services/useRealtimeTable";
 
 const LiabilityList = ({ liabilites }) => {
   // const { userCurrency } = useSelector((state) => state.common);
+  const { loading } = useSelector((state) => state.liabilities);
   const editModelRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -105,7 +107,9 @@ const LiabilityList = ({ liabilites }) => {
                     // const PaymentIcon = paymentMethod.icon;
 
                     return (
-                      <LiabilityCard
+                      <>
+                       {loading ? <CardSkeleton key={item.id} additionalClass="w-half" /> : (
+                       <LiabilityCard
                         key={item.id}
                         liabilityId={item.id}
                         deleteExpense={() => handleDelete(item.id)}
@@ -127,6 +131,8 @@ const LiabilityList = ({ liabilites }) => {
                         editLiabilityHandler={editLiabilityHandler}
                         // PaymentIcon={PaymentIcon}
                       />
+                      )}
+                      </>
                     );
                   })}
                 </div>

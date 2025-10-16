@@ -17,8 +17,11 @@ import { confirmDelete } from "../../../utils/confirmDelete";
 import { handleFormSubmit } from "../../../utils/handleFormSubmit";
 import NoDataFound from "../../common/components/NoDataFound";
 import isRecent from "../../../utils/isRecent";
+import CardSkeleton from "../../common/components/CardSkeleton";
+
 const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
   const { userCurrency } = useSelector((state) => state.common);
+  const {loading} = useSelector((state) => state.expenses);
   const editModelRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -67,7 +70,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
         pb-20  
       "
       >
-        <ExpenseChart />
+       <ExpenseChart />
         <div className="divider text-lg font-semibold">
           Total Expenses by Category
         </div>
@@ -86,6 +89,7 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                 Icon={Icon}
                 userCurrency={userCurrency}
                 bg={category.bg}
+                loading={loading}
               />
             );
           })}
@@ -125,7 +129,9 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                     const PaymentIcon = paymentMethod.icon;
 
                     return (
-                      <ExpenseCard
+                      <>
+                      {loading ? <CardSkeleton key={item.id} additionalClass="w-half" /> : (
+                        <ExpenseCard
                         key={item.id}
                         expenseId={item.id}
                         deleteExpense={() => handleDelete(item.id)}
@@ -138,10 +144,13 @@ const ExpensesList = ({ expenses, expenseTotalAmountByCategory }) => {
                         isNew={isRecent(item.created_at)}
                         note={item.expense_note}
                         // userCurrency={userCurrency}
+                        loading={loading}
                         editModelRef={editModelRef}
                         editExpenseHandler={editExpenseHandler}
                         PaymentIcon={PaymentIcon}
                       />
+                    )}
+                  </>
                     );
                   })}
                 </div>

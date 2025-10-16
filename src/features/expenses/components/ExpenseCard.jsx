@@ -8,6 +8,7 @@ import ExpenseForm from "./ExpenseForm";
 import { commonDate } from "../../../utils/dateUtils";
 import { useSelector } from "react-redux";
 
+
 const ExpenseCard = ({
   expenseId,
 
@@ -24,6 +25,7 @@ const ExpenseCard = ({
   editExpenseHandler,
   Icon = BiHome,
   PaymentIcon = BiMoney,
+ 
 }) => {
   const [showNote, setShowNote] = useState(false);
   const { userCurrency } = useSelector((state) => state.common);
@@ -33,7 +35,9 @@ const ExpenseCard = ({
   //   ? dayjs().diff(dayjs(createdAt), "minute") <= 5
   //   : false;
  
+ 
   return (
+   
     <div
       className={`card ${
         !showNote ? " cursor-pointer " : ""
@@ -159,6 +163,7 @@ const ExpenseCard = ({
         </div>
       )}
     </div>
+   
   );
 };
 
@@ -169,6 +174,7 @@ export default React.memo(ExpenseCard, (prevProps, nextProps) => {
   // }
   return (
     prevProps.category === nextProps.category &&
+    // prevProps.loading === nextProps.loading &&
     prevProps.amount === nextProps.amount &&
     prevProps.type === nextProps.type &&
     prevProps.date === nextProps.date &&

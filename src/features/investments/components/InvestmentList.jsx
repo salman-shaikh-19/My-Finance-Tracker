@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CustomInfiniteScroll from "../../common/components/CustomInfiniteScroll";
 
 import {
@@ -16,8 +16,10 @@ import Loader from "../../common/components/Loader";
 import ExportButtons from '../../common/components/ExportButtons'
 import isRecent from "../../../utils/isRecent";
 // import InvestmentChart from "./InvestmentChart";
+import CardSkeleton from "../../common/components/CardSkeleton";
 const InvestmentChart = lazy(() => import("./InvestmentChart"));
 const InvestmentList = ({ investments }) => {
+  const { loading } = useSelector((state) => state.investments);
   const editModelRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -96,6 +98,8 @@ const InvestmentList = ({ investments }) => {
                   const Icon = category.icon;
 
                   return (
+                 <>
+                    {loading ? <CardSkeleton key={investment.id} additionalClass="w-half" /> : (
                     <InvestmentCard
                       key={investment.id}
                       investmentId={investment.id}
@@ -112,7 +116,10 @@ const InvestmentList = ({ investments }) => {
                       editInvestmentHandler={editInvestmentHandler}
                       Icon={Icon}
                     />
-                  );
+                  )}
+                 </>
+                 
+                  )
                 })}
               </div>
             </div>
