@@ -155,7 +155,7 @@ const Dashboard = () => {
     <Main mainClassName="p-4">
       <div className="flex justify-between items-center">
         <h2 className="card-title">Dashboard</h2>
-        <h3 className=" font-bold ">
+        <h3 className=" text-sm ">
           Your Expense Limit: {expenseLimit}
         </h3>
       </div>
