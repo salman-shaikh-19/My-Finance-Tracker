@@ -153,10 +153,17 @@ const Dashboard = () => {
   };
   return (
     <Main mainClassName="p-4">
-      <div className="flex justify-between items-center">
+          <div className=" overflow-auto 
+        h-[calc(100vh-4rem)]      /* full viewport minus header height */
+        sm:h-[calc(100vh-5rem)]   /* adjust for small screen screens if nav height diffrernt */
+        md:h-[calc(100vh-0)]      /* full height for desktop if no bottom nav */
+        scrollbar-hide 
+        mx-0 
+        pb-20">
+      <div className="flex justify-between items-center   ">
         <h2 className="card-title">Dashboard</h2>
         <h3 className=" text-sm ">
-          Your Daily Expense Limit: {expenseLimit}
+           Daily Expense Limit: {expenseLimit}
         </h3>
       </div>
 
@@ -170,7 +177,9 @@ const Dashboard = () => {
         disableNext={false}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 gap-2 mt-4">
+
+ 
+      <div className="grid grid-cols-1 md:grid-cols-auto lg:grid-cols-3 gap-2 mt-4 ">
         <StatCard
           cardTitle="Total Income"
           loading={incomesLoading}
@@ -321,7 +330,7 @@ const Dashboard = () => {
           loading={expensesLoading || incomesLoading || liabilitiesLoading || investmentsLoading}
         />
       </div>
-
+   </div>
     </Main>
   );
 };
