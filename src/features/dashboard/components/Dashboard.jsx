@@ -156,7 +156,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center">
         <h2 className="card-title">Dashboard</h2>
         <h3 className=" text-sm ">
-          Your Expense Limit: {expenseLimit}
+          Your Daily Expense Limit: {expenseLimit}
         </h3>
       </div>
 
