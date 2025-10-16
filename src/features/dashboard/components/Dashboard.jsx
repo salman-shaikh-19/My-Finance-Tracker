@@ -25,10 +25,11 @@ import { getAllIncomes } from "../../income/incomeSlice";
 import { getAllInvestments } from "../../investments/investmentsSlice";
 import { getAllLiabilities } from "../../liabilities/liabilitySlice";
 import RecentActivity from "./RecentActivity";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
+  const { loggedInUserId, userCurrency,expenseLimit } = useSelector((state) => state.common);
 
   const { expenses, loading: expensesLoading } = useSelector(
     (state) => state.expenses
@@ -152,11 +153,11 @@ const Dashboard = () => {
   };
   return (
     <Main mainClassName="p-4">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h2 className="card-title">Dashboard</h2>
-        {/* <h3 className="text-xl font-bold flex items-center gap-1">
-          <BiCalendar /> {currentYear}
-        </h3> */}
+        <h3 className=" font-bold ">
+          Your Expense Limit: {expenseLimit}
+        </h3>
       </div>
 
       <PrevNextButton
@@ -288,7 +289,7 @@ const Dashboard = () => {
   <StatCard
     cardTitle="Your Performance"
     loading={investmentsLoading}
-    cardContent={<p>No data available</p>}
+    cardContent={<p className="">No data available</p>}
   />
 )}
 

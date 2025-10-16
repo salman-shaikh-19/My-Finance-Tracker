@@ -216,4 +216,8 @@
 
 # 24 oct 
 - add performance suggestions based on performance rating.
+- layout issue in dashboard fixed.
+- add recent incomes and expenses listing in dashboard.
+- apply skeleton loading in recent incomes and expenses listing.
+
  

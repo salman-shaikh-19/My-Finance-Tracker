@@ -10,7 +10,7 @@ export const commonSlice = createSlice({
     error: null,
     userCurrency:'INR',
     isGetStarted: false,
-    expenseLimit:10000,
+    expenseLimit:10000, // custom user choice expense max limit
     isSidebarOpen:true,
   },
   reducers: {
