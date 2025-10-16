@@ -21,7 +21,7 @@ const PrevNextButton = ({
       () => {
         refreshData?.();
       },
-      500,
+      2000,
       { leading: true, trailing: false }
     )
   );
