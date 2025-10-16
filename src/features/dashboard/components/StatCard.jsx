@@ -6,10 +6,11 @@ const StatCard = ({ cardTitle, cardContent, loading,additionalClass='' }) => {
   return (
     <>
       {loading ? <CardSkeleton additionalClass={additionalClass} /> : (
-        <div className={`card w-full bg-base-200 shadow-lg h-36 ${additionalClass}`}>
+        <div className={`card w-auto bg-base-200 shadow-lg h-auto ${additionalClass}`}>
           <div className="card-body">
             <h2 className="card-title">{cardTitle}</h2>
             {cardContent}
+            
           </div>
         </div>
       )}

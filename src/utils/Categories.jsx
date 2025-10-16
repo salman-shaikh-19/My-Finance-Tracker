@@ -20,18 +20,20 @@ import {
   FaQuestionCircle,
   FaLandmark,
   FaBitcoin,
+  FaUserTie,
+  FaDollarSign,
 } from "react-icons/fa";
 import { BiRestaurant, BiBus, BiHealth, BiBook } from "react-icons/bi";
-import { GiGoldBar, GiMoneyStack, GiShoppingCart } from "react-icons/gi";
+import { GiCoins, GiGoldBar, GiMoneyStack, GiShoppingCart } from "react-icons/gi";
 import { MdOutlineCategory } from "react-icons/md";
-import { FaRegMoneyBill1 } from "react-icons/fa6";
+import { FaRegMoneyBill1, FaShield } from "react-icons/fa6";
 import { TbBuildingBank } from "react-icons/tb";
 
 // expense category
 export const expenseCategories = [
   { name: "Payments", icon: MdOutlinePayments, bg: "bg-primary" },
   { name: "Food", icon: BiRestaurant, bg: "bg-secondary" },
-  // { name: "Transport", icon: BiBus, bg: "bg-accent" },
+  
   { name: "Shopping", icon: GiShoppingCart, bg: "bg-info" },
   { name: "Credit Cards", icon: FaRegCreditCard, bg: "bg-warning" },
   { name: "Health", icon: BiHealth, bg: "bg-error" },
@@ -41,7 +43,6 @@ export const expenseCategories = [
   { name: "Education", icon: BiBook, bg: "bg-indigo-500" },
   { name: "Travel", icon: FaPlane, bg: "bg-pink-500" },
   { name: "Home", icon: FaHome, bg: "bg-emerald-500" },
-  // { name: "Electronics", icon: FaLaptop, bg: "bg-teal-500" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },
 ];
 
@@ -50,6 +51,7 @@ export const incomeCategories = [
   { name: "Bonus", icon: FaHandHoldingUsd, bg: "bg-accent" },
   { name: "Business", icon: FaBriefcase, bg: "bg-warning" },
   { name: "Investments", icon: FaChartLine, bg: "bg-info" },
+  
   { name: "Rental Income", icon: FaPiggyBank, bg: "bg-purple-500" },
   // { name: "Gifts", icon: FaGift, bg: "bg-secondary" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-gray-500" },
@@ -63,6 +65,7 @@ export const investmentCategories = [
   { name: "Cryptocurrency", icon: FaBitcoin, bg: "bg-warning" },
   { name: "Fixed Deposit", icon: TbBuildingBank, bg: "bg-success" },
   { name: "Gold", icon: GiGoldBar, bg: "bg-amber-500" },
+  { name: "Silver", icon: GiCoins, bg: "bg-gray-400" },
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
 ];
 
@@ -70,6 +73,7 @@ export const paymentMethods = [
   { name: "Cash", icon: FaMoneyBillWave, bg: "bg-primary" },
   { name: "Card", icon: FaCreditCard, bg: "bg-secondary" },
   { name: "UPI", icon: FaMobileAlt, bg: "bg-accent" },
+
   { name: "Net Banking", icon: FaUniversity, bg: "bg-green-500" },
   { name: "Wallet", icon: FaWallet, bg: "bg-yellow-500" },
   { name: "Cheque", icon: FaRegFileAlt, bg: "bg-purple-500" },
@@ -84,6 +88,8 @@ export const liabilitesCategories = [
   { name: "Mortgage", icon: FaHome, bg: "bg-accent" },
   { name: "Auto Loan", icon: FaCarAlt, bg: "bg-info" },
   { name: "Student Loan", icon: BiBook, bg: "bg-warning" },
+    { name: "Business Loan", icon: FaUserTie, bg: "bg-info" },
+
   { name: "Other", icon: MdOutlineCategory, bg: "bg-info" },
 ];
 

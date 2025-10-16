@@ -28,7 +28,7 @@ const PerformanceSuggestions = ({ performanceRating }) => {
   }, [performanceRating]);
 
   return (
-    <p className="text-xs text-gray-500 ml-1">
+    <p className="text-xs text-gray-500 break-words w-full mt-1  ">
       {currentSuggestion}
     </p>
   );

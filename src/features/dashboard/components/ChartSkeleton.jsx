@@ -1,23 +1,27 @@
 import React from "react";
 
-const ChartSkeleton = ({ containerHeight = 400 }) => {
-
-  const barValues = [60, 120, 90, 130, 150, 140, 100, 80, 150, 90, 110, 140, 160, 145, 110, 90, 60];
-
-
-  const maxValue = Math.max(...barValues);
-  const barHeights = barValues.map(value => (value / maxValue) * containerHeight);
+const ChartSkeleton = ({ containerHeight = 500, barCount = 12 }) => {
+  const bars = Array.from({ length: barCount });
 
   return (
-    <div className="card w-full bg-base-200 shadow-xl p-4">
-      <div className={`animate-pulse flex items-end gap-2`} style={{ height: `${containerHeight}px` }}>
-        {barHeights.map((height, index) => (
-          <div
-            key={index}
-            className="flex-1 bg-base-100 rounded-b-md"
-            style={{ height: `${height}px` }}
-          ></div>
-        ))}
+    <div
+      className="w-full bg-base-200 rounded-lg p-4"
+      style={{ height: `${containerHeight}px` }}
+    >
+      <div className="h-full flex items-end gap-2">
+        {bars.map((_, idx) => {
+          const height = Math.random() * (containerHeight * 0.7) + containerHeight * 0.1; // random heights
+          return (
+            <div
+              key={idx}
+              className="bg-base-100 rounded-b-md animate-pulse"
+              style={{
+                height: `${height}px`,
+                flex: 1,
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );
