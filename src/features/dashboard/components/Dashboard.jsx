@@ -2,11 +2,19 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import { BiCalendar } from "react-icons/bi";
-import { Bar, BarChart, ResponsiveContainer, Tooltip, Legend, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  Legend,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 import Main from "../../common/layouts/Main";
 import StatCard from "./StatCard";
-import ChartSkeleton from './ChartSkeleton';
+import ChartSkeleton from "./ChartSkeleton";
 import CustomCommonTooltipForChart from "../../common/components/charts/CustomCommonTooltipForChart";
 import PrevNextButton from "../../common/components/PrevNextButton";
 import PerformanceSuggestions from "./PerformanceSuggestions";
@@ -21,10 +29,18 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const { loggedInUserId, userCurrency } = useSelector((state) => state.common);
 
-  const { expenses, loading: expensesLoading } = useSelector((state) => state.expenses);
-  const { incomes, loading: incomesLoading } = useSelector((state) => state.income);
-  const { investments, loading: investmentsLoading } = useSelector((state) => state.investments);
-  const { liabilities, loading: liabilitiesLoading } = useSelector((state) => state.liabilities);
+  const { expenses, loading: expensesLoading } = useSelector(
+    (state) => state.expenses
+  );
+  const { incomes, loading: incomesLoading } = useSelector(
+    (state) => state.income
+  );
+  const { investments, loading: investmentsLoading } = useSelector(
+    (state) => state.investments
+  );
+  const { liabilities, loading: liabilitiesLoading } = useSelector(
+    (state) => state.liabilities
+  );
 
   const [yearOffset, setYearOffset] = useState(0); // 0 = current year
   const currentYear = dayjs().add(yearOffset, "year").year();
@@ -39,8 +55,20 @@ const Dashboard = () => {
   // fetch all data
   const fetchData = () => {
     if (!loggedInUserId) return;
-    dispatch(getAllExpenses({ userId: loggedInUserId, wise: "year", customWeakDate: custDate }));
-    dispatch(getAllIncomes({ userId: loggedInUserId, wise: "year", customWeakDate: custDate }));
+    dispatch(
+      getAllExpenses({
+        userId: loggedInUserId,
+        wise: "year",
+        customWeakDate: custDate,
+      })
+    );
+    dispatch(
+      getAllIncomes({
+        userId: loggedInUserId,
+        wise: "year",
+        customWeakDate: custDate,
+      })
+    );
     dispatch(getAllInvestments({ userId: loggedInUserId, year: currentYear }));
     dispatch(getAllLiabilities({ userId: loggedInUserId, year: currentYear }));
   };
@@ -49,10 +77,23 @@ const Dashboard = () => {
     fetchData();
   }, [dispatch, loggedInUserId, yearOffset]);
 
-  const months = useMemo(() => [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ], []);
+  const months = useMemo(
+    () => [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+    []
+  );
 
   const chartData = useMemo(() => {
     const getMonthlyTotal = (items, key, dateField) => {
@@ -65,7 +106,11 @@ const Dashboard = () => {
       }, {});
     };
 
-    const incomeMonthly = getMonthlyTotal(incomes, "income_amount", "received_on");
+    const incomeMonthly = getMonthlyTotal(
+      incomes,
+      "income_amount",
+      "received_on"
+    );
     const expenseMonthly = getMonthlyTotal(expenses, "amount", "expense_date");
 
     return months.map((month) => ({
@@ -83,7 +128,8 @@ const Dashboard = () => {
     if (totalIncome === 0) return 1;
     if (totalLiabilities > totalIncome) return 0;
 
-    const savingPercent = ((totalIncome - totalExpense - totalLiabilities) / totalIncome) * 100;
+    const savingPercent =
+      ((totalIncome - totalExpense - totalLiabilities) / totalIncome) * 100;
     if (savingPercent >= 40) return 5;
     if (savingPercent >= 25) return 4;
     if (savingPercent >= 10) return 3;
@@ -126,21 +172,38 @@ const Dashboard = () => {
         <StatCard
           cardTitle="Total Income"
           loading={incomesLoading}
-          cardContent={<span className="text-success text-2xl font-bold">{formatCurrency(sumBy(incomes, "income_amount"), userCurrency)}</span>}
+          cardContent={
+            <span className="text-success text-2xl font-bold">
+              {formatCurrency(sumBy(incomes, "income_amount"), userCurrency)}
+            </span>
+          }
         />
 
         <StatCard
           cardTitle="Total Expense"
           loading={expensesLoading}
-          cardContent={<span className="text-error text-2xl font-bold">{formatCurrency(sumBy(expenses, "amount"), userCurrency)}</span>}
+          cardContent={
+            <span className="text-error text-2xl font-bold">
+              {formatCurrency(sumBy(expenses, "amount"), userCurrency)}
+            </span>
+          }
         />
 
         <StatCard
           cardTitle="Total Savings"
           loading={expensesLoading || incomesLoading}
           cardContent={
-            <span className={`text-2xl font-bold ${sumBy(incomes, "income_amount") - sumBy(expenses, "amount") > 0 ? "text-success" : "text-error"}`}>
-              {formatCurrency(sumBy(incomes, "income_amount") - sumBy(expenses, "amount"), userCurrency)}
+            <span
+              className={`text-2xl font-bold ${
+                sumBy(incomes, "income_amount") - sumBy(expenses, "amount") > 0
+                  ? "text-success"
+                  : "text-error"
+              }`}
+            >
+              {formatCurrency(
+                sumBy(incomes, "income_amount") - sumBy(expenses, "amount"),
+                userCurrency
+              )}
             </span>
           }
         />
@@ -148,76 +211,95 @@ const Dashboard = () => {
         <StatCard
           cardTitle="Total Liabilities (Debt)"
           loading={liabilitiesLoading}
-          cardContent={<span className="text-warning text-2xl font-bold">{formatCurrency(sumBy(liabilities, "remaining_amount"), userCurrency)}</span>}
+          cardContent={
+            <span className="text-warning text-2xl font-bold">
+              {formatCurrency(
+                sumBy(liabilities, "remaining_amount"),
+                userCurrency
+              )}
+            </span>
+          }
         />
 
         <StatCard
           cardTitle="Total Investments"
           loading={investmentsLoading}
-          cardContent={<span className="text-primaryc text-2xl font-bold">{formatCurrency(sumBy(investments, "invested_amount"), userCurrency)}</span>}
+          cardContent={
+            <span className="text-primaryc text-2xl font-bold">
+              {formatCurrency(
+                sumBy(investments, "invested_amount"),
+                userCurrency
+              )}
+            </span>
+          }
         />
 
-{(incomes.length || expenses.length || liabilities.length) >0 ? (
-  <StatCard
-    cardTitle="Your Performance"
-    loading={expensesLoading || incomesLoading || liabilitiesLoading}
-    cardContent={
-      <div className="tooltip tooltip-bottom tooltip-primary flex items-center gap-2" data-tip="Performance based on your income, expenses, and liabilities">
-        <div className="rating">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <input
-              key={num}
-              type="radio"
-              name="rating"
-              className="mask mask-star-2 bg-orange-400"
-              checked={num === performanceRating}
-              readOnly
-            />
-          ))}
-        </div>
-        <div className="flex flex-col gap-1">
-          <p
-            className={`text-sm ${
-              performanceRating >= 4
-                ? "text-success"
-                : performanceRating === 3
-                ? "text-warning"
-                : performanceRating === 2
-                ? "text-error"
-                : performanceRating === 0
-                ? "text-info"
-                : "text-info"
-            }`}
-          >
-            {performanceRating >= 4
-              ? "Excellent money management!"
-              : performanceRating === 3
-              ? "Average — room to improve."
-              : performanceRating === 2
-              ? "Watch your expenses!"
-              : performanceRating === 0
-              ? "You are in debt!"
-              : "Overspending detected!"}
-          </p>
-          <PerformanceSuggestions performanceRating={performanceRating} />
-        </div>
-      </div>
-    }
-  />
-):  <StatCard
-cardTitle="Your Performance"
-loading={investmentsLoading}
-cardContent={<p>No data available</p>}
-/>}
-
-      </div>
-
-      <div className="w-full  max-w-full h-[450px] mt-4 p-4 bg-base-100 rounded-lg   shadow-lg">
-   
-        {expensesLoading || incomesLoading ? (
-          <ChartSkeleton containerHeight={400} />
+        {(incomes.length || expenses.length || liabilities.length) > 0 ? (
+          <StatCard
+            cardTitle="Your Performance"
+            loading={expensesLoading || incomesLoading || liabilitiesLoading}
+            cardContent={
+              <div
+                className="tooltip tooltip-bottom tooltip-primary flex items-center gap-2"
+                data-tip="Performance based on your income, expenses, and liabilities"
+              >
+                <div className="rating">
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <input
+                      key={num}
+                      type="radio"
+                      name="rating"
+                      className="mask mask-star-2 bg-orange-400"
+                      checked={num === performanceRating}
+                      readOnly
+                    />
+                  ))}
+                </div>
+                <div className="flex flex-col gap-1">
+                  <p
+                    className={`text-sm ${
+                      performanceRating >= 4
+                        ? "text-success"
+                        : performanceRating === 3
+                        ? "text-warning"
+                        : performanceRating === 2
+                        ? "text-error"
+                        : performanceRating === 0
+                        ? "text-info"
+                        : "text-info"
+                    }`}
+                  >
+                    {performanceRating >= 4
+                      ? "Excellent money management!"
+                      : performanceRating === 3
+                      ? "Average — room to improve."
+                      : performanceRating === 2
+                      ? "Watch your expenses!"
+                      : performanceRating === 0
+                      ? "You are in debt!"
+                      : "Overspending detected!"}
+                  </p>
+                  <PerformanceSuggestions
+                    performanceRating={performanceRating}
+                  />
+                </div>
+              </div>
+            }
+          />
         ) : (
-          <ResponsiveContainer width="100%" height={400}>
+          <StatCard
+            cardTitle="Your Performance"
+            loading={investmentsLoading}
+            cardContent={<p>No data available</p>}
+          />
+        )}
+      </div>
+
+      <div className="w-full  max-w-full h-[500px] mt-4 p-4 bg-base-100 rounded-lg   shadow-lg">
+        {expensesLoading || incomesLoading ? (
+          <ChartSkeleton containerHeight={500} />
+        ) : (
+          <ResponsiveContainer width="100%" height={500}>
             <BarChart data={chartData}>
               <XAxis dataKey="month" />
               <YAxis />
