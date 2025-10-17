@@ -69,7 +69,9 @@ const PrevNextButton = ({
         </div>
       </div>
 
-      <span className="font-semibold">{label}</span>
+      <span className="font-semibold">
+        {label}
+      </span>
     </div>
   );
 };

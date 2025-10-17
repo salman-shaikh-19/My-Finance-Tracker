@@ -70,7 +70,7 @@ const LiabilityList = ({ liabilites }) => {
         mx-0 
         pb-20   "
       >
-        <LiabilityChart />
+     <LiabilityChart />
         <div
           className="divider"
           title={`Total ${

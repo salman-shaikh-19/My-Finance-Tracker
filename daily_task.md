@@ -150,52 +150,7 @@
 - apply tooltip on needed place in app(daisyui tooltip).
 - prevent access if user goes offline.
 - optimize code.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- office event
 
 
 # 17 oct
@@ -204,6 +159,29 @@
 - fixed design and layout issue after changing to sidebar in whole app.
 - create new expense record on liabilitie pay.
 - fixed validation issues in liabilities form.
+- office event.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 23 oct
