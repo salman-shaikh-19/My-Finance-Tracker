@@ -33,7 +33,7 @@ const LiabilityList = ({ liabilites }) => {
   // console.log(userCurrency);
   const editLiabilityHandler = (values, { resetForm, setSubmitting }) => {
     const { id } = values;
-    console.log(id);
+    // console.log(id);
 
     handleFormSubmit({
       action: (payload) => dispatch(updatedLiability(payload)),
