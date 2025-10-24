@@ -176,7 +176,7 @@ const SettingsMenu = ({
             <Link
             onClick={handleResetSettings}
            
-            className="btn btn-sm mt-2 w-full"
+            className="btn btn-accent btn-sm mt-2 w-full"
             >Reset Settings</Link>
           <button
             onClick={() => handleClickItem(handleLogout)}
