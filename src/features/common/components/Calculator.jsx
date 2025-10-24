@@ -70,7 +70,7 @@ const Calculator = () => {
       
 
       {/* display */}
-      <div className="bg-base-200 text-right p-3 rounded-lg text-lg font-mono h-20 flex flex-col justify-center shadow-inner overflow-x-auto">
+      <div className="bg-base-200 text-right p-3 rounded-lg text-lg font-mono h-22 resize-y flex flex-col justify-center shadow-inner overflow-x-auto">
         <span className="text-gray-500 text-sm break-words ">{input || "0"}</span>
         {result && <span className="font-bold text-xl text-neutral break-words">{result}</span>}
       </div>
