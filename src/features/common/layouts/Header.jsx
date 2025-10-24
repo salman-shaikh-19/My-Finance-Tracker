@@ -269,7 +269,7 @@ const HeaderWithSidebar = () => {
       {isCalculatorOpen && (
         <>
          <Rnd
-     style={{ zIndex: 9999,touchAction: "none" }}
+     style={{ zIndex: 9999,touchAction: "manipulation" }}
 
      defaultSize={{ width: 320,     height: "auto",}}
      enableResizing={true}
