@@ -8,6 +8,7 @@ import { TbDivide, TbPercentage } from "react-icons/tb";
 import { clearCalculator, setInput, setJustCalculated, setResult } from "../commonSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const Calculator = () => {
   // const [input, setInput] = useState("");
   // const [result, setResult] = useState("");
@@ -64,6 +65,7 @@ const Calculator = () => {
   };
 
   return (
+   
     <div className="p-5 bg-base-100 rounded-2xl shadow-lg w-full   border border-base-200 scrollbar-hide   overflow-auto">
       
 
@@ -125,6 +127,7 @@ const Calculator = () => {
         </button>
       </div>
     </div>
+
   );
 };
 

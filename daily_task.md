@@ -196,3 +196,4 @@
 
  # 27 oct 
  - add performance suggestions based on performance rating.
+ - make common calculator and implemented in app.

@@ -151,6 +151,7 @@ import SettingsMenu from "./SettingsMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsCalculatorOpen, setIsSidebarOpen } from "../commonSlice";
 import Calculator from "../components/Calculator";
+import { Rnd } from "react-rnd";
 
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
@@ -267,9 +268,23 @@ const HeaderWithSidebar = () => {
       </aside>
       {isCalculatorOpen && (
         <>
-          <div className="fixed top-20 right-2 transition-all duration-300 ease-in-out   flex items-center justify-center z-50">
+         <Rnd
+     style={{ zIndex: 9999 }}
+
+     defaultSize={{ width: 320,     height: "auto",}}
+     enableResizing={true}
+     enableDragging={true}
+     bounds="window"
+    //  position={{ x:window.innerWidth - 250 - 20, y: 30 }}
+     default={{ x:window.innerWidth - 250 - 20, y: 30 }}
+      
+
+    >
+       
             <Calculator />
-          </div>
+      
+
+    </Rnd>
         </>
       )}
       <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
