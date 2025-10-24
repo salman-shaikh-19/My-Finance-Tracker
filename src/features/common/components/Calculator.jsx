@@ -63,7 +63,7 @@ const Calculator = () => {
       dispatch(setJustCalculated(true));
     }
   };
-
+ 
   return (
    
     <div className="p-5 bg-base-100 rounded-2xl shadow-lg w-full   border border-base-200 scrollbar-hide   overflow-auto">
