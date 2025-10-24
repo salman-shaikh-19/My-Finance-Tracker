@@ -93,7 +93,7 @@ const LiabilityList = ({ liabilites }) => {
             {(items) => (
               // <div className="flex flex-wrap gap-1 lg:pl-4 justify-center sm:justify-start">
               <div className="container mx-auto p-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                   {items.map((item) => {
                     const category = getCategoryByName(
                       liabilitesCategories,

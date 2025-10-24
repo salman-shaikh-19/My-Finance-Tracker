@@ -21,7 +21,7 @@ const RecentActivity = ({ expenses, incomes, userCurrency, loading }) => {
     .slice(0, 10);
 
   return (
-    <div className="w-full h-[500px] p-4 bg-base-100 rounded-lg shadow-lg overflow-auto lg:col-span-1  scrollbar-hide">
+    <div className="w-full h-[500px]  p-4 bg-base-100 rounded-lg shadow-lg overflow-auto lg:col-span-1  scrollbar-hide">
       {loading ? (
         <ul className="space-y-2">
           <div className="h-4 w-50 bg-base-200 rounded mb-5"></div>

@@ -143,18 +143,19 @@ import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { BiCalculator, BiMenu, BiPlusCircle } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 
 import HeaderNavMobile from "../components/HeaderNavMobile";
 // import HeaderNav from "../components/HeaderNav";
 import SettingsMenu from "./SettingsMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsSidebarOpen } from "../commonSlice";
+import { setIsCalculatorOpen, setIsSidebarOpen } from "../commonSlice";
+import Calculator from "../components/Calculator";
 
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
 
-  const { isSidebarOpen } = useSelector((state) => state.common);
+  const { isSidebarOpen,isCalculatorOpen } = useSelector((state) => state.common);
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -176,19 +177,17 @@ const HeaderWithSidebar = () => {
   return (
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5 shadow-md z-40">
-        
         <div
-        data-tip={`${isSidebarOpen ? 'close sidebar':'open sidebar'}`}
-        className="tooltip tooltip-right tooltip-primary">
-          
-          <button
-          onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
-          className="btn btn-ghost btn-sm"
-          
+          data-tip={`${isSidebarOpen ? "close sidebar" : "open sidebar"}`}
+          className="tooltip tooltip-right tooltip-primary"
         >
-          <BiMenu size={25} />
-        </button>
-          </div>
+          <button
+            onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
+            className="btn btn-ghost btn-sm"
+          >
+            <BiMenu size={25} />
+          </button>
+        </div>
 
         <Link to={"/"} className="font-bold me-auto select-none text-lg">
           My Finance Tracker
@@ -219,7 +218,12 @@ const HeaderWithSidebar = () => {
           redirectTo="/investments"
           isActive={currentPath === "/investments"}
         /> */}
+        <div data-tip="Calculator" className="tooltip tooltip-bottom tooltip-primary">
 
+        <Link onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}>
+          <BiCalculator size={25} className="text-primary" />
+        </Link>
+        </div>
         <SettingsMenu
           triggerIcon={
             <CgProfile
@@ -237,8 +241,14 @@ const HeaderWithSidebar = () => {
       >
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
-            <div  key={item.path} className={`${!isSidebarOpen && 'tooltip tooltip-primary tooltip-right'}`} data-tip={item.title}>
-              <li >
+            <div
+              key={item.path}
+              className={`${
+                !isSidebarOpen && "tooltip tooltip-primary tooltip-right"
+              }`}
+              data-tip={item.title}
+            >
+              <li>
                 <Link
                   to={item.path}
                   className={`flex items-center gap-3 p-2.5 m-1 rounded-lg transition-colors duration-200 ease-in-out ${
@@ -247,17 +257,21 @@ const HeaderWithSidebar = () => {
                       : "hover:bg-base-300"
                   }`}
                 >
-                  
                   <span className="text-lg">{item.icon}</span>
                   {isSidebarOpen && <span>{item.title}</span>}
                 </Link>
               </li>
             </div>
           ))}
-         
         </ul>
       </aside>
-
+      {isCalculatorOpen && (
+        <>
+          <div className="fixed top-20 right-2 transition-all duration-300 ease-in-out   flex items-center justify-center z-50">
+            <Calculator />
+          </div>
+        </>
+      )}
       <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
         <div className="flex justify-around items-center h-16 px-4 relative ">
           <HeaderNavMobile
@@ -295,6 +309,13 @@ const HeaderWithSidebar = () => {
               >
                 <FaHandHoldingUsd className="text-error" /> Liabilities
               </Link>
+            </li>
+            <li>
+              
+              <Link onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}>
+                <BiCalculator className="text-success" /> Calculator
+              </Link>
+            
             </li>
           </SettingsMenu>
 

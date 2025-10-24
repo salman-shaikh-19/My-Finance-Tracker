@@ -85,7 +85,7 @@ const LiabilityPage = () => {
           ref={modalRef}
           modalId="liability-add-modal"
           openModalBtnClassName="
-         btn-circle btn-sm md:btn-md lg:btn-lg 
+          btn-circle btn-sm md:btn-md lg:btn-lg 
           fixed z-50 shadow-md bg-primary text-white 
           hover:bg-primary/80 transition-all duration-200
           top-0 right-0 

@@ -161,41 +161,38 @@
 - fixed validation issues in liabilities form.
 - office event.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 23 oct
 - add progress bar in liability card.
 - make total incomes ,expense and so on card on dashboard and load data into it.
 - explore skeleton loading.
 - implement skeleton loading in dashboard for card and chart.
-- performance rating based on income and expense done.
-
 
 # 24 oct 
-- add performance suggestions based on performance rating.
 - layout issue in dashboard fixed.
 - add recent incomes and expenses listing in dashboard.
 - apply skeleton loading in recent incomes and expenses listing.
+- performance rating based on income, expense and debt done.
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ # 27 oct 
+ - add performance suggestions based on performance rating.

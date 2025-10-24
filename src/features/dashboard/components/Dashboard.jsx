@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { BiCalendar } from "react-icons/bi";
+import { BiCalculator, BiCalendar } from "react-icons/bi";
 import {
   Bar,
   BarChart,
@@ -26,9 +26,13 @@ import { getAllInvestments } from "../../investments/investmentsSlice";
 import { getAllLiabilities } from "../../liabilities/liabilitySlice";
 import RecentActivity from "./RecentActivity";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import Calculator from '../../common/components/Calculator'
+
+
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
   const { loggedInUserId, userCurrency, expenseLimit } = useSelector(
     (state) => state.common
   );
@@ -166,7 +170,8 @@ const Dashboard = () => {
       >
         <div className="flex justify-between items-center   ">
           <h2 className="card-title">Dashboard</h2>
-          <h3 className=" text-sm ">Daily Expense Limit: {expenseLimit}</h3>
+          <h3 className=" text-sm ">      
+                         Daily Expense Limit: {expenseLimit}</h3>
         </div>
 
         <PrevNextButton
@@ -196,12 +201,16 @@ const Dashboard = () => {
             cardTitle="Total Expense"
             loading={expensesLoading}
             cardContent={
+              <>
               <span className="text-error text-2xl font-bold">
                 {formatCurrency(sumBy(expenses, "amount"), userCurrency)}
               </span>
+        
+              </>
             }
           />
-
+ 
+     
           <StatCard
             cardTitle="Total Savings"
             loading={expensesLoading || incomesLoading}
@@ -247,6 +256,7 @@ const Dashboard = () => {
               </span>
             }
           />
+          
           {(incomes.length || expenses.length || liabilities.length) > 0 ? (
             <StatCard
               cardTitle="Your Performance"
@@ -306,6 +316,7 @@ const Dashboard = () => {
               cardContent={<p className="">No data available</p>}
             />
           )}
+          
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
           {/* Chart */}
@@ -313,7 +324,7 @@ const Dashboard = () => {
             {expensesLoading || incomesLoading ? (
               <ChartSkeleton containerHeight={480} />
             ) : (
-              <ResponsiveContainer width="100%" height={480}>
+              <ResponsiveContainer width="100%" height={480} >
                 <BarChart data={chartData}>
                   <XAxis dataKey="month" />
                   <YAxis />
@@ -327,6 +338,9 @@ const Dashboard = () => {
           </div>
 
           {/* recent activity */}
+ 
+
+       
           <RecentActivity
             expenses={expenses}
             incomes={incomes}
@@ -338,6 +352,8 @@ const Dashboard = () => {
               investmentsLoading
             }
           />
+            
+        
         </div>
       </div>
     </Main>
@@ -345,3 +361,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+ 

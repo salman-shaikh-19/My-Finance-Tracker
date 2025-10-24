@@ -171,7 +171,7 @@ const LiabilityForm = ({ handleSubmit, initialValues, isEdit = false }) => {
               <Field
                 type="date"
                 name="startDate"
-                className="input input-bordered w-full "
+                className="input input-bordered w-full  "
               />
               <ErrorMessage
                 name="startDate"

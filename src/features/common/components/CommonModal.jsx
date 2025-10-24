@@ -42,7 +42,7 @@ const CommonModal = ({
         className="modal"
         onClick={handleBackdropClick}
       >
-        <div className="modal-box relative ">
+        <div className="modal-box relative scrollbar-hide ">
           <button
           
             className="hover:cursor-pointer absolute right-2 top-2 btn btn-sm btn-circle btn-ghost"
