@@ -26,7 +26,7 @@ const RecentActivity = ({ expenses, incomes, userCurrency, loading }) => {
         <ul className="space-y-2">
           <div className="h-4 w-50 bg-base-200 rounded mb-5"></div>
           {[...Array(8)].map((_, idx) => (
-            <>
+           
               <li
                 key={idx}
                 className="py-2 flex justify-between items-center animate-pulse"
@@ -37,7 +37,7 @@ const RecentActivity = ({ expenses, incomes, userCurrency, loading }) => {
                 </div>
                 <div className="h-4 w-12 bg-base-200 rounded"></div>
               </li>
-            </>
+            
           ))}
         </ul>
       ) : (
@@ -46,7 +46,7 @@ const RecentActivity = ({ expenses, incomes, userCurrency, loading }) => {
           <ul className="divide-y divide-gray-200 dark:divide-gray-700 ">
             {combinedData.map((item) => (
               <li
-                key={item.id}
+               key={`${item.type}-${item.id}`}
                 className="py-2 flex justify-between items-center"
               >
                 <div className="flex flex-col">

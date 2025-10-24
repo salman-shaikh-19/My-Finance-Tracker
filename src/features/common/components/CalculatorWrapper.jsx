@@ -30,7 +30,7 @@ const CalculatorWrapper = () => {
           style={{ zIndex: 9999 }}
           defaultSize={{ width: 320, height: "auto" }}
           enableResizing={true}
-          enableDragging={true}
+         
           bounds="window"
           default={{ x: window.innerWidth - 250, y: 20 }}
         >

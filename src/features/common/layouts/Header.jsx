@@ -150,9 +150,8 @@ import HeaderNavMobile from "../components/HeaderNavMobile";
 import SettingsMenu from "./SettingsMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsCalculatorOpen, setIsSidebarOpen } from "../commonSlice";
-import Calculator from "../components/Calculator";
-import { Rnd } from "react-rnd";
-import CalculatorWrapper from "./CalculatorWrapper";
+
+import CalculatorWrapper from "../components/CalculatorWrapper";
 
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
