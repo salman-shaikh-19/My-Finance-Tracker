@@ -21,7 +21,7 @@ const CalculatorWrapper = () => {
     <>
       {isMobile ? (
 
-        <div className="fixed top-20 right-2 z-50 ">
+        <div className="fixed top-20 right-2 z-50 w-72">
           <Calculator />
         </div>
       ) : (
