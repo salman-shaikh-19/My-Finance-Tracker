@@ -57,9 +57,21 @@ export const commonSlice = createSlice({
       state.result = "";
       state.justCalculated = false;
     },
+    resetSettings: (state) => {
+      state.theme = "light";
+ 
+      state.userCurrency = "INR";
+     
+      state.expenseLimit = 10000;
+      state.isSidebarOpen = true;
+      state.isCalculatorOpen = false;
+      state.input = "";
+      state.result = "";
+      state.justCalculated = false;
+    },
   },
 });
 
-export const { setTheme, setGetStarted,setIsSidebarOpen, setLoggedInUserId,setUserCurrency,setExpenseLimit,setIsCalculatorOpen,setInput,setResult,setJustCalculated,clearCalculator } =
+export const { setTheme, setGetStarted,setIsSidebarOpen, setLoggedInUserId,setUserCurrency,setExpenseLimit,setIsCalculatorOpen,setInput,setResult,setJustCalculated,clearCalculator,resetSettings } =
   commonSlice.actions;
 export default commonSlice.reducer;

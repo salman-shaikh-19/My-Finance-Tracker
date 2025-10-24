@@ -203,3 +203,4 @@
  # 28 oct
  - fixed issue of recent activity listing.
  - fixed issue of dragging calculator.
+ - reset settings implemented.

@@ -7,11 +7,12 @@ import ThemeToggle from "../components/ThemeToggle";
 import { fetchUserProfile, logoutUser } from "../../auth/authSlice";
 import supabase from "../../../services/supabaseClient";
 import { BiPlus, BiReset } from "react-icons/bi";
-import { setExpenseLimit, setLoggedInUserId } from "../commonSlice";
+import { resetSettings, setExpenseLimit, setLoggedInUserId } from "../commonSlice";
 import SetUserCurrency from "../components/SetUserCurrency";
 import SetExpenseLimit from "../../expenses/components/SetExpenseLimit";
 import CommonModal from "../components/CommonModal";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
@@ -90,6 +91,23 @@ const SettingsMenu = ({
     setSubmitting(false);
   };
 
+  const handleResetSettings = () => {
+    Swal.fire({  
+      title: "Are you sure?",
+      text: "You want to reset settings!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonText: "Yes, reset it!",
+      cancelButtonText: "No, cancel!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(resetSettings());
+        toast.success("Settings reset successfully");
+      }
+    });
+  };
   return (
     <div ref={menuRef} className="relative  ">
       <div
@@ -155,7 +173,11 @@ const SettingsMenu = ({
               </button>
             )}
           </div>
-
+            <Link
+            onClick={handleResetSettings}
+           
+            className="btn btn-sm mt-2 w-full"
+            >Reset Settings</Link>
           <button
             onClick={() => handleClickItem(handleLogout)}
             className="btn  btn-error btn-sm mt-3 w-full"
