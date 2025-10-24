@@ -152,6 +152,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsCalculatorOpen, setIsSidebarOpen } from "../commonSlice";
 import Calculator from "../components/Calculator";
 import { Rnd } from "react-rnd";
+import CalculatorWrapper from "./CalculatorWrapper";
 
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
@@ -268,23 +269,7 @@ const HeaderWithSidebar = () => {
       </aside>
       {isCalculatorOpen && (
         <>
-<Rnd
-  dragHandleClassName="calculator-drag-handle"
-  style={{ zIndex: 9999, touchAction: "none" }}
-  defaultSize={{ width: 320, height: "auto" }}
-  enableResizing={true}
-  enableDragging={true}
-  bounds="window"
-  default={{ x: window.innerWidth - 250 - 20, y: 30 }}
->
-  <div className="bg-base-100 rounded-2xl shadow-lg border border-base-200">
-    <div className=" cursor-move text-center py-1 bg-base-300 rounded-t-2xl font-medium text-gray-600">
-      Calculator
-    </div>
-    <Calculator />
-  </div>
-</Rnd>
-
+       <CalculatorWrapper />
         </>
       )}
       <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
