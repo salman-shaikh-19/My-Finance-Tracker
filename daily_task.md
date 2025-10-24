@@ -197,3 +197,5 @@
  # 27 oct 
  - add performance suggestions based on performance rating.
  - make common calculator and implemented in app.
+ - learn react-rnd library.
+ - make draggable and resizable calculator.

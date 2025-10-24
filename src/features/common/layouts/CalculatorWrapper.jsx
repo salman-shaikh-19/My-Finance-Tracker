@@ -32,7 +32,7 @@ const CalculatorWrapper = () => {
           enableResizing={true}
           enableDragging={true}
           bounds="window"
-          default={{ x: window.innerWidth - 350, y: 30 }}
+          default={{ x: window.innerWidth - 250, y: 20 }}
         >
           <Calculator />
         </Rnd>
