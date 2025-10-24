@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiX } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
@@ -8,14 +8,10 @@ import { TbDivide, TbPercentage } from "react-icons/tb";
 import { clearCalculator, setInput, setJustCalculated, setResult } from "../commonSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 const Calculator = () => {
-  // const [input, setInput] = useState("");
-  // const [result, setResult] = useState("");
-  // const [justCalculated, setJustCalculated] = useState(false);
   const { input, result, justCalculated } = useSelector((state) => state.common);
   const dispatch = useDispatch();
+
   const operatorIcons = {
     "+": <AiOutlinePlus />,
     "-": <AiOutlineMinus />,
@@ -38,23 +34,18 @@ const Calculator = () => {
       dispatch(setInput(input + value));
     }
   };
-  
+
   const handleBackspace = () => {
     dispatch(setInput(input.slice(0, -1)));
     dispatch(setJustCalculated(false));
   };
-  
 
   const handleClear = () => {
-  
     dispatch(clearCalculator());
   };
 
-
-
   const handleCalculate = () => {
     try {
-      // replace % with /100
       const sanitized = input.replace(/%/g, "/100");
       const evalResult = Function(`"use strict"; return (${sanitized})`)();
       dispatch(setResult(evalResult));
@@ -64,39 +55,40 @@ const Calculator = () => {
       dispatch(setJustCalculated(true));
     }
   };
- 
-  return (
-   
-    <div className="p-5 bg-base-100 rounded-2xl shadow-lg w-full   border border-base-200 scrollbar-hide   overflow-auto">
-      
 
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const { key } = e;
+
+      if ("0123456789.+-*/%".includes(key)) {
+        handleClick(key);
+      } else if (key === "Enter") {
+        handleCalculate();
+      } else if (key === "Backspace") {
+        handleBackspace();
+      } else if (key.toLowerCase() === "c") {
+        handleClear();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [input, result, justCalculated]);
+
+
+
+  return (
+    <div className="p-5 bg-base-100 rounded-2xl shadow-lg w-full border border-base-200 scrollbar-hide overflow-auto">
       {/* display */}
-      <div className=" bg-base-200 text-right p-3 rounded-lg text-lg font-mono h-22 resize-y lg:resize-none flex flex-col justify-center shadow-inner overflow-x-auto">
-        <span className="text-gray-500 text-sm break-words ">{input || "0"}</span>
+      <div className="bg-base-200 text-right p-3 rounded-lg text-lg font-mono h-22 resize-y lg:resize-none flex flex-col justify-center shadow-inner overflow-x-auto">
+        <span className="text-gray-500 text-sm break-words">{input || "0"}</span>
         {result && <span className="font-bold text-xl text-neutral break-words">{result}</span>}
-      
       </div>
 
-      {/* btns */}
+      {/* buttons */}
       <div className="grid grid-cols-4 gap-2 mt-4">
-        {[
-          "7",
-          "8",
-          "9",
-          "/",
-          "4",
-          "5",
-          "6",
-          "*",
-          "1",
-          "2",
-          "3",
-          "-",
-          "0",
-          ".",
-          "%",
-          "+",
-        ].map((btn) => (
+        {["7","8","9","/","4","5","6","*","1","2","3","-","0",".","%","+"].map((btn) => (
           <button
             key={btn}
             onClick={() => handleClick(btn)}
@@ -106,12 +98,10 @@ const Calculator = () => {
           </button>
         ))}
 
-     
         <button
           onClick={handleClear}
-          className="btn btn-sm bg-error rounded-lg text-white font-bold col-span-2 "
-      
-      >
+          className="btn btn-sm bg-error rounded-lg text-white font-bold col-span-2"
+        >
           C
         </button>
 
@@ -121,6 +111,7 @@ const Calculator = () => {
         >
           <MdBackspace />
         </button>
+
         <button
           onClick={handleCalculate}
           className="btn btn-sm bg-success rounded-lg text-white font-bold"
@@ -129,7 +120,6 @@ const Calculator = () => {
         </button>
       </div>
     </div>
-
   );
 };
 
