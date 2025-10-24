@@ -219,7 +219,7 @@ const HeaderWithSidebar = () => {
           redirectTo="/investments"
           isActive={currentPath === "/investments"}
         /> */}
-        <div data-tip="Calculator" className="tooltip tooltip-bottom tooltip-primary">
+        <div data-tip={`${isCalculatorOpen ? "Close" : "Open"} Calculator`} className="tooltip tooltip-bottom tooltip-primary">
 
         <Link onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}>
           <BiCalculator size={25} className="text-primary" />

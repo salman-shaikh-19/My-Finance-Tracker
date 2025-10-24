@@ -199,3 +199,7 @@
  - make common calculator and implemented in app.
  - learn react-rnd library.
  - make draggable and resizable calculator.
+
+ # 28 oct
+ - fixed issue of recent activity listing.
+ - fixed issue of dragging calculator.
