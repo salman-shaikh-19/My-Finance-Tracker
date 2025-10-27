@@ -80,11 +80,11 @@ const ChartMenu = ({
           </button>
         </div>
         <div
-          className="tooltip tooltip-bottom lg:tooltip-top tooltip-accent "
+          className="tooltip tooltip-bottom lg:tooltip-top tooltip-secondary "
           data-tip={`Download ${currentChart} chart`}
         >
           <button
-            className="flex items-center cursor-pointer text-accent  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-ghost"
+            className="flex items-center cursor-pointer text-secondary  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-ghost"
             onClick={downloadChart}
           >
             <FiDownload size={22} />
