@@ -156,7 +156,9 @@ import CalculatorWrapper from "../components/CalculatorWrapper";
 const HeaderWithSidebar = () => {
   const [spinning, setSpinning] = useState(false);
 
-  const { isSidebarOpen,isCalculatorOpen } = useSelector((state) => state.common);
+  const { isSidebarOpen, isCalculatorOpen } = useSelector(
+    (state) => state.common
+  );
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -219,11 +221,15 @@ const HeaderWithSidebar = () => {
           redirectTo="/investments"
           isActive={currentPath === "/investments"}
         /> */}
-        <div data-tip={`${isCalculatorOpen ? "Close" : "Open"} Calculator`} className="tooltip tooltip-bottom tooltip-primary">
-
-        <Link onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}>
-          <BiCalculator size={25} className="text-primary" />
-        </Link>
+        <div
+          data-tip={`${isCalculatorOpen ? "Close" : "Open"} Calculator`}
+          className="tooltip tooltip-bottom tooltip-primary"
+        >
+          <Link
+            onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}
+          >
+            <BiCalculator size={25} className="text-primary" />
+          </Link>
         </div>
         <SettingsMenu
           triggerIcon={
@@ -235,24 +241,23 @@ const HeaderWithSidebar = () => {
         />
       </nav>
 
- <aside
-  className={`hidden md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 
-  transition-all duration-500 ease-in-out overflow-y-hidden
-  ${isSidebarOpen ? "w-64" : "w-16"}`}
->
-
+      <aside
+        className={`hidden md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 
+        transition-all duration-500 ease-in-out overflow-hidden
+        ${isSidebarOpen ? "w-64" : "w-16"}`}
+      >
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
             <div
               key={item.path}
-              className={` ${
+              className={`${
                 !isSidebarOpen && "tooltip tooltip-primary  tooltip-right"
               }`}
               data-tip={item.title}
-              title={item.title}
+              title={!isSidebarOpen && item.title}
             >
               <li>
-                  <Link
+                <Link
                   to={item.path}
                   className={`flex items-center gap-3 p-2.5 m-1 rounded-lg transition  duration-1000 ease-in-out  ${
                     currentPath === item.path
@@ -264,14 +269,13 @@ const HeaderWithSidebar = () => {
                   {isSidebarOpen && <span>{item.title}</span>}
                 </Link>
               </li>
-          
             </div>
           ))}
         </ul>
       </aside>
       {isCalculatorOpen && (
         <>
-       <CalculatorWrapper />
+          <CalculatorWrapper />
         </>
       )}
       <nav className="md:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 w-11/12 bg-base-100 text-base-content shadow-lg rounded-2xl z-50">
@@ -313,11 +317,11 @@ const HeaderWithSidebar = () => {
               </Link>
             </li>
             <li>
-              
-              <Link onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}>
+              <Link
+                onClick={() => dispatch(setIsCalculatorOpen(!isCalculatorOpen))}
+              >
                 <BiCalculator className="text-success" /> Calculator
               </Link>
-            
             </li>
           </SettingsMenu>
 
