@@ -141,7 +141,7 @@ import { MdOutlinePayments } from "react-icons/md";
 import { FaChartLine, FaHandHoldingUsd, FaMoneyBillWave } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { BiCalculator, BiMenu, BiPlusCircle } from "react-icons/bi";
+import { BiCalculator, BiMenu, BiPlusCircle, BiX } from "react-icons/bi";
 import { GrDashboard } from "react-icons/gr";
 import React, { useState } from "react";
 
@@ -181,14 +181,24 @@ const HeaderWithSidebar = () => {
     <>
       <nav className="hidden md:flex fixed top-0 w-full bg-base-100 text-base-content h-14 items-center gap-5 px-5 shadow-md z-40">
         <div
-          data-tip={`${isSidebarOpen ? "close sidebar" : "open sidebar"}`}
+          data-tip={`${isSidebarOpen ? "Close Sidebar" : "Open Sidebar"}`}
           className="tooltip tooltip-right tooltip-primary"
         >
           <button
             onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
-            className="btn btn-ghost btn-sm"
+            className="btn btn-ghost btn-sm transition-all duration-300 ease-in-out"
           >
-            <BiMenu size={25} />
+            {isSidebarOpen ? (
+              <BiX
+                size={25}
+                className=" transition-transform duration-300 rotate-0"
+              />
+            ) : (
+              <BiMenu
+                size={25}
+                className=" transition-transform duration-300 rotate-0"
+              />
+            )}
           </button>
         </div>
 
