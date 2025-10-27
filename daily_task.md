@@ -228,3 +228,5 @@
 
  # 29 oct
  - add export as excel ,csv and image in dashboard.
+ - enhanced ui/ux of dashboard.
+ - tailwind css documentation.
