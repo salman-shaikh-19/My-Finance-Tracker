@@ -173,34 +173,54 @@
 - apply skeleton loading in recent incomes and expenses listing.
 - performance rating based on income, expense and debt done.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  # 27 oct 
  - add performance suggestions based on performance rating.
  - make common calculator and implemented in app.
  - learn react-rnd library.
  - make draggable and resizable calculator.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  # 28 oct
  - fixed issue of recent activity listing.
  - fixed issue of dragging calculator.
+ - fixed ui issue in sidebar at desktop , make smoother and manage ui issue while opening sidebar.
  - reset settings implemented.

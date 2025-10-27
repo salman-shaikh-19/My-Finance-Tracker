@@ -235,24 +235,26 @@ const HeaderWithSidebar = () => {
         />
       </nav>
 
-      <aside
-        className={`hidden  md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 transition-all duration-300 ease-in-out ${
-          isSidebarOpen ? "w-64" : "w-16"
-        }`}
-      >
+ <aside
+  className={`hidden md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 
+  transition-all duration-500 ease-in-out overflow-y-hidden
+  ${isSidebarOpen ? "w-64" : "w-16"}`}
+>
+
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
             <div
               key={item.path}
-              className={`${
-                !isSidebarOpen && "tooltip tooltip-primary tooltip-right"
+              className={` ${
+                !isSidebarOpen && "tooltip tooltip-primary  tooltip-right"
               }`}
               data-tip={item.title}
+              title={item.title}
             >
               <li>
-                <Link
+                  <Link
                   to={item.path}
-                  className={`flex items-center gap-3 p-2.5 m-1 rounded-lg transition-colors duration-200 ease-in-out ${
+                  className={`flex items-center gap-3 p-2.5 m-1 rounded-lg transition  duration-1000 ease-in-out  ${
                     currentPath === item.path
                       ? "bg-primary text-white"
                       : "hover:bg-base-300"
@@ -262,6 +264,7 @@ const HeaderWithSidebar = () => {
                   {isSidebarOpen && <span>{item.title}</span>}
                 </Link>
               </li>
+          
             </div>
           ))}
         </ul>
