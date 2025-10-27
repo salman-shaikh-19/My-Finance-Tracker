@@ -30,6 +30,7 @@ import { downloadAsImage } from "../../../utils/downloadAsImage";
 import { exportToCsv, exportToExcel } from "../../../utils/exportTo";
 import { FaFileCsv, FaFileExcel } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
+import NoDataFound from "../../common/components/NoDataFound";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -343,106 +344,108 @@ const Dashboard = () => {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
-          {/* Chart */}
-          <div className="w-full h-[550px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
-            {expensesLoading || incomesLoading ? (
-             
+        {!expenses.length && !incomes.length ? (
+          <NoDataFound NoDataFoundFor=" " />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+            {/* chart */}
+            <div className="w-full h-[550px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
+              {expensesLoading || incomesLoading ? (
                 <ChartSkeleton containerHeight={510} />
-             
-            ) : (
-              <>
-                <div className="flex flex-row  justify-center items-center">
-                  <div className="flex flex-wrap mb-2">
-                    <div className="flex flex-wrap gap-1 mb-2 justify-end  ">
-                      <div
-                        className="tooltip tooltip-bottom lg:tooltip-top tooltip-info"
-                        data-tip="Export to Excel"
-                      >
-                        <button
-                          className="flex items-center cursor-pointer text-info  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
-                          onClick={() =>
-                            exportToExcel(
-                              mergedData,
-                              `Income-expense-${dayjs(
-                                customWeakDate,
-                                "year"
-                              ).format("YYYY")}`,
-                              ["created_at", "updated_at", "id", "user_id"]
-                            )
-                          }
+              ) : (
+                <>
+                  <div className="flex flex-row  justify-center items-center">
+                    <div className="flex flex-wrap mb-2">
+                      <div className="flex flex-wrap gap-1 mb-2 justify-end  ">
+                        <div
+                          className="tooltip tooltip-bottom lg:tooltip-top tooltip-info"
+                          data-tip="Export to Excel"
                         >
-                          <FaFileExcel size={20} />
-                        </button>
-                      </div>
+                          <button
+                            className="flex items-center cursor-pointer text-info  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                            onClick={() =>
+                              exportToExcel(
+                                mergedData,
+                                `Income-expense-${dayjs(
+                                  customWeakDate,
+                                  "year"
+                                ).format("YYYY")}`,
+                                ["created_at", "updated_at", "id", "user_id"]
+                              )
+                            }
+                          >
+                            <FaFileExcel size={20} />
+                          </button>
+                        </div>
 
-                      <div
-                        className="tooltip tooltip-bottom lg:tooltip-top  tooltip-success "
-                        data-tip="Export to CSV"
-                      >
-                        <button
-                          className="flex items-center cursor-pointer text-success  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
-                          onClick={() =>
-                            exportToCsv(
-                              mergedData,
-                              `Income-expense-${dayjs(
-                                customWeakDate,
-                                "year"
-                              ).format("YYYY")}`,
-                              ["created_at", "updated_at", "id", "user_id"]
-                            )
-                          }
+                        <div
+                          className="tooltip tooltip-bottom lg:tooltip-top  tooltip-success "
+                          data-tip="Export to CSV"
                         >
-                          <FaFileCsv size={20} />
-                        </button>
-                      </div>
-                      <div
-                        className="tooltip tooltip-bottom lg:tooltip-top tooltip-secondary "
-                        data-tip={`Download income-expense chart`}
-                      >
-                        <button
-                          className="flex items-center cursor-pointer text-secondary   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
-                          onClick={handleDownloadChart}
+                          <button
+                            className="flex items-center cursor-pointer text-success  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                            onClick={() =>
+                              exportToCsv(
+                                mergedData,
+                                `Income-expense-${dayjs(
+                                  customWeakDate,
+                                  "year"
+                                ).format("YYYY")}`,
+                                ["created_at", "updated_at", "id", "user_id"]
+                              )
+                            }
+                          >
+                            <FaFileCsv size={20} />
+                          </button>
+                        </div>
+                        <div
+                          className="tooltip tooltip-bottom lg:tooltip-top tooltip-secondary "
+                          data-tip={`Download income-expense chart`}
                         >
-                          <FiDownload size={22} />
-                        </button>
+                          <button
+                            className="flex items-center cursor-pointer text-secondary   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                            onClick={handleDownloadChart}
+                          >
+                            <FiDownload size={22} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <ResponsiveContainer
-                  width="100%"
-                  height={480}
-                  id="chart-container"
-                >
-                  <BarChart data={chartData}>
-                    <XAxis dataKey="month" />
-                    <YAxis />
-                    <Tooltip content={<CustomCommonTooltipForChart />} />
-                    <Legend />
-                    <Bar dataKey="income_amount" name="Income" fill="green" />
-                    <Bar dataKey="amount" name="Expense" fill="red" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </>
-            )}
+                  <ResponsiveContainer
+                    width="100%"
+                    height={480}
+                    id="chart-container"
+                  >
+                    <BarChart data={chartData}>
+                      <XAxis dataKey="month" />
+                      <YAxis />
+                      <Tooltip content={<CustomCommonTooltipForChart />} />
+                      <Legend />
+                      <Bar dataKey="income_amount" name="Income" fill="green" />
+                      <Bar dataKey="amount" name="Expense" fill="red" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </>
+              )}
+            </div>
+
+            {/* recent activity */}
+
+            <RecentActivity
+              expenses={expenses}
+              incomes={incomes}
+              userCurrency={userCurrency}
+              loading={
+                expensesLoading ||
+                incomesLoading ||
+                liabilitiesLoading ||
+                investmentsLoading
+              }
+            />
           </div>
-
-          {/* recent activity */}
-
-          <RecentActivity
-            expenses={expenses}
-            incomes={incomes}
-            userCurrency={userCurrency}
-            loading={
-              expensesLoading ||
-              incomesLoading ||
-              liabilitiesLoading ||
-              investmentsLoading
-            }
-          />
-        </div>
+        )}
       </div>
     </Main>
   );

@@ -186,12 +186,12 @@ const HeaderWithSidebar = () => {
         >
           <button
             onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}
-            className="btn btn-ghost btn-sm transition-all duration-300 ease-in-out"
+            className="btn btn-ghost  btn-sm transition-all duration-300 ease-in-out"
           >
             {isSidebarOpen ? (
               <BiX
                 size={25}
-                className=" transition-transform duration-300 rotate-0"
+                className="  transition-transform duration-300 rotate-0"
               />
             ) : (
               <BiMenu
