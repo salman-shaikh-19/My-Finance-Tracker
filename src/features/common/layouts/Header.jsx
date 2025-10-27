@@ -264,7 +264,7 @@ const HeaderWithSidebar = () => {
                 !isSidebarOpen && "tooltip tooltip-primary  tooltip-right"
               }`}
               data-tip={item.title}
-              title={!isSidebarOpen && item.title}
+              title={!isSidebarOpen ? item.title : ''}
             >
               <li>
                 <Link
