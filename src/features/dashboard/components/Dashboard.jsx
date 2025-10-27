@@ -347,7 +347,9 @@ const Dashboard = () => {
           {/* Chart */}
           <div className="w-full h-[550px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
             {expensesLoading || incomesLoading ? (
-              <ChartSkeleton containerHeight={480} />
+             
+                <ChartSkeleton containerHeight={510} />
+             
             ) : (
               <>
                 <div className="flex flex-row  justify-center items-center">
