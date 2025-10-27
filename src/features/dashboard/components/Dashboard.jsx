@@ -25,10 +25,11 @@ import { getAllIncomes } from "../../income/incomeSlice";
 import { getAllInvestments } from "../../investments/investmentsSlice";
 import { getAllLiabilities } from "../../liabilities/liabilitySlice";
 import RecentActivity from "./RecentActivity";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-import Calculator from '../../common/components/Calculator'
 
-
+import { downloadAsImage } from "../../../utils/downloadAsImage";
+import { exportToCsv, exportToExcel } from "../../../utils/exportTo";
+import { FaFileCsv, FaFileExcel } from "react-icons/fa6";
+import { FiDownload } from "react-icons/fi";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Dashboard = () => {
   const currentYear = dayjs().add(yearOffset, "year").year();
   const custDate = dayjs().add(yearOffset, "year").startOf("year").toDate();
 
+  const [currentChart, setCurrentChart] = useState("bar");
   // sum field values
   const sumBy = (items, key) => {
     if (!items || !items.length) return 0;
@@ -102,7 +104,34 @@ const Dashboard = () => {
     ],
     []
   );
+  const handleDownloadChart = () => {
+    downloadAsImage({ currentChartFor: `expense-income` });
+  };
+  const mergedData = useMemo(() => {
+    const formattedExpenses = expenses.map((e) => ({
+      type: "Expense",
+      amount: e.amount || 0,
+      category: e.expense_category || e.category || "",
+      date: e.expense_date || e.date || "",
+      note: e.expense_note || e.note || "",
+      payment_method: e.payment_method || "",
+    }));
 
+    const formattedIncomes = incomes.map((i) => ({
+      type: "Income",
+      amount: i.income_amount || 0,
+      category: i.income_category || i.category || "",
+      date: i.received_on || i.date || "",
+      note: i.income_note || i.note || "",
+      payment_method: i.payment_method || "",
+    }));
+
+    return [...formattedExpenses, ...formattedIncomes].sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
+  }, [expenses, incomes]);
+
+  const customWeakDate = dayjs().add(yearOffset, "year").toDate();
   const chartData = useMemo(() => {
     const getMonthlyTotal = (items, key, dateField) => {
       if (!items || !items.length) return {};
@@ -170,8 +199,7 @@ const Dashboard = () => {
       >
         <div className="flex justify-between items-center   ">
           <h2 className="card-title">Dashboard</h2>
-          <h3 className=" text-sm ">      
-                         Daily Expense Limit: {expenseLimit}</h3>
+          <h3 className=" text-sm ">Daily Expense Limit: {expenseLimit}</h3>
         </div>
 
         <PrevNextButton
@@ -202,15 +230,13 @@ const Dashboard = () => {
             loading={expensesLoading}
             cardContent={
               <>
-              <span className="text-error text-2xl font-bold">
-                {formatCurrency(sumBy(expenses, "amount"), userCurrency)}
-              </span>
-        
+                <span className="text-error text-2xl font-bold">
+                  {formatCurrency(sumBy(expenses, "amount"), userCurrency)}
+                </span>
               </>
             }
           />
- 
-     
+
           <StatCard
             cardTitle="Total Savings"
             loading={expensesLoading || incomesLoading}
@@ -256,7 +282,7 @@ const Dashboard = () => {
               </span>
             }
           />
-          
+
           {(incomes.length || expenses.length || liabilities.length) > 0 ? (
             <StatCard
               cardTitle="Your Performance"
@@ -316,31 +342,93 @@ const Dashboard = () => {
               cardContent={<p className="">No data available</p>}
             />
           )}
-          
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
           {/* Chart */}
-          <div className="w-full h-[500px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
+          <div className="w-full h-[550px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
             {expensesLoading || incomesLoading ? (
               <ChartSkeleton containerHeight={480} />
             ) : (
-              <ResponsiveContainer width="100%" height={480} >
-                <BarChart data={chartData}>
-                  <XAxis dataKey="month" />
-                  <YAxis />
-                  <Tooltip content={<CustomCommonTooltipForChart />} />
-                  <Legend />
-                  <Bar dataKey="income_amount" name="Income" fill="green" />
-                  <Bar dataKey="amount" name="Expense" fill="red" />
-                </BarChart>
-              </ResponsiveContainer>
+              <>
+                <div className="flex flex-row  justify-center items-center">
+                  <div className="flex flex-wrap mb-2">
+                    <div className="flex flex-wrap gap-1 mb-2 justify-end  ">
+                      <div
+                        className="tooltip tooltip-bottom lg:tooltip-top tooltip-info"
+                        data-tip="Export to Excel"
+                      >
+                        <button
+                          className="flex items-center cursor-pointer text-info  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                          onClick={() =>
+                            exportToExcel(
+                              mergedData,
+                              `Income-expense-${dayjs(
+                                customWeakDate,
+                                "year"
+                              ).format("YYYY")}`,
+                              ["created_at", "updated_at", "id", "user_id"]
+                            )
+                          }
+                        >
+                          <FaFileExcel size={20} />
+                        </button>
+                      </div>
+
+                      <div
+                        className="tooltip tooltip-bottom lg:tooltip-top  tooltip-success "
+                        data-tip="Export to CSV"
+                      >
+                        <button
+                          className="flex items-center cursor-pointer text-success  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                          onClick={() =>
+                            exportToCsv(
+                              mergedData,
+                              `Income-expense-${dayjs(
+                                customWeakDate,
+                                "year"
+                              ).format("YYYY")}`,
+                              ["created_at", "updated_at", "id", "user_id"]
+                            )
+                          }
+                        >
+                          <FaFileCsv size={20} />
+                        </button>
+                      </div>
+                      <div
+                        className="tooltip tooltip-bottom lg:tooltip-top tooltip-accent "
+                        data-tip={`Download income-expense chart`}
+                      >
+                        <button
+                          className="flex items-center cursor-pointer text-accent   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:btn-ghost"
+                          onClick={handleDownloadChart}
+                        >
+                          <FiDownload size={22} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ResponsiveContainer
+                  width="100%"
+                  height={480}
+                  id="chart-container"
+                >
+                  <BarChart data={chartData}>
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip content={<CustomCommonTooltipForChart />} />
+                    <Legend />
+                    <Bar dataKey="income_amount" name="Income" fill="green" />
+                    <Bar dataKey="amount" name="Expense" fill="red" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </>
             )}
           </div>
 
           {/* recent activity */}
- 
 
-       
           <RecentActivity
             expenses={expenses}
             incomes={incomes}
@@ -352,8 +440,6 @@ const Dashboard = () => {
               investmentsLoading
             }
           />
-            
-        
         </div>
       </div>
     </Main>
@@ -361,4 +447,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
- 

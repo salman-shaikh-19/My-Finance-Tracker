@@ -58,33 +58,33 @@ const ChartMenu = ({
         })}
 
         <div
-          className="tooltip tooltip-bottom lg:tooltip-top tooltip-primary"
+          className="tooltip tooltip-bottom lg:tooltip-top tooltip-info"
           data-tip="Export to Excel"
         >
           <button
-            className="lex items-center cursor-pointer   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="flex items-center cursor-pointer text-info   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-ghost"
             onClick={() => exportToExcel(data, fileName, excludeKeys)}
           >
             <FaFileExcel size={20} />
           </button>
         </div>
         <div
-          className="tooltip tooltip-bottom lg:tooltip-top  tooltip-primary "
+          className="tooltip tooltip-bottom lg:tooltip-top  tooltip-success "
           data-tip="Export to CSV"
         >
           <button
-            className="lex items-center cursor-pointer   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="flex items-center cursor-pointer text-success  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-ghost"
             onClick={() => exportToCsv(data, fileName, excludeKeys)}
           >
             <FaFileCsv size={20} />
           </button>
         </div>
         <div
-          className="tooltip tooltip-bottom lg:tooltip-top tooltip-primary "
+          className="tooltip tooltip-bottom lg:tooltip-top tooltip-accent "
           data-tip={`Download ${currentChart} chart`}
         >
           <button
-            className="flex items-center cursor-pointer   px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-primary"
+            className="flex items-center cursor-pointer text-accent  px-1 lg:px-2 py-1 rounded-md btn btn-ghost btn-sm hover:text-ghost"
             onClick={downloadChart}
           >
             <FiDownload size={22} />

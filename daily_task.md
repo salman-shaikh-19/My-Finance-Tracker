@@ -222,5 +222,9 @@
  # 28 oct
  - fixed issue of recent activity listing.
  - fixed issue of dragging calculator.
- - fixed ui issue in sidebar at desktop , make smoother and manage ui issue while opening sidebar.
+ - fixed ui issue in sidebar at desktop , make smoother and manage ui issue while opening sidebar and manage different icons on sidebar open close button.
+ - enhanced ui in chart menu.
  - reset settings implemented.
+
+ # 29 oct
+ - add export as excel ,csv and image in dashboard.
