@@ -182,7 +182,7 @@ const SettingsMenu = ({
                );
                setDeferredPrompt(null);
              }}
-             className=" btn btn-sm btn-outline btn-accent w-full"
+             className=" btn btn-sm btn-outline btn-secondary w-full"
            >
                   Install App
                 </button>
