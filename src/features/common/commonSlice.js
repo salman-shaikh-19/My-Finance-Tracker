@@ -16,6 +16,8 @@ export const commonSlice = createSlice({
     input: "",
     result: "",
     justCalculated: false,
+    
+  
   },
   reducers: {
     setTheme(state, action) {
@@ -68,7 +70,9 @@ export const commonSlice = createSlice({
       state.input = "";
       state.result = "";
       state.justCalculated = false;
+      localStorage.setItem("appLang", "en");
     },
+  
   },
 });
 

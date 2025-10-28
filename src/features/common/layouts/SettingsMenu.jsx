@@ -13,6 +13,11 @@ import SetExpenseLimit from "../../expenses/components/SetExpenseLimit";
 import CommonModal from "../components/CommonModal";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import TranslatePage from "../components/TranslatePage";
+import { MdSettings } from "react-icons/md";
+
+
+
 const SettingsMenu = ({
   isMobile = false,
   triggerIcon = <FiSettings className="text-xl cursor-pointer" />,
@@ -92,7 +97,7 @@ const SettingsMenu = ({
   };
 
   const handleResetSettings = () => {
-    Swal.fire({  
+    Swal.fire({
       title: "Are you sure?",
       text: "You want to reset settings!",
       icon: "warning",
@@ -120,74 +125,91 @@ const SettingsMenu = ({
       </div>
 
       {open && (
-        <div
+         <div
           className={`${
-            isMobile
-              ? "absolute bottom-20 -right-15 "
-              : "absolute top-16 right-0"
-          }  w-50 bg-base-100 shadow-lg rounded-xl border p-3 z-50`}
+            isMobile ? "bottom-20 -right-25" : "top-14 right-0"
+          } absolute w-64 bg-base-100 shadow-2xl rounded-2xl border border-gray-200 z-50 p-4`}
         >
-          <div className="flex gap-3 border-b pb-3 mb-2 ">
+              <div className="flex items-center gap-3 border-b pb-3 mb-3">
+            
             <div>
-              <p className="font-semibold text-sm truncate w-32">
+              <p className="font-semibold text-sm truncate w-40">
                 {profile?.user_name || "User Name"}
               </p>
-              <p className="text-xs text-gray-500 ">
-                {profile?.user_email || "User Email "}
+              <p className="text-xs text-gray-500 truncate">
+                {profile?.user_email || "user@email.com"}
               </p>
             </div>
           </div>
-          <ul className="menu menu-compact ">{children || ""}</ul>
-          <div className="mt-3 lg:mt-0 lg:pt-0 lg:border-t-0 border-t pt-2 ">
-            <SetUserCurrency />
-          </div>
-          <div className="mt-2 ">
-            <ThemeToggle onClick={() => handleClickItem()} />
-          </div>
-          <CommonModal
-            ref={modalRef}
-            modalId="expense-limit-set-modal"
-            openModalBtnClassName="
-                     btn-sm mt-2 w-full
+          <div className="">
+            <p className=" text-xs font-semibold text-gray-500 uppercase ">
+              Preferences  
+            </p>
+            <ul className={`menu menu-compact ${children ? "" : "hidden"}`}>{children || ""}</ul>
+            <div className="flex items-center gap-2 my-2">
+              <div className="flex items-center justify-between ">
+                <SetUserCurrency />
+              </div>
+
+              <div className="flex items-center justify-between">
+                <ThemeToggle />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              
+              <TranslatePage />
+            
+            <CommonModal
+              ref={modalRef}
+              modalId="expense-limit-set-modal"
+              openModalBtnClassName="
+                   btn btn-sm btn-outline btn-primary w-full
                   "
-            openModalBtnText={<>Expense Limit </>}
-          >
-            <SetExpenseLimit handleSubmit={handleExpenseLimit} />
-          </CommonModal>
-          <div className="mt-2">
-            {deferredPrompt && (
-              <button
-                onClick={async () => {
-                  deferredPrompt.prompt();
-                  const { outcome } = await deferredPrompt.userChoice;
-                  if (outcome === "accepted") {
-                    toast.success("App installation started!");
-                  } else {
-                    toast.info("App installation cancelled.");
-                  }
-                  setDeferredPrompt(null);
-                }}
-                className="btn btn-info btn-sm mt-2 w-full"
-              >
-                Install App 
-              </button>
-            )}
-          </div>
+              openModalBtnText={<>Expense Limit </>}
+            >
+              <SetExpenseLimit handleSubmit={handleExpenseLimit} />
+            </CommonModal>
+            <div className="mt-2">
+              {deferredPrompt && (
+             <button
+             onClick={async () => {
+               deferredPrompt.prompt();
+               const { outcome } = await deferredPrompt.userChoice;
+               toast[outcome === "accepted" ? "success" : "info"](
+                 outcome === "accepted"
+                   ? "App installation started!"
+                   : "App installation cancelled."
+               );
+               setDeferredPrompt(null);
+             }}
+             className="btn btn-sm btn-info w-full mt-1"
+           >
+                  Install App
+                </button>
+              )}
+            </div>
+           </div>
+           <div className="border-t mt-4 pt-3 space-y-2">
             <Link
-            onClick={handleResetSettings}
-           
-            className="btn btn-accent btn-sm mt-2 w-full"
+              onClick={handleResetSettings}
+
+              className="btn btn-sm btn-outline btn-accent w-full flex items-center gap-2"
             >Reset Settings</Link>
-          <button
-            onClick={() => handleClickItem(handleLogout)}
-            className="btn  btn-error btn-sm mt-3 w-full"
-          >
-            Logout
-          </button>
+            <button
+              onClick={() => handleClickItem(handleLogout)}
+              className="btn btn-sm btn-error w-full flex items-center gap-2"
+            >
+              Logout
+            </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
 };
+
+
+
 
 export default React.memo(SettingsMenu);

@@ -96,16 +96,16 @@ const ThemeToggle = () => {
   };
 
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-start gap-1 ">
       <select
         title="Set Theme"
-        className="select select-bordered select-sm w-full max-w-xs"
+        className="select select-bordered select-sm w-full max-w-xs "
         value={theme}
         onChange={handleChange}
       >
         <optgroup
           label={`  Light Themes`}
-          className="font-semibold text-base-content"
+          className="font-semibold text-base-content "
         >
           {/* <option disabled className="bg-base-200 text-primary font-medium">
             <MdLightMode /> Light Themes

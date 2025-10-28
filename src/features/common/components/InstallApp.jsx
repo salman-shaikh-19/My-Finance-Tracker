@@ -54,7 +54,7 @@ const InstallApp = ({ className }) => {
 
   return (
     <button
-      className={className}
+      className={` ${className}`}
       onClick={handleInstallClick}
       aria-label="Install app"
     >

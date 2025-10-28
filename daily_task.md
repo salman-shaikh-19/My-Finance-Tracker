@@ -179,46 +179,6 @@
  - learn react-rnd library.
  - make draggable and resizable calculator.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  # 28 oct
  - fixed issue of recent activity listing.
  - fixed issue of dragging calculator.
@@ -226,7 +186,33 @@
  - enhanced ui in chart menu.
  - reset settings implemented.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  # 29 oct
  - add export as excel ,csv and image in dashboard.
  - enhanced ui/ux of dashboard.
  - tailwind css documentation.
+ - enhanced ui of settings compoenent.
+
+ # 30 oct
+ - learning page translation.
+ - implement page translation.
