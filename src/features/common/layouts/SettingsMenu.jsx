@@ -142,10 +142,11 @@ const SettingsMenu = ({
             </div>
           </div>
           <div className="">
+          <ul className={`menu menu-compact ${children ? "" : "hidden"}`}>{children || ""}</ul>
             <p className=" text-xs font-semibold text-gray-500 uppercase ">
               Preferences  
             </p>
-            <ul className={`menu menu-compact ${children ? "" : "hidden"}`}>{children || ""}</ul>
+           
             <div className="flex items-center gap-2 my-2">
               <div className="flex items-center justify-between ">
                 <SetUserCurrency />
