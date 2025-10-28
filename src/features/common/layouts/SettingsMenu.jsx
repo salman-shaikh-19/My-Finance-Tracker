@@ -169,7 +169,7 @@ const SettingsMenu = ({
             >
               <SetExpenseLimit handleSubmit={handleExpenseLimit} />
             </CommonModal>
-            <div className="mt-2">
+          
               {deferredPrompt && (
              <button
              onClick={async () => {
@@ -187,7 +187,7 @@ const SettingsMenu = ({
                   Install App
                 </button>
               )}
-            </div>
+       
            </div>
            <div className="border-t mt-4 pt-3 space-y-2">
             <Link
