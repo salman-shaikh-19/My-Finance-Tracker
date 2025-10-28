@@ -346,7 +346,7 @@ const Dashboard = () => {
         {!expenses.length && !incomes.length ? (
           <NoDataFound NoDataFoundFor=" " />
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mt-4">
             {/* chart */}
             <div className="w-full h-[550px] p-4 bg-base-100 rounded-lg shadow-lg lg:col-span-2">
               {expensesLoading || incomesLoading ? (
