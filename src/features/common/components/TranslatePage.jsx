@@ -24,7 +24,7 @@ function TranslatePage() {
       toast(
         <span className="flex items-center gap-2">
           <MdGTranslate size={100} className="text-blue-500 text-lg" />
-          <span>Language switching...! If the popup doesn’t appear, click the translate icon in your browser’s address bar.</span>
+          <span>Language switching...! If the popup doesn't appear, click the translate icon in your browser’s address bar.</span>
         </span>);
     }
     // reload page to let browser detect the new lang and possibly show translate popup
@@ -34,7 +34,7 @@ function TranslatePage() {
   };
 
   return (
-    
+
     <button
       onClick={handleClick}
       className="btn btn-sm btn-outline btn-secondary w-full flex items-center gap-2"
@@ -43,7 +43,7 @@ function TranslatePage() {
       <MdGTranslate className="text-xl" />
       {lang === "en" ? "Translate App" : "Reset to English"}
     </button>
-  
+
   );
 }
 

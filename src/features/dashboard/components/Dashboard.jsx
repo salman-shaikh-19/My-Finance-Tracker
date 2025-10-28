@@ -242,12 +242,11 @@ const Dashboard = () => {
             loading={expensesLoading || incomesLoading}
             cardContent={
               <span
-                className={`text-2xl font-bold ${
-                  sumBy(incomes, "income_amount") - sumBy(expenses, "amount") >
-                  0
+                className={`text-2xl font-bold ${sumBy(incomes, "income_amount") - sumBy(expenses, "amount") >
+                    0
                     ? "text-success"
                     : "text-error"
-                }`}
+                  }`}
               >
                 {formatCurrency(
                   sumBy(incomes, "income_amount") - sumBy(expenses, "amount"),
@@ -306,27 +305,26 @@ const Dashboard = () => {
                   </div>
                   <div className="flex flex-col gap-1">
                     <p
-                      className={`text-xs lg:text-sm ${
-                        performanceRating >= 4
+                      className={`text-xs lg:text-sm ${performanceRating >= 4
                           ? "text-success"
                           : performanceRating === 3
-                          ? "text-warning"
-                          : performanceRating === 2
-                          ? "text-error"
-                          : performanceRating === 0
-                          ? "text-info"
-                          : "text-info"
-                      }`}
+                            ? "text-warning"
+                            : performanceRating === 2
+                              ? "text-error"
+                              : performanceRating === 0
+                                ? "text-info"
+                                : "text-info"
+                        }`}
                     >
                       {performanceRating >= 4
                         ? "Excellent money management!"
                         : performanceRating === 3
-                        ? "Average — room to improve."
-                        : performanceRating === 2
-                        ? "Watch your expenses!"
-                        : performanceRating === 0
-                        ? "You are in debt!"
-                        : "Overspending detected!"}
+                          ? "Average — room to improve."
+                          : performanceRating === 2
+                            ? "Watch your expenses!"
+                            : performanceRating === 0
+                              ? "You are in debt!"
+                              : "Overspending detected!"}
                     </p>
                     <PerformanceSuggestions
                       performanceRating={performanceRating}

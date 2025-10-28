@@ -125,13 +125,12 @@ const SettingsMenu = ({
       </div>
 
       {open && (
-         <div
-          className={`${
-            isMobile ? "bottom-20 -right-25" : "top-14 right-0"
-          } absolute w-64 bg-base-100 shadow-2xl rounded-2xl border border-gray-200 z-50 p-4`}
+        <div
+          className={`${isMobile ? "bottom-20 -right-25" : "top-14 right-0"
+            } absolute w-64 bg-base-100 shadow-2xl rounded-2xl border border-gray-200 z-50 p-4`}
         >
-              <div className="flex items-center gap-3 border-b pb-3 mb-3">
-            
+          <div className="flex items-center gap-3 border-b pb-3 mb-3">
+
             <div>
               <p className="font-semibold text-sm truncate w-40">
                 {profile?.user_name || "User Name"}
@@ -142,11 +141,11 @@ const SettingsMenu = ({
             </div>
           </div>
           <div className="">
-          <ul className={`menu menu-compact ${children ? "" : "hidden"}`}>{children || ""}</ul>
+            <ul className={`menu menu-compact ${children ? "" : "hidden"}`}>{children || ""}</ul>
             <p className=" text-xs font-semibold text-gray-500 uppercase ">
-              Preferences  
+              Preferences
             </p>
-           
+
             <div className="flex items-center gap-2 my-2">
               <div className="flex items-center justify-between ">
                 <SetUserCurrency />
@@ -157,51 +156,51 @@ const SettingsMenu = ({
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              
+
               <TranslatePage />
-            
-            <CommonModal
-              ref={modalRef}
-              modalId="expense-limit-set-modal"
-              openModalBtnClassName="
+
+              <CommonModal
+                ref={modalRef}
+                modalId="expense-limit-set-modal"
+                openModalBtnClassName="
                    btn btn-sm btn-outline btn-primary w-full
                   "
-              openModalBtnText={<>Expense Limit </>}
-            >
-              <SetExpenseLimit handleSubmit={handleExpenseLimit} />
-            </CommonModal>
-          
+                openModalBtnText={<>Expense Limit </>}
+              >
+                <SetExpenseLimit handleSubmit={handleExpenseLimit} />
+              </CommonModal>
+
               {deferredPrompt && (
-             <button
-             onClick={async () => {
-               deferredPrompt.prompt();
-               const { outcome } = await deferredPrompt.userChoice;
-               toast[outcome === "accepted" ? "success" : "info"](
-                 outcome === "accepted"
-                   ? "App installation started!"
-                   : "App installation cancelled."
-               );
-               setDeferredPrompt(null);
-             }}
-             className=" btn btn-sm btn-outline btn-success w-full"
-           >
+                <button
+                  onClick={async () => {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    toast[outcome === "accepted" ? "success" : "info"](
+                      outcome === "accepted"
+                        ? "App installation started!"
+                        : "App installation cancelled."
+                    );
+                    setDeferredPrompt(null);
+                  }}
+                  className=" btn btn-sm btn-outline btn-success w-full"
+                >
                   Install App
                 </button>
               )}
-       
-           </div>
-           <div className="border-t mt-4 pt-3 space-y-2">
-            <Link
-              onClick={handleResetSettings}
 
-              className="btn btn-sm btn-outline btn-accent w-full flex items-center gap-2"
-            >Reset Settings</Link>
-            <button
-              onClick={() => handleClickItem(handleLogout)}
-              className="btn btn-sm btn-error w-full flex items-center gap-2"
-            >
-              Logout
-            </button>
+            </div>
+            <div className="border-t mt-4 pt-3 space-y-2">
+              <Link
+                onClick={handleResetSettings}
+
+                className="btn btn-sm btn-outline btn-accent w-full flex items-center gap-2"
+              >Reset Settings</Link>
+              <button
+                onClick={() => handleClickItem(handleLogout)}
+                className="btn btn-sm btn-error w-full flex items-center gap-2"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
