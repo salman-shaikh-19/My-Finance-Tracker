@@ -41,7 +41,7 @@ function TranslatePage() {
 
     >
       <MdGTranslate className="text-xl" />
-      {lang === "en" ? "Translate App" : "Undo Translation"}
+      {lang === "en" ? "Translate App" : "Reset to English"}
     </button>
   
   );
