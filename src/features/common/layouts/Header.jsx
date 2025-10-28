@@ -250,12 +250,10 @@ const HeaderWithSidebar = () => {
           }
         />
       </nav>
-
-      <aside
-        className={`hidden md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 
-        transition-all duration-500 ease-in-out overflow-hidden
-        ${isSidebarOpen ? "w-64" : "w-16"}`}
-      >
+ 
+       <aside className={`hidden md:flex fixed top-14 z-50 left-0 h-[calc(100vh-3.5rem)] bg-base-200 border-r border-base-300 
+        transition-all duration-500 ease-in-out overflow-hidden 
+        ${isSidebarOpen ? "w-64" : "w-16"}`}>
         <ul className="menu p-4 w-full text-base-content">
           {sidebarItems.map((item) => (
             <div
@@ -282,7 +280,7 @@ const HeaderWithSidebar = () => {
             </div>
           ))}
         </ul>
-      </aside>
+      </aside>  
       {isCalculatorOpen && (
         <>
           <CalculatorWrapper />

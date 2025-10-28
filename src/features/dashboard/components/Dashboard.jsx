@@ -56,7 +56,6 @@ const Dashboard = () => {
   const currentYear = dayjs().add(yearOffset, "year").year();
   const custDate = dayjs().add(yearOffset, "year").startOf("year").toDate();
 
-  const [currentChart, setCurrentChart] = useState("bar");
   // sum field values
   const sumBy = (items, key) => {
     if (!items || !items.length) return 0;

@@ -254,7 +254,7 @@ export const suggestions_old_BKP = {
       "Adjust budget allocations monthly based on changes in income or expenses.",
       "Monitor cash inflow vs outflow weekly to ensure positive net cash flow consistently.",
       "Invest in ethical micro-projects to diversify income streams safely.",
-      "Check insurance coverage periodically to make sure you are adequately protected.",
+      "Check insura nce coverage periodically to make sure you are adequately protected.",
       "Plan minor expenses in advance to avoid last-minute impulsive spending.",
       "Track utility and subscription costs monthly and identify areas to save.",
       "Avoid unnecessary high-interest debts that can drain financial resources.",
@@ -473,6 +473,8 @@ export const suggestions_old_BKP = {
       "Use strict cash budgeting daily to maintain control over funds.",
       "Track all essential income sources to ensure nothing is missed.",
       "Avoid high-risk decisions entirely to prevent further losses."
+      
+      
     ]
   };
   

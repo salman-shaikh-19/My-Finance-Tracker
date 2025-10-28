@@ -8,7 +8,7 @@ const Footer = () => {
       <aside>
         <p className="text-center text-sm flex items-center gap-1">
            <BiCopyright /> {new Date().getFullYear()} - All rights reserved by
-          Finance Tracker Ltd
+          Finance Tracker Ltd 
         </p>
       </aside>
     </footer>
